@@ -1,0 +1,11 @@
+2021-07-11T07:26:15+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Product starts in 5 seconds :: obj_id 254
+2021-07-11T07:26:23+00:00 NOTICE product_submit.success :: addStoreProduct :: #254
+2021-07-11T09:32:43+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 23
+2021-07-11T09:32:52+00:00 NOTICE member.sync :: Updated Member ca_acacio@yahoo.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+        )
+
+)
+

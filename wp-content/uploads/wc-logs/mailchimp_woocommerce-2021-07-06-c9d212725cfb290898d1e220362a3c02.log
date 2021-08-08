@@ -1,0 +1,111 @@
+2021-07-06T10:09:12+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-06T10:09:21+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2021-07-06T10:17:41+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-06T10:17:41+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 247
+2021-07-06T10:17:48+00:00 NOTICE debug :: Order ID 247 was pending and is now processing :: Array
+(
+    [new_order] => 1
+    [tracking] => Array
+        (
+            [campaign_id] => 
+            [landing_site] => http://intoplantz.com/?wc-ajax=get_refreshed_fragments
+        )
+
+)
+
+2021-07-06T10:17:49+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2021-07-06T10:19:31+00:00 NOTICE order.member.updated :: Updated allenacaciosoftware@gmail.com subscriber status to subscribed and language to en
+2021-07-06T10:19:31+00:00 NOTICE order_submit.success :: addStoreOrder :: #247 :: email: allenacaciosoftware@gmail.com :: landing site http://intoplantz.com/?wc-ajax=get_refreshed_fragments
+2021-07-06T10:36:06+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-06T10:36:06+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 248
+2021-07-06T10:36:12+00:00 NOTICE debug :: Order ID 248 was pending and is now completed :: Array
+(
+    [new_order] => 1
+    [tracking] => Array
+        (
+            [campaign_id] => 
+            [landing_site] => http://intoplantz.com/wp-admin/admin-ajax.php
+        )
+
+)
+
+2021-07-06T10:36:14+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2021-07-06T10:38:00+00:00 NOTICE order.member.updated :: Updated allenacaciosoftware@gmail.com subscriber status to subscribed and language to en
+2021-07-06T10:38:00+00:00 NOTICE order_submit.success :: addStoreOrder :: #248 :: email: allenacaciosoftware@gmail.com :: landing site http://intoplantz.com/wp-admin/admin-ajax.php
+2021-07-06T10:39:15+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-06T10:39:16+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 249
+2021-07-06T10:39:20+00:00 NOTICE debug :: Order ID 249 was pending and is now completed :: Array
+(
+    [new_order] => 1
+    [tracking] => Array
+        (
+            [campaign_id] => 
+            [landing_site] => http://intoplantz.com/wp-admin/admin-ajax.php
+        )
+
+)
+
+2021-07-06T10:39:24+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2021-07-06T10:42:00+00:00 NOTICE order.member.updated :: Updated allenacaciosoftware@gmail.com subscriber status to subscribed and language to en
+2021-07-06T10:42:00+00:00 NOTICE order_submit.success :: addStoreOrder :: #249 :: email: allenacaciosoftware@gmail.com :: landing site http://intoplantz.com/wp-admin/admin-ajax.php
+2021-07-06T10:44:48+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-06T10:44:48+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 250
+2021-07-06T10:44:53+00:00 NOTICE debug :: Order ID 250 was pending and is now completed :: Array
+(
+    [new_order] => 1
+    [tracking] => Array
+        (
+            [campaign_id] => 
+            [landing_site] => http://intoplantz.com/wp-admin/admin.php?page=stats&noheader&proxy&chart=admin-bar-hours-scale
+        )
+
+)
+
+2021-07-06T10:45:13+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2021-07-06T10:46:30+00:00 NOTICE order.member.updated :: Updated allenacaciosoftware@gmail.com subscriber status to subscribed and language to en
+2021-07-06T10:46:30+00:00 NOTICE order_submit.success :: addStoreOrder :: #250 :: email: allenacaciosoftware@gmail.com :: landing site http://intoplantz.com/wp-admin/admin.php?page=stats&noheader&proxy&chart=admin-bar-hours-scale

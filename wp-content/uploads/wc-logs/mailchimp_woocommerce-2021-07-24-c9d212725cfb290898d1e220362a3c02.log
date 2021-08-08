@@ -1,0 +1,13 @@
+2021-07-24T00:00:14+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Cart_Update queued :: obj_id 10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-24T00:01:08+00:00 NOTICE abandoned_cart.success :: email: ca_acacio@yahoo.com :: checkout_url: http://intoplantz.com/checkout/?mc_cart_id=10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-24T00:22:37+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Cart_Update queued :: obj_id 8f0a53523dcf23a82bd1706dcda8a28e
+2021-07-24T00:22:45+00:00 NOTICE abandoned_cart.success :: email: pam.s.acacio@gmail.com :: checkout_url: http://intoplantz.com/checkout/?mc_cart_id=8f0a53523dcf23a82bd1706dcda8a28e
+2021-07-24T00:22:45+00:00 NOTICE cart.member.updated :: Updated pam.s.acacio@gmail.com subscriber status to subscribed and language to en
+2021-07-24T00:24:50+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 259
+2021-07-24T00:24:51+00:00 NOTICE debug :: Order ID 259 was pending and is now on-hold :: Array
+(
+    [new_order] => 
+    [tracking] => 
+)
+
+2021-07-24T00:57:50+00:00 NOTICE system.debug :: order 259 is in on-hold status, and is being skipped for now.

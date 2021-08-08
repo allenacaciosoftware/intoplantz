@@ -1,0 +1,11 @@
+2021-07-29T02:36:05+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-29T02:36:12+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+

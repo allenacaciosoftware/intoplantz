@@ -1,0 +1,8 @@
+2021-07-04T09:06:17+00:00 CRITICAL Uncaught Error: Call to a member function get_order_number() on bool in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/processes/class-mailchimp-woocommerce-single-order.php:396
+Stack trace:
+#0 /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/processes/class-mailchimp-woocommerce-single-order.php(84): MailChimp_WooCommerce_Single_Order->getRealOrderNumber()
+#1 /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/processes/class-mailchimp-woocommerce-single-order.php(71): MailChimp_WooCommerce_Single_Order->process()
+#2 /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/class-mailchimp-woocommerce-service.php(928): MailChimp_WooCommerce_Single_Order->handle()
+#3 /home/dh_fxwhir/intoplantz.com/wp-includes/class-wp-hook.php(292): MailChimp_Service->mailchimp_process_single_job(246)
+#4 /home/dh_fxwhir/intoplantz.com/wp-includes/class-wp-hook.php(316): WP_Hook->apply_filters(' in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/processes/class-mailchimp-woocommerce-single-order.php on line 396
+

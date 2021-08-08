@@ -1,0 +1,808 @@
+2021-07-11T00:12:44+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T00:12:45+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T01:06:53+00:00 DEBUG Webhook recieved: payout.paid
+2021-07-11T01:06:53+00:00 DEBUG Webhook recieved: payout.created
+2021-07-11T01:06:53+00:00 DEBUG Webhook body: array (
+  'id' => 'evt_1JBr7D2H24DauksWwunNepSA',
+  'type' => 'payout.paid',
+  'livemode' => false,
+  'account' => 'acct_1JAB282H24DauksW',
+  'data' => 
+  array (
+    'object' => 
+    array (
+      'id' => 'po_1JBr5f2H24DauksWTTmAnWZY',
+      'object' => 'payout',
+      'amount' => 153323,
+      'arrival_date' => 1626048000,
+      'automatic' => true,
+      'balance_transaction' => 'txn_1JBr5f2H24DauksWGU73D3Zu',
+      'created' => 1625965455,
+      'currency' => 'nzd',
+      'description' => 'STRIPE PAYOUT',
+      'destination' => 'ba_1JAB5a2H24DauksWhil9dwA5',
+      'failure_balance_transaction' => NULL,
+      'failure_code' => NULL,
+      'failure_message' => NULL,
+      'livemode' => false,
+      'metadata' => 
+      array (
+      ),
+      'method' => 'standard',
+      'original_payout' => NULL,
+      'reversed_by' => NULL,
+      'source_type' => 'card',
+      'statement_descriptor' => 'WooCommerce Payments',
+      'status' => 'paid',
+      'type' => 'bank_account',
+    ),
+  ),
+)
+2021-07-11T01:06:53+00:00 DEBUG Webhook body: array (
+  'id' => 'evt_1JBr7C2H24DauksWDLXFC7rS',
+  'type' => 'payout.created',
+  'livemode' => false,
+  'account' => 'acct_1JAB282H24DauksW',
+  'data' => 
+  array (
+    'object' => 
+    array (
+      'id' => 'po_1JBr5f2H24DauksWTTmAnWZY',
+      'object' => 'payout',
+      'amount' => 153323,
+      'arrival_date' => 1626048000,
+      'automatic' => true,
+      'balance_transaction' => 'txn_1JBr5f2H24DauksWGU73D3Zu',
+      'created' => 1625965455,
+      'currency' => 'nzd',
+      'description' => 'STRIPE PAYOUT',
+      'destination' => 'ba_1JAB5a2H24DauksWhil9dwA5',
+      'failure_balance_transaction' => NULL,
+      'failure_code' => NULL,
+      'failure_message' => NULL,
+      'livemode' => false,
+      'metadata' => 
+      array (
+      ),
+      'method' => 'standard',
+      'original_payout' => NULL,
+      'reversed_by' => NULL,
+      'source_type' => 'card',
+      'statement_descriptor' => 'WooCommerce Payments',
+      'status' => 'in_transit',
+      'type' => 'bank_account',
+    ),
+  ),
+)
+2021-07-11T02:06:48+00:00 DEBUG Webhook recieved: payout.paid
+2021-07-11T02:06:48+00:00 DEBUG Webhook recieved: payout.created
+2021-07-11T02:06:48+00:00 DEBUG Webhook body: array (
+  'id' => 'evt_1JBr7D2H24DauksWwunNepSA',
+  'type' => 'payout.paid',
+  'livemode' => false,
+  'account' => 'acct_1JAB282H24DauksW',
+  'data' => 
+  array (
+    'object' => 
+    array (
+      'id' => 'po_1JBr5f2H24DauksWTTmAnWZY',
+      'object' => 'payout',
+      'amount' => 153323,
+      'arrival_date' => 1626048000,
+      'automatic' => true,
+      'balance_transaction' => 'txn_1JBr5f2H24DauksWGU73D3Zu',
+      'created' => 1625965455,
+      'currency' => 'nzd',
+      'description' => 'STRIPE PAYOUT',
+      'destination' => 'ba_1JAB5a2H24DauksWhil9dwA5',
+      'failure_balance_transaction' => NULL,
+      'failure_code' => NULL,
+      'failure_message' => NULL,
+      'livemode' => false,
+      'metadata' => 
+      array (
+      ),
+      'method' => 'standard',
+      'original_payout' => NULL,
+      'reversed_by' => NULL,
+      'source_type' => 'card',
+      'statement_descriptor' => 'WooCommerce Payments',
+      'status' => 'paid',
+      'type' => 'bank_account',
+    ),
+  ),
+)
+2021-07-11T02:06:48+00:00 DEBUG Webhook body: array (
+  'id' => 'evt_1JBr7C2H24DauksWDLXFC7rS',
+  'type' => 'payout.created',
+  'livemode' => false,
+  'account' => 'acct_1JAB282H24DauksW',
+  'data' => 
+  array (
+    'object' => 
+    array (
+      'id' => 'po_1JBr5f2H24DauksWTTmAnWZY',
+      'object' => 'payout',
+      'amount' => 153323,
+      'arrival_date' => 1626048000,
+      'automatic' => true,
+      'balance_transaction' => 'txn_1JBr5f2H24DauksWGU73D3Zu',
+      'created' => 1625965455,
+      'currency' => 'nzd',
+      'description' => 'STRIPE PAYOUT',
+      'destination' => 'ba_1JAB5a2H24DauksWhil9dwA5',
+      'failure_balance_transaction' => NULL,
+      'failure_code' => NULL,
+      'failure_message' => NULL,
+      'livemode' => false,
+      'metadata' => 
+      array (
+      ),
+      'method' => 'standard',
+      'original_payout' => NULL,
+      'reversed_by' => NULL,
+      'source_type' => 'card',
+      'statement_descriptor' => 'WooCommerce Payments',
+      'status' => 'in_transit',
+      'type' => 'bank_account',
+    ),
+  ),
+)
+2021-07-11T02:46:50+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T02:46:50+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T02:46:51+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T02:46:51+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T02:46:51+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T02:46:52+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T04:48:42+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T04:48:43+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T07:18:09+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T07:18:10+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T09:18:37+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T09:18:38+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T11:27:00+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T11:27:00+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T14:44:27+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T14:44:28+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T16:54:45+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T16:54:45+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T20:01:13+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T20:01:13+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-11T22:26:02+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-11T22:26:03+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)

@@ -1,0 +1,7 @@
+2021-07-23T23:51:51+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Cart_Update queued :: obj_id 10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-23T23:51:55+00:00 NOTICE abandoned_cart.success :: email: ca_acacio@yahoo.com :: checkout_url: http://intoplantz.com/checkout/?mc_cart_id=10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-23T23:51:55+00:00 NOTICE cart.member.updated :: Updated ca_acacio@yahoo.com subscriber status to subscribed and language to en
+2021-07-23T23:55:35+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Cart_Update queued :: obj_id 10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-23T23:55:41+00:00 NOTICE abandoned_cart.success :: email: ca_acacio@yahoo.com :: checkout_url: http://intoplantz.com/checkout/?mc_cart_id=10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-23T23:59:32+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Cart_Update queued :: obj_id 10ae5a0fd9293cc6a3dd93c6fb79471a
+2021-07-23T23:59:33+00:00 NOTICE abandoned_cart.success :: email: ca_acacio@yahoo.com :: checkout_url: http://intoplantz.com/checkout/?mc_cart_id=10ae5a0fd9293cc6a3dd93c6fb79471a

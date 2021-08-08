@@ -1,0 +1,1908 @@
+2021-07-14T01:12:01+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T01:12:02+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T03:20:22+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T03:20:22+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T06:06:58+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T06:06:58+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T06:06:58+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T06:06:58+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T06:06:58+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T06:06:59+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T08:29:59+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T08:30:00+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T09:01:54+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/payment_methods?test_mode=1&customer=cus_JnmvejDlOTs1Vi&type=card&limit=100
+2021-07-14T09:01:55+00:00 INFO RESPONSE: array (
+  'object' => 'list',
+  'data' => 
+  array (
+    0 => 
+    array (
+      'id' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+      'object' => 'payment_method',
+      'billing_details' => 
+      array (
+        'address' => 
+        array (
+          'city' => '(redacted)',
+          'country' => '(redacted)',
+          'line1' => '(redacted)',
+          'line2' => '(redacted)',
+          'postal_code' => '(redacted)',
+          'state' => '(redacted)',
+        ),
+        'email' => '(redacted)',
+        'name' => '(redacted)',
+        'phone' => '(redacted)',
+      ),
+      'card' => 
+      array (
+        'brand' => 'visa',
+        'checks' => 
+        array (
+          'address_line1_check' => 'pass',
+          'address_postal_code_check' => 'pass',
+          'cvc_check' => 'pass',
+        ),
+        'country' => '(redacted)',
+        'exp_month' => 2,
+        'exp_year' => 2023,
+        'fingerprint' => '0SEufZLr8JkcLcfi',
+        'funding' => 'credit',
+        'generated_from' => NULL,
+        'last4' => '4242',
+        'networks' => 
+        array (
+          'available' => 
+          array (
+            0 => 'visa',
+          ),
+          'preferred' => NULL,
+        ),
+        'three_d_secure_usage' => 
+        array (
+          'supported' => true,
+        ),
+        'wallet' => NULL,
+      ),
+      'created' => 1625567762,
+      'customer' => 'cus_JnmvejDlOTs1Vi',
+      'livemode' => false,
+      'metadata' => 
+      array (
+      ),
+      'type' => 'card',
+    ),
+  ),
+  'has_more' => false,
+  'url' => '/v1/payment_methods',
+)
+2021-07-14T09:12:31+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/customers/cus_JnmvejDlOTs1Vi
+2021-07-14T09:12:31+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'name' => '(redacted)',
+  'description' => 'Name:  , Username: chraca_w8gvjg',
+  'email' => '(redacted)',
+  'phone' => '(redacted)',
+  'address' => 
+  array (
+    'line1' => '(redacted)',
+    'line2' => '(redacted)',
+    'postal_code' => '(redacted)',
+    'city' => '(redacted)',
+    'state' => '(redacted)',
+    'country' => '(redacted)',
+  ),
+)
+2021-07-14T09:12:32+00:00 INFO RESPONSE: array (
+  'id' => 'cus_JnmvejDlOTs1Vi',
+  'object' => 'customer',
+  'address' => 
+  array (
+    'city' => '(redacted)',
+    'country' => '(redacted)',
+    'line1' => '(redacted)',
+    'line2' => '(redacted)',
+    'postal_code' => '(redacted)',
+    'state' => '(redacted)',
+  ),
+  'balance' => 0,
+  'created' => 1625566663,
+  'currency' => NULL,
+  'default_source' => NULL,
+  'delinquent' => false,
+  'description' => 'Name:  , Username: chraca_w8gvjg',
+  'discount' => NULL,
+  'email' => '(redacted)',
+  'invoice_prefix' => '29A0F007',
+  'invoice_settings' => 
+  array (
+    'custom_fields' => NULL,
+    'default_payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+    'footer' => NULL,
+  ),
+  'livemode' => false,
+  'metadata' => 'stdClass()',
+  'name' => '(redacted)',
+  'next_invoice_sequence' => 1,
+  'phone' => '(redacted)',
+  'preferred_locales' => 
+  array (
+  ),
+  'shipping' => NULL,
+  'tax_exempt' => 'none',
+)
+2021-07-14T09:12:32+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/payment_methods/pm_1JABdF2H24DauksWtnAoTTh0
+2021-07-14T09:12:32+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'billing_details' => 
+  array (
+    'email' => '(redacted)',
+  ),
+)
+2021-07-14T09:12:32+00:00 INFO RESPONSE: array (
+  'id' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+  'object' => 'payment_method',
+  'billing_details' => 
+  array (
+    'address' => 
+    array (
+      'city' => '(redacted)',
+      'country' => '(redacted)',
+      'line1' => '(redacted)',
+      'line2' => '(redacted)',
+      'postal_code' => '(redacted)',
+      'state' => '(redacted)',
+    ),
+    'email' => '(redacted)',
+    'name' => '(redacted)',
+    'phone' => '(redacted)',
+  ),
+  'card' => 
+  array (
+    'brand' => 'visa',
+    'checks' => 
+    array (
+      'address_line1_check' => 'unchecked',
+      'address_postal_code_check' => 'unchecked',
+      'cvc_check' => 'unchecked',
+    ),
+    'country' => '(redacted)',
+    'exp_month' => 2,
+    'exp_year' => 2023,
+    'fingerprint' => '0SEufZLr8JkcLcfi',
+    'funding' => 'credit',
+    'generated_from' => NULL,
+    'last4' => '4242',
+    'networks' => 
+    array (
+      'available' => 
+      array (
+        0 => 'visa',
+      ),
+      'preferred' => NULL,
+    ),
+    'three_d_secure_usage' => 
+    array (
+      'supported' => true,
+    ),
+    'wallet' => NULL,
+  ),
+  'created' => 1625567762,
+  'customer' => 'cus_JnmvejDlOTs1Vi',
+  'livemode' => false,
+  'metadata' => 'stdClass()',
+  'type' => 'card',
+)
+2021-07-14T09:12:32+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/intentions
+2021-07-14T09:12:32+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'amount' => 40000.0,
+  'currency' => 'usd',
+  'confirm' => 'true',
+  'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+  'customer' => 'cus_JnmvejDlOTs1Vi',
+  'capture_method' => 'automatic',
+  'metadata' => 
+  array (
+    'customer_name' => '(redacted)',
+    'customer_email' => '(redacted)',
+    'site_url' => 'http://intoplantz.com',
+    'order_id' => 256,
+    'order_key' => 'wc_order_pW7vfRvkB5lzn',
+    'payment_type' => 'WCPay\\Constants\\Payment_Type()',
+  ),
+  'level3' => 
+  array (
+  ),
+)
+2021-07-14T09:12:34+00:00 INFO RESPONSE: array (
+  'id' => 'pi_1JD48r2H24DauksW9tOKzmbK',
+  'object' => 'payment_intent',
+  'amount' => 40000,
+  'amount_capturable' => 0,
+  'amount_received' => 40000,
+  'amount_subtotal' => 40000,
+  'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+  'application_fee_amount' => 1181,
+  'canceled_at' => NULL,
+  'cancellation_reason' => NULL,
+  'capture_method' => 'automatic',
+  'charges' => 
+  array (
+    'object' => 'list',
+    'data' => 
+    array (
+      0 => 
+      array (
+        'id' => 'ch_1JD48r2H24DauksWseZJzjQr',
+        'object' => 'charge',
+        'amount' => 40000,
+        'amount_captured' => 40000,
+        'amount_refunded' => 0,
+        'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+        'application_fee' => 'fee_1JD48s2H24DauksWlCIJPXU6',
+        'application_fee_amount' => 1181,
+        'balance_transaction' => 
+        array (
+          'id' => 'txn_1JD48s2H24DauksWZIP0qS8E',
+          'object' => 'balance_transaction',
+          'amount' => 57626,
+          'available_on' => 1626739200,
+          'created' => 1626253953,
+          'currency' => 'nzd',
+          'description' => NULL,
+          'exchange_rate' => 1.44064,
+          'fee' => 1701,
+          'fee_details' => 
+          array (
+            0 => 
+            array (
+              'amount' => 1701,
+              'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+              'currency' => 'nzd',
+              'description' => 'WooCommerce Payments application fee',
+              'type' => 'application_fee',
+            ),
+          ),
+          'net' => 55925,
+          'reporting_category' => 'charge',
+          'source' => 'ch_1JD48r2H24DauksWseZJzjQr',
+          'status' => 'pending',
+          'type' => 'charge',
+        ),
+        'billing_details' => 
+        array (
+          'address' => 
+          array (
+            'city' => '(redacted)',
+            'country' => '(redacted)',
+            'line1' => '(redacted)',
+            'line2' => '(redacted)',
+            'postal_code' => '(redacted)',
+            'state' => '(redacted)',
+          ),
+          'email' => '(redacted)',
+          'name' => '(redacted)',
+          'phone' => '(redacted)',
+        ),
+        'calculated_statement_descriptor' => 'INTOPLANTZ.COM',
+        'captured' => true,
+        'created' => 1626253953,
+        'currency' => 'usd',
+        'customer' => 'cus_JnmvejDlOTs1Vi',
+        'description' => NULL,
+        'destination' => NULL,
+        'dispute' => NULL,
+        'disputed' => false,
+        'failure_code' => NULL,
+        'failure_message' => NULL,
+        'fraud_details' => 
+        array (
+        ),
+        'invoice' => NULL,
+        'livemode' => false,
+        'metadata' => 
+        array (
+          'customer_name' => '(redacted)',
+          'customer_email' => '(redacted)',
+          'site_url' => 'http://intoplantz.com',
+          'order_id' => '256',
+          'order_key' => 'wc_order_pW7vfRvkB5lzn',
+          'payment_type' => 'single',
+        ),
+        'on_behalf_of' => NULL,
+        'order' => NULL,
+        'outcome' => 
+        array (
+          'network_status' => 'approved_by_network',
+          'reason' => NULL,
+          'risk_level' => 'normal',
+          'risk_score' => 45,
+          'seller_message' => 'Payment complete.',
+          'type' => 'authorized',
+        ),
+        'paid' => true,
+        'payment_intent' => 'pi_1JD48r2H24DauksW9tOKzmbK',
+        'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+        'payment_method_details' => 
+        array (
+          'card' => 
+          array (
+            'brand' => 'visa',
+            'checks' => 
+            array (
+              'address_line1_check' => 'pass',
+              'address_postal_code_check' => 'pass',
+              'cvc_check' => NULL,
+            ),
+            'country' => '(redacted)',
+            'exp_month' => 2,
+            'exp_year' => 2023,
+            'fingerprint' => '0SEufZLr8JkcLcfi',
+            'funding' => 'credit',
+            'installments' => NULL,
+            'last4' => '4242',
+            'network' => 'visa',
+            'three_d_secure' => NULL,
+            'wallet' => NULL,
+          ),
+          'type' => 'card',
+        ),
+        'receipt_email' => NULL,
+        'receipt_number' => NULL,
+        'receipt_url' => 'https://pay.stripe.com/receipts/acct_1JAB282H24DauksW/ch_1JD48r2H24DauksWseZJzjQr/rcpt_JqlghUGs1GUEvlD2wHTMxR2h0ABtN7z',
+        'refunded' => false,
+        'refunds' => 
+        array (
+          'object' => 'list',
+          'data' => 
+          array (
+          ),
+          'has_more' => false,
+          'total_count' => 0,
+          'url' => '/v1/charges/ch_1JD48r2H24DauksWseZJzjQr/refunds',
+        ),
+        'review' => NULL,
+        'shipping' => NULL,
+        'source' => NULL,
+        'source_transfer' => NULL,
+        'statement_descriptor' => NULL,
+        'statement_descriptor_suffix' => NULL,
+        'status' => 'succeeded',
+        'transfer_data' => NULL,
+        'transfer_group' => NULL,
+      ),
+    ),
+    'has_more' => false,
+    'total_count' => 1,
+    'url' => '/v1/charges?payment_intent=pi_1JD48r2H24DauksW9tOKzmbK',
+  ),
+  'client_secret' => '(redacted)',
+  'confirmation_method' => 'automatic',
+  'created' => 1626253953,
+  'currency' => 'usd',
+  'customer' => 'cus_JnmvejDlOTs1Vi',
+  'description' => NULL,
+  'invoice' => NULL,
+  'last_payment_error' => NULL,
+  'level3' => NULL,
+  'livemode' => false,
+  'metadata' => 
+  array (
+    'customer_name' => '(redacted)',
+    'customer_email' => '(redacted)',
+    'site_url' => 'http://intoplantz.com',
+    'order_id' => '256',
+    'order_key' => 'wc_order_pW7vfRvkB5lzn',
+    'payment_type' => 'single',
+  ),
+  'next_action' => NULL,
+  'on_behalf_of' => NULL,
+  'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+  'payment_method_options' => 
+  array (
+    'card' => 
+    array (
+      'installments' => NULL,
+      'network' => NULL,
+      'request_three_d_secure' => 'automatic',
+    ),
+  ),
+  'payment_method_types' => 
+  array (
+    0 => 'card',
+  ),
+  'receipt_email' => NULL,
+  'review' => NULL,
+  'setup_future_usage' => NULL,
+  'shipping' => NULL,
+  'source' => NULL,
+  'statement_descriptor' => NULL,
+  'statement_descriptor_suffix' => NULL,
+  'status' => 'succeeded',
+  'total_details' => 
+  array (
+    'amount_discount' => 0,
+    'amount_tax' => 0,
+  ),
+  'transfer_data' => NULL,
+  'transfer_group' => NULL,
+)
+2021-07-14T09:12:40+00:00 DEBUG Webhook recieved: payment_intent.succeeded
+2021-07-14T09:12:40+00:00 DEBUG Webhook body: array (
+  'id' => 'evt_1JD48s2H24DauksWE9GJiwEk',
+  'type' => 'payment_intent.succeeded',
+  'livemode' => false,
+  'account' => 'acct_1JAB282H24DauksW',
+  'data' => 
+  array (
+    'object' => 
+    array (
+      'id' => 'pi_1JD48r2H24DauksW9tOKzmbK',
+      'object' => 'payment_intent',
+      'amount' => 40000,
+      'amount_capturable' => 0,
+      'amount_received' => 40000,
+      'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+      'application_fee_amount' => 1181,
+      'canceled_at' => NULL,
+      'cancellation_reason' => NULL,
+      'capture_method' => 'automatic',
+      'charges' => 
+      array (
+        'object' => 'list',
+        'data' => 
+        array (
+          0 => 
+          array (
+            'id' => 'ch_1JD48r2H24DauksWseZJzjQr',
+            'object' => 'charge',
+            'amount' => 40000,
+            'amount_captured' => 40000,
+            'amount_refunded' => 0,
+            'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+            'application_fee' => 'fee_1JD48s2H24DauksWlCIJPXU6',
+            'application_fee_amount' => 1181,
+            'balance_transaction' => 'txn_1JD48s2H24DauksWZIP0qS8E',
+            'billing_details' => 
+            array (
+              'address' => 
+              array (
+                'city' => '(redacted)',
+                'country' => '(redacted)',
+                'line1' => '(redacted)',
+                'line2' => '(redacted)',
+                'postal_code' => '(redacted)',
+                'state' => '(redacted)',
+              ),
+              'email' => '(redacted)',
+              'name' => '(redacted)',
+              'phone' => '(redacted)',
+            ),
+            'calculated_statement_descriptor' => 'INTOPLANTZ.COM',
+            'captured' => true,
+            'created' => 1626253953,
+            'currency' => 'usd',
+            'customer' => 'cus_JnmvejDlOTs1Vi',
+            'description' => NULL,
+            'destination' => NULL,
+            'dispute' => NULL,
+            'disputed' => false,
+            'failure_code' => NULL,
+            'failure_message' => NULL,
+            'fraud_details' => 
+            array (
+            ),
+            'invoice' => NULL,
+            'livemode' => false,
+            'metadata' => 
+            array (
+              'customer_name' => '(redacted)',
+              'customer_email' => '(redacted)',
+              'site_url' => 'http://intoplantz.com',
+              'order_id' => '256',
+              'order_key' => 'wc_order_pW7vfRvkB5lzn',
+              'payment_type' => 'single',
+            ),
+            'on_behalf_of' => NULL,
+            'order' => NULL,
+            'outcome' => 
+            array (
+              'network_status' => 'approved_by_network',
+              'reason' => NULL,
+              'risk_level' => 'normal',
+              'risk_score' => 45,
+              'seller_message' => 'Payment complete.',
+              'type' => 'authorized',
+            ),
+            'paid' => true,
+            'payment_intent' => 'pi_1JD48r2H24DauksW9tOKzmbK',
+            'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+            'payment_method_details' => 
+            array (
+              'card' => 
+              array (
+                'brand' => 'visa',
+                'checks' => 
+                array (
+                  'address_line1_check' => 'pass',
+                  'address_postal_code_check' => 'pass',
+                  'cvc_check' => NULL,
+                ),
+                'country' => '(redacted)',
+                'exp_month' => 2,
+                'exp_year' => 2023,
+                'fingerprint' => '0SEufZLr8JkcLcfi',
+                'funding' => 'credit',
+                'installments' => NULL,
+                'last4' => '4242',
+                'network' => 'visa',
+                'three_d_secure' => NULL,
+                'wallet' => NULL,
+              ),
+              'type' => 'card',
+            ),
+            'receipt_email' => NULL,
+            'receipt_number' => NULL,
+            'receipt_url' => 'https://pay.stripe.com/receipts/acct_1JAB282H24DauksW/ch_1JD48r2H24DauksWseZJzjQr/rcpt_JqlghUGs1GUEvlD2wHTMxR2h0ABtN7z',
+            'refunded' => false,
+            'refunds' => 
+            array (
+              'object' => 'list',
+              'data' => 
+              array (
+              ),
+              'has_more' => false,
+              'total_count' => 0,
+              'url' => '/v1/charges/ch_1JD48r2H24DauksWseZJzjQr/refunds',
+            ),
+            'review' => NULL,
+            'shipping' => NULL,
+            'source' => NULL,
+            'source_transfer' => NULL,
+            'statement_descriptor' => NULL,
+            'statement_descriptor_suffix' => NULL,
+            'status' => 'succeeded',
+            'transfer_data' => NULL,
+            'transfer_group' => NULL,
+          ),
+        ),
+        'has_more' => false,
+        'total_count' => 1,
+        'url' => '/v1/charges?payment_intent=pi_1JD48r2H24DauksW9tOKzmbK',
+      ),
+      'client_secret' => '(redacted)',
+      'confirmation_method' => 'automatic',
+      'created' => 1626253953,
+      'currency' => 'usd',
+      'customer' => 'cus_JnmvejDlOTs1Vi',
+      'description' => NULL,
+      'invoice' => NULL,
+      'last_payment_error' => NULL,
+      'livemode' => false,
+      'metadata' => 
+      array (
+        'customer_name' => '(redacted)',
+        'customer_email' => '(redacted)',
+        'site_url' => 'http://intoplantz.com',
+        'order_id' => '256',
+        'order_key' => 'wc_order_pW7vfRvkB5lzn',
+        'payment_type' => 'single',
+      ),
+      'next_action' => NULL,
+      'on_behalf_of' => NULL,
+      'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+      'payment_method_options' => 
+      array (
+        'card' => 
+        array (
+          'installments' => NULL,
+          'network' => NULL,
+          'request_three_d_secure' => 'automatic',
+        ),
+      ),
+      'payment_method_types' => 
+      array (
+        0 => 'card',
+      ),
+      'receipt_email' => NULL,
+      'review' => NULL,
+      'setup_future_usage' => NULL,
+      'shipping' => NULL,
+      'source' => NULL,
+      'statement_descriptor' => NULL,
+      'statement_descriptor_suffix' => NULL,
+      'status' => 'succeeded',
+      'transfer_data' => NULL,
+      'transfer_group' => NULL,
+      'amount_subtotal' => 40000,
+      'level3' => NULL,
+      'total_details' => 
+      array (
+        'amount_discount' => 0,
+        'amount_tax' => 0,
+      ),
+    ),
+  ),
+)
+2021-07-14T09:18:08+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/tracking/order
+2021-07-14T09:18:08+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'order_data' => 
+  array (
+    'id' => 256,
+    'parent_id' => 0,
+    'status' => 'completed',
+    'currency' => 'USD',
+    'version' => '5.3.0',
+    'prices_include_tax' => false,
+    'date_created' => 'WC_DateTime()',
+    'date_modified' => 'WC_DateTime()',
+    'discount_total' => '0',
+    'discount_tax' => '0',
+    'shipping_total' => '0',
+    'shipping_tax' => '0',
+    'cart_tax' => '0',
+    'total' => '400',
+    'total_tax' => '0',
+    'customer_id' => 1,
+    'order_key' => 'wc_order_pW7vfRvkB5lzn',
+    'billing' => 
+    array (
+      'first_name' => '',
+      'last_name' => '',
+      'company' => '',
+      'address_1' => '',
+      'address_2' => '',
+      'city' => '(redacted)',
+      'state' => '(redacted)',
+      'postcode' => '',
+      'country' => '(redacted)',
+      'email' => '(redacted)',
+      'phone' => '(redacted)',
+    ),
+    'shipping' => 
+    array (
+      'first_name' => '',
+      'last_name' => '',
+      'company' => '',
+      'address_1' => '',
+      'address_2' => '',
+      'city' => '(redacted)',
+      'state' => '(redacted)',
+      'postcode' => '',
+      'country' => '(redacted)',
+    ),
+    'payment_method' => 'woocommerce_payments',
+    'payment_method_title' => 'Credit card / debit card',
+    'transaction_id' => 'pi_1JD48r2H24DauksW9tOKzmbK',
+    'customer_ip_address' => '203.211.74.134',
+    'customer_user_agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36',
+    'created_via' => 'checkout',
+    'customer_note' => '',
+    'date_completed' => 'WC_DateTime()',
+    'date_paid' => 'WC_DateTime()',
+    'cart_hash' => '53e28d38906a4bff6b21ebd4c7de9e13',
+    'number' => '256',
+    'meta_data' => 
+    array (
+      0 => 'WC_Meta_Data()',
+      1 => 'WC_Meta_Data()',
+      2 => 'WC_Meta_Data()',
+      3 => 'WC_Meta_Data()',
+      4 => 'WC_Meta_Data()',
+      5 => 'WC_Meta_Data()',
+      6 => 'WC_Meta_Data()',
+      7 => 'WC_Meta_Data()',
+      8 => 'WC_Meta_Data()',
+      9 => 'WC_Meta_Data()',
+      10 => 'WC_Meta_Data()',
+    ),
+    'line_items' => 
+    array (
+      21 => 'WC_Order_Item_Product()',
+    ),
+    'tax_lines' => 
+    array (
+    ),
+    'shipping_lines' => 
+    array (
+    ),
+    'fee_lines' => 
+    array (
+    ),
+    'coupon_lines' => 
+    array (
+    ),
+    '_payment_method_id' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+    '_stripe_customer_id' => 'cus_JnmvejDlOTs1Vi',
+  ),
+  'update' => false,
+)
+2021-07-14T09:18:09+00:00 INFO RESPONSE: array (
+  'result' => 'error',
+)
+2021-07-14T09:36:30+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/customers/cus_JnmvejDlOTs1Vi
+2021-07-14T09:36:30+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'name' => '(redacted)',
+  'description' => 'Name:  , Username: chraca_w8gvjg',
+  'email' => '(redacted)',
+  'phone' => '(redacted)',
+  'address' => 
+  array (
+    'line1' => '(redacted)',
+    'line2' => '(redacted)',
+    'postal_code' => '(redacted)',
+    'city' => '(redacted)',
+    'state' => '(redacted)',
+    'country' => '(redacted)',
+  ),
+)
+2021-07-14T09:36:31+00:00 INFO RESPONSE: array (
+  'id' => 'cus_JnmvejDlOTs1Vi',
+  'object' => 'customer',
+  'address' => 
+  array (
+    'city' => '(redacted)',
+    'country' => '(redacted)',
+    'line1' => '(redacted)',
+    'line2' => '(redacted)',
+    'postal_code' => '(redacted)',
+    'state' => '(redacted)',
+  ),
+  'balance' => 0,
+  'created' => 1625566663,
+  'currency' => NULL,
+  'default_source' => NULL,
+  'delinquent' => false,
+  'description' => 'Name:  , Username: chraca_w8gvjg',
+  'discount' => NULL,
+  'email' => '(redacted)',
+  'invoice_prefix' => '29A0F007',
+  'invoice_settings' => 
+  array (
+    'custom_fields' => NULL,
+    'default_payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+    'footer' => NULL,
+  ),
+  'livemode' => false,
+  'metadata' => 'stdClass()',
+  'name' => '(redacted)',
+  'next_invoice_sequence' => 1,
+  'phone' => '(redacted)',
+  'preferred_locales' => 
+  array (
+  ),
+  'shipping' => NULL,
+  'tax_exempt' => 'none',
+)
+2021-07-14T09:36:31+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/payment_methods/pm_1JABdF2H24DauksWtnAoTTh0
+2021-07-14T09:36:31+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'billing_details' => 
+  array (
+    'email' => '(redacted)',
+  ),
+)
+2021-07-14T09:36:31+00:00 INFO RESPONSE: array (
+  'id' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+  'object' => 'payment_method',
+  'billing_details' => 
+  array (
+    'address' => 
+    array (
+      'city' => '(redacted)',
+      'country' => '(redacted)',
+      'line1' => '(redacted)',
+      'line2' => '(redacted)',
+      'postal_code' => '(redacted)',
+      'state' => '(redacted)',
+    ),
+    'email' => '(redacted)',
+    'name' => '(redacted)',
+    'phone' => '(redacted)',
+  ),
+  'card' => 
+  array (
+    'brand' => 'visa',
+    'checks' => 
+    array (
+      'address_line1_check' => 'unchecked',
+      'address_postal_code_check' => 'unchecked',
+      'cvc_check' => 'unchecked',
+    ),
+    'country' => '(redacted)',
+    'exp_month' => 2,
+    'exp_year' => 2023,
+    'fingerprint' => '0SEufZLr8JkcLcfi',
+    'funding' => 'credit',
+    'generated_from' => NULL,
+    'last4' => '4242',
+    'networks' => 
+    array (
+      'available' => 
+      array (
+        0 => 'visa',
+      ),
+      'preferred' => NULL,
+    ),
+    'three_d_secure_usage' => 
+    array (
+      'supported' => true,
+    ),
+    'wallet' => NULL,
+  ),
+  'created' => 1625567762,
+  'customer' => 'cus_JnmvejDlOTs1Vi',
+  'livemode' => false,
+  'metadata' => 'stdClass()',
+  'type' => 'card',
+)
+2021-07-14T09:36:31+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/intentions
+2021-07-14T09:36:31+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'amount' => 20000.0,
+  'currency' => 'usd',
+  'confirm' => 'true',
+  'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+  'customer' => 'cus_JnmvejDlOTs1Vi',
+  'capture_method' => 'automatic',
+  'metadata' => 
+  array (
+    'customer_name' => '(redacted)',
+    'customer_email' => '(redacted)',
+    'site_url' => 'http://intoplantz.com',
+    'order_id' => 257,
+    'order_key' => 'wc_order_ZccOiwC6Et0pJ',
+    'payment_type' => 'WCPay\\Constants\\Payment_Type()',
+  ),
+  'level3' => 
+  array (
+  ),
+)
+2021-07-14T09:36:34+00:00 INFO RESPONSE: array (
+  'id' => 'pi_1JD4W42H24DauksWa9teVlx5',
+  'object' => 'payment_intent',
+  'amount' => 20000,
+  'amount_capturable' => 0,
+  'amount_received' => 20000,
+  'amount_subtotal' => 20000,
+  'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+  'application_fee_amount' => 601,
+  'canceled_at' => NULL,
+  'cancellation_reason' => NULL,
+  'capture_method' => 'automatic',
+  'charges' => 
+  array (
+    'object' => 'list',
+    'data' => 
+    array (
+      0 => 
+      array (
+        'id' => 'ch_1JD4W52H24DauksWgJlanYrY',
+        'object' => 'charge',
+        'amount' => 20000,
+        'amount_captured' => 20000,
+        'amount_refunded' => 0,
+        'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+        'application_fee' => 'fee_1JD4W52H24DauksWC7cEoFbO',
+        'application_fee_amount' => 601,
+        'balance_transaction' => 
+        array (
+          'id' => 'txn_1JD4W52H24DauksWmZvqQR43',
+          'object' => 'balance_transaction',
+          'amount' => 28813,
+          'available_on' => 1626739200,
+          'created' => 1626255393,
+          'currency' => 'nzd',
+          'description' => NULL,
+          'exchange_rate' => 1.44064,
+          'fee' => 866,
+          'fee_details' => 
+          array (
+            0 => 
+            array (
+              'amount' => 866,
+              'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+              'currency' => 'nzd',
+              'description' => 'WooCommerce Payments application fee',
+              'type' => 'application_fee',
+            ),
+          ),
+          'net' => 27947,
+          'reporting_category' => 'charge',
+          'source' => 'ch_1JD4W52H24DauksWgJlanYrY',
+          'status' => 'pending',
+          'type' => 'charge',
+        ),
+        'billing_details' => 
+        array (
+          'address' => 
+          array (
+            'city' => '(redacted)',
+            'country' => '(redacted)',
+            'line1' => '(redacted)',
+            'line2' => '(redacted)',
+            'postal_code' => '(redacted)',
+            'state' => '(redacted)',
+          ),
+          'email' => '(redacted)',
+          'name' => '(redacted)',
+          'phone' => '(redacted)',
+        ),
+        'calculated_statement_descriptor' => 'INTOPLANTZ.COM',
+        'captured' => true,
+        'created' => 1626255393,
+        'currency' => 'usd',
+        'customer' => 'cus_JnmvejDlOTs1Vi',
+        'description' => NULL,
+        'destination' => NULL,
+        'dispute' => NULL,
+        'disputed' => false,
+        'failure_code' => NULL,
+        'failure_message' => NULL,
+        'fraud_details' => 
+        array (
+        ),
+        'invoice' => NULL,
+        'livemode' => false,
+        'metadata' => 
+        array (
+          'customer_name' => '(redacted)',
+          'customer_email' => '(redacted)',
+          'site_url' => 'http://intoplantz.com',
+          'order_id' => '257',
+          'order_key' => 'wc_order_ZccOiwC6Et0pJ',
+          'payment_type' => 'single',
+        ),
+        'on_behalf_of' => NULL,
+        'order' => NULL,
+        'outcome' => 
+        array (
+          'network_status' => 'approved_by_network',
+          'reason' => NULL,
+          'risk_level' => 'normal',
+          'risk_score' => 5,
+          'seller_message' => 'Payment complete.',
+          'type' => 'authorized',
+        ),
+        'paid' => true,
+        'payment_intent' => 'pi_1JD4W42H24DauksWa9teVlx5',
+        'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+        'payment_method_details' => 
+        array (
+          'card' => 
+          array (
+            'brand' => 'visa',
+            'checks' => 
+            array (
+              'address_line1_check' => 'pass',
+              'address_postal_code_check' => 'pass',
+              'cvc_check' => NULL,
+            ),
+            'country' => '(redacted)',
+            'exp_month' => 2,
+            'exp_year' => 2023,
+            'fingerprint' => '0SEufZLr8JkcLcfi',
+            'funding' => 'credit',
+            'installments' => NULL,
+            'last4' => '4242',
+            'network' => 'visa',
+            'three_d_secure' => NULL,
+            'wallet' => NULL,
+          ),
+          'type' => 'card',
+        ),
+        'receipt_email' => NULL,
+        'receipt_number' => NULL,
+        'receipt_url' => 'https://pay.stripe.com/receipts/acct_1JAB282H24DauksW/ch_1JD4W52H24DauksWgJlanYrY/rcpt_Jqm4RF5cSbV01TSiIhEn6VfLRqFO5za',
+        'refunded' => false,
+        'refunds' => 
+        array (
+          'object' => 'list',
+          'data' => 
+          array (
+          ),
+          'has_more' => false,
+          'total_count' => 0,
+          'url' => '/v1/charges/ch_1JD4W52H24DauksWgJlanYrY/refunds',
+        ),
+        'review' => NULL,
+        'shipping' => NULL,
+        'source' => NULL,
+        'source_transfer' => NULL,
+        'statement_descriptor' => NULL,
+        'statement_descriptor_suffix' => NULL,
+        'status' => 'succeeded',
+        'transfer_data' => NULL,
+        'transfer_group' => NULL,
+      ),
+    ),
+    'has_more' => false,
+    'total_count' => 1,
+    'url' => '/v1/charges?payment_intent=pi_1JD4W42H24DauksWa9teVlx5',
+  ),
+  'client_secret' => '(redacted)',
+  'confirmation_method' => 'automatic',
+  'created' => 1626255392,
+  'currency' => 'usd',
+  'customer' => 'cus_JnmvejDlOTs1Vi',
+  'description' => NULL,
+  'invoice' => NULL,
+  'last_payment_error' => NULL,
+  'level3' => NULL,
+  'livemode' => false,
+  'metadata' => 
+  array (
+    'customer_name' => '(redacted)',
+    'customer_email' => '(redacted)',
+    'site_url' => 'http://intoplantz.com',
+    'order_id' => '257',
+    'order_key' => 'wc_order_ZccOiwC6Et0pJ',
+    'payment_type' => 'single',
+  ),
+  'next_action' => NULL,
+  'on_behalf_of' => NULL,
+  'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+  'payment_method_options' => 
+  array (
+    'card' => 
+    array (
+      'installments' => NULL,
+      'network' => NULL,
+      'request_three_d_secure' => 'automatic',
+    ),
+  ),
+  'payment_method_types' => 
+  array (
+    0 => 'card',
+  ),
+  'receipt_email' => NULL,
+  'review' => NULL,
+  'setup_future_usage' => NULL,
+  'shipping' => NULL,
+  'source' => NULL,
+  'statement_descriptor' => NULL,
+  'statement_descriptor_suffix' => NULL,
+  'status' => 'succeeded',
+  'total_details' => 
+  array (
+    'amount_discount' => 0,
+    'amount_tax' => 0,
+  ),
+  'transfer_data' => NULL,
+  'transfer_group' => NULL,
+)
+2021-07-14T09:36:38+00:00 DEBUG Webhook recieved: payment_intent.succeeded
+2021-07-14T09:36:38+00:00 DEBUG Webhook body: array (
+  'id' => 'evt_1JD4W62H24DauksWVoWnejmp',
+  'type' => 'payment_intent.succeeded',
+  'livemode' => false,
+  'account' => 'acct_1JAB282H24DauksW',
+  'data' => 
+  array (
+    'object' => 
+    array (
+      'id' => 'pi_1JD4W42H24DauksWa9teVlx5',
+      'object' => 'payment_intent',
+      'amount' => 20000,
+      'amount_capturable' => 0,
+      'amount_received' => 20000,
+      'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+      'application_fee_amount' => 601,
+      'canceled_at' => NULL,
+      'cancellation_reason' => NULL,
+      'capture_method' => 'automatic',
+      'charges' => 
+      array (
+        'object' => 'list',
+        'data' => 
+        array (
+          0 => 
+          array (
+            'id' => 'ch_1JD4W52H24DauksWgJlanYrY',
+            'object' => 'charge',
+            'amount' => 20000,
+            'amount_captured' => 20000,
+            'amount_refunded' => 0,
+            'application' => 'ca_Ex84e31yMTLaNU5ozQvi5woLclpIDVpX',
+            'application_fee' => 'fee_1JD4W52H24DauksWC7cEoFbO',
+            'application_fee_amount' => 601,
+            'balance_transaction' => 'txn_1JD4W52H24DauksWmZvqQR43',
+            'billing_details' => 
+            array (
+              'address' => 
+              array (
+                'city' => '(redacted)',
+                'country' => '(redacted)',
+                'line1' => '(redacted)',
+                'line2' => '(redacted)',
+                'postal_code' => '(redacted)',
+                'state' => '(redacted)',
+              ),
+              'email' => '(redacted)',
+              'name' => '(redacted)',
+              'phone' => '(redacted)',
+            ),
+            'calculated_statement_descriptor' => 'INTOPLANTZ.COM',
+            'captured' => true,
+            'created' => 1626255393,
+            'currency' => 'usd',
+            'customer' => 'cus_JnmvejDlOTs1Vi',
+            'description' => NULL,
+            'destination' => NULL,
+            'dispute' => NULL,
+            'disputed' => false,
+            'failure_code' => NULL,
+            'failure_message' => NULL,
+            'fraud_details' => 
+            array (
+            ),
+            'invoice' => NULL,
+            'livemode' => false,
+            'metadata' => 
+            array (
+              'customer_name' => '(redacted)',
+              'customer_email' => '(redacted)',
+              'site_url' => 'http://intoplantz.com',
+              'order_id' => '257',
+              'order_key' => 'wc_order_ZccOiwC6Et0pJ',
+              'payment_type' => 'single',
+            ),
+            'on_behalf_of' => NULL,
+            'order' => NULL,
+            'outcome' => 
+            array (
+              'network_status' => 'approved_by_network',
+              'reason' => NULL,
+              'risk_level' => 'normal',
+              'risk_score' => 5,
+              'seller_message' => 'Payment complete.',
+              'type' => 'authorized',
+            ),
+            'paid' => true,
+            'payment_intent' => 'pi_1JD4W42H24DauksWa9teVlx5',
+            'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+            'payment_method_details' => 
+            array (
+              'card' => 
+              array (
+                'brand' => 'visa',
+                'checks' => 
+                array (
+                  'address_line1_check' => 'pass',
+                  'address_postal_code_check' => 'pass',
+                  'cvc_check' => NULL,
+                ),
+                'country' => '(redacted)',
+                'exp_month' => 2,
+                'exp_year' => 2023,
+                'fingerprint' => '0SEufZLr8JkcLcfi',
+                'funding' => 'credit',
+                'installments' => NULL,
+                'last4' => '4242',
+                'network' => 'visa',
+                'three_d_secure' => NULL,
+                'wallet' => NULL,
+              ),
+              'type' => 'card',
+            ),
+            'receipt_email' => NULL,
+            'receipt_number' => NULL,
+            'receipt_url' => 'https://pay.stripe.com/receipts/acct_1JAB282H24DauksW/ch_1JD4W52H24DauksWgJlanYrY/rcpt_Jqm4RF5cSbV01TSiIhEn6VfLRqFO5za',
+            'refunded' => false,
+            'refunds' => 
+            array (
+              'object' => 'list',
+              'data' => 
+              array (
+              ),
+              'has_more' => false,
+              'total_count' => 0,
+              'url' => '/v1/charges/ch_1JD4W52H24DauksWgJlanYrY/refunds',
+            ),
+            'review' => NULL,
+            'shipping' => NULL,
+            'source' => NULL,
+            'source_transfer' => NULL,
+            'statement_descriptor' => NULL,
+            'statement_descriptor_suffix' => NULL,
+            'status' => 'succeeded',
+            'transfer_data' => NULL,
+            'transfer_group' => NULL,
+          ),
+        ),
+        'has_more' => false,
+        'total_count' => 1,
+        'url' => '/v1/charges?payment_intent=pi_1JD4W42H24DauksWa9teVlx5',
+      ),
+      'client_secret' => '(redacted)',
+      'confirmation_method' => 'automatic',
+      'created' => 1626255392,
+      'currency' => 'usd',
+      'customer' => 'cus_JnmvejDlOTs1Vi',
+      'description' => NULL,
+      'invoice' => NULL,
+      'last_payment_error' => NULL,
+      'livemode' => false,
+      'metadata' => 
+      array (
+        'customer_name' => '(redacted)',
+        'customer_email' => '(redacted)',
+        'site_url' => 'http://intoplantz.com',
+        'order_id' => '257',
+        'order_key' => 'wc_order_ZccOiwC6Et0pJ',
+        'payment_type' => 'single',
+      ),
+      'next_action' => NULL,
+      'on_behalf_of' => NULL,
+      'payment_method' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+      'payment_method_options' => 
+      array (
+        'card' => 
+        array (
+          'installments' => NULL,
+          'network' => NULL,
+          'request_three_d_secure' => 'automatic',
+        ),
+      ),
+      'payment_method_types' => 
+      array (
+        0 => 'card',
+      ),
+      'receipt_email' => NULL,
+      'review' => NULL,
+      'setup_future_usage' => NULL,
+      'shipping' => NULL,
+      'source' => NULL,
+      'statement_descriptor' => NULL,
+      'statement_descriptor_suffix' => NULL,
+      'status' => 'succeeded',
+      'transfer_data' => NULL,
+      'transfer_group' => NULL,
+      'amount_subtotal' => 20000,
+      'level3' => NULL,
+      'total_details' => 
+      array (
+        'amount_discount' => 0,
+        'amount_tax' => 0,
+      ),
+    ),
+  ),
+)
+2021-07-14T09:36:51+00:00 INFO REQUEST POST https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/tracking/order
+2021-07-14T09:36:51+00:00 INFO BODY: array (
+  'test_mode' => true,
+  'order_data' => 
+  array (
+    'id' => 257,
+    'parent_id' => 0,
+    'status' => 'completed',
+    'currency' => 'USD',
+    'version' => '5.3.0',
+    'prices_include_tax' => false,
+    'date_created' => 'WC_DateTime()',
+    'date_modified' => 'WC_DateTime()',
+    'discount_total' => '0',
+    'discount_tax' => '0',
+    'shipping_total' => '0',
+    'shipping_tax' => '0',
+    'cart_tax' => '0',
+    'total' => '200',
+    'total_tax' => '0',
+    'customer_id' => 1,
+    'order_key' => 'wc_order_ZccOiwC6Et0pJ',
+    'billing' => 
+    array (
+      'first_name' => '',
+      'last_name' => '',
+      'company' => '',
+      'address_1' => '',
+      'address_2' => '',
+      'city' => '(redacted)',
+      'state' => '(redacted)',
+      'postcode' => '',
+      'country' => '(redacted)',
+      'email' => '(redacted)',
+      'phone' => '(redacted)',
+    ),
+    'shipping' => 
+    array (
+      'first_name' => '',
+      'last_name' => '',
+      'company' => '',
+      'address_1' => '',
+      'address_2' => '',
+      'city' => '(redacted)',
+      'state' => '(redacted)',
+      'postcode' => '',
+      'country' => '(redacted)',
+    ),
+    'payment_method' => 'woocommerce_payments',
+    'payment_method_title' => 'Credit card / debit card',
+    'transaction_id' => 'pi_1JD4W42H24DauksWa9teVlx5',
+    'customer_ip_address' => '203.211.74.134',
+    'customer_user_agent' => 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36',
+    'created_via' => 'checkout',
+    'customer_note' => '',
+    'date_completed' => 'WC_DateTime()',
+    'date_paid' => 'WC_DateTime()',
+    'cart_hash' => '33ccac0c6abe544011158820ffacb35c',
+    'number' => '257',
+    'meta_data' => 
+    array (
+      0 => 'WC_Meta_Data()',
+      1 => 'WC_Meta_Data()',
+      2 => 'WC_Meta_Data()',
+      3 => 'WC_Meta_Data()',
+      4 => 'WC_Meta_Data()',
+      5 => 'WC_Meta_Data()',
+      6 => 'WC_Meta_Data()',
+      7 => 'WC_Meta_Data()',
+      8 => 'WC_Meta_Data()',
+      9 => 'WC_Meta_Data()',
+      10 => 'WC_Meta_Data()',
+    ),
+    'line_items' => 
+    array (
+      22 => 'WC_Order_Item_Product()',
+    ),
+    'tax_lines' => 
+    array (
+    ),
+    'shipping_lines' => 
+    array (
+    ),
+    'fee_lines' => 
+    array (
+    ),
+    'coupon_lines' => 
+    array (
+    ),
+    '_payment_method_id' => 'pm_1JABdF2H24DauksWtnAoTTh0',
+    '_stripe_customer_id' => 'cus_JnmvejDlOTs1Vi',
+  ),
+  'update' => false,
+)
+2021-07-14T09:36:52+00:00 INFO RESPONSE: array (
+  'result' => 'error',
+)
+2021-07-14T10:30:39+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T10:30:40+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T13:31:09+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T13:31:10+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T16:37:19+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T16:37:20+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)
+2021-07-14T18:49:09+00:00 INFO REQUEST GET https://public-api.wordpress.com/wpcom/v2/sites/%s/wcpay/accounts?test_mode=0
+2021-07-14T18:49:10+00:00 INFO RESPONSE: array (
+  'account_id' => 'acct_1JAB282H24DauksW',
+  'email' => '(redacted)',
+  'live_publishable_key' => 'pk_live_iBIpeqzKOOx2Y8PFCRBfyMU000Q7xVG4Sn',
+  'test_publishable_key' => 'pk_test_51ETDmyFuiXB5oUVxwSobQMW5Tno1GclIq7ePZWzLeW4q8oa7Zb8hI5VfwI5sNT5nXuKYinLukNvGCXmsQXAoDGHG00MqHqlYHR',
+  'is_live' => true,
+  'has_pending_requirements' => false,
+  'has_overdue_requirements' => false,
+  'current_deadline' => NULL,
+  'status' => 'complete',
+  'payments_enabled' => true,
+  'deposits_status' => 'daily',
+  'statement_descriptor' => 'INTOPLANTZ.COM',
+  'latest_tos_agreement' => 
+  array (
+    'date' => '2021-07-06 10:08:55',
+    'source' => 'signup',
+    'is_current_version' => true,
+  ),
+  'fees' => 
+  array (
+    'base' => 
+    array (
+      'percentage_rate' => 0.029,
+      'fixed_rate' => 30,
+      'currency' => 'nzd',
+    ),
+    'discount' => 
+    array (
+    ),
+  ),
+  'fraud_services' => 
+  array (
+    'stripe' => 
+    array (
+    ),
+    'sift' => 
+    array (
+      'beacon_key' => 'affbdadb36',
+      'sandbox_beacon_key' => '6ad0ad748b',
+    ),
+  ),
+  'store_currencies' => 
+  array (
+    'default' => 'nzd',
+    'supported' => 
+    array (
+      0 => 'nzd',
+    ),
+  ),
+  'country' => '(redacted)',
+  'instant_deposits_eligible' => false,
+  'card_present_eligible' => false,
+)

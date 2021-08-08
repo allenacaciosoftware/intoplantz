@@ -1,0 +1,44 @@
+2021-07-04T08:44:56+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 21
+2021-07-04T08:45:23+00:00 NOTICE member.sync :: Updated Member joedrc@yahoo.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+        )
+
+)
+
+2021-07-04T08:50:46+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 22
+2021-07-04T08:51:12+00:00 NOTICE member.sync :: Updated Member joedrc@yahoo.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+        )
+
+)
+
+2021-07-04T08:59:57+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2021-07-04T08:59:58+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 246
+2021-07-04T09:00:00+00:00 NOTICE debug :: Order ID 246 was pending and is now on-hold :: Array
+(
+    [new_order] => 
+    [tracking] => 
+)
+
+2021-07-04T09:00:07+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2021-07-04T09:01:44+00:00 NOTICE system.debug :: order 246 is in on-hold status, and is being skipped for now.
+2021-07-04T09:04:42+00:00 NOTICE debug :: Order ID 246 was on-hold and is now completed :: Array
+(
+    [new_order] => 
+    [tracking] => 
+)
+
+2021-07-04T09:04:42+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_Single_Order starts in 90 seconds :: obj_id 246
