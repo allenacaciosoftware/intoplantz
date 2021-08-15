@@ -969,13 +969,16 @@ class WC_Checkout {
         $wallet_payment_gateway = new Wallet_System_For_Woocommerce();
         $send_email_enable      = get_option( 'mwb_wsfw_enable_email_notification_for_wallet_update', '' );
         $payment_method         = $order->get_payment_method();
+        $intoplantz_commission_percentage = (int)get_option( 'intoplantz_commission_percentage', '' );
+
 
         foreach ( $order_items as $item_id => $item ) {
             error_log("mwb_order_status_changed foreach here.....");
             error_log($item);
 
             $product_id = $item->get_product_id();
-            $total      = 30;
+            $actual_product_price      = $item->get_subtotal();
+//            $total      = 30;
 
 //            $result =(string)$wpdb->get_col(
 //            $result =$wpdb->get_row( $wpdb->prepare(
@@ -1009,10 +1012,10 @@ class WC_Checkout {
 //            }
 
 
-            error_log("step 1....");
-            $amount          = $total;
+            $credited_amount          = $actual_product_price*(100-$intoplantz_commission_percentage)/100;
+            error_log("credited amount is....$credited_amount");
 //            $userid                 = $order->get_user_id();
-            $credited_amount = apply_filters( 'mwb_wsfw_convert_to_base_price', $amount );
+//            $credited_amount = apply_filters( 'mwb_wsfw_convert_to_base_price', $amount );
             $wallet_userid   = apply_filters( 'wsfw_check_order_meta_for_userid', $userid, $order_id );
             if ( $wallet_userid ) {
                 $update_wallet_userid = $wallet_userid;
@@ -1028,7 +1031,7 @@ class WC_Checkout {
             if ( isset( $send_email_enable ) && 'on' === $send_email_enable ) {
                 $user_name  = $wallet_user->first_name . ' ' . $wallet_user->last_name;
                 $mail_text  = sprintf( 'Hello %s,<br/>', $user_name );
-                $mail_text .= __( 'Wallet credited by ', 'wallet-system-for-woocommerce' ) . wc_price( $amount, array( 'currency' => $order->get_currency() ) ) . __( ' through wallet recharging.', 'wallet-system-for-woocommerce' );
+                $mail_text .= __( 'Wallet credited by IntoPlantz', 'wallet-system-for-woocommerce' ) . wc_price( $credited_amount, array( 'currency' => $order->get_currency() ) ) . __( ' through wallet recharging.', 'wallet-system-for-woocommerce' );
                 $to         = $wallet_user->user_email;
                 $from       = get_option( 'admin_email' );
                 $subject    = __( 'Wallet updating notification', 'wallet-system-for-woocommerce' );
