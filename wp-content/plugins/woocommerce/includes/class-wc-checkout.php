@@ -1046,7 +1046,7 @@ class WC_Checkout {
             $transaction_type = 'Wallet credited through purchase <a href="' . admin_url( 'post.php?post=' . $order_id . '&action=edit' ) . '" >#' . $order_id . '</a>';
             $transaction_data = array(
                 'user_id'          => $userid,
-                'amount'           => $amount,
+                'amount'           => $credited_amount,
                 'currency'         => $order->get_currency(),
                 'payment_method'   => $payment_method,
                 'transaction_type' => htmlentities( $transaction_type ),
