@@ -101,7 +101,7 @@ function wc_get_account_menu_items() {
 		'downloads'       => __( 'Downloads', 'woocommerce' ),
 		'edit-address'    => _n( 'Addresses', 'Address', (int) wc_shipping_enabled(), 'woocommerce' ),
 		'payment-methods' => __( 'Payment methods', 'woocommerce' ),
-		'edit-account'    => __( 'Account details', 'woocommerce' ),
+		'edit-account'    => __( 'Account details123', 'woocommerce' ),
 		'customer-logout' => __( 'Logout', 'woocommerce' ),
 	);
 

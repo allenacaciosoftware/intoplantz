@@ -277,7 +277,7 @@ $wallet_keys = array_keys( $wallet_tabs );
  * @return void
  */
 function show_message_on_form_submit( $wpg_message, $type = 'error' ) {
-	$wpg_notice = '<div class="woocommerce"><p class="' . esc_attr( $type ) . '">' . $wpg_message . '</p>	</div>';
+	$wpg_notice = '<div class="woocommerce" style="display: flex"><p class="' . esc_attr( $type ) . '">' . $wpg_message . '</p>	</div>';
 	echo wp_kses_post( $wpg_notice );
 }
 
