@@ -20,9 +20,46 @@
 defined( 'ABSPATH' ) || exit;
 
 do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
-
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
 <?php if ( $has_orders ) : ?>
+    <table id="ordersTable" class="display">
+        <thead>
+        <th>Order</th>
+        <th>Date</th>
+        <th>Status</th>
+        <th>Total</th>
+        </thead>
+        <tbody>
+            <?php foreach( $customer_orders->orders as $customer_order) {
+                $order      = wc_get_order( $customer_order );
+                $item_count = $order->get_item_count() - $order->get_item_count_refunded();
+            ?>
 
+                <tr>
+                    <td><?php echo esc_html( _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number() ); ?></td>
+                    <td><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></td>
+                    <td><?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?></td>
+                    <td>
+                        <?php
+                        /* translators: 1: formatted order total 2: total order items */
+                        echo wp_kses_post( sprintf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ) );
+                        ?>
+                    </td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let table = $('#ordersTable').DataTable();
+            $('#ordersTable tbody').on('click', 'tr', function () {
+                let data = table.row( this ).data();
+                alert( 'You clicked on '+data[0]+'\'s row' );
+            } );
+        });
+    </script>
 	<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">
 		<thead>
 			<tr>
