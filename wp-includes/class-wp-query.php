@@ -2923,7 +2923,8 @@ class WP_Query {
 			$found_rows = 'SQL_CALC_FOUND_ROWS';
 		}
 
-		$old_request   = "SELECT $found_rows $distinct $fields FROM {$wpdb->posts} $join WHERE 1=1 $where $groupby $orderby $limits";
+		$old_request   = "SELECT $found_rows $distinct $fields FROM {$wpdb->posts} $join WHERE 1=1 $where $groupby $orderby ";
+//		$old_request   = "SELECT $found_rows $distinct $fields FROM {$wpdb->posts} $join WHERE 1=1 $where $groupby $orderby $limits";
 		$this->request = $old_request;
 
 		if ( ! $q['suppress_filters'] ) {
@@ -2969,6 +2970,8 @@ class WP_Query {
 			return $this->posts;
 		}
 
+//		error_log("query here::::::::::::");
+
 		if ( 'id=>parent' === $q['fields'] ) {
 			if ( null === $this->posts ) {
 				$this->posts = $wpdb->get_results( $this->request );
@@ -2990,7 +2993,8 @@ class WP_Query {
 		}
 
 		if ( null === $this->posts ) {
-			$split_the_query = ( $old_request == $this->request && "{$wpdb->posts}.*" === $fields && ! empty( $limits ) && $q['posts_per_page'] < 500 );
+//			$split_the_query = ( $old_request == $this->request && "{$wpdb->posts}.*" === $fields  && $q['posts_per_page'] < 500 );
+//			$split_the_query = ( $old_request == $this->request && "{$wpdb->posts}.*" === $fields && ! empty( $limits ) && $q['posts_per_page'] < 500 );
 
 			/**
 			 * Filters whether to split the query.
@@ -3004,36 +3008,41 @@ class WP_Query {
 			 * @param bool     $split_the_query Whether or not to split the query.
 			 * @param WP_Query $query           The WP_Query instance.
 			 */
-			$split_the_query = apply_filters( 'split_the_query', $split_the_query, $this );
+//			$split_the_query = apply_filters( 'split_the_query', $split_the_query, $this );
 
-			if ( $split_the_query ) {
-				// First get the IDs and then fill in the objects.
+//			if ( $split_the_query ) {
+//				// First get the IDs and then fill in the objects.
+//
+//				$this->request = "SELECT $found_rows $distinct {$wpdb->posts}.ID FROM {$wpdb->posts} $join WHERE 1=1 $where $groupby $orderby $limits";
+//
+//				/**
+//				 * Filters the Post IDs SQL request before sending.
+//				 *
+//				 * @since 3.4.0
+//				 *
+//				 * @param string   $request The post ID request.
+//				 * @param WP_Query $query   The WP_Query instance.
+//				 */
+//				$this->request = apply_filters( 'posts_request_ids', $this->request, $this );
+//
+//				$ids = $wpdb->get_col( $this->request );
+//
+//				if ( $ids ) {
+//					$this->posts = $ids;
+//					$this->set_found_posts( $q, $limits );
+//					_prime_post_caches( $ids, $q['update_post_term_cache'], $q['update_post_meta_cache'] );
+//				} else {
+//					$this->posts = array();
+//				}
+//			} else {
 
-				$this->request = "SELECT $found_rows $distinct {$wpdb->posts}.ID FROM {$wpdb->posts} $join WHERE 1=1 $where $groupby $orderby $limits";
-
-				/**
-				 * Filters the Post IDs SQL request before sending.
-				 *
-				 * @since 3.4.0
-				 *
-				 * @param string   $request The post ID request.
-				 * @param WP_Query $query   The WP_Query instance.
-				 */
-				$this->request = apply_filters( 'posts_request_ids', $this->request, $this );
-
-				$ids = $wpdb->get_col( $this->request );
-
-				if ( $ids ) {
-					$this->posts = $ids;
-					$this->set_found_posts( $q, $limits );
-					_prime_post_caches( $ids, $q['update_post_term_cache'], $q['update_post_meta_cache'] );
-				} else {
-					$this->posts = array();
-				}
-			} else {
-				$this->posts = $wpdb->get_results( $this->request );
-				$this->set_found_posts( $q, $limits );
-			}
+//            $this->request = "SELECT * FROM {$wpdb->posts}";
+//            $this->request = "SELECT $found_rows $distinct {$wpdb->posts}.ID FROM {$wpdb->posts} $join WHERE 1=1 $where $groupby $orderby $limits";
+            error_log("thisrequest::::::");
+            error_log($this->request);
+            $this->posts = $wpdb->get_results( $this->request );
+//				$this->set_found_posts( $q, $limits );
+//			}
 		}
 
 		// Convert to WP_Post objects.

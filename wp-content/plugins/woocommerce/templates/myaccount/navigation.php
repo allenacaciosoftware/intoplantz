@@ -22,10 +22,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 do_action( 'woocommerce_before_account_navigation' );
 ?>
 
-<nav class="woocommerce-MyAccount-navigation" style="width: 20%">
-	<ul>
+<nav class="woocommerce-MyAccount-navigation" style="width: 20%;">
+	<ul style="border: 1px solid #74cf6e">
 		<?php foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
-			<li class="<?php echo wc_get_account_menu_item_classes( $endpoint ); ?>">
+			<li class="<?php echo wc_get_account_menu_item_classes( $endpoint ); ?>" style="border-bottom: 1px solid #74cf6e">
 				<a href="<?php echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?>"><?php echo esc_html( $label ); ?></a>
 			</li>
 		<?php endforeach; ?>
