@@ -21,6 +21,10 @@ defined( 'ABSPATH' ) || exit;
 
 //do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <style>
     table, td, th {
         border: 1px solid #74cf6e;
@@ -70,20 +74,17 @@ defined( 'ABSPATH' ) || exit;
             <?php } ?>
         </tbody>
     </table>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
             let table = $('#ordersTable').DataTable({
-                // "processing": true,
-                // "serverSide": true,
-                // "ajax": "ordersDatatable.php"
-                // "ajax": "../server_side/scripts/server_processing.php"
+                "order": [[ 0, "desc" ]]
             });
             $('#ordersTable tbody').on('click', 'tr', function () {
                 let data = table.row( this ).data();
-                alert( 'You clicked on '+data[0]+'\'s row' );
-            } );
+                // $('#ex1').modal('show');
+                console.log("data is:::", data[0]);
+                location.href = '/my-account/view-order/' + data[0].replace("#", "") + '/';
+            });
         });
     </script>
 <!--	<table class="woocommerce-orders-table woocommerce-MyAccount-orders shop_table shop_table_responsive my_account_orders account-orders-table">-->
