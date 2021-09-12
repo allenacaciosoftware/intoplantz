@@ -3051,166 +3051,166 @@ class WP_Query {
 			$this->posts = array_map( 'get_post', $this->posts );
 		}
 
-		if ( ! $q['suppress_filters'] ) {
-			/**
-			 * Filters the raw post results array, prior to status checks.
-			 *
-			 * @since 2.3.0
-			 *
-			 * @param WP_Post[] $posts Array of post objects.
-			 * @param WP_Query  $query The WP_Query instance (passed by reference).
-			 */
-			$this->posts = apply_filters_ref_array( 'posts_results', array( $this->posts, &$this ) );
-		}
-
-		if ( ! empty( $this->posts ) && $this->is_comment_feed && $this->is_singular ) {
-			/** This filter is documented in wp-includes/query.php */
-			$cjoin = apply_filters_ref_array( 'comment_feed_join', array( '', &$this ) );
-
-			/** This filter is documented in wp-includes/query.php */
-			$cwhere = apply_filters_ref_array( 'comment_feed_where', array( "WHERE comment_post_ID = '{$this->posts[0]->ID}' AND comment_approved = '1'", &$this ) );
-
-			/** This filter is documented in wp-includes/query.php */
-			$cgroupby = apply_filters_ref_array( 'comment_feed_groupby', array( '', &$this ) );
-			$cgroupby = ( ! empty( $cgroupby ) ) ? 'GROUP BY ' . $cgroupby : '';
-
-			/** This filter is documented in wp-includes/query.php */
-			$corderby = apply_filters_ref_array( 'comment_feed_orderby', array( 'comment_date_gmt DESC', &$this ) );
-			$corderby = ( ! empty( $corderby ) ) ? 'ORDER BY ' . $corderby : '';
-
-			/** This filter is documented in wp-includes/query.php */
-			$climits = apply_filters_ref_array( 'comment_feed_limits', array( 'LIMIT ' . get_option( 'posts_per_rss' ), &$this ) );
-
-			$comments_request = "SELECT {$wpdb->comments}.* FROM {$wpdb->comments} $cjoin $cwhere $cgroupby $corderby $climits";
-			$comments         = $wpdb->get_results( $comments_request );
-			// Convert to WP_Comment.
-			/** @var WP_Comment[] */
-			$this->comments      = array_map( 'get_comment', $comments );
-			$this->comment_count = count( $this->comments );
-		}
-
-		// Check post status to determine if post should be displayed.
-		if ( ! empty( $this->posts ) && ( $this->is_single || $this->is_page ) ) {
-			$status = get_post_status( $this->posts[0] );
-
-			if ( 'attachment' === $this->posts[0]->post_type && 0 === (int) $this->posts[0]->post_parent ) {
-				$this->is_page       = false;
-				$this->is_single     = true;
-				$this->is_attachment = true;
-			}
-
-			// If the post_status was specifically requested, let it pass through.
-			if ( ! in_array( $status, $q_status, true ) ) {
-				$post_status_obj = get_post_status_object( $status );
-
-				if ( $post_status_obj && ! $post_status_obj->public ) {
-					if ( ! is_user_logged_in() ) {
-						// User must be logged in to view unpublished posts.
-						$this->posts = array();
-					} else {
-						if ( $post_status_obj->protected ) {
-							// User must have edit permissions on the draft to preview.
-							if ( ! current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
-								$this->posts = array();
-							} else {
-								$this->is_preview = true;
-								if ( 'future' !== $status ) {
-									$this->posts[0]->post_date = current_time( 'mysql' );
-								}
-							}
-						} elseif ( $post_status_obj->private ) {
-							if ( ! current_user_can( $read_cap, $this->posts[0]->ID ) ) {
-								$this->posts = array();
-							}
-						} else {
-							$this->posts = array();
-						}
-					}
-				} elseif ( ! $post_status_obj ) {
-					// Post status is not registered, assume it's not public.
-					if ( ! current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
-						$this->posts = array();
-					}
-				}
-			}
-
-			if ( $this->is_preview && $this->posts && current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
-				/**
-				 * Filters the single post for preview mode.
-				 *
-				 * @since 2.7.0
-				 *
-				 * @param WP_Post  $post_preview  The Post object.
-				 * @param WP_Query $query         The WP_Query instance (passed by reference).
-				 */
-				$this->posts[0] = get_post( apply_filters_ref_array( 'the_preview', array( $this->posts[0], &$this ) ) );
-			}
-		}
-
-		// Put sticky posts at the top of the posts array.
-		$sticky_posts = get_option( 'sticky_posts' );
-		if ( $this->is_home && $page <= 1 && is_array( $sticky_posts ) && ! empty( $sticky_posts ) && ! $q['ignore_sticky_posts'] ) {
-			$num_posts     = count( $this->posts );
-			$sticky_offset = 0;
-			// Loop over posts and relocate stickies to the front.
-			for ( $i = 0; $i < $num_posts; $i++ ) {
-				if ( in_array( $this->posts[ $i ]->ID, $sticky_posts, true ) ) {
-					$sticky_post = $this->posts[ $i ];
-					// Remove sticky from current position.
-					array_splice( $this->posts, $i, 1 );
-					// Move to front, after other stickies.
-					array_splice( $this->posts, $sticky_offset, 0, array( $sticky_post ) );
-					// Increment the sticky offset. The next sticky will be placed at this offset.
-					$sticky_offset++;
-					// Remove post from sticky posts array.
-					$offset = array_search( $sticky_post->ID, $sticky_posts, true );
-					unset( $sticky_posts[ $offset ] );
-				}
-			}
-
-			// If any posts have been excluded specifically, Ignore those that are sticky.
-			if ( ! empty( $sticky_posts ) && ! empty( $q['post__not_in'] ) ) {
-				$sticky_posts = array_diff( $sticky_posts, $q['post__not_in'] );
-			}
-
-			// Fetch sticky posts that weren't in the query results.
-			if ( ! empty( $sticky_posts ) ) {
-				$stickies = get_posts(
-					array(
-						'post__in'    => $sticky_posts,
-						'post_type'   => $post_type,
-						'post_status' => 'publish',
-						'nopaging'    => true,
-					)
-				);
-
-				foreach ( $stickies as $sticky_post ) {
-					array_splice( $this->posts, $sticky_offset, 0, array( $sticky_post ) );
-					$sticky_offset++;
-				}
-			}
-		}
-
-		// If comments have been fetched as part of the query, make sure comment meta lazy-loading is set up.
-		if ( ! empty( $this->comments ) ) {
-			wp_queue_comments_for_comment_meta_lazyload( $this->comments );
-		}
-
-		if ( ! $q['suppress_filters'] ) {
-			/**
-			 * Filters the array of retrieved posts after they've been fetched and
-			 * internally processed.
-			 *
-			 * @since 1.5.0
-			 *
-			 * @param WP_Post[] $posts Array of post objects.
-			 * @param WP_Query  $query The WP_Query instance (passed by reference).
-			 */
-			$this->posts = apply_filters_ref_array( 'the_posts', array( $this->posts, &$this ) );
-		}
-
-		// Ensure that any posts added/modified via one of the filters above are
-		// of the type WP_Post and are filtered.
+//		if ( ! $q['suppress_filters'] ) {
+//			/**
+//			 * Filters the raw post results array, prior to status checks.
+//			 *
+//			 * @since 2.3.0
+//			 *
+//			 * @param WP_Post[] $posts Array of post objects.
+//			 * @param WP_Query  $query The WP_Query instance (passed by reference).
+//			 */
+//			$this->posts = apply_filters_ref_array( 'posts_results', array( $this->posts, &$this ) );
+//		}
+//
+//		if ( ! empty( $this->posts ) && $this->is_comment_feed && $this->is_singular ) {
+//			/** This filter is documented in wp-includes/query.php */
+//			$cjoin = apply_filters_ref_array( 'comment_feed_join', array( '', &$this ) );
+//
+//			/** This filter is documented in wp-includes/query.php */
+//			$cwhere = apply_filters_ref_array( 'comment_feed_where', array( "WHERE comment_post_ID = '{$this->posts[0]->ID}' AND comment_approved = '1'", &$this ) );
+//
+//			/** This filter is documented in wp-includes/query.php */
+//			$cgroupby = apply_filters_ref_array( 'comment_feed_groupby', array( '', &$this ) );
+//			$cgroupby = ( ! empty( $cgroupby ) ) ? 'GROUP BY ' . $cgroupby : '';
+//
+//			/** This filter is documented in wp-includes/query.php */
+//			$corderby = apply_filters_ref_array( 'comment_feed_orderby', array( 'comment_date_gmt DESC', &$this ) );
+//			$corderby = ( ! empty( $corderby ) ) ? 'ORDER BY ' . $corderby : '';
+//
+//			/** This filter is documented in wp-includes/query.php */
+//			$climits = apply_filters_ref_array( 'comment_feed_limits', array( 'LIMIT ' . get_option( 'posts_per_rss' ), &$this ) );
+//
+//			$comments_request = "SELECT {$wpdb->comments}.* FROM {$wpdb->comments} $cjoin $cwhere $cgroupby $corderby $climits";
+//			$comments         = $wpdb->get_results( $comments_request );
+//			// Convert to WP_Comment.
+//			/** @var WP_Comment[] */
+//			$this->comments      = array_map( 'get_comment', $comments );
+//			$this->comment_count = count( $this->comments );
+//		}
+//
+//		// Check post status to determine if post should be displayed.
+//		if ( ! empty( $this->posts ) && ( $this->is_single || $this->is_page ) ) {
+//			$status = get_post_status( $this->posts[0] );
+//
+//			if ( 'attachment' === $this->posts[0]->post_type && 0 === (int) $this->posts[0]->post_parent ) {
+//				$this->is_page       = false;
+//				$this->is_single     = true;
+//				$this->is_attachment = true;
+//			}
+//
+//			// If the post_status was specifically requested, let it pass through.
+//			if ( ! in_array( $status, $q_status, true ) ) {
+//				$post_status_obj = get_post_status_object( $status );
+//
+//				if ( $post_status_obj && ! $post_status_obj->public ) {
+//					if ( ! is_user_logged_in() ) {
+//						// User must be logged in to view unpublished posts.
+//						$this->posts = array();
+//					} else {
+//						if ( $post_status_obj->protected ) {
+//							// User must have edit permissions on the draft to preview.
+//							if ( ! current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
+//								$this->posts = array();
+//							} else {
+//								$this->is_preview = true;
+//								if ( 'future' !== $status ) {
+//									$this->posts[0]->post_date = current_time( 'mysql' );
+//								}
+//							}
+//						} elseif ( $post_status_obj->private ) {
+//							if ( ! current_user_can( $read_cap, $this->posts[0]->ID ) ) {
+//								$this->posts = array();
+//							}
+//						} else {
+//							$this->posts = array();
+//						}
+//					}
+//				} elseif ( ! $post_status_obj ) {
+//					// Post status is not registered, assume it's not public.
+//					if ( ! current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
+//						$this->posts = array();
+//					}
+//				}
+//			}
+//
+//			if ( $this->is_preview && $this->posts && current_user_can( $edit_cap, $this->posts[0]->ID ) ) {
+//				/**
+//				 * Filters the single post for preview mode.
+//				 *
+//				 * @since 2.7.0
+//				 *
+//				 * @param WP_Post  $post_preview  The Post object.
+//				 * @param WP_Query $query         The WP_Query instance (passed by reference).
+//				 */
+//				$this->posts[0] = get_post( apply_filters_ref_array( 'the_preview', array( $this->posts[0], &$this ) ) );
+//			}
+//		}
+//
+//		// Put sticky posts at the top of the posts array.
+//		$sticky_posts = get_option( 'sticky_posts' );
+//		if ( $this->is_home && $page <= 1 && is_array( $sticky_posts ) && ! empty( $sticky_posts ) && ! $q['ignore_sticky_posts'] ) {
+//			$num_posts     = count( $this->posts );
+//			$sticky_offset = 0;
+//			// Loop over posts and relocate stickies to the front.
+//			for ( $i = 0; $i < $num_posts; $i++ ) {
+//				if ( in_array( $this->posts[ $i ]->ID, $sticky_posts, true ) ) {
+//					$sticky_post = $this->posts[ $i ];
+//					// Remove sticky from current position.
+//					array_splice( $this->posts, $i, 1 );
+//					// Move to front, after other stickies.
+//					array_splice( $this->posts, $sticky_offset, 0, array( $sticky_post ) );
+//					// Increment the sticky offset. The next sticky will be placed at this offset.
+//					$sticky_offset++;
+//					// Remove post from sticky posts array.
+//					$offset = array_search( $sticky_post->ID, $sticky_posts, true );
+//					unset( $sticky_posts[ $offset ] );
+//				}
+//			}
+//
+//			// If any posts have been excluded specifically, Ignore those that are sticky.
+//			if ( ! empty( $sticky_posts ) && ! empty( $q['post__not_in'] ) ) {
+//				$sticky_posts = array_diff( $sticky_posts, $q['post__not_in'] );
+//			}
+//
+//			// Fetch sticky posts that weren't in the query results.
+//			if ( ! empty( $sticky_posts ) ) {
+//				$stickies = get_posts(
+//					array(
+//						'post__in'    => $sticky_posts,
+//						'post_type'   => $post_type,
+//						'post_status' => 'publish',
+//						'nopaging'    => true,
+//					)
+//				);
+//
+//				foreach ( $stickies as $sticky_post ) {
+//					array_splice( $this->posts, $sticky_offset, 0, array( $sticky_post ) );
+//					$sticky_offset++;
+//				}
+//			}
+//		}
+//
+//		// If comments have been fetched as part of the query, make sure comment meta lazy-loading is set up.
+//		if ( ! empty( $this->comments ) ) {
+//			wp_queue_comments_for_comment_meta_lazyload( $this->comments );
+//		}
+//
+//		if ( ! $q['suppress_filters'] ) {
+//			/**
+//			 * Filters the array of retrieved posts after they've been fetched and
+//			 * internally processed.
+//			 *
+//			 * @since 1.5.0
+//			 *
+//			 * @param WP_Post[] $posts Array of post objects.
+//			 * @param WP_Query  $query The WP_Query instance (passed by reference).
+//			 */
+//			$this->posts = apply_filters_ref_array( 'the_posts', array( $this->posts, &$this ) );
+//		}
+//
+//		// Ensure that any posts added/modified via one of the filters above are
+//		// of the type WP_Post and are filtered.
 		if ( $this->posts ) {
 			$this->post_count = count( $this->posts );
 
@@ -3223,14 +3223,14 @@ class WP_Query {
 
 			/** @var WP_Post */
 			$this->post = reset( $this->posts );
-		} else {
-			$this->post_count = 0;
-			$this->posts      = array();
+//		} else {
+//			$this->post_count = 0;
+//			$this->posts      = array();
 		}
-
-		if ( $q['lazy_load_term_meta'] ) {
-			wp_queue_posts_for_term_meta_lazyload( $this->posts );
-		}
+//
+//		if ( $q['lazy_load_term_meta'] ) {
+//			wp_queue_posts_for_term_meta_lazyload( $this->posts );
+//		}
 
 		return $this->posts;
 	}
