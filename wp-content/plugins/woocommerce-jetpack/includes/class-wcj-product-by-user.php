@@ -207,12 +207,10 @@ class WCJ_Product_By_User extends WCJ_Module {
             echo '</thead>';
             echo '<tbody>';
             foreach ( $products as $_product_id => $_product_data ) {
-                echo '<tr>';
+                echo '<tr id="product_'. $_product_id .'">';
                 echo '<td>'. $_product_data['status'] .'</td>';
                 echo '<td>'. $_product_data['title'] .'</td>';
-//                echo '<td>'. $_product_data['title'] .'</td>';
                 echo '</tr>';
-//                echo '<tr><td>'. $_product_data['title'] .'</td></tr>';
             }
             echo '</tbody>';
             echo '</table>';
@@ -222,26 +220,26 @@ class WCJ_Product_By_User extends WCJ_Module {
             echo '    var table = $("#productsTable").DataTable({';
             echo '      "order": [[ 0, "desc" ]]';
             echo '    });';
-            echo '    $("#ordersTable tbody").on("click","tr", function () {';
+            echo '    $("#productsTable tbody").on("click","tr", function () {';
             echo '        var data = table.row( this ).data();';
-            echo '        location.href = "/my-account/view-order/" + data[0].replace("#", "") + "/";';
+            echo '        location.href = "/my-account/wcj-my-products/?wcj_edit_product="+ data.DT_RowId.replaceAll("product_","");';
             echo '    });';
             echo '});';
             echo '</script>';
-//			$table_data = array();
-//			$table_data[] = array( '', __( 'Status', 'woocommerce-jetpack' ), __( 'Title', 'woocommerce-jetpack' ), __( 'Actions', 'woocommerce-jetpack' ) );
-//			$i = 0;
-//			foreach ( $products as $_product_id => $_product_data ) {
-//				$i++;
-//				$table_data[] = array(
-//					/* $i . ' [' . $_product_id . ']' . */ get_the_post_thumbnail( $_product_id, array( 25, 25 ) ),
-//					'<code>'. $_product_data['status'] . '</code>',
-//					$_product_data['title'],
-//					'<a class="button" href="' . add_query_arg( 'wcj_edit_product',   $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_delete_product' ) ) ) . '">' . __( 'Edit', 'woocommerce-jetpack' ) . '</a>' . ' ' .
-//					'<a class="button" href="' . add_query_arg( 'wcj_delete_product', $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_edit_product' ) ) ) . '" onclick="return confirm(\'' . __( 'Are you sure?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a>',
-//				);
-//			}
-//			echo wcj_get_table_html( $table_data, array( 'table_class' => 'shop_table shop_table_responsive my_account_orders' ) );
+			$table_data = array();
+			$table_data[] = array( '', __( 'Status', 'woocommerce-jetpack' ), __( 'Title', 'woocommerce-jetpack' ), __( 'Actions', 'woocommerce-jetpack' ) );
+			$i = 0;
+			foreach ( $products as $_product_id => $_product_data ) {
+				$i++;
+				$table_data[] = array(
+					/* $i . ' [' . $_product_id . ']' . */ get_the_post_thumbnail( $_product_id, array( 25, 25 ) ),
+					'<code>'. $_product_data['status'] . '</code>',
+					$_product_data['title'],
+					'<a class="button" href="' . add_query_arg( 'wcj_edit_product',   $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_delete_product' ) ) ) . '">' . __( 'Edit', 'woocommerce-jetpack' ) . '</a>' . ' ' .
+					'<a class="button" href="' . add_query_arg( 'wcj_delete_product', $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_edit_product' ) ) ) . '" onclick="return confirm(\'' . __( 'Are you sure?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a>',
+				);
+			}
+			echo wcj_get_table_html( $table_data, array( 'table_class' => 'shop_table shop_table_responsive my_account_orders' ) );
 //		}
 	}
 
