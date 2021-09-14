@@ -339,9 +339,9 @@ final class WP_Post {
 			$value = get_post_meta( $this->ID, $key, true );
 		}
 
-		if ( $this->filter ) {
-			$value = sanitize_post_field( $key, $value, $this->ID, $this->filter );
-		}
+//		if ( $this->filter ) {
+//			$value = sanitize_post_field( $key, $value, $this->ID, $this->filter );
+//		}
 
 		return $value;
 	}
