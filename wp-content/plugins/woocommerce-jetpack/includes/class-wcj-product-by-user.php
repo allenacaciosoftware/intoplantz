@@ -212,7 +212,7 @@ class WCJ_Product_By_User extends WCJ_Module {
                 echo '<tr id="product_' . $_product_id . '">';
                 echo '<td>' . $_product_data['status'] . '</td>';
                 echo '<td>' . $_product_data['title'] . '</td>';
-                echo '<td>' . '<a class="button" href="' . add_query_arg( 'wcj_delete_product', $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_edit_product' ) ) ) . '" onclick="return confirm(\'' . __( 'Are you sure?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a>' . '</td>';
+                echo '<td>' . '<a class="button" href="' . add_query_arg( 'wcj_delete_product', $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_edit_product' ) ) ) . '" onclick="return confirm(\'' . __( 'Are you sure you want to delete product: ' . $_product_data['title'] . '?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a>' . '</td>';
                 echo '</tr>';
             }
             echo '</tbody>';
