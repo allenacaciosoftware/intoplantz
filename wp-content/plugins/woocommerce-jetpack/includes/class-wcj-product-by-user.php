@@ -194,7 +194,7 @@ class WCJ_Product_By_User extends WCJ_Module {
 //			$offset += $block_size;
 //		}
 //		if ( 0 != count( $products ) ) {
-            echo '<h2>' . __('My Products', 'woocommerce-jetpack') . '</h2>';
+            echo '<div style="display: flex;justify-content: space-between;"><h2>' . __('My Products', 'woocommerce-jetpack') . '</h2><p><a href="/my-account/wcj-my-products/?wcj_edit_product" class="button">Add new product</a></p></div>';
             echo '<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"/>';
             echo '<script src="https://code.jquery.com/jquery-3.5.1.js"></script>';
             echo '<script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>';
