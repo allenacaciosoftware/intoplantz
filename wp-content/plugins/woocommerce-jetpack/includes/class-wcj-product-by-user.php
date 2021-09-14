@@ -202,14 +202,15 @@ class WCJ_Product_By_User extends WCJ_Module {
 
             echo '<table id="productsTable" class="display">';
             echo '<thead style="background: #217b1b; color: white">';
+            echo '<th></th>';
             echo '<th>Status</th>';
             echo '<th>Title</th>';
             echo '<th></th>';
-//            echo '<th>Action</th>';
             echo '</thead>';
             echo '<tbody>';
             foreach ($products as $_product_id => $_product_data) {
                 echo '<tr id="product_' . $_product_id . '">';
+                echo '<td style="text-align: center">' . get_the_post_thumbnail( $_product_id, array( 30, 30 ) ) . '</td>';
                 echo '<td>' . $_product_data['status'] . '</td>';
                 echo '<td>' . $_product_data['title'] . '</td>';
                 echo '<td>' . '<a class="button" href="' . add_query_arg( 'wcj_delete_product', $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_edit_product' ) ) ) . '" onclick="return confirm(\'' . __( 'Are you sure you want to delete product: ' . $_product_data['title'] . '?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a>' . '</td>';
@@ -223,7 +224,8 @@ class WCJ_Product_By_User extends WCJ_Module {
             echo '    var table = $("#productsTable").DataTable({';
             echo '      "order": [[ 0, "desc" ]]';
             echo '    });';
-            echo '    $("#productsTable tbody").on("click","tr", function () {';
+            echo '    $("#productsTable tr").css("cursor", "pointer");';
+            echo '    $("#productsTable tbody").on("click","tr td:not(:last-child)", function () {';
             echo '        var data = table.row( this ).data();';
             echo '        location.href = "/my-account/wcj-my-products/?wcj_edit_product="+ data.DT_RowId.replaceAll("product_","");';
             echo '    });';
