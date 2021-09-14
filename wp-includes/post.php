@@ -2225,8 +2225,8 @@ function get_posts( $args = null ) {
 	$parsed_args['no_found_rows']       = true;
 
 	$get_posts = new WP_Query;
-	error_log("parsed_args::::");
-	error_log(json_encode($parsed_args));
+//	error_log("parsed_args::::");
+//	error_log(json_encode($parsed_args));
 	return $get_posts->query( $parsed_args );
 
 }
