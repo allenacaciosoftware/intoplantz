@@ -359,10 +359,7 @@ do_action( 'woocommerce_before_account_navigation' );
 </style>
 <nav class="navbar navbar-inverse " id="sidebar-wrapper" role="navigation">
     <ul class="nav sidebar-nav">
-        <div class="sidebar-header">
-            <div class="sidebar-brand">
-                <a href="#">My Account</a></div></div>
-        <li><a href="#home">Home</a></li>
+        <div class="sidebar-header"><div class="sidebar-brand"><a href="#">My Account</a></div></div>
         <li><a href="/my-account/orders/">Orders</a></li>
         <li class="dropdown">
             <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Products<span class="caret"></span></a>

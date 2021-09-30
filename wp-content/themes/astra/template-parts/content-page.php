@@ -25,17 +25,17 @@
 	<header class="entry-header <?php astra_entry_header_class(); ?>">
 		<?php astra_get_post_thumbnail(); ?>
 
-		<?php
-		astra_the_title(
-			'<h1 class="entry-title" ' . astra_attr(
-				'article-title-content-page',
-				array(
-					'class' => '',
-				)
-			) . '>',
-			'</h1>'
-		);
-		?>
+<!--		--><?php
+//		astra_the_title(
+//			'<h1 class="entry-title" ' . astra_attr(
+//				'article-title-content-page',
+//				array(
+//					'class' => '',
+//				)
+//			) . '>',
+//			'</h1>'
+//		);
+//		?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content clear" 

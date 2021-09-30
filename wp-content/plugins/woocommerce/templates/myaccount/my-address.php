@@ -42,12 +42,12 @@ $oldcol = 1;
 $col    = 1;
 ?>
 
-<p>
+<h4>
 	<?php echo apply_filters( 'woocommerce_my_account_my_address_description', esc_html__( 'The following addresses will be used on the checkout page by default.', 'woocommerce' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-</p>
+</h4>
 
 <?php if ( ! wc_ship_to_billing_address_only() && wc_shipping_enabled() ) : ?>
-	<div class="u-columns woocommerce-Addresses col2-set addresses" >
+	<div>
 <?php endif; ?>
 
 <?php foreach ( $get_addresses as $name => $address_title ) : ?>
@@ -57,8 +57,8 @@ $col    = 1;
 		$oldcol  = $oldcol * -1;
 	?>
 
-	<div class="u-column<?php echo $col < 0 ? 1 : 2; ?> col-<?php echo $oldcol < 0 ? 1 : 2; ?> woocommerce-Address" >
-		<header class="woocommerce-Address-title title" style="background: #217b1b; border: 1px solid #217b1b">
+	<div>
+		<header class="woocommerce-Address-title title" style="background: #217b1b; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
 			<h3 style="color: white"><?php echo esc_html( $address_title ); ?></h3>
 			<a style="color: white; text-decoration: underline" href="<?php echo esc_url( wc_get_endpoint_url( 'edit-address', $name ) ); ?>" class="edit"><?php echo $address ? esc_html__( 'Edit', 'woocommerce' ) : esc_html__( 'Add', 'woocommerce' ); ?></a>
 		</header>
