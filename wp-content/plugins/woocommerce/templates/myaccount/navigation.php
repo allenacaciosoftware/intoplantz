@@ -195,6 +195,8 @@ do_action( 'woocommerce_before_account_navigation' );
         line-height: 20px;
         display: inline-block;
         width: 100%;
+        background: green;
+        border-bottom: 1px solid black;
     }
 
     .sidebar-nav li:before {
@@ -239,7 +241,6 @@ do_action( 'woocommerce_before_account_navigation' );
         -moz-transition:  width .2s ease-in;
         -ms-transition:  width .2s ease-in;
         transition: width .2s ease-in;
-
     }
 
     .sidebar-nav li a {
@@ -247,6 +248,10 @@ do_action( 'woocommerce_before_account_navigation' );
         color: #ddd;
         text-decoration: none;
         padding: 10px 15px 10px 30px;
+    }
+
+    ul.dropdown-menu li a{
+        background: black;
     }
 
     .sidebar-nav li a:hover,
@@ -358,23 +363,27 @@ do_action( 'woocommerce_before_account_navigation' );
             <div class="sidebar-brand">
                 <a href="#">My Account</a></div></div>
         <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#events">Events</a></li>
-        <li><a href="#team">Team</a></li>
+        <li><a href="/my-account/orders/">Orders</a></li>
         <li class="dropdown">
-            <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Works <span class="caret"></span></a>
-            <ul class="dropdown-menu animated fadeInLeft" role="menu">
-                <div class="dropdown-header">Dropdown heading</div>
-                <li><a href="#pictures">Pictures</a></li>
-                <li><a href="#videos">Videeos</a></li>
-                <li><a href="#books">Books</a></li>
-                <li><a href="#art">Art</a></li>
-                <li><a href="#awards">Awards</a></li>
+            <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Products<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/my-account/wcj-my-products/">My products</a></li>
+                <li><a href="/my-account/wcj-my-products/?wcj_edit_product">Add product</a></li>
             </ul>
+            </a>
         </li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="#followme">Follow me</a></li>
+        <li><a href="/my-account/edit-address/">Addresses</a></li>
+        <li><a href="/my-account/edit-account/">Account Details</a></li>
+        <li class="dropdown">
+            <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Wallet<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#pictures">Add balance</a></li>
+                    <li><a href="#videos">Request Withdrawal</a></li>
+                    <li><a href="#books">Transactions</a></li>
+                </ul>
+            </a>
+        </li>
+        <li><a href="<?php echo wc_logout_url() ?>">Logout</a></li>
     </ul>
 </nav>
 
@@ -414,15 +423,5 @@ do_action( 'woocommerce_before_account_navigation' );
     });
 </script>
 
-
-<!--<nav class="woocommerce-MyAccount-navigation" style="width: 20%;">-->
-<!--	<ul style="border: 1px solid #74cf6e">-->
-<!--		--><?php //foreach ( wc_get_account_menu_items() as $endpoint => $label ) : ?>
-<!--			<li class="--><?php //echo wc_get_account_menu_item_classes( $endpoint ); ?><!--" style="border-bottom: 1px solid #74cf6e">-->
-<!--				<a href="--><?php //echo esc_url( wc_get_account_endpoint_url( $endpoint ) ); ?><!--">--><?php //echo esc_html( $label ); ?><!--</a>-->
-<!--			</li>-->
-<!--		--><?php //endforeach; ?>
-<!--	</ul>-->
-<!--</nav>-->
 
 <?php do_action( 'woocommerce_after_account_navigation' ); ?>
