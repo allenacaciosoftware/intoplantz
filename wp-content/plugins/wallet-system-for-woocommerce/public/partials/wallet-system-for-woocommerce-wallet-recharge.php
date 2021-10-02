@@ -27,7 +27,8 @@ if ( is_array( $wsfw_min_max_value ) ) {
 ?>
 
 <div class='content active'>
-	<form method="post" action="" id="mwb_wallet_transfer_form">
+	<form method="post" action="" id="mwb_wallet_transfer_form" style="display: flex; flex-direction: column; align-items: center;">
+        <h3><b><?php echo esc_html( 'Add Balance' ); ?></b></h3>
 		<p class="mwb-wallet-field-container form-row form-row-wide">
 			<label for="mwb_wallet_recharge_amount"><?php echo esc_html__( 'Enter Amount (', 'wallet-system-for-woocommerce' ) . esc_html( get_woocommerce_currency_symbol( $current_currency ) ) . '):'; ?></label>
 			<input type="number" id="mwb_wallet_recharge" step="0.01" data-min="<?php echo esc_attr( $min_value ); ?>" data-max="<?php echo esc_attr( $max_value ); ?>" name="mwb_wallet_recharge_amount" required="">

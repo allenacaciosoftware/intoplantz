@@ -284,62 +284,37 @@ function show_message_on_form_submit( $wpg_message, $type = 'error' ) {
 ?>
 
 <div class="mwb_wcb_wallet_display_wrapper">
-	<div class="mwb_wcb_wallet_balance_container"> 
-		<h4><?php esc_html_e( 'Wallet Balance123', 'wallet-system-for-woocommerce' ); ?></h4>
-		<p>
-		<?php
-		$wallet_bal = apply_filters( 'mwb_wsfw_show_converted_price', $wallet_bal );
-		echo wc_price( $wallet_bal, array( 'currency' => $current_currency ) );
-		?>
-		</p>
-	</div>
 	<div class="mwb_wcb_main_tabs_template">
 		<div class="mwb_wcb_body_template">
-			<div class="mwb_wcb_content_template">
-
-				<nav class="wallet-tabs">
-					<ul class='tabs'>
-						<?php
-						
-						foreach ( $wallet_tabs as $key => $wallet_tab ) {
-							if ( $flag ) {
-								if ( $key === $wallet_keys[0] ) {
-									$class = 'active';
-								} else {
-									$class = '';
-								}
-								echo "<li class='" . esc_html( $class ) . "'><a href='" . esc_url( $wallet_tab['url'] ) . "'><svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>" . $wallet_tab['icon'] . '</svg></a><h3>' . esc_html( $wallet_tab['title'] ) . '</h3></li>';
-							} else {
-								if ( $current_url === $wallet_tab['url'] ) {
-									$class = 'active';
-								} else {
-									$class = '';
-								}
-								echo "<li class='" . esc_html( $class ) . "'><a href='" . esc_url( $wallet_tab['url'] ) . "'><svg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'>" . $wallet_tab['icon'] . '</svg></a><h3>' . esc_html( $wallet_tab['title'] ) . '</h3></li>';
-							}
-						}
-						?>
-					</ul>
-				</nav>
-
-				<div class='content-section'>
-
-				<?php
-				foreach ( $wallet_tabs as $key => $wallet_tab ) {
-					if ( $flag ) {
-						if ( $key === $wallet_keys[0] ) {
-							include_once $wallet_tab['file-path'];
-						}
-					} else {
-						if ( $current_url === $wallet_tab['url'] ) {
-							include_once $wallet_tab['file-path'];
-						}
-					}
-				}
-				?>
-				</div>
-			</div>
-		</div>
+            <div>
+                <header class="woocommerce-Address-title title" style="background: #217b1b; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
+                    <h3 style="color: white"><?php esc_html_e( 'Wallet Balance', 'wallet-system-for-woocommerce' ); ?></h3>
+                    <h3 style="color: white">
+                        <?php
+                        $wallet_bal = apply_filters( 'mwb_wsfw_show_converted_price', $wallet_bal );
+                        echo wc_price( $wallet_bal, array( 'currency' => $current_currency ) );
+                        ?>
+                    </h3>
+                </header>
+                <address style="border: 1px solid #217b1b">
+                    <div class='content-section'>
+                        <?php
+                        foreach ( $wallet_tabs as $key => $wallet_tab ) {
+                            if ( $flag ) {
+                                if ( $key === $wallet_keys[0] ) {
+                                    include_once $wallet_tab['file-path'];
+                                }
+                            } else {
+                                if ( $current_url === $wallet_tab['url'] ) {
+                                    include_once $wallet_tab['file-path'];
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                </address>
+            </div>
+        </div>
 	</div>
 </div>
 
