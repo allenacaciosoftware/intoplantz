@@ -234,11 +234,11 @@ if ( ! class_exists( 'Astra_Woocommerce' ) ) :
 		 */
 		public function rating_markup( $html, $rating, $count ) {
 
-			if ( 0 == $rating ) {
-				$html  = '<div class="star-rating">';
-				$html .= wc_get_star_rating_html( $rating, $count );
-				$html .= '</div>';
-			}
+//			if ( 0 == $rating ) {
+//				$html  = '<div class="star-rating">';
+//				$html .= wc_get_star_rating_html( $rating, $count );
+//				$html .= '</div>';
+//			}
 			return $html;
 		}
 

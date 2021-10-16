@@ -19,4 +19,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<ul class="products columns-<?php echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?>">
+<style>
+    ul.box {
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
+    }
+
+    ul li {
+        box-shadow: 5px 5px 20px 0 rgb(0 0 0 / 10%) !important;
+        /*margin-right: 20px;*/
+    }
+    .astra-shop-thumbnail-wrap {
+        border: 1px solid;
+    }
+
+    .woocommerce-loop-product__title {
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 20px auto 0 0;
+        white-space: nowrap;
+        /*width: 50px;*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+        /*border: 1px solid #000000;*/
+    }
+</style>
+<ul class="box products" >
+<!--<ul class="box products columns---><?php //echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?><!--" >-->
