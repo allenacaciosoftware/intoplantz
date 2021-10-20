@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     ul li {
         box-shadow: 5px 5px 20px 0 rgb(0 0 0 / 10%) !important;
-        /*margin-right: 20px;*/
+        padding-bottom: 20px;
     }
     .astra-shop-thumbnail-wrap {
         border: 1px solid;
@@ -42,6 +42,18 @@ if ( ! defined( 'ABSPATH' ) ) {
         overflow: hidden;
         text-overflow: ellipsis;
         /*border: 1px solid #000000;*/
+    }
+
+    .ast-article-post:last-child {
+        margin-bottom: auto !important;
+    }
+
+    .woocommerce-loop-product__title {
+        margin: 0;
+    }
+
+    ul.box.products {
+        list-style: none;
     }
 </style>
 <ul class="box products" >
