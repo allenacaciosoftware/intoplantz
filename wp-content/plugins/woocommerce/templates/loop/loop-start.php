@@ -20,17 +20,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <style>
-    ul.box {
-        display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
-    }
 
     ul li {
         box-shadow: 5px 5px 20px 0 rgb(0 0 0 / 10%) !important;
         padding-bottom: 20px;
+        flex: 30%;
+        flex-grow: 0;
+    }
+    ul li:last-child {
+        content: "";
+        margin-left: 20px !important;
+    }
+    ul li div.astra-shop-summary-wrap {
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
     .astra-shop-thumbnail-wrap {
-        border: 1px solid;
+        border-bottom: 1px solid #aaadac;
     }
 
     .woocommerce-loop-product__title {
@@ -38,10 +45,8 @@ if ( ! defined( 'ABSPATH' ) ) {
         text-transform: uppercase;
         margin: 20px auto 0 0;
         white-space: nowrap;
-        /*width: 50px;*/
         overflow: hidden;
         text-overflow: ellipsis;
-        /*border: 1px solid #000000;*/
     }
 
     .ast-article-post:last-child {

@@ -173,7 +173,7 @@ if ( ! function_exists( 'astra_woo_woocommerce_shop_product_content' ) ) {
 			do_action( 'astra_woo_shop_before_summary_wrap' );
 			echo '<div class="astra-shop-summary-wrap">';
 			do_action( 'astra_woo_shop_summary_wrap_top' );
-            echo '<div style="display: flex;justify-content: space-between;align-items: center;">';
+            echo '<div style="display: flex;justify-content: space-between;align-items: center; padding-bottom: 10px">';
             woocommerce_template_loop_price();
             woocommerce_template_loop_add_to_cart();
             echo '</div>';

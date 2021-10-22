@@ -56,8 +56,6 @@ add_filter( 'the_title', 'ur_page_endpoint_title', 10 );
  * @return int
  */
 function ur_get_page_id( $page ) {
-    print("aaaaaa");
-    print($page);
 	$my_account_page_id = get_option( 'user_registration_myaccount_page_id' );
 	$page_id            = get_the_ID();
 
