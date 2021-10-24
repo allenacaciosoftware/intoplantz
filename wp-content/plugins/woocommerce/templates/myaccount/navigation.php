@@ -357,7 +357,7 @@ do_action( 'woocommerce_before_account_navigation' );
         color: #0084b4;
     }
 </style>
-<nav class="navbar navbar-inverse " id="sidebar-wrapper" role="navigation">
+<nav class="navbar navbar-inverse " id="sidebar-wrapper" role="navigation" style="width: 30%">
     <ul class="nav sidebar-nav">
         <div class="sidebar-header"><div class="sidebar-brand"><a href="#">My Account</a></div></div>
         <li><a href="/my-account/orders/">Orders</a></li>
