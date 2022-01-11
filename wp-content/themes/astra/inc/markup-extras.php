@@ -991,6 +991,7 @@ if ( ! function_exists( 'astra_footer_markup' ) ) {
 					)
 				);
 		?>
+                style="margin-top: auto;"
 		>
 
 			<?php astra_footer_content_top(); ?>

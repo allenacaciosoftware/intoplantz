@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?><!DOCTYPE html>
 <?php astra_html_before(); ?>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> style="height: 100%">
 <head>
 <?php astra_head_top(); ?>
 <meta charset="<?php bloginfo( 'charset' ); ?>">
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php astra_head_bottom(); ?>
 </head>
 
-<body <?php astra_schema_body(); ?> <?php body_class(); ?>>
+<body <?php astra_schema_body(); ?> <?php body_class(); ?> style="height: 100%">
 <?php astra_body_top(); ?>
 <?php wp_body_open(); ?>
 <div 
@@ -40,6 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		)
 	);
 	?>
+        style="height: 100%; display: flex; flex-direction: column;"
 >
 	<a class="skip-link screen-reader-text" href="#content"><?php echo esc_html( astra_default_strings( 'string-header-skip-link', false ) ); ?></a>
 	<?php 
