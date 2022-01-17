@@ -109,7 +109,10 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 
 				$atts = array();
 
-				$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
+                if (is_user_logged_in() && strcmp(strtolower($item->title), "sign in") == 0) {
+                    $item->title = "My Account";
+                }
+                $atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 				$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 				$atts['class']  = '';
 				$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
