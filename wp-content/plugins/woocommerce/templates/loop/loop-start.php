@@ -21,17 +21,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 <style>
 
-    ul li {
+    ul.box.products li {
         box-shadow: 5px 5px 20px 0 rgb(0 0 0 / 10%) !important;
         padding-bottom: 20px;
         flex: 30%;
         flex-grow: 0;
     }
-    ul li:last-child {
+    ul.box.products li:last-child {
         content: "";
         margin-left: 20px !important;
     }
-    ul li div.astra-shop-summary-wrap {
+    ul.box.products li div.astra-shop-summary-wrap {
         padding-top: 10px;
         padding-left: 20px;
         padding-right: 20px;
