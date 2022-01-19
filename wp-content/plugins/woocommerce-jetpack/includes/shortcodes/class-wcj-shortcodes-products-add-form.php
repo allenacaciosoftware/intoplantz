@@ -38,7 +38,7 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 			'external_url_enabled'   => wcj_get_option( 'wcj_product_by_user_external_url_enabled', 'no' ),
 			'cats_enabled'           => wcj_get_option( 'wcj_product_by_user_cats_enabled', 'no' ),
 			'tags_enabled'           => wcj_get_option( 'wcj_product_by_user_tags_enabled', 'no' ),
-			'image_enabled'          => apply_filters( 'booster_option', 'no', wcj_get_option( 'wcj_product_by_user_image_enabled', 'no' ) ),
+			'image_enabled'          => apply_filters( 'booster_option', 'yes', wcj_get_option( 'wcj_product_by_user_image_enabled', 'yes' ) ),
 
 			'desc_required'          => wcj_get_option( 'wcj_product_by_user_desc_required', 'no' ),
 			'short_desc_required'    => wcj_get_option( 'wcj_product_by_user_short_desc_required', 'no' ),
