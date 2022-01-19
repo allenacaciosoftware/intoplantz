@@ -23,5 +23,5 @@ global $product;
 ?>
 
 <?php if ( $price_html = $product->get_price_html() ) : ?>
-	<h2 class="price" style="font-size: 50px; margin-bottom: 0"><?php echo $price_html; ?></h2>
+	<h2 class="price" style="font-size: xx-large; margin-bottom: 0"><?php echo $price_html; ?></h2>
 <?php endif; ?>
