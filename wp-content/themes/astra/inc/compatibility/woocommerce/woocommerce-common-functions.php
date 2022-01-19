@@ -154,9 +154,9 @@ if ( ! function_exists( 'astra_woo_woocommerce_template_loop_product_title' ) ) 
 	 */
 	function astra_woo_woocommerce_template_loop_product_title() {
 
-//		echo '<a href="' . esc_url( get_the_permalink() ) . '" class="ast-loop-product__link">';
+		// echo '<a href="' . esc_url( get_the_permalink() ) . '" class="ast-loop-product__link">';
 			woocommerce_template_loop_product_title();
-//		echo '</a>';
+		// echo '</a>';
 	}
 }
 
@@ -173,62 +173,62 @@ if ( ! function_exists( 'astra_woo_woocommerce_shop_product_content' ) ) {
 			do_action( 'astra_woo_shop_before_summary_wrap' );
 			echo '<div class="astra-shop-summary-wrap">';
 			do_action( 'astra_woo_shop_summary_wrap_top' );
-            echo '<div style="display: flex;justify-content: space-between;align-items: center; padding-bottom: 10px">';
+             echo '<div style="display: flex;justify-content: space-between;align-items: center;padding-bottom: 10px;">';
             woocommerce_template_loop_price();
             woocommerce_template_loop_add_to_cart();
             echo '</div>';
             astra_woo_woocommerce_template_loop_product_title();
             astra_woo_shop_product_short_description();
 
-//			foreach ( $shop_structure as $value ) {
-//
-//				switch ( $value ) {
-//					case 'title':
-//						/**
-//						 * Add Product Title on shop page for all products.
-//						 */
-//						do_action( 'astra_woo_shop_title_before' );
-//						astra_woo_woocommerce_template_loop_product_title();
-//						do_action( 'astra_woo_shop_title_after' );
-//						break;
-//					case 'price':
-//						/**
-//						 * Add Product Price on shop page for all products.
-//						 */
-//						do_action( 'astra_woo_shop_price_before' );
-//						woocommerce_template_loop_price();
-//						do_action( 'astra_woo_shop_price_after' );
-//						break;
-//					case 'ratings':
-//						/**
-//						 * Add rating on shop page for all products.
-//						 */
-//						do_action( 'astra_woo_shop_rating_before' );
-//						woocommerce_template_loop_rating();
-//						do_action( 'astra_woo_shop_rating_after' );
-//						break;
-//					case 'short_desc':
-//						do_action( 'astra_woo_shop_short_description_before' );
-//						astra_woo_shop_product_short_description();
-//						do_action( 'astra_woo_shop_short_description_after' );
-//						break;
-//					case 'add_cart':
-//						do_action( 'astra_woo_shop_add_to_cart_before' );
-//						woocommerce_template_loop_add_to_cart();
-//						do_action( 'astra_woo_shop_add_to_cart_after' );
-//						break;
-//					case 'category':
-//						/**
-//						 * Add and/or Remove Categories from shop archive page.
-//						 */
-//						do_action( 'astra_woo_shop_category_before' );
-//						astra_woo_shop_parent_category();
-//						do_action( 'astra_woo_shop_category_after' );
-//						break;
-//					default:
-//						break;
-//				}
-//			}
+			// foreach ( $shop_structure as $value ) {
+
+			// 	switch ( $value ) {
+			// 		case 'title':
+			// 			/**
+			// 			 * Add Product Title on shop page for all products.
+			// 			 */
+			// 			do_action( 'astra_woo_shop_title_before' );
+			// 			astra_woo_woocommerce_template_loop_product_title();
+			// 			do_action( 'astra_woo_shop_title_after' );
+			// 			break;
+			// 		case 'price':
+			// 			/**
+			// 			 * Add Product Price on shop page for all products.
+			// 			 */
+			// 			do_action( 'astra_woo_shop_price_before' );
+			// 			woocommerce_template_loop_price();
+			// 			do_action( 'astra_woo_shop_price_after' );
+			// 			break;
+			// 		case 'ratings':
+			// 			/**
+			// 			 * Add rating on shop page for all products.
+			// 			 */
+			// 			do_action( 'astra_woo_shop_rating_before' );
+			// 			woocommerce_template_loop_rating();
+			// 			do_action( 'astra_woo_shop_rating_after' );
+			// 			break;
+			// 		case 'short_desc':
+			// 			do_action( 'astra_woo_shop_short_description_before' );
+			// 			astra_woo_shop_product_short_description();
+			// 			do_action( 'astra_woo_shop_short_description_after' );
+			// 			break;
+			// 		case 'add_cart':
+			// 			do_action( 'astra_woo_shop_add_to_cart_before' );
+			// 			woocommerce_template_loop_add_to_cart();
+			// 			do_action( 'astra_woo_shop_add_to_cart_after' );
+			// 			break;
+			// 		case 'category':
+			// 			/**
+			// 			 * Add and/or Remove Categories from shop archive page.
+			// 			 */
+			// 			do_action( 'astra_woo_shop_category_before' );
+			// 			astra_woo_shop_parent_category();
+			// 			do_action( 'astra_woo_shop_category_after' );
+			// 			break;
+			// 		default:
+			// 			break;
+			// 	}
+			// }
 
 			do_action( 'astra_woo_shop_summary_wrap_bottom' );
 			echo '</div>';

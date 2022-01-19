@@ -9,12 +9,10 @@
  */
 
 defined( 'ABSPATH' ) || exit;
-//require('class-wallet-system-for-woocommerce-public.php');
 
 /**
  * Checkout class.
  */
-
 class WC_Checkout {
 
 	/**
@@ -960,184 +958,6 @@ class WC_Checkout {
 		WC()->cart->calculate_totals();
 	}
 
-    function topup_user_product_wallet($order_id){
-        global $wpdb;
-        error_log("topping up user product wallet here.....");
-        error_log($order_id);
-        $order     = wc_get_order( $order_id );
-        $order_items = $order->get_items();
-        $wallet_payment_gateway = new Wallet_System_For_Woocommerce();
-        $send_email_enable      = get_option( 'mwb_wsfw_enable_email_notification_for_wallet_update', '' );
-        $payment_method         = $order->get_payment_method();
-        $intoplantz_commission_percentage = (int)get_option( 'intoplantz_commission_percentage', '' );
-
-
-        foreach ( $order_items as $item_id => $item ) {
-            error_log("mwb_order_status_changed foreach here.....");
-            error_log($item);
-
-            $product_id = $item->get_product_id();
-            $actual_product_price      = $item->get_subtotal();
-//            $total      = 30;
-
-//            $result =(string)$wpdb->get_col(
-//            $result =$wpdb->get_row( $wpdb->prepare(
-            $result =$wpdb->get_results(
-                "
-			SELECT post_author FROM {$wpdb->posts} AS p
-			WHERE p.ID=$product_id
-		"
-            ); // WPCS: unprepared SQL ok.
-            error_log("query result is123::::");
-            error_log("my result is::::$result");
-            error_log($result[0]->post_author);
-            $userid     = $result[0]->post_author;
-//            error_log($result[0]["post_author"]);
-//            $result = array_map( 'absint', $result );
-
-//            foreach ( $result as $authorId ) {
-//                error_log("$authorId is::::");
-//                error_log($authorId);
-//            }
-
-
-//            if ($result. > 0) {
-//                // output data of each row
-//                while($row = $result->fetch_assoc()) {
-//                    error_log("before meta value...");
-//                    error_log($row["meta_value"]);
-//                }
-//            } else {
-//                error_log("0 results");
-//            }
-
-
-            $credited_amount          = $actual_product_price*(100-$intoplantz_commission_percentage)/100;
-            error_log("credited amount is....$credited_amount");
-//            $userid                 = $order->get_user_id();
-//            $credited_amount = apply_filters( 'mwb_wsfw_convert_to_base_price', $amount );
-            $wallet_userid   = apply_filters( 'wsfw_check_order_meta_for_userid', $userid, $order_id );
-            if ( $wallet_userid ) {
-                $update_wallet_userid = $wallet_userid;
-            } else {
-                $update_wallet_userid = $userid;
-            }
-            $transfer_note = apply_filters( 'wsfw_check_order_meta_for_recharge_reason', '', $order_id );
-            $walletamount  = get_user_meta( $update_wallet_userid, 'mwb_wallet', true );
-            $wallet_user   = get_user_by( 'id', $update_wallet_userid );
-            $walletamount += $credited_amount;
-            update_user_meta( $update_wallet_userid, 'mwb_wallet', $walletamount );
-
-            if ( isset( $send_email_enable ) && 'on' === $send_email_enable ) {
-                $user_name  = $wallet_user->first_name . ' ' . $wallet_user->last_name;
-                $mail_text  = sprintf( 'Hello %s,<br/>', $user_name );
-                $mail_text .= __( 'Wallet credited by IntoPlantz', 'wallet-system-for-woocommerce' ) . wc_price( $credited_amount, array( 'currency' => $order->get_currency() ) ) . __( ' through wallet recharging.', 'wallet-system-for-woocommerce' );
-                $to         = $wallet_user->user_email;
-                $from       = get_option( 'admin_email' );
-                $subject    = __( 'Wallet updating notification', 'wallet-system-for-woocommerce' );
-                $headers    = 'MIME-Version: 1.0' . "\r\n";
-                $headers   .= 'Content-Type: text/html;  charset=UTF-8' . "\r\n";
-                $headers   .= 'From: ' . $from . "\r\n" .
-                    'Reply-To: ' . $to . "\r\n";
-                $wallet_payment_gateway->send_mail_on_wallet_updation( $to, $subject, $mail_text, $headers );
-
-            }
-
-            $transaction_type = 'Wallet credited through purchase <a href="' . admin_url( 'post.php?post=' . $order_id . '&action=edit' ) . '" >#' . $order_id . '</a>';
-            $transaction_data = array(
-                'user_id'          => $userid,
-                'amount'           => $credited_amount,
-                'currency'         => $order->get_currency(),
-                'payment_method'   => $payment_method,
-                'transaction_type' => htmlentities( $transaction_type ),
-                'order_id'         => $order_id,
-                'note'             => $transfer_note,
-            );
-
-            $wallet_payment_gateway->insert_transaction_data_in_table( $transaction_data );
-        }
-    }
-    function mwb_order_status_changed($order_id)
-    {
-        error_log("mwb_order_status_changed here.....");
-        error_log($order_id);
-//        $order_id               = $order->get_id();
-        $order     = wc_get_order( $order_id );
-        error_log("mwb_order_status_changed order here.....");
-        error_log($order);
-
-        $userid                 = $order->get_user_id();
-        $payment_method         = $order->get_payment_method();
-        $new_status             = $order->get_status();
-        $order_items            = $order->get_items();
-        $wallet_id              = get_option( 'mwb_wsfw_rechargeable_product_id', '' );
-        $walletamount           = get_user_meta( $userid, 'mwb_wallet', true );
-        $user                   = get_user_by( 'id', $userid );
-        $name                   = $user->first_name . ' ' . $user->last_name;
-        $wallet_payment_gateway = new Wallet_System_For_Woocommerce();
-        $send_email_enable      = get_option( 'mwb_wsfw_enable_email_notification_for_wallet_update', '' );
-        error_log("mwb_order_status_changed $order_items here.....");
-        error_log(count($order_items));
-
-
-        foreach ( $order_items as $item_id => $item ) {
-            error_log("mwb_order_status_changed foreach here.....");
-            error_log($item);
-
-            $product_id = $item->get_product_id();
-            $total      = 30;
-//            $total      = $item->get_total();
-
-//            if ( isset( $product_id ) && ! empty( $product_id ) && $product_id == $wallet_id ) {
-                error_log("step 1....");
-
-//                if ( 'completed' == $new_status ) {
-                    $amount          = $total;
-                    $credited_amount = apply_filters( 'mwb_wsfw_convert_to_base_price', $amount );
-                    $wallet_userid   = apply_filters( 'wsfw_check_order_meta_for_userid', $userid, $order_id );
-                    if ( $wallet_userid ) {
-                        $update_wallet_userid = $wallet_userid;
-                    } else {
-                        $update_wallet_userid = $userid;
-                    }
-                    $transfer_note = apply_filters( 'wsfw_check_order_meta_for_recharge_reason', '', $order_id );
-                    $walletamount  = get_user_meta( $update_wallet_userid, 'mwb_wallet', true );
-                    $wallet_user   = get_user_by( 'id', $update_wallet_userid );
-                    $walletamount += $credited_amount;
-                    update_user_meta( $update_wallet_userid, 'mwb_wallet', $walletamount );
-
-                    if ( isset( $send_email_enable ) && 'on' === $send_email_enable ) {
-                        $user_name  = $wallet_user->first_name . ' ' . $wallet_user->last_name;
-                        $mail_text  = sprintf( 'Hello %s,<br/>', $user_name );
-                        $mail_text .= __( 'Wallet credited by ', 'wallet-system-for-woocommerce' ) . wc_price( $amount, array( 'currency' => $order->get_currency() ) ) . __( ' through wallet recharging.', 'wallet-system-for-woocommerce' );
-                        $to         = $wallet_user->user_email;
-                        $from       = get_option( 'admin_email' );
-                        $subject    = __( 'Wallet updating notification', 'wallet-system-for-woocommerce' );
-                        $headers    = 'MIME-Version: 1.0' . "\r\n";
-                        $headers   .= 'Content-Type: text/html;  charset=UTF-8' . "\r\n";
-                        $headers   .= 'From: ' . $from . "\r\n" .
-                            'Reply-To: ' . $to . "\r\n";
-                        $wallet_payment_gateway->send_mail_on_wallet_updation( $to, $subject, $mail_text, $headers );
-
-                    }
-
-                    $transaction_type = 'Wallet credited through purchase <a href="' . admin_url( 'post.php?post=' . $order_id . '&action=edit' ) . '" >#' . $order_id . '</a>';
-                    $transaction_data = array(
-                        'user_id'          => $userid,
-                        'amount'           => $amount,
-                        'currency'         => $order->get_currency(),
-                        'payment_method'   => $payment_method,
-                        'transaction_type' => htmlentities( $transaction_type ),
-                        'order_id'         => $order_id,
-                        'note'             => $transfer_note,
-                    );
-
-                    $wallet_payment_gateway->insert_transaction_data_in_table( $transaction_data );
-
-//                }
-//            }
-        }
-    }
 
 	/**
 	 * Process an order that does require payment.
@@ -1147,7 +967,6 @@ class WC_Checkout {
 	 * @param string $payment_method Payment method.
 	 */
 	protected function process_order_payment( $order_id, $payment_method ) {
-	    error_log("process_order_payment...");
 		$available_gateways = WC()->payment_gateways->get_available_payment_gateways();
 
 		if ( ! isset( $available_gateways[ $payment_method ] ) ) {
@@ -1159,12 +978,6 @@ class WC_Checkout {
 
 		// Process Payment.
 		$result = $available_gateways[ $payment_method ]->process_payment( $order_id );
-		// ALLEN changes...
-        error_log("allen changes here in process payment...");
-        error_log("allen changes here in process payment order...");
-        $this->topup_user_product_wallet($order_id);
-//        $this->mwb_order_status_changed($order_id);
-        error_log("after..........");
 
 		// Redirect to success/confirmation/payment page.
 		if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
@@ -1378,11 +1191,8 @@ class WC_Checkout {
 				 * since it could be empty see:
 				 * https://github.com/woocommerce/woocommerce/issues/24631
 				 */
-				error_log("applying filters before process order payments...");
 				if ( apply_filters( 'woocommerce_cart_needs_payment', $order->needs_payment(), WC()->cart ) ) {
 					$this->process_order_payment( $order_id, $posted_data['payment_method'] );
-					// TOP UP wallet here...
-
 				} else {
 					$this->process_order_without_payment( $order_id );
 				}

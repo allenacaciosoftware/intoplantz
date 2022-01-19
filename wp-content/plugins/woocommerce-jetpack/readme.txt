@@ -4,7 +4,7 @@ Tags: woocommerce customization, woocommerce bundle, woocommerce product addon, 
 Requires at least: 4.4
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 5.4.3
+Stable tag: 5.4.8
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -136,7 +136,7 @@ To unlock all Booster for WooCommerce features, please install additional [Boost
 
 **Products**
 
-* *WooCommerce Product Extra Fees* - Lets you set extra fees for all your shop’s products. Fees can be fixed or calculated as percent from the price. (Plus only)
+* *WooCommerce Product Extra Fees* - Lets you set extra fees for all your shop’s products. Fees can be fixed or calculated as percent from the price. (Available in paid Booster bundles)
 * *Add to Cart* - Set any local URL to redirect to on Add to Cart (Per product not allowed in free version). Automatically add to cart on product visit. Display radio buttons instead of drop box for variable products (Plus). Disable quantity input. Open external products on the add to cart in the new window. Replace Add to Cart button on archives with button from single product pages. Customize Add to Cart messages (Plus).
 * *Add to Cart Button Visibility* - Enable/disable Add to Cart button globally or on per product basis.
 * *Admin Products List* - Customize admin products list (1 custom column allowed in free).
@@ -184,9 +184,9 @@ To unlock all Booster for WooCommerce features, please install additional [Boost
 * *Empty Cart Button* - Add (and customize) "Empty Cart" button to the cart and checkout pages. Customize empty cart button text (Plus). Different button positions on the cart page (Plus).
 * *Mini Cart Custom Info* - Add custom info to the mini cart widget (1 block allowed in free version).
 * *URL Coupons* - WooCommerce URL coupons. Redirect after coupon has been applied (Plus).
-* *Frequently Bought Together* - Add Frequently Bought Together section with suggest items usually bought together with the product watched by your customer. (Plus only)
-* *One Page Checkout* - One Page Checkout make easier for customers to buy from custom checkout pages by displaying both product selection and checkout forms on a single page. (Plus only)
-
+* *Frequently Bought Together* - Add Frequently Bought Together section with suggest items usually bought together with the product watched by your customer. (Available in paid Booster bundles)
+* *One Page Checkout* - One Page Checkout make easier for customers to buy from custom checkout pages by displaying both product selection and checkout forms on a single page. (Available in paid Booster bundles)
+* *Wishlist* - Add to Favourites your customer can mark Products as Favourite Products for any upcomming event.(Available in paid Booster bundles)
 
 **Payment Gateways**
 
@@ -264,6 +264,41 @@ To unlock all Booster for WooCommerce features, please install additional [Boost
 * For support please visit the [Plugin Support Forum](https://wordpress.org/support/plugin/woocommerce-jetpack/).
 
 == Changelog ==
+
+= 5.4.8 27/10/2021 =
+
+* Feature - PRODUCTS - Product Visibility by Country - Added shortcode to display product visibility by country. Use [wcj_product_visibility_by_country] to apply.
+* Fix - PAYMENT GATEWAYS - Gateways Fees and Discounts - Fixed klarna payment fees issue for checkout page.
+* Fix - PRODUCTS - Related Products - Fixed include/exclude hide option issue for products.
+* Fix - PDF INVOICING & PACKING SLIPS - Fixed bulk pdf invoice download issue with include and exclude billing country
+* Fix - PRICES & CURRENCIES- Currency per Product - Fixed shipping price convert issue with exchange rate.
+
+= 5.4.7 29/09/2021 =
+
+* Feature - PRICES & CURRENCIES - Product Price by Formula - Added Compatibility with WoocommerceBooking plugin.
+* Fix - CART & CHECKOUT - Checkout Custom Fields - Fixed PHP warning array_key() expects parameter 1.
+* Fix - CART & CHECKOUT - Checkout Core Fields - Fixed Error Uncaught TypeError: Cannot read property '0' of undefined.
+* WooCommerce 5.7.1 tested
+* WordPress 5.8.1 tested
+
+= 5.4.6 27/08/2021 =
+
+* Fix - SHIPPING & ORDERS - Order Numbers - Fixed order number sequential bug for a new order for different PHP versions.
+
+= 5.4.5 25/08/2021 =
+* Fix - PDF INVOICING & PACKING SLIPS - Fixed table border is not being shown when we use a background image.
+* Fix - PDF INVOICING & PACKING SLIPS - Fixed page break not working when extra header css is being added.
+* Fix - PDF INVOICING & PACKING SLIPS - Fixed refund extra fee and shipping value not being shown on item table.
+* Fix - CART & CHECKOUT - Checkout Custom Fields - Fixed Category rules of checkout were not being reflected on email.
+* Fix - CART & CHECKOUT - EU VAT Number - Fixed EU vat number required notice when the field is empty.
+* Fix - SHIPPING & ORDERS - Order Numbers - Fixed order number sequential bug for a new order.
+* Fix - PRICES & CURRENCIES - Prices and Currencies by Country - Fixed closure error when widgets are being used on shop page.
+* Fix - PRICES & CURRENCIES - Wholesale Price - Fixed per product price issue with the multicurrency switcher.
+* WooCommerce 5.6.0 tested
+* WordPress 5.8 tested
+
+= 5.4.4 11/08/2021 =
+* Fix - Emails & Misc.- Email Verification - Fixed security issue for Authentication link.
 
 = 5.4.3 28/07/2021 =
 * Fix - SHIPPING & ORDERS- Order Quantities - Fixed Steps issue on product detail page.

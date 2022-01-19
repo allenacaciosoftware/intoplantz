@@ -76,6 +76,7 @@ class OMAPI_Welcome {
 		$this->set();
 
 		// Maybe load a dashboard widget.
+		add_action( 'admin_init', array( $this, 'redirect' ), 9999 );
 		add_action( 'wp_dashboard_setup', array( $this, 'dashboard_widget' ) );
 	}
 
@@ -90,12 +91,61 @@ class OMAPI_Welcome {
 	}
 
 	/**
+	 * Onboarding redirect.
+	 *
+	 * This function checks if a new install or update has just occurred. If so,
+	 * then we redirect the user to the appropriate page.
+	 *
+	 * @since 2.6.0
+	 */
+	public function redirect() {
+
+		// Check if we should consider redirection.
+		if ( ! get_transient( 'optin_monster_api_activation_redirect' ) ) {
+			return;
+		}
+
+		// If we are redirecting, clear the transient so it only happens once.
+		delete_transient( 'optin_monster_api_activation_redirect' );
+
+		// Check option to disable welcome redirect.
+		if ( get_option( 'optin_monster_api_activation_redirect_disabled', false ) ) {
+			return;
+		}
+
+		// Only do this for single site installs.
+		if ( isset( $_GET['activate-multi'] ) || is_network_admin() ) { // WPCS: CSRF ok.
+			return;
+		}
+
+		// Don't initiate onboarding if they are already connected.
+		if ( OMAPI_ApiKey::has_credentials() ) {
+			return;
+		}
+
+		$goto = OMAPI_Urls::dashboard();
+
+		// Check if they haven't yet been welcomed.
+		if ( 'welcomed' !== $this->base->get_option( 'welcome', 'status', 'none' ) ) {
+
+			$options                      = $this->base->get_option();
+			$options['welcome']['status'] = 'welcomed';
+			update_option( 'optin_monster_api', $options );
+
+			$goto = OMAPI_Urls::wizard();
+		}
+
+		wp_safe_redirect( $goto );
+		exit;
+	}
+
+	/**
 	 * Loads a dashboard widget if the user has not entered and verified API credentials.
 	 *
 	 * @since 1.1.5.1
 	 */
 	public function dashboard_widget() {
-		if ( $this->base->get_api_credentials() ) {
+		if ( OMAPI_ApiKey::has_credentials() ) {
 			return;
 		}
 

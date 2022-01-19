@@ -153,6 +153,10 @@ class OMAPI_Output {
 
 		$rules = new OMAPI_Rules();
 
+		if ( OMAPI_Debug::can_output_debug() ) {
+			add_action( 'wp_footer', array( 'OMAPI_Debug', 'output_general' ), 99 );
+		}
+
 		// Keep these around for back-compat.
 		$this->fields = $rules->fields;
 
@@ -243,7 +247,7 @@ class OMAPI_Output {
 		}
 
 		// Adjust the output to the JS version embed and to add our custom script ID.
-		return $this->om_script_tag(
+		return self::om_script_tag(
 			array(
 				'id' => 'omapi-script',
 			)
@@ -446,8 +450,9 @@ class OMAPI_Output {
 	public function load_previews( $campaigns, $post_id ) {
 		if ( self::$live_preview || self::$live_rules_preview ) {
 			$campaign_id = sanitize_text_field( self::$live_preview ? self::$live_preview : self::$live_rules_preview );
+			$campaign_id = sanitize_html_class( $campaign_id );
 
-			$embed = $this->om_script_tag(
+			$embed = self::om_script_tag(
 				array(
 					'id'         => 'omapi-script-preview-' . $campaign_id,
 					'campaignId' => $campaign_id,
@@ -480,7 +485,7 @@ class OMAPI_Output {
 
 		$option['id'] = 'omapi-script-global';
 
-		echo $this->om_script_tag( $option ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo self::om_script_tag( $option ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 
 	/**
@@ -582,7 +587,7 @@ class OMAPI_Output {
 		<script type="text/javascript">
 		<?php
 		foreach ( $this->slugs as $slug => $data ) {
-			echo 'var ' . $slug . '_shortcode = true;'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+			echo 'var ' . sanitize_html_class( $slug ) . '_shortcode = true;';
 		}
 		?>
 		</script>
@@ -645,9 +650,7 @@ class OMAPI_Output {
 		// Set flag to true.
 		$this->localized = true;
 
-		$slugs = function_exists( 'wp_json_encode' )
-			? wp_json_encode( $this->slugs )
-			: json_encode( $this->slugs ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
+		$slugs = OMAPI_Utils::json_encode( $this->slugs );
 
 		// Output JS variable.
 		?>
@@ -748,17 +751,18 @@ class OMAPI_Output {
 			}
 		}
 
-		$output = array(
-			'wc_cart'     => $this->woocommerce_cart(),
-			'object_id'   => $object_id,
-			'object_key'  => $object_key,
-			'object_type' => $object_type,
-			'term_ids'    => $tax_terms,
+		$output = apply_filters(
+			'optin_monster_display_rules_data_output',
+			array(
+				'wc_cart'     => $this->woocommerce_cart(),
+				'object_id'   => $object_id,
+				'object_key'  => $object_key,
+				'object_type' => $object_type,
+				'term_ids'    => $tax_terms,
+			)
 		);
 
-		$output = function_exists( 'wp_json_encode' )
-			? wp_json_encode( $output )
-			: json_encode( $output ); // phpcs:ignore WordPress.WP.AlternativeFunctions.json_encode_json_encode
+		$output = OMAPI_Utils::json_encode( $output );
 
 		// Output JS variable.
 		// phpcs:ignore XSS
@@ -777,9 +781,11 @@ class OMAPI_Output {
 	 * @return string         The optin campaign html.
 	 */
 	public function prepare_campaign( $optin ) {
-		return isset( $optin->post_content ) && ! empty( $optin->post_content )
+		$campaign_embed = ! empty( $optin->post_content )
 			? trim( html_entity_decode( stripslashes( $optin->post_content ), ENT_QUOTES, 'UTF-8' ), '\'' )
 			: '';
+
+		return apply_filters( 'optin_monster_campaign_embed_output', $campaign_embed, $optin );
 	}
 
 	/**
@@ -899,7 +905,7 @@ class OMAPI_Output {
 	 *
 	 * @return string        The embed script JS.
 	 */
-	public function om_script_tag( $args = array() ) {
+	public static function om_script_tag( $args = array() ) {
 
 		$src = esc_url_raw( OMAPI_Urls::om_api() );
 
@@ -919,6 +925,11 @@ class OMAPI_Output {
 			? sprintf( 's.dataset.user="%s";', esc_attr( $args['userId'] ) )
 			: '';
 
+		$api_cname = OMAPI::get_instance()->get_option( 'apiCname' );
+		$api_cname = ! empty( $api_cname )
+			? sprintf( 's.dataset.api="%s";', esc_attr( $api_cname ) )
+			: '';
+
 		$env = defined( 'OPTINMONSTER_ENV' )
 			? sprintf( 's.dataset.env="%s";', esc_attr( OPTINMONSTER_ENV ) )
 			: '';
@@ -933,17 +944,21 @@ class OMAPI_Output {
 		$tag .= '%3$s';
 		$tag .= '%4$s';
 		$tag .= '%5$s';
+		$tag .= '%6$s';
 		$tag .= 'd.getElementsByTagName("head")[0].appendChild(s);';
 		$tag .= '})(document);';
 		$tag .= '</script>';
 
-		return sprintf(
+		$tag = sprintf(
 			$tag,
 			$src,
 			$script_id,
 			$campaign_or_account_id,
 			$user_id,
+			$api_cname,
 			$env
 		);
+
+		return apply_filters( 'optin_monster_embed_script_tag', $tag, $args );
 	}
 }

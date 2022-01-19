@@ -2691,8 +2691,6 @@ class wpdb {
 			$this->check_current_query = false;
 		}
 
-		error_log("query is::::$query");
-
 		if ( $query ) {
 			$this->query( $query );
 		} else {

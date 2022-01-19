@@ -112,7 +112,8 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
                 if (is_user_logged_in() && strcmp(strtolower($item->title), "sign in") == 0) {
                     $item->title = "My Account";
                 }
-                $atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
+
+				$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 				$atts['target'] = ! empty( $item->target ) ? $item->target : '';
 				$atts['class']  = '';
 				$atts['rel']    = ! empty( $item->xfn ) ? $item->xfn : '';
@@ -202,8 +203,7 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 					$item_output = '';
 				}
 			}
-
-			$output .= apply_filters( 'megamenu_walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+            $output .= apply_filters( 'megamenu_walker_nav_menu_start_el', $item_output, $item, $depth, $args );
 		}
 
 		/**

@@ -2225,8 +2225,6 @@ function get_posts( $args = null ) {
 	$parsed_args['no_found_rows']       = true;
 
 	$get_posts = new WP_Query;
-//	error_log("parsed_args::::");
-//	error_log(json_encode($parsed_args));
 	return $get_posts->query( $parsed_args );
 
 }
@@ -4926,7 +4924,7 @@ function _truncate_post_slug( $slug, $length = 200 ) {
 		if ( $decoded_slug === $slug ) {
 			$slug = substr( $slug, 0, $length );
 		} else {
-			$slug = utf8_uri_encode( $decoded_slug, $length );
+			$slug = utf8_uri_encode( $decoded_slug, $length, true );
 		}
 	}
 

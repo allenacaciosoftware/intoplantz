@@ -1,0 +1,38 @@
+2022-01-17T07:46:31+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 206
+
+2022-01-17T07:46:36+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 206
+
+2022-01-17T07:48:01+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 210
+
+2022-01-17T07:48:31+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 210
+
+2022-01-17T07:48:37+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 210
+
+2022-01-17T07:48:40+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 210
+
+2022-01-17T07:48:44+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 210
+
+2022-01-17T07:49:50+00:00 CRITICAL syntax error, unexpected '$output' (T_VARIABLE) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 210
+
+2022-01-17T08:08:33+00:00 CRITICAL syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting '-' or identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 113
+
+2022-01-17T08:08:39+00:00 CRITICAL syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting '-' or identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 113
+
+2022-01-17T08:08:40+00:00 CRITICAL syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting '-' or identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 113
+
+2022-01-17T08:08:48+00:00 CRITICAL syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting '-' or identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 113
+
+2022-01-17T08:08:57+00:00 CRITICAL syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting '-' or identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 113
+
+2022-01-17T08:09:02+00:00 CRITICAL syntax error, unexpected '' (T_ENCAPSED_AND_WHITESPACE), expecting '-' or identifier (T_STRING) or variable (T_VARIABLE) or number (T_NUM_STRING) in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 113
+
+2022-01-17T08:14:12+00:00 CRITICAL Uncaught Error: Cannot use object of type WP_Post as array in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php:117
+Stack trace:
+#0 /home/dh_fxwhir/intoplantz.com/wp-includes/class-wp-walker.php(144): Mega_Menu_Walker->start_el('<li class='mega...', Object(WP_Post), 0, Object(stdClass))
+#1 /home/dh_fxwhir/intoplantz.com/wp-includes/class-wp-walker.php(244): Walker->display_element(Object(WP_Post), Array, 0, 0, Array, '<li class='mega...')
+#2 /home/dh_fxwhir/intoplantz.com/wp-includes/nav-menu-template.php(608): Walker->walk(Array, 0, Object(stdClass))
+#3 /home/dh_fxwhir/intoplantz.com/wp-includes/nav-menu-template.php(228): walk_nav_menu_tree(Array, 0, Object(stdClass))
+#4 /home/dh_fxwhir/intoplantz.com/wp-content/themes/astra/inc/markup-extras.php(859): wp_nav_menu(Object(stdClass))
+#5 /home/dh_fxwhir/intoplantz.com/wp-includes/class-wp-hook.php(303): astra_primary_navigation_markup('')
+#6 /home/dh_fxwhir/intoplantz.com/wp-includes/class-wp-hook.php(327): WP_Hook->apply_filt in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/megamenu/classes/walker.class.php on line 117
+

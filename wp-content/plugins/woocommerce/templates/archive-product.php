@@ -169,111 +169,9 @@ do_action( 'woocommerce_before_main_content' );
 	do_action( 'woocommerce_archive_description' );
 	?>
 </header>
-<!--    <div class="products">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-12">-->
-<!--                    <div class="filters">-->
-<!--                        <ul>-->
-<!--                            <li class="active" data-filter="*">All Products</li>-->
-<!--                            <li data-filter=".des">Featured</li>-->
-<!--                            <li data-filter=".dev">Flash Deals</li>-->
-<!--                            <li data-filter=".gra">Last Minute</li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="col-md-12">-->
-<!--                    <div class="filters-content">-->
-<!--                        <div class="row grid">-->
-<!--                            <div class="col-lg-4 col-md-4 all des">-->
-<!--                                <div class="product-item">-->
-<!--                                    <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>-->
-<!--                                    <div class="down-content">-->
-<!--                                        <a href="#"><h4>Tittle goes here</h4></a>-->
-<!--                                        <h6>$18.25</h6>-->
-<!--                                        <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>-->
-<!--                                        <ul class="stars">-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                        </ul>-->
-<!--                                        <span>Reviews (12)</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-4 col-md-4 all dev">-->
-<!--                                <div class="product-item">-->
-<!--                                    <a href="#"><img src="assets/images/product_02.jpg" alt=""></a>-->
-<!--                                    <div class="down-content">-->
-<!--                                        <a href="#"><h4>Tittle goes here</h4></a>-->
-<!--                                        <h6>$16.75</h6>-->
-<!--                                        <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>-->
-<!--                                        <ul class="stars">-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                        </ul>-->
-<!--                                        <span>Reviews (24)</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-4 col-md-4 all gra">-->
-<!--                                <div class="product-item">-->
-<!--                                    <a href="#"><img src="assets/images/product_03.jpg" alt=""></a>-->
-<!--                                    <div class="down-content">-->
-<!--                                        <a href="#"><h4>Tittle goes here</h4></a>-->
-<!--                                        <h6>$32.50</h6>-->
-<!--                                        <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>-->
-<!--                                        <ul class="stars">-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                        </ul>-->
-<!--                                        <span>Reviews (36)</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="col-lg-4 col-md-4 all gra">-->
-<!--                                <div class="product-item">-->
-<!--                                    <a href="#"><img src="assets/images/product_04.jpg" alt=""></a>-->
-<!--                                    <div class="down-content">-->
-<!--                                        <a href="#"><h4>Tittle goes here</h4></a>-->
-<!--                                        <h6>$24.60</h6>-->
-<!--                                        <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>-->
-<!--                                        <ul class="stars">-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                            <li><i class="fa fa-star"></i></li>-->
-<!--                                        </ul>-->
-<!--                                        <span>Reviews (48)</span>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <script src="custom.js"></script>-->
-<!--    <script src="../../assets/js/custom/owl.js"></script>-->
-<!--    <script src="../../assets/js/custom/slick.js"></script>-->
-<!--    <script src="../../assets/js/custom/isotope.js"></script>-->
-<!--    <script src="../../assets/js/custom/accordions.js"></script>-->
-
 <?php
-
-//echo "test product loop 1";
 if ( woocommerce_product_loop() ) {
-//    echo "test product loop 2";
+
 	/**
 	 * Hook: woocommerce_before_shop_loop.
 	 *
@@ -282,14 +180,12 @@ if ( woocommerce_product_loop() ) {
 	 * @hooked woocommerce_catalog_ordering - 30
 	 */
 	do_action( 'woocommerce_before_shop_loop' );
-//    echo "test product loop 3";
+
 	woocommerce_product_loop_start();
-//    echo "test product loop 4";
-//	if ( wc_get_loop_prop( 'total' ) ) {
-//        echo "test product loop 5";
-        while ( have_posts() ) {
-//            echo "test product loop 6";
-            the_post();
+
+	// if ( wc_get_loop_prop( 'total' ) ) {
+		while ( have_posts() ) {
+			the_post();
 
 			/**
 			 * Hook: woocommerce_shop_loop.
@@ -298,7 +194,7 @@ if ( woocommerce_product_loop() ) {
 
 			wc_get_template_part( 'content', 'product' );
 		}
-//	}
+	// }
 
 	woocommerce_product_loop_end();
 

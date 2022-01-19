@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <div class='content active'>
-	<div class="mwb-wallet-transaction-container" style="display: flex; flex-direction: column; align-items: center;">
+		<div class="mwb-wallet-transaction-container" style="display: flex; flex-direction: column; align-items: center;">
         <h3><b><?php echo esc_html( 'Transactions' ); ?></b></h3>
 		<table class="mwb-wallet-field-table dt-responsive" id="transactions_table">
 			<thead>

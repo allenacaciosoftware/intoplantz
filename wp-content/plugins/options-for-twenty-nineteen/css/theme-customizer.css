@@ -1,0 +1,11 @@
+#accordion-section-colors > .accordion-section-title:before,
+#accordion-section-oftn_general > .accordion-section-title:before,
+#accordion-section-oftn_header > .accordion-section-title:before,
+#accordion-section-oftn_navigation > .accordion-section-title:before,
+#accordion-section-oftn_content > .accordion-section-title:before,
+#accordion-section-oftn_footer > .accordion-section-title:before,
+#accordion-section-featured_content > .accordion-section-title:before {
+    content: "\f111";
+    font-family: dashicons;
+    padding: 3px;
+}

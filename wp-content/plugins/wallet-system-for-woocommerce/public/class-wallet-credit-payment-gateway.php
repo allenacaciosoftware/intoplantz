@@ -143,7 +143,6 @@ function mwb_wsfw_wallet_payment_gateway_init() {
 		 * @return array
 		 */
 		public function process_payment( $order_id ) {
-		    error_log("***********wallet credit payment process_payment**********.....");
 
 			$order       = wc_get_order( $order_id );
 			$payment_method = $order->payment_method;

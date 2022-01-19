@@ -317,4 +317,3 @@ function show_message_on_form_submit( $wpg_message, $type = 'error' ) {
         </div>
 	</div>
 </div>
-

@@ -71,6 +71,7 @@ class WC_Order extends WC_Abstract_Order {
 			'state'      => '',
 			'postcode'   => '',
 			'country'    => '',
+			'phone'      => '',
 		),
 		'payment_method'       => '',
 		'payment_method_title' => '',
@@ -97,7 +98,6 @@ class WC_Order extends WC_Abstract_Order {
 	 * @return bool success
 	 */
 	public function payment_complete( $transaction_id = '' ) {
-        error_log("payment_complete.....");
 		if ( ! $this->get_id() ) { // Order must exist.
 			return false;
 		}
@@ -119,17 +119,8 @@ class WC_Order extends WC_Abstract_Order {
 				$this->set_status( apply_filters( 'woocommerce_payment_complete_order_status', $this->needs_processing() ? 'processing' : 'completed', $this->get_id(), $this ) );
 				$this->save();
 
-
-				// topup wallet here...
-                error_log("if topping up wallet $50...");
-                update_user_meta( 1, 'mwb_wallet', abs( 50 ) );
 				do_action( 'woocommerce_payment_complete', $this->get_id() );
 			} else {
-                // topup wallet here...
-                // topup wallet here...
-                error_log("else topping up wallet $30...");
-                update_user_meta( 1, 'mwb_wallet', abs( 30 ) );
-
 				do_action( 'woocommerce_payment_complete_order_status_' . $this->get_status(), $this->get_id() );
 			}
 		} catch ( Exception $e ) {
@@ -753,6 +744,17 @@ class WC_Order extends WC_Abstract_Order {
 	}
 
 	/**
+	 * Get shipping phone.
+	 *
+	 * @since  5.6.0
+	 * @param  string $context What the value is for. Valid values are view and edit.
+	 * @return string
+	 */
+	public function get_shipping_phone( $context = 'view' ) {
+		return $this->get_address_prop( 'phone', 'shipping', $context );
+	}
+
+	/**
 	 * Get the payment method.
 	 *
 	 * @param  string $context What the value is for. Valid values are view and edit.
@@ -879,7 +881,7 @@ class WC_Order extends WC_Abstract_Order {
 		$address = $this->get_address( 'shipping' );
 
 		// Remove name and company before generate the Google Maps URL.
-		unset( $address['first_name'], $address['last_name'], $address['company'] );
+		unset( $address['first_name'], $address['last_name'], $address['company'], $address['phone'] );
 
 		$address = apply_filters( 'woocommerce_shipping_address_map_url_parts', $address, $this );
 
@@ -1240,6 +1242,17 @@ class WC_Order extends WC_Abstract_Order {
 	 */
 	public function set_shipping_country( $value ) {
 		$this->set_address_prop( 'country', 'shipping', $value );
+	}
+
+	/**
+	 * Set shipping phone.
+	 *
+	 * @since 5.6.0
+	 * @param string $value Shipping phone.
+	 * @throws WC_Data_Exception Throws exception when invalid data is found.
+	 */
+	public function set_shipping_phone( $value ) {
+		$this->set_address_prop( 'phone', 'shipping', $value );
 	}
 
 	/**

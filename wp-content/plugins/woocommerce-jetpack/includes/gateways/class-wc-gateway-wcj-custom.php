@@ -305,7 +305,6 @@ if ( ! function_exists( 'init_wc_gateway_wcj_custom_class' ) ) {
 				 * @return  array
 				 */
 				function process_payment( $order_id ) {
-				    error_log("process_payment class-wc-gateway-wcj-custom.php....");
 
 					$order = wc_get_order( $order_id );
 

@@ -5,11 +5,15 @@
  * Description: OptinMonster is the best WordPress popup plugin that helps you grow your email list and sales with email popups, exit intent popups, floating bars and more!
  * Author:      OptinMonster Team
  * Author URI:  https://optinmonster.com
- * Version:     2.3.3
+ * Version:     2.6.4
  * Text Domain: optin-monster-api
  * Domain Path: languages
+ *
  * WC requires at least: 3.2.0
  * WC tested up to:      5.3.0
+ * Requires at least:    4.7.0
+ * Requires PHP:         5.3
+ * Tested up to:         5.8
  *
  * OptinMonster is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -62,7 +66,7 @@ class OMAPI {
 	 *
 	 * @var string
 	 */
-	public $version = '2.3.3';
+	public $version = '2.6.4';
 
 	/**
 	 * The name of the plugin.
@@ -431,6 +435,7 @@ class OMAPI {
 		$this->refresh       = new OMAPI_Refresh();
 		$this->save          = new OMAPI_Save();
 		$this->notifications = new OMAPI_Notifications();
+		$this->review        = new OMAPI_Review();
 
 		// Fire a hook to say that the global classes are loaded.
 		do_action( 'optin_monster_api_rest_loaded' );
@@ -832,6 +837,28 @@ class OMAPI {
 	}
 
 	/**
+	 * Check if the OM user's plan is upgradeable.
+	 *
+	 * @since 2.4.0
+	 *
+	 * @return boolean Whether OM user's plan is upgradeable.
+	 */
+	public function can_ugrade() {
+		$level = $this->get_level();
+
+		// If plan upgradeable... (e.g. not top tier).
+		return $level && ! in_array(
+			$level,
+			array(
+				'vbp_agency',
+				'vbp_team',
+				'vbp_growth',
+			),
+			true
+		) ? $level : false;
+	}
+
+	/**
 	 * Loads the default plugin options.
 	 *
 	 * @since 1.0.0
@@ -842,7 +869,6 @@ class OMAPI {
 
 		$options = array(
 			'api'                => array(),
-			'optins'             => array(),
 			'is_expired'         => false,
 			'is_disabled'        => false,
 			'is_invalid'         => false,
@@ -1163,6 +1189,14 @@ function optin_monster_api_activation_hook( $network_wide ) {
 		$options['welcome']['status'] = 'none';
 		update_option( 'optin_monster_api', $options );
 	}
+
+	// Abort so we only set the transient for single site installs.
+	if ( isset( $_GET['activate-multi'] ) || is_network_admin() ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		return;
+	}
+
+	// Add transient to trigger redirect to the Welcome screen.
+	set_transient( 'optin_monster_api_activation_redirect', true, 30 );
 }
 
 register_uninstall_hook( __FILE__, 'optin_monster_api_uninstall_hook' );

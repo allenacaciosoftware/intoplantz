@@ -108,29 +108,36 @@ class OMAPI_Shortcode {
 			'optin-monster'
 		);
 
-		$optin_id = false;
+		$identifier = false;
+
+		if ( ! empty( $atts['slug'] ) ) {
+			$identifier = $atts['slug'];
+		}
+
 		if ( ! empty( $atts['id'] ) ) {
-			$optin_id = absint( $atts['id'] );
-		} elseif ( isset( $atts['slug'] ) ) {
-				$optin = $this->base->get_optin_by_slug( $atts['slug'] );
-			if ( $optin ) {
-				 $optin_id = $optin->ID;
-			}
-		} else {
+			$identifier = $atts['id'];
+		}
+
+		if ( empty( $identifier ) ) {
 			// A custom attribute must have been passed. Allow it to be filtered to grab the optin ID from a custom source.
-			$optin_id = apply_filters( 'optin_monster_api_custom_optin_id', false, $atts, $post );
+			$identifier = apply_filters( 'optin_monster_api_custom_optin_id', false, $atts, $post );
 		}
 
 		// Allow the optin ID to be filtered before it is stored and used to create the optin output.
-		$optin_id = apply_filters( 'optin_monster_api_pre_optin_id', $optin_id, $atts, $post );
+		$identifier = apply_filters( 'optin_monster_api_pre_optin_id', $identifier, $atts, $post );
 
-		// If there is no optin, do nothing.
-		if ( ! $optin_id ) {
+		// If there is no identifier, do nothing.
+		if ( empty( $identifier ) ) {
 			return false;
 		}
 
-		if ( empty( $optin->ID ) || (int) $optin_id !== (int) $optin->ID ) {
-			$optin = $this->base->get_optin( $optin_id );
+		$optin = ctype_digit( (string) $identifier )
+			? $this->base->get_optin( absint( $identifier ) )
+			: $this->base->get_optin_by_slug( sanitize_text_field( $identifier ) );
+
+		// If there is no identifier, do nothing.
+		if ( empty( $optin ) ) {
+			return false;
 		}
 
 		// Try to grab the stored HTML.
@@ -151,7 +158,7 @@ class OMAPI_Shortcode {
 		$this->base->output->set_slug( $optin );
 
 		// Return the HTML.
-		return $html;
+		return apply_filters( 'optin_monster_shortcode_output', $html, $optin, $atts );
 	}
 
 	/**
@@ -167,8 +174,10 @@ class OMAPI_Shortcode {
 	public function shortcode_v1( $atts ) {
 
 		// Run the v2 implementation.
-		$atts['slug'] = $atts['id'];
-		unset( $atts['id'] );
+		if ( ! empty( $atts['id'] ) ) {
+			$atts['slug'] = $atts['id'];
+			unset( $atts['id'] );
+		}
 
 		return $this->shortcode( $atts );
 	}

@@ -39,35 +39,14 @@ if ( $show_downloads ) {
 	);
 }
 ?>
-<style>
-    table, td, th {
-        border: 1px solid #74cf6e;
-        font-weight: bold;
-    }
-    table {
-        border-bottom: 1px solid #74cf6e !important;
-    }
-</style>
-
 <section class="woocommerce-order-details">
 	<?php do_action( 'woocommerce_order_details_before_order_table', $order ); ?>
 
 	<h2 class="woocommerce-order-details__title"><?php esc_html_e( 'Order details', 'woocommerce' ); ?></h2>
-    <h5>
-        <?php
-        printf(
-        /* translators: 1: order number 2: order date 3: order status */
-            esc_html__( 'Order #%1$s was placed on %2$s and is currently %3$s.', 'woocommerce' ),
-            '<mark class="order-number">' . $order->get_order_number() . '</mark>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            '<mark class="order-date">' . wc_format_datetime( $order->get_date_created() ) . '</mark>', // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            '<mark class="order-status">' . wc_get_order_status_name( $order->get_status() ) . '</mark>' // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-        );
-        ?>
-    </h5>
 
 	<table class="woocommerce-table woocommerce-table--order-details shop_table order_details">
 
-		<thead style="background: #217b1b; color: white">
+		<thead>
 			<tr>
 				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
@@ -103,16 +82,16 @@ if ( $show_downloads ) {
 			foreach ( $order->get_order_item_totals() as $key => $total ) {
 				?>
 					<tr>
-						<th style="border-bottom: 1px solid #74cf6e !important;" scope="row"><?php echo esc_html( $total['label'] ); ?></th>
-						<td style="border-bottom: 1px solid #74cf6e !important;"><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
+						<th scope="row"><?php echo esc_html( $total['label'] ); ?></th>
+						<td><?php echo ( 'payment_method' === $key ) ? esc_html( $total['value'] ) : wp_kses_post( $total['value'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 					</tr>
 					<?php
 			}
 			?>
 			<?php if ( $order->get_customer_note() ) : ?>
 				<tr>
-					<th style="border-bottom: 1px solid #74cf6e !important;"><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
-					<td style="border-bottom: 1px solid #74cf6e !important;"><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
+					<th><?php esc_html_e( 'Note:', 'woocommerce' ); ?></th>
+					<td><?php echo wp_kses_post( nl2br( wptexturize( $order->get_customer_note() ) ) ); ?></td>
 				</tr>
 			<?php endif; ?>
 		</tfoot>

@@ -55,6 +55,7 @@ class OMAPI_ApiKey {
 		unset( $option['siteId'] );
 		unset( $option['siteIds'] );
 		unset( $option['customApiUrl'] );
+		unset( $option['apiCname'] );
 
 		// Fetch the userId and accountId now.
 		$option = OMAPI_Api::fetch_me( $option, $creds );
@@ -100,6 +101,7 @@ class OMAPI_ApiKey {
 		unset( $option['siteId'] );
 		unset( $option['siteIds'] );
 		unset( $option['customApiUrl'] );
+		unset( $option['apiCname'] );
 		unset( $option['api']['user'] );
 		unset( $option['api']['key'] );
 

@@ -25,7 +25,7 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 ?>
 <tr class="<?php echo esc_attr( apply_filters( 'woocommerce_order_item_class', 'woocommerce-table__line-item order_item', $item, $order ) ); ?>">
 
-	<td class="woocommerce-table__product-name product-name" style="border-bottom: 1px solid #74cf6e !important;">
+	<td class="woocommerce-table__product-name product-name">
 		<?php
 		$is_visible        = $product && $product->is_visible();
 		$product_permalink = apply_filters( 'woocommerce_order_item_permalink', $is_visible ? $product->get_permalink( $item ) : '', $item, $order );
@@ -51,7 +51,7 @@ if ( ! apply_filters( 'woocommerce_order_item_visible', true, $item ) ) {
 		?>
 	</td>
 
-	<td class="woocommerce-table__product-total product-total" style="border-bottom: 1px solid #74cf6e !important;">
+	<td class="woocommerce-table__product-total product-total">
 		<?php echo $order->get_formatted_line_subtotal( $item ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 	</td>
 

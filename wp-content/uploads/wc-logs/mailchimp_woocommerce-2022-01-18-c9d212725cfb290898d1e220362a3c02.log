@@ -1,0 +1,60 @@
+2022-01-18T02:36:23+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2022-01-18T02:37:34+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2022-01-18T02:40:22+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 1
+2022-01-18T02:41:12+00:00 ERROR api.list :: Error retrieving list for double_optin check
+2022-01-18T02:41:15+00:00 ERROR member.sync.error :: RateLimited :: user #1 :: Error Code 0 ::  on 1855 in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/api/class-mailchimp-api.php
+2022-01-18T02:41:15+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit starts in 30 seconds :: obj_id 1 attempt:1
+2022-01-18T02:43:48+00:00 ERROR api.list :: Error retrieving list for double_optin check
+2022-01-18T02:43:52+00:00 ERROR member.sync.error :: RateLimited :: user #1 :: Error Code 0 ::  on 1855 in /home/dh_fxwhir/intoplantz.com/wp-content/plugins/mailchimp-for-woocommerce/includes/api/class-mailchimp-api.php
+2022-01-18T02:43:52+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit starts in 30 seconds :: obj_id 1 attempt:2
+2022-01-18T02:45:51+00:00 NOTICE member.sync :: Updated Member allenacaciosoftware@gmail.com ( merge fields only ) :: Array
+(
+    [merge_fields] => Array
+        (
+            [FNAME] => Allen
+            [LNAME] => Acacio
+        )
+
+)
+
+2022-01-18T03:09:17+00:00 NOTICE sync_store :: posting data :: Array
+(
+    [store_post] => Array
+        (
+            [id] => 60bd3085a5f66
+            [is_syncing] => 
+            [platform] => woocommerce
+            [list_id] => b09d2b4b28
+            [name] => Plants NZ
+            [domain] => http://intoplantz.com
+            [email_address] => allenacaciosoftware@gmail.com
+            [currency_code] => USD
+            [money_format] => $
+            [primary_locale] => en_US
+            [timezone] => +00:00
+            [phone] => +64273725403
+            [address] => Array
+                (
+                    [address1] => 48 Trewern Ave
+                    [city] => Hamilton
+                    [province] => Waikato
+                    [postal_code] => 3214
+                    [country] => NZ
+                    [country_code] => NZ
+                    [phone] => +64273725403
+                    [company] => Plants NZ
+                )
+
+        )
+
+)
+

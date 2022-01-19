@@ -3243,7 +3243,7 @@ body .entry-content .wp-block-latest-posts li {
 }
 
 .site-footer {
-  color: #fff;
+  color: darkcyan;
 }
 
 .site-footer .widget-title {
@@ -3255,7 +3255,7 @@ body .entry-content .wp-block-latest-posts li {
 }
 
 .site-footer a:hover, .site-footer a:focus {
-  color: #fff;
+  color: darkcyan;
 }
 
 .site-footer ul {

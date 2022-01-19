@@ -20,6 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <style>
+    ul.box {
+        display: grid;
+        grid-template-columns: repeat(auto-fill,minmax(400px, 1fr));
+    }
 
     ul.box.products li {
         box-shadow: 5px 5px 20px 0 rgb(0 0 0 / 10%) !important;
@@ -45,11 +49,12 @@ if ( ! defined( 'ABSPATH' ) ) {
         text-transform: uppercase;
         margin: 20px auto 0 0;
         white-space: nowrap;
+        /*width: 50px;*/
         overflow: hidden;
         text-overflow: ellipsis;
+        /*border: 1px solid #000000;*/
     }
-
-    .ast-article-post:last-child {
+        .ast-article-post:last-child {
         margin-bottom: auto !important;
     }
 
@@ -62,6 +67,4 @@ if ( ! defined( 'ABSPATH' ) ) {
     }
 </style>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
-
 <ul class="box products" >
-<!--<ul class="box products columns---><?php //echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?><!--" >-->

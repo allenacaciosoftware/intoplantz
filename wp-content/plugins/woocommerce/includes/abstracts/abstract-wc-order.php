@@ -225,8 +225,6 @@ abstract class WC_Abstract_Order extends WC_Abstract_Legacy_Order {
 	 * Save all order items which are part of this order.
 	 */
 	protected function save_items() {
-	    print("saving items...");
-        error_log("this is NOT an error on saving items::::");
 		$items_changed = false;
 
 		foreach ( $this->items_to_delete as $item ) {
@@ -240,10 +238,6 @@ abstract class WC_Abstract_Order extends WC_Abstract_Legacy_Order {
 			if ( is_array( $items ) ) {
 				$items = array_filter( $items );
 				foreach ( $items as $item_key => $item ) {
-                    error_log("saving item $item::::");
-                    error_log($item);
-				    print("$item::::");
-				    print ($item);
 					$item->set_order_id( $this->get_id() );
 
 					$item_id = $item->save();

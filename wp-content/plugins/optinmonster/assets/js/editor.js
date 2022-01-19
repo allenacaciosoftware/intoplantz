@@ -150,7 +150,7 @@ window.OMAPI_Editor = window.OMAPI_Editor || {};
 	app.insertShortcode = function () {
 		const id = app.$inlineSelect.val();
 		if (id) {
-			wp.media.editor.insert(`[optin-monster id="${id}"]`);
+			wp.media.editor.insert(`[optin-monster slug="${id}"]`);
 		}
 	};
 
@@ -203,7 +203,7 @@ window.OMAPI_Editor = window.OMAPI_Editor || {};
 		// Set options to disabled if they are already used.
 		app.$inlineSelect.find('option').each(function () {
 			const $option = $(this);
-			const hasShortcode = editorText.indexOf(`optin-monster id="${$option.val()}"`) >= 0;
+			const hasShortcode = editorText.indexOf(`optin-monster slug="${$option.val()}"`) >= 0;
 			$option.attr('disabled', hasShortcode);
 		});
 	};

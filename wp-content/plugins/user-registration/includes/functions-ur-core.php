@@ -69,9 +69,7 @@ if ( ! function_exists( 'is_ur_account_page' ) ) {
 	 * @return bool
 	 */
 	function is_ur_account_page() {
-//	    print("is_ur_account_page:::");
-//        error_log("this is an error on is_ur_account_page::::");
-        return is_page( ur_get_page_id( 'myaccount' ) ) || ur_post_content_has_shortcode( 'user_registration_my_account' ) || apply_filters( 'user_registration_is_account_page', false );
+		return is_page( ur_get_page_id( 'myaccount' ) ) || ur_post_content_has_shortcode( 'user_registration_my_account' ) || apply_filters( 'user_registration_is_account_page', false );
 	}
 }
 

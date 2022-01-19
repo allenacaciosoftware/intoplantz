@@ -69,11 +69,12 @@ class OMAPI_Blocks {
 	 * @since 1.9.10
 	 */
 	public function __construct() {
+		// Set our object.
+		$this->set();
 
 		if ( function_exists( 'register_block_type' ) ) {
 
-			// Set our object.
-			$this->set();
+			// Register our blocks.
 			$this->register_blocks();
 
 			add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue_block_editor_assets' ) );
@@ -269,7 +270,7 @@ class OMAPI_Blocks {
 	 *
 	 * @since 2.2.0
 	 *
-	 * @param  $titles_only Whether to include titles only, or separate data as array.
+	 * @param boolean $titles_only Whether to include titles only, or separate data as array.
 	 *
 	 * @return array Array of campaign options.
 	 */

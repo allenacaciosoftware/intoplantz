@@ -14,8 +14,7 @@ $wallet_bal = apply_filters( 'mwb_wsfw_show_converted_price', $wallet_bal );
 ?>
 
 
-<div class='content active' style="display: flex; flex-direction: column; align-items: center;">
-    <h3><b><?php echo esc_html( 'Request Withdrawal' ); ?></b></h3>
+<div class='content active'>
 
 	<?php
 	$disable_withdrawal_request = get_user_meta( $user_id, 'disable_further_withdrawal_request', true );
@@ -30,8 +29,9 @@ $wallet_bal = apply_filters( 'mwb_wsfw_show_converted_price', $wallet_bal );
 		);
 		$withdrawal_request = get_posts( $args );
 		?>
-		<div class="mwb-wallet-transaction-container">
-            <table class="mwb-wallet-field-table dt-responsive" id="transactions_table" >
+		<div class='content active' style="display: flex; flex-direction: column; align-items: center;">
+    <h3><b><?php echo esc_html( 'Request Withdrawal' ); ?></b></h3>
+			<table class="mwb-wallet-field-table dt-responsive" id="transactions_table" >
 				<thead>
 					<tr>
 						<th>#</th>

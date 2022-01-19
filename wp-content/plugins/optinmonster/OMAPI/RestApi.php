@@ -103,13 +103,33 @@ class OMAPI_RestApi {
 			)
 		);
 
+		// Toggles rule debug.
+		register_rest_route(
+			$this->namespace,
+			'support/debug/enable',
+			array(
+				'methods'             => 'GET',
+				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'callback'            => array( $this, 'rule_debug_enable' ),
+			)
+		);
+		register_rest_route(
+			$this->namespace,
+			'support/debug/disable',
+			array(
+				'methods'             => 'GET',
+				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'callback'            => array( $this, 'rule_debug_disable' ),
+			)
+		);
+
 		// Route for triggering refreshing/syncing of all campaigns.
 		register_rest_route(
 			$this->namespace,
 			'campaigns/refresh',
 			array(
 				'methods'             => 'POST',
-				'permission_callback' => array( $this, 'has_valid_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'refresh_campaigns' ),
 			)
 		);
@@ -120,7 +140,7 @@ class OMAPI_RestApi {
 			'campaigns/(?P<id>\w+)',
 			array(
 				'methods'             => 'GET',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'get_campaign_data' ),
 			)
 		);
@@ -131,7 +151,7 @@ class OMAPI_RestApi {
 			'campaigns/(?P<id>\w+)',
 			array(
 				'methods'             => 'POST',
-				'permission_callback' => array( $this, 'has_valid_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'update_campaign_data' ),
 			)
 		);
@@ -142,7 +162,7 @@ class OMAPI_RestApi {
 			'campaigns/(?P<id>[\w-]+)/sync',
 			array(
 				'methods'             => 'POST',
-				'permission_callback' => array( $this, 'has_valid_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
 				'callback'            => array( $this, 'sync_campaign' ),
 			)
 		);
@@ -153,7 +173,7 @@ class OMAPI_RestApi {
 			'resources',
 			array(
 				'methods'             => 'GET',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'get_wp_resources' ),
 			)
 		);
@@ -163,7 +183,7 @@ class OMAPI_RestApi {
 			'notifications',
 			array(
 				'methods'             => 'GET',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'get_notifications' ),
 			)
 		);
@@ -173,7 +193,7 @@ class OMAPI_RestApi {
 			'notifications/dismiss',
 			array(
 				'methods'             => 'POST',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'dismiss_notification' ),
 			)
 		);
@@ -183,7 +203,7 @@ class OMAPI_RestApi {
 			'notifications/create',
 			array(
 				'methods'             => 'POST',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'create_event_notification' ),
 			)
 		);
@@ -193,7 +213,7 @@ class OMAPI_RestApi {
 			'plugins',
 			array(
 				'methods'             => 'GET',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'get_am_plugins_list' ),
 			)
 		);
@@ -203,7 +223,7 @@ class OMAPI_RestApi {
 			'plugins',
 			array(
 				'methods'             => 'POST',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'handle_plugin_action' ),
 			)
 		);
@@ -243,7 +263,7 @@ class OMAPI_RestApi {
 			'woocommerce/key',
 			array(
 				'methods'             => 'GET',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'woocommerce_get_key' ),
 			)
 		);
@@ -273,7 +293,7 @@ class OMAPI_RestApi {
 			'settings',
 			array(
 				'methods'             => 'GET',
-				'permission_callback' => array( $this, 'logged_in_or_has_api_key' ),
+				'permission_callback' => array( $this, 'logged_in_and_can_access_route' ),
 				'callback'            => array( $this, 'get_settings' ),
 			)
 		);
@@ -285,6 +305,16 @@ class OMAPI_RestApi {
 				'methods'             => 'POST',
 				'permission_callback' => array( $this, 'can_update_settings' ),
 				'callback'            => array( $this, 'update_settings' ),
+			)
+		);
+
+		register_rest_route(
+			$this->namespace,
+			'review/dismiss',
+			array(
+				'methods'             => 'POST',
+				'permission_callback' => array( $this, 'can_dismiss_review' ),
+				'callback'            => array( $this, 'dismiss_review' ),
 			)
 		);
 	}
@@ -394,6 +424,67 @@ class OMAPI_RestApi {
 		}
 
 		return new WP_REST_Response( $support->get_support_data( $format ), 200 );
+	}
+
+	/**
+	 * Enables the rules debug output for this site.
+	 * (Still requires the omwpdebug query var on the frontend)
+	 *
+	 * Route: GET omapp/v1/support/debug/enable
+	 *
+	 * @since 2.4.0
+	 *
+	 * @param  WP_REST_Request $request The REST Request.
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function rule_debug_enable() {
+		return $this->toggle_rule_debug( true );
+	}
+
+	/**
+	 * Disables the rules debug output for this site.
+	 *
+	 * Route: GET omapp/v1/support/debug/disable
+	 *
+	 * @since 2.4.0
+	 *
+	 * @param  WP_REST_Request $request The REST Request.
+	 *
+	 * @return WP_REST_Response
+	 */
+	public function rule_debug_disable() {
+		return $this->toggle_rule_debug( false );
+	}
+
+	/**
+	 * Toggles the rules debug setting.
+	 *
+	 * @since 2.4.0
+	 *
+	 * @param  boolean $enable Whether to enable/disable the rules debug setting.
+	 *
+	 * @return WP_REST_Response
+	 */
+	protected function toggle_rule_debug( $enable ) {
+		$options = $this->base->get_option();
+
+		if ( $enable ) {
+			$options['api']['omwpdebug'] = true;
+		} else {
+			unset( $options['api']['omwpdebug'] );
+		}
+
+		$updated = $this->base->save->update_option( $options );
+
+		return new WP_REST_Response(
+			array(
+				'message' => $updated
+					? esc_html__( 'OK', 'optin-monster-api' )
+					: esc_html__( 'Not Modified', 'optin-monster-api' ),
+			),
+			$updated ? 200 : 202
+		);
 	}
 
 	/**
@@ -1039,11 +1130,6 @@ class OMAPI_RestApi {
 	 * @return bool
 	 */
 	public function can_update_settings( $request ) {
-		$result = $this->check_dev_server_request( $request );
-		if ( is_bool( $result ) ) {
-			return $result;
-		}
-
 		try {
 
 			$this->verify_request_nonce( $request );
@@ -1052,7 +1138,7 @@ class OMAPI_RestApi {
 			return $this->exception_to_response( $e );
 		}
 
-		return true;
+		return OMAPI::get_instance()->can_access( 'settings_update' );
 	}
 
 	/**
@@ -1097,11 +1183,6 @@ class OMAPI_RestApi {
 	 * @return bool
 	 */
 	public function can_store_api_key( $request ) {
-		$result = $this->check_dev_server_request( $request );
-		if ( is_bool( $result ) ) {
-			return $result;
-		}
-
 		try {
 
 			$this->verify_request_nonce( $request );
@@ -1121,7 +1202,7 @@ class OMAPI_RestApi {
 			return $this->exception_to_response( $e );
 		}
 
-		return true;
+		return OMAPI::get_instance()->can_access( 'store_api_key' );
 	}
 
 	/**
@@ -1161,11 +1242,6 @@ class OMAPI_RestApi {
 	 * @return bool
 	 */
 	public function can_delete_api_key( $request ) {
-		$result = $this->check_dev_server_request( $request );
-		if ( is_bool( $result ) ) {
-			return $result;
-		}
-
 		try {
 
 			$this->verify_request_nonce( $request );
@@ -1177,7 +1253,7 @@ class OMAPI_RestApi {
 			return $this->exception_to_response( $e );
 		}
 
-		return true;
+		return OMAPI::get_instance()->can_access( 'delete_api_key' );
 	}
 
 	/**
@@ -1237,6 +1313,21 @@ class OMAPI_RestApi {
 				'hide_announcements' => array(
 					'validate' => 'is_bool',
 				),
+				'accountId'          => array(
+					'validate' => 'is_string',
+				),
+				'currentLevel'       => array(
+					'validate' => 'is_string',
+				),
+				'plan'               => array(
+					'validate' => 'is_string',
+				),
+				'customApiUrl'       => array(
+					'validate' => 'is_string',
+				),
+				'apiCname'           => array(
+					'validate' => 'is_string',
+				),
 			);
 
 			$options      = $this->base->get_option();
@@ -1264,7 +1355,34 @@ class OMAPI_RestApi {
 							$options[ $setting ] = sanitize_text_field( $value );
 							break;
 					}
+					switch ( $setting ) {
+						case 'customApiUrl':
+							$options[ $setting ] = $value
+								? 0 === strpos( $value, 'https://' )
+									? $value
+									: 'https://' . $value . '/app/js/api.min.js'
+								: '';
+							break;
+					}
 				}
+			}
+
+			// Looks like we want to toggle the omwpdebug setting.
+			if ( isset( $settings['omwpdebug'] ) ) {
+				$enabled = wp_validate_boolean( $settings['omwpdebug'] );
+				if ( empty( $enabled ) ) {
+					unset( $option['api']['omwpdebug'] );
+				} else {
+					$options['api']['omwpdebug'] = true;
+				}
+				$has_settings = true;
+			}
+
+			// Looks like we want to toggle the beta setting.
+			if ( isset( $settings['omwpbeta'] ) ) {
+				$enabled         = wp_validate_boolean( $settings['omwpdebug'] );
+				$options['beta'] = ! empty( $enabled );
+				$has_settings    = true;
 			}
 
 			if ( ! $has_settings ) {
@@ -1340,15 +1458,21 @@ class OMAPI_RestApi {
 	 * @return bool
 	 */
 	public function logged_in_or_has_api_key( $request ) {
-		if (
-			! empty( $_SERVER['HTTP_REFERER'] )
-			&& false !== strpos( $_SERVER['HTTP_REFERER'], 'https://wp.app.optinmonster.test' )
-			&& 'OPTIONS' === $_SERVER['REQUEST_METHOD']
-		) {
-			return true;
-		}
+		return $this->logged_in_and_can_access_route( $request )
+			|| true === $this->has_valid_api_key( $request );
+	}
 
-		return is_user_logged_in() || true === $this->has_valid_api_key( $request );
+	/**
+	 * Determine if logged in user can access this route (calls current_user_can).
+	 *
+	 * @since 2.6.4
+	 *
+	 * @param  WP_REST_Request $request The REST Request.
+	 *
+	 * @return bool
+	 */
+	public function logged_in_and_can_access_route( $request ) {
+		return OMAPI::get_instance()->can_access( $request->get_route() );
 	}
 
 	/**
@@ -1409,44 +1533,6 @@ class OMAPI_RestApi {
 	}
 
 	/**
-	 * Whether request is being generated from the Vue dev server.
-	 *
-	 * @since  2.0.0
-	 *
-	 * @return boolean
-	 */
-	public function is_dev_server_request() {
-		return ! empty( $_SERVER['HTTP_REFERER'] ) && false !== strpos( $_SERVER['HTTP_REFERER'], 'https://wp.app.optinmonster.test' );
-	}
-
-	/**
-	 * Check if initial logged-in check passes (or it's a dev server OPTIONS request).
-	 *
-	 * @since  2.0.0
-	 *
-	 * @param  WP_REST_Request $request The REST request.
-	 *
-	 * @return bool|null       True if passed, false if not, null if we can continue checking.
-	 */
-	protected function check_dev_server_request( $request ) {
-		$dev_server_request = $this->is_dev_server_request();
-
-		$dev_server_options_request = $dev_server_request && 'OPTIONS' === $_SERVER['REQUEST_METHOD'];
-
-		// If this is an OPTIONS requst from the dev server, then pass it.
-		if ( $dev_server_options_request ) {
-			return true;
-		}
-
-		// To to this action, user has to be logged in.
-		if ( ! is_user_logged_in() && ! $dev_server_request ) {
-			return false;
-		}
-
-		return null;
-	}
-
-	/**
 	 * Verify the request nonce and throw an exception if verification fails.
 	 *
 	 * @since  2.0.0
@@ -1461,16 +1547,52 @@ class OMAPI_RestApi {
 			$nonce = $request->get_header( 'X-WP-Nonce' );
 		}
 
-		$dev_server_request = $this->is_dev_server_request();
-
-		if ( ! $dev_server_request && empty( $nonce ) ) {
+		if ( empty( $nonce ) ) {
 			throw new Exception( esc_html__( 'Missing security token!', 'optin-monster-api' ), rest_authorization_required_code() );
 		}
 
 		// Check the nonce.
 		$result = wp_verify_nonce( $nonce, 'wp_rest' );
-		if ( ! $dev_server_request && ! $result ) {
+		if ( ! $result ) {
 			throw new Exception( esc_html__( 'Security token invalid!', 'optin-monster-api' ), rest_authorization_required_code() );
 		}
+	}
+
+	/**
+	 * Determine if user can dismiss review.
+	 *
+	 * @since 2.6.1
+	 *
+	 * @param  WP_REST_Request $request The REST Request.
+	 *
+	 * @return bool
+	 */
+	public function can_dismiss_review( $request ) {
+		try {
+			$this->verify_request_nonce( $request );
+		} catch ( Exception $e ) {
+			return $this->exception_to_response( $e );
+		}
+
+		return is_user_logged_in() &&
+			OMAPI::get_instance()->can_access( 'review' );
+	}
+
+	/**
+	 * Determine if user can dismiss review.
+	 *
+	 * @since 2.6.1
+	 *
+	 * @param  WP_REST_Request $request The REST Request.
+	 *
+	 * @return bool
+	 */
+	public function dismiss_review( $request ) {
+		$this->base->review->dismiss_review( $request->get_param( 'later' ) );
+
+		return new WP_REST_Response(
+			array( 'message' => esc_html__( 'OK', 'optin-monster-api' ) ),
+			200
+		);
 	}
 }

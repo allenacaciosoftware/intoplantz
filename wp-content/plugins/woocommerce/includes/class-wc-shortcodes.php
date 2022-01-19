@@ -68,7 +68,7 @@ class WC_Shortcodes {
 		ob_start();
 
 		// @codingStandardsIgnoreStart
-		echo empty( $wrapper['before'] ) ? '<div class="' . esc_attr( $wrapper['class'] ) . '" style="display: flex; justify-content: space-between">' : $wrapper['before'];
+		echo empty( $wrapper['before'] ) ? '<div class="' . esc_attr( $wrapper['class'] ) . '">' : $wrapper['before'];
 		call_user_func( $function, $atts );
 		echo empty( $wrapper['after'] ) ? '</div>' : $wrapper['after'];
 		// @codingStandardsIgnoreEnd
@@ -613,7 +613,7 @@ class WC_Shortcodes {
 
 		remove_filter( 'woocommerce_add_to_cart_form_action', '__return_empty_string' );
 
-		return '<div class="woocommerce" style="display: flex">' . ob_get_clean() . '</div>';
+		return '<div class="woocommerce">' . ob_get_clean() . '</div>';
 	}
 
 	/**
@@ -625,7 +625,7 @@ class WC_Shortcodes {
 		if ( ! function_exists( 'wc_print_notices' ) ) {
 			return '';
 		}
-		return '<div class="woocommerce" style="display: flex">' . wc_print_notices( true ) . '</div>';
+		return '<div class="woocommerce">' . wc_print_notices( true ) . '</div>';
 	}
 
 	/**

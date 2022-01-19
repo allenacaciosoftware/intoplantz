@@ -67,7 +67,6 @@ function ur_login_error_message( $error ) {
  * @return string
  */
 function ur_lostpassword_url( $default_url = '' ) {
-    print("ur_lostpassword_url:::");
 
 	// Don't redirect to the user registration endpoint on global network admin lost passwords.
 	if ( is_multisite() && isset( $_GET['redirect_to'] ) && false !== strpos( $_GET['redirect_to'], network_admin_url() ) ) {

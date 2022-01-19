@@ -107,7 +107,12 @@ class OMAPI_Actions {
 		}
 
 		// Fetch the SiteIds for this site, if we don't have them.
-		if ( empty( $option['siteIds'] ) || empty( $option['siteId'] ) || $this->site_ids_are_numeric( $option['siteIds'] ) ) {
+		if (
+			empty( $option['siteIds'] )
+			|| empty( $option['siteId'] )
+			|| $this->site_ids_are_numeric( $option['siteIds'] )
+			|| ! isset( $option['apiCname'] )
+		) {
 
 			$result = $this->base->sites->fetch();
 			if ( ! is_wp_error( $result ) ) {

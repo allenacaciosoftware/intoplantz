@@ -141,7 +141,7 @@ function astra_ext_transparent_header_dynamic_css( $dynamic_css, $dynamic_css_fi
 
 	$transparent_header_base = array(
 		'.ast-theme-transparent-header #masthead'         => array(
-//			'position' => 'absolute',
+			// 'position' => 'absolute',
 			'left'     => '0',
 			'right'    => '0',
 		),

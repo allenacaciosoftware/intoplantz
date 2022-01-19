@@ -278,25 +278,25 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 				$result = $this->wc_add_new_product( $args, $atts );
 				if ( 0 == $result ) {
 					// Error
-					$notice_html .= '<div class="woocommerce" style="display: flex"><ul class="woocommerce-error"><li>' . __( 'Error!', 'woocommerce-jetpack' ) . '</li></ul></div>';
+					$notice_html .= '<div class="woocommerce"><ul class="woocommerce-error"><li>' . __( 'Error!', 'woocommerce-jetpack' ) . '</li></ul></div>';
 				} else {
 					// Success
                     echo '<script>location.href = "/my-account/wcj-my-products"</script>';
-//					if ( 0 == $atts['product_id'] ) {
-//						$notice_html .= '<div class="woocommerce" style="display: flex"><div class="woocommerce-message">' .
-//							str_replace(
-//								'%product_title%',
-//								$args['title'],
-//								get_option( 'wcj_product_by_user_message_product_successfully_added', __( '"%product_title%" successfully added!', 'woocommerce-jetpack' ) ) ) .
-//							'</div></div>';
-//					} else {
-//						$notice_html .= '<div class="woocommerce" style="display: flex"><div class="woocommerce-message">' .
-//							str_replace(
-//								'%product_title%',
-//								$args['title'],
-//								get_option( 'wcj_product_by_user_message_product_successfully_edited', __( '"%product_title%" successfully edited!', 'woocommerce-jetpack' ) ) ) .
-//							'</div></div>';
-//					}
+					// if ( 0 == $atts['product_id'] ) {
+					// 	$notice_html .= '<div class="woocommerce"><div class="woocommerce-message">' .
+					// 		str_replace(
+					// 			'%product_title%',
+					// 			$args['title'],
+					// 			get_option( 'wcj_product_by_user_message_product_successfully_added', __( '"%product_title%" successfully added!', 'woocommerce-jetpack' ) ) ) .
+					// 		'</div></div>';
+					// } else {
+					// 	$notice_html .= '<div class="woocommerce"><div class="woocommerce-message">' .
+					// 		str_replace(
+					// 			'%product_title%',
+					// 			$args['title'],
+					// 			get_option( 'wcj_product_by_user_message_product_successfully_edited', __( '"%product_title%" successfully edited!', 'woocommerce-jetpack' ) ) ) .
+					// 		'</div></div>';
+					// }
 				}
 			} else {
 				$notice_html .= '<div class="woocommerce" style="display: flex"><ul class="woocommerce-error">' . $validate_args . '</ul></div>';
@@ -422,8 +422,8 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 		$input_fields_html .= wcj_get_table_html( $table_data, array( 'table_class' => 'widefat', 'table_heading_type' => 'vertical', ) );
 
 		$footer_html .= '<input type="submit" class="button" name="wcj_add_new_product" value="' . __( 'Save', 'woocommerce-jetpack' ) . '">';
-//		$footer_html .= '<input type="submit" class="button" name="wcj_add_new_product" value="' . ( ( 0 == $atts['product_id'] ) ?
-//			__( 'Add', 'woocommerce-jetpack' ) : __( 'Edit', 'woocommerce-jetpack' ) ) . '">';
+		// $footer_html .= '<input type="submit" class="button" name="wcj_add_new_product" value="' . ( ( 0 == $atts['product_id'] ) ?
+		// 	__( 'Add', 'woocommerce-jetpack' ) : __( 'Edit', 'woocommerce-jetpack' ) ) . '">';
 		$footer_html .= '</form>';
 
 		return $notice_html . $header_html . $input_fields_html . $footer_html;

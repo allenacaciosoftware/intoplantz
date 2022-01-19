@@ -352,16 +352,12 @@ class OMAPI_Notifications {
 			return array();
 		}
 
-		$option = $this->get_option();
-
 		// Update notifications using async task.
-		if ( empty( $option['updated'] ) || time() > ( $option['updated'] + ( 12 * HOUR_IN_SECONDS ) ) ) {
-			if ( $can_update ) {
-				$this->update();
-				$option = $this->get_option();
-			}
+		if ( $this->should_update() && $can_update ) {
+			$this->update();
 		}
 
+		$option = $this->get_option();
 		$events = ! empty( $option['events'] ) ? $this->verify_active( $option['events'] ) : array();
 		$feed   = ! empty( $option['feed'] ) ? $this->verify_active( $option['feed'] ) : array();
 
@@ -681,6 +677,19 @@ class OMAPI_Notifications {
 	}
 
 	/**
+	 * Checks if our notifications should be updated.
+	 *
+	 * @since 2.6.1
+	 *
+	 * @return bool Whether notifications should be updated.
+	 */
+	public function should_update() {
+		$updated = $this->get_option( 'updated' );
+
+		return empty( $updated ) || time() > ( $updated + ( 12 * HOUR_IN_SECONDS ) );
+	}
+
+	/**
 	 * Register and enqueue admin specific JS.
 	 *
 	 * @since 2.1.1
@@ -699,8 +708,9 @@ class OMAPI_Notifications {
 			$handle,
 			'OMAPI_Global',
 			array(
-				'url'   => esc_url_raw( rest_url( 'omapp/v1/notifications' ) ),
-				'nonce' => wp_create_nonce( 'wp_rest' ),
+				'url'                => esc_url_raw( rest_url( 'omapp/v1/notifications' ) ),
+				'nonce'              => wp_create_nonce( 'wp_rest' ),
+				'fetchNotifications' => $this->base->notifications->should_update(),
 			)
 		);
 	}

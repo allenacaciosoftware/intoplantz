@@ -325,8 +325,8 @@ class OMAPI_Rules {
 		}
 
 		// If query var is set and user can manage OM, output debug data.
-		if ( $this->can_output_debug() ) {
-			$this->output_debug();
+		if ( OMAPI_Debug::can_output_debug() ) {
+			$this->output_rules_debug();
 		}
 
 		return $should_output;
@@ -498,7 +498,7 @@ class OMAPI_Rules {
 		// Check if we should show on a selected singular post type.
 		if ( $this->field_not_empty_array( 'show' ) ) {
 			foreach ( $this->get_field_value( 'show' ) as $show_value ) {
-				if ( 0 ===  strpos( $show_value, 'singular___' ) ) {
+				if ( 0 === strpos( $show_value, 'singular___' ) ) {
 					$post_type = str_replace( 'singular___', '', $show_value );
 					if ( is_singular( $post_type ) ) {
 						throw new OMAPI_Rules_True( 'include on singular post type: ' . $post_type );
@@ -782,58 +782,19 @@ class OMAPI_Rules {
 	}
 
 	/**
-	 * Check if rules debug can be output.
-	 *
-	 * @since  2.0.0
-	 *
-	 * @return bool
-	 */
-	public function can_output_debug() {
-		$rules_debug = ! empty( $_GET['omwpdebug'] ) ? $_GET['omwpdebug'] : '';
-
-		if ( $rules_debug ) {
-			$omapi         = OMAPI::get_instance();
-			$disable       = 'off' === $rules_debug;
-			$decoded       = base64_decode( base64_decode( $rules_debug ) );
-			$debug_enabled = $omapi->get_option( 'api', 'omwpdebug' );
-			$creds         = $omapi->get_api_credentials();
-			if (
-				! empty( $creds['apikey'] )
-				&& ( $decoded === $creds['apikey'] || $disable )
-			) {
-
-				$option = $omapi->get_option();
-
-				if ( $disable ) {
-					unset( $option['api']['omwpdebug'] );
-					$debug_enabled = false;
-				} else {
-					$option['api']['omwpdebug'] = true;
-					$debug_enabled = true;
-				}
-				update_option( 'optin_monster_api', $option );
-			}
-
-			$rules_debug = $debug_enabled || is_user_logged_in() && $omapi->can_access( 'rules_debug' );
-		}
-
-		// If query var is set and user can manage OM, output debug data.
-		return apply_filters( 'optin_monster_api_should_output_rules_debug', ! empty( $rules_debug ) );
-	}
-
-	/**
 	 * Outputs some debug data for the current campaign object.
 	 *
 	 * @since  1.6.2
 	 *
 	 * @return void
 	 */
-	protected function output_debug() {
+	protected function output_rules_debug() {
 		$show = $this->caught instanceof OMAPI_Rules_True;
 
-		echo '<xmp class="_om-campaign-sep">' . str_repeat( '-', 10 ) . $this->optin->post_name . str_repeat( '-', 10 ) . '</xmp>';;
+		echo '<xmp class="_om-campaign-sep">' . str_repeat( '-', 10 ) . $this->optin->post_name . str_repeat( '-', 10 ) . '</xmp>';
+
 		echo '<xmp class="_om-post-id">$post_id: ' . print_r( $this->post_id, true ) . '</xmp>';
-		echo '<xmp class="_om-post-id">$debug_enabled: ' . print_r( OMAPI::get_instance()->get_option( 'api', 'omwpdebug' ), true ) . '</xmp>';
+		echo '<xmp class="_om-post-id">$debug_setting_enabled: ' . print_r( OMAPI::get_instance()->get_option( 'api', 'omwpdebug' ), true ) . '</xmp>';
 		echo '<xmp class="_om-campaign-status" style="color: ' . ( $show ? 'green' : 'red' ) . ';">' . $this->optin->post_name . ":\n" . print_r( $this->caught->getMessage(), true );
 		$reasons = $this->caught->get_exceptions();
 		if ( ! empty( $reasons ) ) {
@@ -858,5 +819,4 @@ class OMAPI_Rules {
 		echo '<xmp class="_om-global-override" style="display:none;">$global_override?: ' . print_r( $this->global_override, true ) . '</xmp>';
 		echo '<xmp class="_om-optin" style="display:none;">$optin: ' . print_r( $this->optin, true ) . '</xmp>';
 	}
-
 }

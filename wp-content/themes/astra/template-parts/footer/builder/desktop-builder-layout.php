@@ -22,6 +22,7 @@ echo astra_attr(
 	)
 );
 ?>
+		style="color: darkcyan"
 >
 	<?php
 		astra_footer_content_top();

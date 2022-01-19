@@ -1,0 +1,10 @@
+2022-01-15T03:31:29+00:00 NOTICE action_scheduler.queue_job :: MailChimp_WooCommerce_User_Submit queued :: obj_id 36
+2022-01-15T03:32:14+00:00 NOTICE member.sync :: Subscribed Member pam_test@gmail.com :: Array
+(
+    [status_if_new] => 1
+    [merge_fields] => Array
+        (
+        )
+
+)
+

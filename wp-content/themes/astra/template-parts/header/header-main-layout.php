@@ -17,7 +17,7 @@
 ?>
 
 <div class="main-header-bar-wrap">
-	<div <?php echo astra_attr( 'main-header-bar' ); ?>>
+	<div <?php echo astra_attr( 'main-header-bar' ); ?> style="background: lightcyan">
 		<?php astra_main_header_bar_top(); ?>
 		<div class="ast-container">
 
