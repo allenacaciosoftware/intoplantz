@@ -61,5 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         list-style: none;
     }
 </style>
+<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
 <ul class="box products" >
 <!--<ul class="box products columns---><?php //echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?><!--" >-->
