@@ -196,6 +196,10 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 					$item_output .= '<span class="mega-indicator"></span>';
 				}
 
+                if (strcmp(strtolower($item->title), "cart") == 0) {
+                    $item_output .= '<span>&nbsp;(<span class="cart-items-count">' . WC()->cart->get_cart_contents_count() . '</span>)</span>';
+                }
+
 				$item_output .= '</a>';
 				$item_output .= $args->after;
 
