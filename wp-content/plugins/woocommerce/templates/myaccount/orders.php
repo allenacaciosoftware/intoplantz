@@ -27,29 +27,29 @@ defined( 'ABSPATH' ) || exit;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <style>
     table, td, th {
-        border: 1px solid #74cf6e;
+        border: 1px solid #78a2a2;
         font-weight: bold;
     }
     table {
-        border-bottom: 1px solid #74cf6e !important;
+        border-bottom: 1px solid #78a2a2 !important;
     }
     table thead th, table thead td {
         border-bottom: 0px !important;
     }
     .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
-        background: #217b1b;
+        background: #78a2a2;
         line-height: 17px;
         color: white !important;
     }
     .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        background: #217b1b;
+        background: #78a2a2;
         opacity: 0.7;
     }
 </style>
 <?php //if ( $has_orders ) : ?>
     <h2>Items I bought</h2>
     <table id="ordersTable" class="display">
-        <thead style="background: #217b1b; color: white">
+        <thead style="background: cadetblue; color: white">
         <th>Order</th>
         <th>Date</th>
         <th>Status</th>
