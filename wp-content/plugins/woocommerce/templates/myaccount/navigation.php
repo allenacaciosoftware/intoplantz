@@ -379,7 +379,6 @@ do_action( 'woocommerce_before_account_navigation' );
                 </ul>
             </a>
         </li>
-        <li><a href="<?php echo wc_logout_url() ?>">Logout</a></li>
     </ul>
 </nav>
 
