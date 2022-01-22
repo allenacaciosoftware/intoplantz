@@ -161,7 +161,7 @@ class WCJ_Product_By_User extends WCJ_Module {
 		if ( isset( $_GET['wcj_edit_product'] ) ) {
 			$product_id = $_GET['wcj_edit_product'];
 			$post_author_id = get_post_field( 'post_author', $product_id );
-			if ( $user_ID != $post_author_id ) {
+			if ( $user_ID != $post_author_id && !empty($product_id)) {
 				echo '<p>' . __( 'Wrong user ID!', 'woocommerce-jetpack' ) . '</p>';
 			} else {
 				echo do_shortcode( '[wcj_product_add_new product_id="' . $product_id . '"]' );

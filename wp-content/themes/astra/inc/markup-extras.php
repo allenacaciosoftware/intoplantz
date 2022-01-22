@@ -857,7 +857,11 @@ if ( ! function_exists( 'astra_primary_navigation_markup' ) ) {
 				// Do not add any CSS from theme except header alignment.
 				echo '<div ' . astra_attr( 'ast-main-header-bar-alignment' ) . '>';
 					wp_nav_menu( $primary_menu_args );
-				echo '</div>';
+                if (get_current_user_id() == 0) {
+                    echo '</div>';
+                } else {
+                    echo '<div style="margin: 0 30px 10px 0; line-height: initial; float: right; color: #008b8b;">You are logged in as: ' . wp_get_current_user()->display_name . '</div></div>';
+                }
 			} else {
 
 				echo '<div ' . astra_attr( 'ast-main-header-bar-alignment' ) . '>';
