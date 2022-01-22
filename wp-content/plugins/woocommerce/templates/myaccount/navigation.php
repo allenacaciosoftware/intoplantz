@@ -374,7 +374,6 @@ do_action( 'woocommerce_before_account_navigation' );
         <li class="dropdown">
             <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Wallet<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="/my-account/mwb-wallet/wallet-topup/">Add balance</a></li>
                     <li><a href="/my-account/mwb-wallet/wallet-withdrawal/">Request Withdrawal</a></li>
                     <li><a href="/my-account/mwb-wallet/wallet-transactions/">Transactions</a></li>
                 </ul>
