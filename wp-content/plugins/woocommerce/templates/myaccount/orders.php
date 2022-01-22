@@ -47,6 +47,7 @@ defined( 'ABSPATH' ) || exit;
     }
 </style>
 <?php //if ( $has_orders ) : ?>
+    <h2>Items I bought</h2>
     <table id="ordersTable" class="display">
         <thead style="background: #217b1b; color: white">
         <th>Order</th>

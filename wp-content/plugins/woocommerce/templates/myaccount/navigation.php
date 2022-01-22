@@ -195,7 +195,7 @@ do_action( 'woocommerce_before_account_navigation' );
         line-height: 20px;
         display: inline-block;
         width: 100%;
-        background: green;
+        background: cadetblue;
         border-bottom: 1px solid black;
     }
 
@@ -254,16 +254,22 @@ do_action( 'woocommerce_before_account_navigation' );
         background: black;
     }
 
-    .sidebar-nav li a:hover,
     .sidebar-nav li a:active,
     .sidebar-nav li a:focus,
-    .sidebar-nav li.open a:hover,
     .sidebar-nav li.open a:active,
     .sidebar-nav li.open a:focus{
         color: #fff;
         text-decoration: none;
-        background-color: transparent;
+        background-color: cadetblue;
     }
+
+    .sidebar-nav li a:hover,
+    .sidebar-nav li.open a:hover {
+        color: #fff;
+        text-decoration: none;
+        background-color: dimgrey;
+    }
+
     .sidebar-header {
         text-align: center;
         font-size: 20px;
@@ -360,10 +366,17 @@ do_action( 'woocommerce_before_account_navigation' );
 <nav class="navbar navbar-inverse " id="sidebar-wrapper" role="navigation" style="width: 30%">
     <ul class="nav sidebar-nav">
         <div class="sidebar-header"><div class="sidebar-brand"><a href="#">My Account</a></div></div>
-        <li><a href="/my-account/orders/">Orders</a></li>
         <li class="dropdown">
-            <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Products<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Buying<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
+                <li><a href="/my-account/orders/">Items I bought</a></li>
+            </ul>
+            </a>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Selling<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/my-account/orders/">Sold items</a></li>
                 <li><a href="/my-account/wcj-my-products/">My products</a></li>
                 <li><a href="/my-account/wcj-my-products/?wcj_edit_product">Add product</a></li>
             </ul>
@@ -372,7 +385,7 @@ do_action( 'woocommerce_before_account_navigation' );
         <li><a href="/my-account/edit-address/">Addresses</a></li>
         <li><a href="/my-account/edit-account/">Account Details</a></li>
         <li class="dropdown">
-            <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Wallet<span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Wallet<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="/my-account/mwb-wallet/wallet-withdrawal/">Request Withdrawal</a></li>
                     <li><a href="/my-account/mwb-wallet/wallet-transactions/">Transactions</a></li>
