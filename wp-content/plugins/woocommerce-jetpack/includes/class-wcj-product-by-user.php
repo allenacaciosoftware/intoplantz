@@ -201,7 +201,7 @@ class WCJ_Product_By_User extends WCJ_Module {
             echo '<script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>';
 
             echo '<table id="productsTable" class="display">';
-            echo '<thead style="background: #217b1b; color: white">';
+            echo '<thead style="background: cadetblue; color: white">';
             echo '<th></th>';
             echo '<th>Status</th>';
             echo '<th>Title</th>';
