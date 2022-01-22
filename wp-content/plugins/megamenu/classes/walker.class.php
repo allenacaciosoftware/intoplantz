@@ -167,8 +167,12 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 				foreach ( $atts as $attr => $value ) {
 					if ( strlen( $value ) ) {
 						$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
-						$attributes .= ' ' . $attr . '="' . $value . '"';
-					}
+                        if (is_user_logged_in() && $attr == "href"  && strcmp(strtolower($item->title), "logout") == 0) {
+                            $attributes .= ' ' . $attr . '="' . wc_logout_url() . '"';
+                        } else {
+                            $attributes .= ' ' . $attr . '="' . $value . '"';
+                        }
+                    }
 				}
 
 				$item_output  = $args->before;
