@@ -27,21 +27,13 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
         font-weight: 500;
         margin-bottom: 0 !important;
     }
-    button {
-        background: #217b1b !important;
-    }
-    button:hover {
-        /*opacity: 0.9 !important;*/
-        color: black !important;
-        background: #6ed384 !important;
-    }
 </style>
 
 <form class="woocommerce-EditAccountForm edit-account" action="" method="post" <?php do_action( 'woocommerce_edit_account_form_tag' ); ?> >
 
 	<?php do_action( 'woocommerce_edit_account_form_start' ); ?>
     <div>
-        <header class="woocommerce-Address-title title" style="background: #217b1b; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
+        <header class="woocommerce-Address-title title" style="background: cadetblue; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
             <h3 style="color: white"><?php esc_html_e( 'User details', 'woocommerce' ); ?></h3>
         </header>
         <address style="border: 1px solid #217b1b">
@@ -68,7 +60,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
         </address>
     </div>
     <div>
-        <header class="woocommerce-Address-title title" style="background: #217b1b; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
+        <header class="woocommerce-Address-title title" style="background: cadetblue; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
             <h3 style="color: white"><?php esc_html_e( 'Password change', 'woocommerce' ); ?></h3>
         </header>
         <address style="border: 1px solid #217b1b">
@@ -93,7 +85,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
 
 	<p style="padding-top: 20px">
 		<?php wp_nonce_field( 'save_account_details', 'save-account-details-nonce' ); ?>
-		<button type="submit"  class="woocommerce-Button button" name="save_account_details" value="<?php esc_attr_e( 'Save changes', 'woocommerce' ); ?>"><?php esc_html_e( 'Save changes', 'woocommerce' ); ?></button>
+		<button type="submit"  class="button" name="save_account_details" value="<?php esc_attr_e( 'Save changes', 'woocommerce' ); ?>"><?php esc_html_e( 'Save changes', 'woocommerce' ); ?></button>
 		<input type="hidden" name="action" value="save_account_details" />
 	</p>
 
