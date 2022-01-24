@@ -287,7 +287,7 @@ function show_message_on_form_submit( $wpg_message, $type = 'error' ) {
 	<div class="mwb_wcb_main_tabs_template">
 		<div class="mwb_wcb_body_template">
             <div>
-                <header class="woocommerce-Address-title title" style="background: #217b1b; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
+                <header class="woocommerce-Address-title title" style="background: darkslategrey; border: 1px solid #217b1b; display: flex; justify-content: space-between;">
                     <h3 style="color: white"><?php esc_html_e( 'Wallet Balance', 'wallet-system-for-woocommerce' ); ?></h3>
                     <h3 style="color: white">
                         <?php
