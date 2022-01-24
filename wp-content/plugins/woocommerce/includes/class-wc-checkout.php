@@ -958,6 +958,71 @@ class WC_Checkout {
 		WC()->cart->calculate_totals();
 	}
 
+    function topup_user_product_wallet($order_id){
+        global $wpdb;
+        $order     = wc_get_order( $order_id );
+        $order_items = $order->get_items();
+        $wallet_payment_gateway = new Wallet_System_For_Woocommerce();
+        $send_email_enable      = get_option( 'mwb_wsfw_enable_email_notification_for_wallet_update', '' );
+        $payment_method         = $order->get_payment_method();
+        $intoplantz_commission_percentage = (int)get_option( 'intoplantz_commission_percentage', '' );
+
+        // TODO: calculate topup per seller
+        foreach ( $order_items as $item_id => $item ) {
+            $product_id = $item->get_product_id();
+            $actual_product_price = $item->get_subtotal();
+            $total      = 30;
+            $result =$wpdb->get_results(
+                "
+			SELECT post_author FROM {$wpdb->posts} AS p
+			WHERE p.ID=$product_id
+		"
+            ); // WPCS: unprepared SQL ok.
+            $userid     = $result[0]->post_author;
+            // CALCULATE item percentage...
+            $credited_amount = $actual_product_price*(100-$intoplantz_commission_percentage)/100;
+
+            $wallet_userid   = apply_filters( 'wsfw_check_order_meta_for_userid', $userid, $order_id );
+            if ( $wallet_userid ) {
+                $update_wallet_userid = $wallet_userid;
+            } else {
+                $update_wallet_userid = $userid;
+            }
+            $transfer_note = apply_filters( 'wsfw_check_order_meta_for_recharge_reason', '', $order_id );
+            $walletamount  = get_user_meta( $update_wallet_userid, 'mwb_wallet', true );
+            $wallet_user   = get_user_by( 'id', $update_wallet_userid );
+            $walletamount += $credited_amount;
+            update_user_meta( $update_wallet_userid, 'mwb_wallet', $walletamount );
+
+            if ( isset( $send_email_enable ) && 'on' === $send_email_enable ) {
+                $user_name  = $wallet_user->first_name . ' ' . $wallet_user->last_name;
+                $mail_text  = sprintf( 'Hello %s,<br/>', $user_name );
+                $mail_text .= __( 'Wallet credited by IntoPlantz', 'wallet-system-for-woocommerce' ) . wc_price( $credited_amount, array( 'currency' => $order->get_currency() ) ) . __( ' through wallet recharging.', 'wallet-system-for-woocommerce' );
+                $to         = $wallet_user->user_email;
+                $from       = get_option( 'admin_email' );
+                $subject    = __( 'Wallet updating notification', 'wallet-system-for-woocommerce' );
+                $headers    = 'MIME-Version: 1.0' . "\r\n";
+                $headers   .= 'Content-Type: text/html;  charset=UTF-8' . "\r\n";
+                $headers   .= 'From: ' . $from . "\r\n" .
+                    'Reply-To: ' . $to . "\r\n";
+                $wallet_payment_gateway->send_mail_on_wallet_updation( $to, $subject, $mail_text, $headers );
+            }
+
+            $transaction_type = 'Wallet credited through purchase <a href="' . admin_url( 'post.php?post=' . $order_id . '&action=edit' ) . '" >#' . $order_id . '</a>';
+            $transaction_data = array(
+                'user_id'          => $userid,
+                'amount'           => $credited_amount,
+                'currency'         => $order->get_currency(),
+                'payment_method'   => $payment_method,
+                'transaction_type' => htmlentities( $transaction_type ),
+                'order_id'         => $order_id,
+                'note'             => $transfer_note,
+            );
+
+            $wallet_payment_gateway->insert_transaction_data_in_table( $transaction_data );
+        }
+    }
+
 
 	/**
 	 * Process an order that does require payment.
@@ -978,6 +1043,7 @@ class WC_Checkout {
 
 		// Process Payment.
 		$result = $available_gateways[ $payment_method ]->process_payment( $order_id );
+        $this->topup_user_product_wallet($order_id);
 
 		// Redirect to success/confirmation/payment page.
 		if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
