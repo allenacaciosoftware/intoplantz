@@ -3079,11 +3079,35 @@ if ( ! function_exists( 'woocommerce_account_content' ) ) {
 				if ( 'pagename' === $key ) {
 					continue;
 				}
-
-				if ( has_action( 'woocommerce_account_' . $key . '_endpoint' ) ) {
-					do_action( 'woocommerce_account_' . $key . '_endpoint', $value );
-					return;
-				}
+                $soldItemsPage = serialize($wp->query_vars);
+                if (strpos($soldItemsPage, "sold-items") !== false) {
+                    $current_page    = empty( $current_page ) ? 1 : absint( $current_page );
+                    $customer_orders = wc_get_orders(
+                        apply_filters(
+                            'woocommerce_my_account_my_orders_query',
+                            array(
+                                'customer' => get_current_user_id(),
+                                'page'     => $current_page,
+                                'paginate' => true,
+                            )
+                        )
+                    );
+                    wc_get_template(
+                        'myaccount/sold-items.php',
+                        array(
+                            'current_user' => get_user_by( 'id', get_current_user_id() ),
+                            'current_page'    => absint( $current_page ),
+                            'customer_orders' => $customer_orders,
+                            'has_orders'      => 0 < $customer_orders->total,
+                        )
+                    );
+                    return;
+                } else {
+                    if (has_action('woocommerce_account_' . $key . '_endpoint')) {
+                        do_action('woocommerce_account_' . $key . '_endpoint', $value);
+                        return;
+                    }
+                }
 			}
 		}
 

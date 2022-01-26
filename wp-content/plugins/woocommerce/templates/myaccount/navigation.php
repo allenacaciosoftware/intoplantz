@@ -376,7 +376,7 @@ do_action( 'woocommerce_before_account_navigation' );
         <li class="dropdown">
             <a href="#" class="dropdown-toggle"  data-toggle="dropdown">Selling<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="/my-account/orders/">Sold items</a></li>
+                <li><a href="/my-account/sold-items/">Sold items</a></li>
                 <li><a href="/my-account/wcj-my-products/">My products</a></li>
                 <li><a href="/my-account/wcj-my-products/?wcj_edit_product">Add product</a></li>
             </ul>
