@@ -47,31 +47,45 @@ defined( 'ABSPATH' ) || exit;
         opacity: 0.7;
     }
 </style>
-<?php //if ( $has_orders ) : ?>
+<?php
+global $wpdb, $current_user;
+
+$soldItems = $wpdb->get_results(
+        "
+select wz6b8gwoi.order_id, wp_z6b8gq_wc_order_product_lookup.date_created, status, product_qty, order_item_name, meta_value
+from wp_z6b8gq_wc_order_product_lookup
+join wp_z6b8gq_posts on ID = product_id
+join wp_z6b8gq_woocommerce_order_items wz6b8gwoi on wp_z6b8gq_wc_order_product_lookup.order_item_id = wz6b8gwoi.order_item_id
+join wp_z6b8gq_wc_order_stats wz6b8gwos on wz6b8gwoi.order_id = wz6b8gwos.order_id
+join wp_z6b8gq_woocommerce_order_itemmeta w on wp_z6b8gq_wc_order_product_lookup.order_item_id = w.order_item_id and wz6b8gwoi.order_item_id = w.order_item_id
+where post_author in ($current_user->ID) and meta_key='_line_subtotal'
+order by wp_z6b8gq_wc_order_product_lookup.date_created desc;
+			"
+);
+?>
     <h2>Items I sold</h2>
     <table id="ordersTable" class="display">
         <thead style="background: cadetblue; color: white">
         <th>Order</th>
+        <th>Product</th>
         <th>Date</th>
         <th>Status</th>
         <th>Total</th>
         </thead>
         <tbody>
-            <?php foreach( $customer_orders->orders as $customer_order) {
-                $order      = wc_get_order( $customer_order );
-                $item_count = $order->get_item_count() - $order->get_item_count_refunded();
+            <?php foreach( $soldItems as $soldItem) {
+                $itemText = "item";
+                if ($soldItem->product_qty > 1) {
+                    $itemText = "items";
+                }
             ?>
 
                 <tr>
-                    <td><?php echo esc_html( _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number() ); ?></td>
-                    <td><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></td>
-                    <td><?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?></td>
-                    <td>
-                        <?php
-                        /* translators: 1: formatted order total 2: total order items */
-                        echo wp_kses_post( sprintf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ) );
-                        ?>
-                    </td>
+                    <td><?php echo esc_html( $soldItem->order_id ); ?></td>
+                    <td><?php echo esc_html( $soldItem->order_item_name ); ?></td>
+                    <td><?php echo esc_html( $soldItem->date_created ); ?></td>
+                    <td><?php echo esc_html( ucfirst(str_replace("wc-","", $soldItem->status)) ); ?></td>
+                    <td><?php echo esc_html( "$" . $soldItem->meta_value . " for " . $soldItem->product_qty . " $itemText"); ?></td>
                 </tr>
             <?php } ?>
         </tbody>
@@ -81,10 +95,10 @@ defined( 'ABSPATH' ) || exit;
             let table = $('#ordersTable').DataTable({
                 "order": [[ 0, "desc" ]]
             });
-            $("#ordersTable tr").css("cursor", "pointer");
-            $('#ordersTable tbody').on('click', 'tr', function () {
-                let data = table.row( this ).data();
-                location.href = '/my-account/view-order/' + data[0].replace("#", "") + '/';
-            });
+            // $("#ordersTable tr").css("cursor", "pointer");
+            // $('#ordersTable tbody').on('click', 'tr', function () {
+            //     let data = table.row( this ).data();
+            //     location.href = '/my-account/view-order/' + data[0].replace("#", "") + '/';
+            // });
         });
     </script>
