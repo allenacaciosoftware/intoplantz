@@ -116,6 +116,7 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 			}
 			update_post_meta( $product_id, '_visibility', 'visible' );
 			update_post_meta( $product_id, '_stock_status', 'instock' );
+			wc_update_product_stock( $product_id, $args['stock_quantity'], 'set', true );
 
 			if ( 'external' === wcj_get_option( 'wcj_product_by_user_product_type', 'simple' ) ) {
 				update_post_meta( $product_id, '_product_url', $args['external_url'] );
@@ -258,6 +259,7 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 		$footer_html       = '';
 
 		$args = array(
+			'stock_quantity'    => isset( $_REQUEST['wcj_add_new_product_stock_quantity'] )         ? $_REQUEST['wcj_add_new_product_stock_quantity']         : '',
 			'title'             => isset( $_REQUEST['wcj_add_new_product_title'] )         ? $_REQUEST['wcj_add_new_product_title']         : '',
 			'desc'              => isset( $_REQUEST['wcj_add_new_product_desc'] )          ? $_REQUEST['wcj_add_new_product_desc']          : '',
 			'short_desc'        => isset( $_REQUEST['wcj_add_new_product_short_desc'] )    ? $_REQUEST['wcj_add_new_product_short_desc']    : '',
@@ -374,6 +376,13 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 				$the_field
 			);
 		}
+        $required_html      = ' required';
+        $required_mark_html = $required_mark_html_template;
+        $table_data[] = array(
+            '<label for="">' . __( 'Stock Quantity', 'woocommerce-jetpack' ) . $required_mark_html . '</label>',
+            '<input' . $required_html . ' type="number" min="0" id="wcj_add_new_product_stock_quantity" name="wcj_add_new_product_stock_quantity" value="' .
+                ( ( 0 != $atts['product_id'] ) ? strval(intval(get_post_meta( $atts['product_id'], '_stock', true ))) : $args['_stock'] ) . '">'
+        );
 		if ( 'yes' === $atts['regular_price_enabled'] ) {
 			$required_html      = ( 'yes' === $atts['regular_price_required'] ) ? ' required' : '';
 			$required_mark_html = ( 'yes' === $atts['regular_price_required'] ) ? $required_mark_html_template : '';

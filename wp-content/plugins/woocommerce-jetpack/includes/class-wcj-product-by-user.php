@@ -189,7 +189,7 @@ class WCJ_Product_By_User extends WCJ_Module {
             foreach ($loop->posts as $post_id) {
                 $products[$post_id] = array(
                     'title' => get_the_title($post_id),
-                    'status' => get_post_status($post_id),
+                    'stock' => get_post_meta( $post_id, '_stock', true ),
                 );
             }
 //			$offset += $block_size;
@@ -203,16 +203,20 @@ class WCJ_Product_By_User extends WCJ_Module {
             echo '<table id="productsTable" class="display">';
             echo '<thead style="background: cadetblue; color: white">';
             echo '<th></th>';
-            echo '<th>Status</th>';
             echo '<th>Title</th>';
+            echo '<th>Quantity</th>';
             echo '<th></th>';
             echo '</thead>';
             echo '<tbody>';
             foreach ($products as $_product_id => $_product_data) {
+            $stock_quantity_text = "0";
+            if ($_product_data['stock'] > 0) {
+                $stock_quantity_text = strval(intval($_product_data['stock']));
+            }
                 echo '<tr id="product_' . $_product_id . '">';
                 echo '<td style="text-align: center">' . get_the_post_thumbnail( $_product_id, array( 30, 30 ) ) . '</td>';
-                echo '<td>' . $_product_data['status'] . '</td>';
                 echo '<td>' . $_product_data['title'] . '</td>';
+                echo '<td>' . $stock_quantity_text . '</td>';
                 echo '<td>' . '<a class="button" href="' . add_query_arg( 'wcj_delete_product', $_product_id, remove_query_arg( array( 'wcj_edit_product_image_delete', 'wcj_edit_product' ) ) ) . '" onclick="return confirm(\'' . __( 'Are you sure you want to delete product: ' . $_product_data['title'] . '?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a>' . '</td>';
                 echo '</tr>';
             }
