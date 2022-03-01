@@ -376,6 +376,37 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 				$the_field
 			);
 		}
+		global $thepostid, $product_object;
+		$thepostid      = $atts['product_id'];
+		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
+        $products = get_post_meta( $thepostid, 'gallery_image_ids', true );
+
+        $product_image_gallery = $product_object->get_gallery_image_ids( 'edit' );
+
+        $attachments         = array_filter( $product_image_gallery );
+        $update_meta         = false;
+        $updated_gallery_ids = array();
+        $productGalleryImages = '';
+                if ( ! empty( $attachments ) ) {
+                    foreach ( $attachments as $attachment_id ) {
+                        $attachment = wp_get_attachment_image( $attachment_id, 'thumbnail' );
+
+                        // if attachment is empty skip.
+                        if ( empty( $attachment ) ) {
+                            $update_meta = true;
+                            continue;
+                        }
+                        $productGalleryImages = $productGalleryImages . '<div style="height: 50px; width: 50px; padding-right: 10px;">' . $attachment . '</div>';
+                    }
+                }
+		$table_data[] = array(
+		    '<label for="">Image gallery</label>',
+		    '<div id="product_images_container" style="display:flex">' . $productGalleryImages . '</div>' .
+            '<p class="add_product_images hide-if-no-js">' .
+            '<a href="#" data-choose="Add images to product gallery" data-update="Add to gallery" data-delete="Delete image" data-text="Delete">Add product gallery images</a>' .
+            '</p>',
+		);
+
         $required_html      = ' required';
         $required_mark_html = $required_mark_html_template;
         $table_data[] = array(
