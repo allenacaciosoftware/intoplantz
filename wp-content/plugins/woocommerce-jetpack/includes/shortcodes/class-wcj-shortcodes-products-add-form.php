@@ -146,6 +146,38 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 				set_post_thumbnail( $product_id, $attach_id );
 			}
 
+			// Images
+            $attachment_ids = isset( $_POST['product_image_gallery'] ) ? array_filter( explode( ',', wc_clean( $_POST['product_image_gallery'] ) ) ) : array();
+
+			foreach ($args['images']['name'] as $value) {
+                    $upload_dir = wp_upload_dir();
+                    $filename = $value;
+                    $file = ( wp_mkdir_p( $upload_dir['path'] ) ) ? $upload_dir['path'] : $upload_dir['basedir'];
+                    $file .= '/' . $filename;
+
+                    move_uploaded_file( $value, $file );
+
+                    $wp_filetype = wp_check_filetype( $filename, null );
+                    $attachment = array(
+                        'post_mime_type' => $wp_filetype['type'],
+                        'post_title'     => sanitize_file_name( $filename ),
+                        'post_content'   => '',
+                        'post_status'    => 'inherit'
+                    );
+                    $attach_id = wp_insert_attachment( $attachment, $file, $product_id );
+
+
+                    require_once( ABSPATH . 'wp-admin/includes/image.php' );
+                    $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
+
+                    $product_type   = empty( $_POST['product-type'] ) ? WC_Product_Factory::get_product_type( $product_id ) : sanitize_title( stripslashes( $_POST['product-type'] ) );
+                    $classname      = WC_Product_Factory::get_product_classname( $product_id, $product_type ? $product_type : 'simple' );
+                    $product        = new $classname( $product_id );
+                    array_push($attachment_ids,$attach_id);
+                }
+                $product->set_gallery_image_ids( $attachment_ids );
+                $product->save();
+
 			wp_update_post( array( 'ID' => $product_id, 'post_status' => $shortcode_atts['post_status'] ) );
 		}
 
@@ -269,6 +301,7 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 			'cats'              => isset( $_REQUEST['wcj_add_new_product_cats'] )          ? $_REQUEST['wcj_add_new_product_cats']          : array(),
 			'tags'              => isset( $_REQUEST['wcj_add_new_product_tags'] )          ? $_REQUEST['wcj_add_new_product_tags']          : array(),
 			'image'             => isset( $_FILES['wcj_add_new_product_image'] )           ? $_FILES['wcj_add_new_product_image']           : '',
+			'images'             => isset( $_FILES['wcj_add_new_product_images'] )           ? $_FILES['wcj_add_new_product_images']           : array(),
 		);
 		for ( $i = 1; $i <= $this->the_atts['custom_taxonomies_total']; $i++ ) {
 			$param_id = 'wcj_add_new_product_' . 'custom_taxonomy_' . $i;
@@ -380,7 +413,6 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 		$thepostid      = $atts['product_id'];
 		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
         $products = get_post_meta( $thepostid, 'gallery_image_ids', true );
-
         $product_image_gallery = $product_object->get_gallery_image_ids( 'edit' );
 
         $attachments         = array_filter( $product_image_gallery );
@@ -396,14 +428,22 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
                             $update_meta = true;
                             continue;
                         }
-                        $productGalleryImages = $productGalleryImages . '<div style="height: 50px; width: 50px; padding-right: 10px;">' . $attachment . '</div>';
+                        $productGalleryImages = $productGalleryImages . '<div id="attachId-' . $attachment_id . '" style="height: 50px; width: 50px; padding-right: 10px;">' . $attachment . '</div>';
+                        // rebuild ids to be saved.
+                        $updated_gallery_ids[] = $attachment_id;
+
                     }
+					// need to update product meta to set new gallery ids for delete
+// 					if ( $update_meta ) {
+// 						update_post_meta( $post->ID, '_product_image_gallery', implode( ',', $updated_gallery_ids ) );
+// 					}
                 }
 		$table_data[] = array(
 		    '<label for="">Image gallery</label>',
 		    '<div id="product_images_container" style="display:flex">' . $productGalleryImages . '</div>' .
             '<p class="add_product_images hide-if-no-js">' .
-            '<a href="#" data-choose="Add images to product gallery" data-update="Add to gallery" data-delete="Delete image" data-text="Delete">Add product gallery images</a>' .
+            '<input type="file" multiple id="wcj_add_new_product_images[]" name="wcj_add_new_product_images[]" accept="image/*" >' .
+            '<input type="hidden" id="product_image_gallery" name="product_image_gallery" value="' . esc_attr( implode( ',', $updated_gallery_ids ) ) . '" />' .
             '</p>',
 		);
 
