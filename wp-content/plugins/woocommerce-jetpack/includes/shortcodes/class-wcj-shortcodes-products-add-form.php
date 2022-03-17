@@ -148,14 +148,14 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 
 			// Images
             $attachment_ids = isset( $_POST['product_image_gallery'] ) ? array_filter( explode( ',', wc_clean( $_POST['product_image_gallery'] ) ) ) : array();
-
-			foreach ($args['images']['name'] as $value) {
+			foreach ($args['images']['name'] as  $key=>$value) {
                     $upload_dir = wp_upload_dir();
                     $filename = $value;
                     $file = ( wp_mkdir_p( $upload_dir['path'] ) ) ? $upload_dir['path'] : $upload_dir['basedir'];
                     $file .= '/' . $filename;
+                    $tmp_file = $args['images']['tmp_name'][$key];
 
-                    move_uploaded_file( $value, $file );
+                    move_uploaded_file( $tmp_file, $file );
 
                     $wp_filetype = wp_check_filetype( $filename, null );
                     $attachment = array(
@@ -317,21 +317,6 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 				} else {
 					// Success
                     echo '<script>location.href = "/my-account/wcj-my-products"</script>';
-					// if ( 0 == $atts['product_id'] ) {
-					// 	$notice_html .= '<div class="woocommerce"><div class="woocommerce-message">' .
-					// 		str_replace(
-					// 			'%product_title%',
-					// 			$args['title'],
-					// 			get_option( 'wcj_product_by_user_message_product_successfully_added', __( '"%product_title%" successfully added!', 'woocommerce-jetpack' ) ) ) .
-					// 		'</div></div>';
-					// } else {
-					// 	$notice_html .= '<div class="woocommerce"><div class="woocommerce-message">' .
-					// 		str_replace(
-					// 			'%product_title%',
-					// 			$args['title'],
-					// 			get_option( 'wcj_product_by_user_message_product_successfully_edited', __( '"%product_title%" successfully edited!', 'woocommerce-jetpack' ) ) ) .
-					// 		'</div></div>';
-					// }
 				}
 			} else {
 				$notice_html .= '<div class="woocommerce" style="display: flex"><ul class="woocommerce-error">' . $validate_args . '</ul></div>';
@@ -349,6 +334,18 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 			} else {
 				$image_id = get_post_thumbnail_id( $product_id );
 				wp_delete_post( $image_id, true );
+			}
+		}
+
+		if ( isset( $_GET['delete_gallery_image'] ) ) {
+			$product_id = $_GET['wcj_edit_product'];
+			$post_author_id = get_post_field( 'post_author', $product_id );
+			$user_ID = get_current_user_id();
+			if ( $user_ID != $post_author_id ) {
+				echo '<p>' . __( 'Wrong user ID!', 'woocommerce-jetpack' ) . '</p>';
+			} else {
+			    $attach_id = $_GET['delete_gallery_image'];
+                wp_delete_attachment( $attach_id, false );
 			}
 		}
 
@@ -398,9 +395,17 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 			if ( 0 != $atts['product_id'] ) {
 				$the_field = ( '' == get_post_thumbnail_id( $atts['product_id'] ) ) ?
 					$new_image_field :
-					'<a href="' . add_query_arg( 'wcj_edit_product_image_delete', $atts['product_id'] ) . '" onclick="return confirm(\'' .
-						__( 'Are you sure?', 'woocommerce-jetpack' ) . '\')">' . __( 'Delete', 'woocommerce-jetpack' ) . '</a><br>' .
-						get_the_post_thumbnail( $atts['product_id'], array( 50, 50 ) , array( 'class' => 'alignleft' ) );
+                    '<div style="display: flex; ">' .
+                    '<div style="height: 75px; width: 75px; padding-right: 10px;display: flex; justify-content: end;">' .
+                        '<a style="position:absolute;margin-top: -5px; margin-right: -7px; color: lightcoral"
+                            href="' . add_query_arg( 'wcj_edit_product_image_delete', $atts['product_id'] ) . '"
+                            class="fa fa-times-circle-o" title="Delete main image"
+                            onclick="return confirm(\'' . __( 'Delete main image?', 'woocommerce-jetpack' ) . '\')"></a>' .
+
+                        '<p>' . get_the_post_thumbnail( $atts['product_id'], array( 75, 75 ) , array( 'class' => 'alignleft' ) ) . '</p>' .
+                    '</div>' .
+                    '</div>';
+
 			} else {
 				$the_field = $new_image_field;
 			}
@@ -412,7 +417,6 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 		global $thepostid, $product_object;
 		$thepostid      = $atts['product_id'];
 		$product_object = $thepostid ? wc_get_product( $thepostid ) : new WC_Product();
-        $products = get_post_meta( $thepostid, 'gallery_image_ids', true );
         $product_image_gallery = $product_object->get_gallery_image_ids( 'edit' );
 
         $attachments         = array_filter( $product_image_gallery );
@@ -422,29 +426,34 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
                 if ( ! empty( $attachments ) ) {
                     foreach ( $attachments as $attachment_id ) {
                         $attachment = wp_get_attachment_image( $attachment_id, 'thumbnail' );
+                        $full_attachment_url = wp_get_attachment_image_url($attachment_id);
+                        $attachment_url = basename($full_attachment_url);
 
                         // if attachment is empty skip.
                         if ( empty( $attachment ) ) {
                             $update_meta = true;
                             continue;
                         }
-                        $productGalleryImages = $productGalleryImages . '<div id="attachId-' . $attachment_id . '" style="height: 50px; width: 50px; padding-right: 10px;">' . $attachment . '</div>';
+                        $productGalleryImages = $productGalleryImages .
+                            '<div id="attachId-' . $attachment_id . '" style="height: 75px; width: 75px; padding-right: 10px;display: flex; justify-content: end;">' .
+                                '<a style="position:absolute;margin-top: -5px; margin-right: -7px; color: lightcoral"
+                                    href="' . add_query_arg( 'delete_gallery_image', $attachment_id ) . '"
+                                    class="fa fa-times-circle-o" title="Delete image: ' . $attachment_url . '"' .
+                                    ' onclick="return confirm(\'' . __( 'Delete image: ' . $attachment_url . '?', 'woocommerce-jetpack' ) . '\')"></a>' .
+                                $attachment .
+                            '</div>';
                         // rebuild ids to be saved.
                         $updated_gallery_ids[] = $attachment_id;
 
                     }
-					// need to update product meta to set new gallery ids for delete
-// 					if ( $update_meta ) {
-// 						update_post_meta( $post->ID, '_product_image_gallery', implode( ',', $updated_gallery_ids ) );
-// 					}
                 }
 		$table_data[] = array(
 		    '<label for="">Image gallery</label>',
 		    '<div id="product_images_container" style="display:flex">' . $productGalleryImages . '</div>' .
-            '<p class="add_product_images hide-if-no-js">' .
-            '<input type="file" multiple id="wcj_add_new_product_images[]" name="wcj_add_new_product_images[]" accept="image/*" >' .
+            '<div class="add_product_images hide-if-no-js">' .
+            '<input type="file" multiple id="wcj_add_new_product_images[]" name="wcj_add_new_product_images[]" accept="image/*" style="padding-top: 8px;"/>' .
             '<input type="hidden" id="product_image_gallery" name="product_image_gallery" value="' . esc_attr( implode( ',', $updated_gallery_ids ) ) . '" />' .
-            '</p>',
+            '</div>',
 		);
 
         $required_html      = ' required';
