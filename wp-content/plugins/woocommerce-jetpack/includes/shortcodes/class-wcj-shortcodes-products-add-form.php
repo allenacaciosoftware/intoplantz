@@ -397,7 +397,7 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
 					$new_image_field :
                     '<div style="display: flex; ">' .
                     '<div style="height: 75px; width: 75px; padding-right: 10px;display: flex; justify-content: end;">' .
-                        '<a style="position:absolute;margin-top: -5px; margin-right: -7px; color: lightcoral"
+                        '<a style="position:absolute;margin-top: -5px; margin-right: -7px; color: lightcoral; background: white; border-radius: 10px; padding: 1px;"
                             href="' . add_query_arg( 'wcj_edit_product_image_delete', $atts['product_id'] ) . '"
                             class="fa fa-times-circle-o" title="Delete main image"
                             onclick="return confirm(\'' . __( 'Delete main image?', 'woocommerce-jetpack' ) . '\')"></a>' .
@@ -436,7 +436,7 @@ class WCJ_Products_Add_Form_Shortcodes extends WCJ_Shortcodes {
                         }
                         $productGalleryImages = $productGalleryImages .
                             '<div id="attachId-' . $attachment_id . '" style="height: 75px; width: 75px; padding-right: 10px;display: flex; justify-content: end;">' .
-                                '<a style="position:absolute;margin-top: -5px; margin-right: -7px; color: lightcoral"
+                                '<a style="position:absolute;margin-top: -5px; margin-right: -7px; color: lightcoral; background: white; border-radius: 10px; padding: 1px;"
                                     href="' . add_query_arg( 'delete_gallery_image', $attachment_id ) . '"
                                     class="fa fa-times-circle-o" title="Delete image: ' . $attachment_url . '"' .
                                     ' onclick="return confirm(\'' . __( 'Delete image: ' . $attachment_url . '?', 'woocommerce-jetpack' ) . '\')"></a>' .
