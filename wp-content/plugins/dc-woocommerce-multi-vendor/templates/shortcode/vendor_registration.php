@@ -2,7 +2,7 @@
 <?php wc_print_notices(); ?>
 <div class="wcmp_regi_main">
     <form class="register" role="form" method="post" enctype="multipart/form-data">
-        <h2 class="reg_header1"><?php echo apply_filters('wcmp_vendor_registration_header_text',__('Vendor Registration Form','dc-woocommerce-multi-vendor')); ?></h2>
+        <h2 class="reg_header1"><?php echo apply_filters('wcmp_vendor_registration_header_text',__('Registration Form','dc-woocommerce-multi-vendor')); ?></h2>
 
         <div class="wcmp_regi_form_box">
             <?php if(!is_user_logged_in()) : 

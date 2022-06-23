@@ -64,26 +64,22 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 <?php if ( 'yes' === get_option( 'woocommerce_enable_myaccount_registration' ) ) : ?>
 
 	</div>
-
 	<div class="u-column2 col-2">
 
-		<h2>Become a vendor</h2>
+		<h2>Register here</h2>
 
         <form class="woocommerce-form woocommerce-form-register register">
 			<p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
-				Register as a vendor allows you to buy and sell products online.
+				Register to buy and/or sell products online.
 			</p>
-			<p class="form-row">
-				<label class="woocommerce-form__label woocommerce-form__label-for-checkbox woocommerce-form-login__rememberme">
-					Click here to register
-				</label>
-			</p>
+
             <p >
-                <a class="woocommerce-button button" href="/vendor-registration">Become a vendor</a>
+                <a class="woocommerce-button button" href="/vendor-registration">Register</a>
             </p>
         </form>
 
 	</div>
+
 
 </div>
 <?php endif; ?>
