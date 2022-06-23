@@ -1,7 +1,7 @@
 <div class="mo_wpns_divided_layout_tab">
-<div class="mo_wpns_tab">
-  <button class="tablinks" onclick="block_function(event, 'block_list')" id="defaultOpen">IP Black list</button>
-  <button class="tablinks" onclick="block_function(event, 'adv_block')" id="adv_block_subtab">Advanced Blocking</button>
+<div class="nav-tab-wrapper">
+  <button class="nav-tab" onclick="mo2f_wpns_block_function(this)" id="mo2f_block_list">IP Black list</button>
+  <button class="nav-tab" onclick="mo2f_wpns_block_function(this)" id="mo2f_adv_block">Advanced Blocking</button>
 
 </div>
 </div>
@@ -10,16 +10,15 @@ global $mo2f_dirName;
 $setup_dirName = $mo2f_dirName.'views'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEPARATOR.'link_tracer.php';
 include $setup_dirName;
 ?>
-
-<div id="block_list" class="tabcontent">
+<div id="mo2f_block_list_div" class="tabcontent">
  
  <div class="mo_wpns_divided_layout">
 		<div class="mo_wpns_setting_layout" id="mo2f_manual_ip_blocking">
-					<h2>Manual IP Blocking <a href='<?php echo $two_factor_premium_doc['Manual IP Blocking'];?>' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#269eb3;float: right;"></span></a></h2>
+					<h2>Manual IP Blocking <a href='<?php echo $two_factor_premium_doc['Manual IP Blocking'];?>' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#413c69;float: right;"></span></a></h2>
 					
 					<h4 class="mo_wpns_setting_layout_inside">Manually block an IP address here:&emsp;&emsp;
 					<input type="text" name="ManuallyBlockIP" id="ManuallyBlockIP" required placeholder='IP address'pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}" style="width: 35%; height: 41px" />&emsp;&emsp;
-					<input type="button" name="BlockIP" id="BlockIP" value="Manual Block IP" class="mo_wpsn_button mo_wpsn_button1" />
+					<input type="button" name="BlockIP" id="BlockIP" value="Manual Block IP" class="button button-primary button-large" />
 					</h4>
 
 					<h3 class="mo_wpns_setting_layout_inside"><b>Blocked IPs</b>
@@ -53,10 +52,10 @@ echo 			"</td><td>".date("M j, Y, g:i:s a",$blockedip->created_timestamp)."</td>
 				</h4>
 		</div>
 		<div class="mo_wpns_setting_layout"  id="mo2f_ip_whitelisting">
-					<h2>IP Whitelisting<a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/IP-blocking-whitelisting-lookup#wp-ip-whitelisting" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#269eb3;float: right;"></span></a></h2>
+					<h2>IP Whitelisting<a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/IP-blocking-whitelisting-lookup#wp-ip-whitelisting" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#413c69;float: right;"></span></a></h2>
 					<h4 class="mo_wpns_setting_layout_inside">Add new IP address to whitelist:&emsp;&emsp;
 					<input type="text" name="IPWhitelist" id="IPWhitelist" required placeholder='IP address'pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}" style="width: 40%; height: 41px"/>&emsp;&emsp;
-					<input type="button" name="WhiteListIP" id="WhiteListIP" value="Whitelist IP" class="mo_wpsn_button mo_wpsn_button1" />
+					<input type="button" name="WhiteListIP" id="WhiteListIP" value="Whitelist IP" class="button button-primary button-large" />
 	
 					</h4>
 					<h3 class="mo_wpns_setting_layout_inside">Whitelist IPs
@@ -83,10 +82,10 @@ echo'			</tbody>
 
 
 		<div class="mo_wpns_setting_layout" id="mo2f_ip_lookup">
-					<h2>IP LookUp<a href='<?php echo $two_factor_premium_doc['IP LookUp'];?>' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#269eb3;float: right;"></span></a></h2>
+					<h2>IP LookUp<a href='<?php echo $two_factor_premium_doc['IP LookUp'];?>' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#413c69;float: right;"></span></a></h2>
 					<h4 class="mo_wpns_setting_layout_inside">Enter IP address you Want to check:&emsp;&emsp;
 					<input type="text" name="ipAddresslookup" id="ipAddresslookup" required placeholder='IP address'pattern="((^|\.)((25[0-5])|(2[0-4]\d)|(1\d\d)|([1-9]?\d))){4}" style="width: 40%; height: 41px"/>&emsp;&emsp;
-					<input type="button" name="LookupIP" id="LookupIP" value="LookUp IP" class="mo_wpsn_button mo_wpsn_button1" />
+					<input type="button" name="LookupIP" id="LookupIP" value="LookUp IP" class="button button-primary button-large" />
 					</h4>
 					<div class="ip_lookup_desc" hidden ></div>
 					
@@ -98,11 +97,11 @@ echo'			</tbody>
 
 
 <?php
-echo '<div id="adv_block" class="tabcontent">';
+echo '<div id="mo2f_adv_block_div" class="tabcontent">';
 echo'<div class="mo_wpns_divided_layout">
 		<div class="mo_wpns_setting_layout"  id= "mo2f_ip_range_blocking">';
 
-echo'		<h2>IP Address Range Blocking<a href='.$two_factor_premium_doc['IP Address Range Blocking'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;float: right;"></span></a></h2>
+echo'		<h2>IP Address Range Blocking<a href='.$two_factor_premium_doc['IP Address Range Blocking'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#413c69;float: right;"></span></a></h2>
 			You can block range of IP addresses here  ( Examples: 192.168.0.100 - 192.168.0.190 )
 			<form name="f" method="post" action="" id="iprangeblockingform" >
 				<input type="hidden" name="option" value="mo_wpns_block_ip_range" />
@@ -141,7 +140,7 @@ echo '
 		
 		
 		<div class="mo_wpns_setting_layout" id="mo2f_browser_blocking">
-			<h3>Browser Blocking<a href='.$two_factor_premium_doc['Browser Blocking'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#269eb3;float: right;"></span></a></h3>
+			<h3>Browser Blocking<a href='.$two_factor_premium_doc['Browser Blocking'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#413c69;float: right;"></span></a></h3>
 			<!-- <div class="mo_wpns_subheading">This protects your site from robots and other automated scripts.</div> -->
 			<form id="mo_wpns_enable_user_agent_blocking" method="post" action="">
 				<input type="hidden" name="option" value="mo_wpns_enable_user_agent_blocking">
@@ -252,53 +251,34 @@ echo'			</table><br>
 
 	?>
 <script type="text/javascript">
-	jQuery('#resultsIPLookup').empty();
-function block_function(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
 
-  localStorage.setItem("last_tab",cityName);
-  evt.currentTarget.className += " active";
-
-    if(cityName == "defaultOpen")
-  {
-  	jQuery("#defaultOpen").addClass(" active");
-  }
-  document.getElementById(cityName).style.display = "block";
-
-}
-
-	var tab = localStorage.getItem("last_tab");
-
-	if(tab == "block_list")
-	{
-		document.getElementById("defaultOpen").click();
-        // document.getElementById("block_list").style.display = "block";
-        // document.getElementById("adv_block").style.display = "none";
-        // jQuery("#defaultOpen").addClass(" active");
-
+function mo2f_wpns_block_function(elmt){
+		var tabname = elmt.id;
+		var tabarray = ["mo2f_block_list","mo2f_adv_block"];
+		for (var i = 0; i < tabarray.length; i++) {
+			if(tabarray[i] == tabname){
+				jQuery("#"+tabarray[i]).addClass("nav-tab-active");
+				jQuery("#"+tabarray[i]+"_div").css("display", "block");
+			}else{
+				jQuery("#"+tabarray[i]).removeClass("nav-tab-active");
+				jQuery("#"+tabarray[i]+"_div").css("display", "none");
+			}
+		}
+		localStorage.setItem("ip_last_tab", tabname);
 	}
-	else if(tab == "adv_block")
-	{
-		document.getElementById("adv_block_subtab").click();
-        // document.getElementById("adv_block").style.display = "block";
-        // document.getElementById("block_list").style.display = "none";
-        // jQuery("#adv_block_subtab").addClass(" active");
-	}
-	else 
-	{
-		document.getElementById("defaultOpen").click();
-        // jQuery("#defaultOpen").addClass(" active");
+	
+	jQuery('#adv_block_tab').addClass('nav-tab-active');
+
+	var tab = localStorage.getItem("ip_last_tab"); 
+
+	if(tab)
+		document.getElementById(tab).click();
+	else{
+		document.getElementById("mo2f_block_list").click();
 	}
 
-	jQuery('#BlockIP').click(function(){
+
+jQuery('#BlockIP').click(function(){
 
 	var ip 	= jQuery('#ManuallyBlockIP').val();
 

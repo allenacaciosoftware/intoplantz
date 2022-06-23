@@ -1246,8 +1246,21 @@ button.mo2f_close {
 }
 
 
+.mo2f-styled-radio_conf {
+    width: 25px;
+    height: 32px;
+    position: relative;
+    display: inline-block;
+    border-radius: 51%;
+    background-color: #e6e6e6;
+    float: left;
+    margin-top: -7px;
+}
 
-
+.mo2f-styled-radio-text_conf {
+        margin-left: 10px;
+            font-size: medium;
+    }
 
 .mo2f-modal-backdrop {
 

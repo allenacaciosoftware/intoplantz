@@ -1,3 +1,6 @@
+.mo2fa_visible{
+    top: 20px !important;
+}
 body.login div#login {
     display: block;
 }

@@ -24,6 +24,7 @@
 						if(array_key_exists('g-recaptcha-response',$_POST))
 						{
 							$userIp 	= $moWpnsUtility->get_client_ip();
+							$userIp = sanitize_text_field( $userIp );
 							$mocURL 	= new MocURL;
 							$response 	= $mocURL->validate_recaptcha($userIp,sanitize_text_field($_POST['g-recaptcha-response']));
 							$content	= json_decode($response, true);
@@ -41,6 +42,7 @@
 				if(array_key_exists('g-recaptcha-response',$_REQUEST))
 					{
 						$userIp 	= $moWpnsUtility->get_client_ip();
+						$userIp = sanitize_text_field( $userIp );
 						$mocURL 	= new MocURL;
 						
 					$response 	= $mocURL->get_Captcha_v3($_REQUEST['g-recaptcha-response']);
@@ -134,6 +136,7 @@
 		{
 			global $moWpnsUtility;
 			$userIp 	= $moWpnsUtility->get_client_ip();
+			$userIp = sanitize_text_field( $userIp );
 			$mocURL 	= new MocURL;
 			$response 	= $mocURL->validate_recaptcha($userIp,$response);
 			$content	= json_decode($response, true);
@@ -145,6 +148,7 @@
 	{
 		global $moWpnsUtility;
 		$userIp 	= $moWpnsUtility->get_client_ip();
+		$userIp = sanitize_text_field( $userIp );
 		$mocURL 	= new MocURL;
 		$response 	= $mocURL->get_Captcha_v3($response);
 		$content	= json_decode($response, true);

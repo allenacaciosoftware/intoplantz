@@ -4,7 +4,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
         $current_user = wp_get_current_user();
         ?>
         
-        <div class="mo2f_table_layout">
+        <div class="mo2f_table_divide_border">
             
             
             <div id="mo2f_hide_shortcode_content" >
@@ -45,7 +45,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
                     ?> value="<?php echo get_option('mo2f_rba_loginform_id') ?>"/>
                     <br><br>
                     <input type="hidden" name="option" value="custom_login_form_save"/>
-                    <input type="submit" name="submit" value="Save Settings" style="background-color: #20b2aa; color: white;" class="button button-primary button-large" <?php
+                    <input type="submit" name="submit" value="Save Settings" style="background-color: #2271b1; color: white;" class="button button-primary button-large" <?php
                     
                         echo 'disabled';
                      ?> />

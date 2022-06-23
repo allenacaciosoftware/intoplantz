@@ -173,7 +173,7 @@ class Miniorange_Mobile_Login {
 	function mo_2_factor_hide_login() {
 		$bootstrappath = plugins_url( 'includes/css/bootstrap.min.css?version='.MO2F_VERSION.'', dirname(dirname(__FILE__)) );
 		$bootstrappath = str_replace('/handler/includes/css', '/includes/css', $bootstrappath);
-		$hidepath = plugins_url( 'includes/css/hide-login-form.css?version=5.1.21', dirname(dirname(__FILE__)) );
+		$hidepath = plugins_url( 'includes/css/hide-login-form.css?version=5.5', dirname(dirname(__FILE__)) );
 		$hidepath = str_replace('/handler/includes/css', '/includes/css', $hidepath);
 	
 		wp_register_style( 'hide-login', $hidepath );
@@ -270,7 +270,7 @@ class Miniorange_Mobile_Login {
 	}
 
 	function mo_2_factor_show_login_with_password_when_phonelogin_enabled() {
-		wp_register_style( 'show-login', plugins_url( 'includes/css/show-login.css?version=5.1.21', dirname(dirname(__FILE__ ))) );
+		wp_register_style( 'show-login', plugins_url( 'includes/css/show-login.css?version=5.5', dirname(dirname(__FILE__ ))) );
 		wp_enqueue_style( 'show-login' );
 	}
 
@@ -291,9 +291,9 @@ class Miniorange_Mobile_Login {
 	}
 
 	function mo_2_factor_show_login() {
-		$hidepath = plugins_url( 'includes/css/hide-login-form.css?version=5.1.21', dirname(dirname(__FILE__)) );
+		$hidepath = plugins_url( 'includes/css/hide-login-form.css?version=5.5', dirname(dirname(__FILE__)) );
 
-		$showpath = plugins_url( 'includes/css/show-login.css?version=5.1.21', dirname(dirname(__FILE__ )));
+		$showpath = plugins_url( 'includes/css/show-login.css?version=5.5', dirname(dirname(__FILE__ )));
 
 		if ( get_option( 'mo2f_enable_login_with_2nd_factor' ) ) {
 			wp_register_style( 'show-login', $hidepath );
@@ -338,20 +338,22 @@ class Miniorange_Mobile_Login {
             function mouserloginsubmit() {
                 var username = jQuery('#mo2fa_usernamekey').val();
                 var recap    = jQuery('#g-recaptcha-response').val();
-                 
-                document.getElementById("mo2f_show_qrcode_loginform").elements[0].value = username;
-                document.getElementById("mo2f_show_qrcode_loginform").elements[1].value = recap;
+                  if(document.getElementById("mo2fa-g-recaptcha-response-form") !== null){
+                document.getElementById("mo2fa-g-recaptcha-response-form").elements[0].value = username;
+                document.getElementById("mo2fa-g-recaptcha-response-form").elements[1].value = recap;
                 
-                jQuery('#mo2f_show_qrcode_loginform').submit();
-
+                jQuery('#mo2fa-g-recaptcha-response-form').submit();
+            	}
             }
 
             jQuery('#mo2fa_usernamekey').keypress(function (e) {
                 if (e.which == 13) {//Enter key pressed
                     e.preventDefault();
                     var username = jQuery('#mo2fa_usernamekey').val();
-                    document.getElementById("mo2f_show_qrcode_loginform").elements[0].value = username;
-                    jQuery('#mo2f_show_qrcode_loginform').submit();
+                    if(document.getElementById("mo2fa-g-recaptcha-response-form") !== null){
+	                    document.getElementById("mo2fa-g-recaptcha-response-form").elements[0].value = username;
+	                    jQuery('#mo2fa-g-recaptcha-response-form').submit();
+	                }
                 }
 
             });
@@ -375,7 +377,7 @@ class Miniorange_Mobile_Login {
 				    <input type="hidden" id="sessids" name="session_id"
                    value="<?php echo $session_id_encrypt; ?>"/>
         </form>
-        <form name="f" id="mo2f_show_qrcode_loginform" method="post" action="" hidden>
+        <form name="f" id="mo2fa-g-recaptcha-response-form" method="post" action="" hidden>
             <input type="text" name="mo2fa_username" id="mo2fa_username" hidden/>
             <input type="text" name="g-recaptcha-response" id = 'g-recaptcha-response' hidden/>
             <input type="hidden" name="miniorange_login_nonce"
@@ -388,6 +390,7 @@ class Miniorange_Mobile_Login {
 			var session_ids="<?php echo $session_id_encrypt; ?>";
                 if (document.getElementById('loginform') != null) {
 					jQuery("#user_pass").after( "<input type='hidden' id='sessid' name='session_id' value='"+session_ids+"'/>");
+					jQuery(".wp-hide-pw").addClass('mo2fa_visible');
                   
                 }
 		});

@@ -24,7 +24,7 @@
   height: 80%;
   display: block;
   background: white;
-  border: 2px solid #20b2aa;
+  border: 2px solid #2271b1;
   border-radius: 20px;
   padding: 1rem;
   padding-top: 0px;
@@ -36,7 +36,7 @@
 }
 
 #mo_popup_id input[type="radio"]:checked + label {
-  background: #20b2aa;
+  background: #2271b1;
   color: hsla(215, 0%, 100%, 1);
   &::after {
     color: hsla(215, 5%, 25%, 1);

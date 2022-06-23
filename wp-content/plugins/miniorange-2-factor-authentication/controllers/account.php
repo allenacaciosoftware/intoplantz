@@ -280,7 +280,7 @@
 		if ( ! empty( $mo2f_customer_selected_plan ) ) {
 			delete_option( 'mo2f_customer_selected_plan' );
 			
-			if (MoWpnsUtility::get_mo2f_db_option('mo2f_planname', 'get_option') == 'addon_plan') 
+			if (MoWpnsUtility::get_mo2f_db_option('mo2f_planname', 'site_option') == 'addon_plan') 
 			{
 				?><script>window.location.href="admin.php?page=mo_2fa_addons";</script><?php
 			}

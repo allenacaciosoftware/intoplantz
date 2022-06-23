@@ -3,12 +3,11 @@
 }
 .mo2fa_pricing_head_supporter{
 	height: 4em;
-	padding: 2px 1px 1px 1px;
-	margin-bottom: 1em;
+	padding-bottom: 1em;
 }
 i.fa-check {
 	color: black;
-	margin-right: 17px;
+	margin-right: 11px;
 	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
@@ -37,9 +36,10 @@ i.fa-times {
 	color: #b6abab;
 	font-weight: 500;
 }
+
 .mo2fa_unltimate_feature{
-	color: #00000;
-	font-weight: 500;
+	color: #000000;
+	font-weight:500;
 }
 .mo2fa_sec{
 	width: 27em;
@@ -77,8 +77,7 @@ i.fa-times {
 .mo2fa_pricing_tabs_mo{
 	width: auto; 
 	border-radius: 4px;
-	height: 85em;
-	border: 1px solid #ccc;
+	height: 86.5em;
 	padding-top: 2em;
 }
 .mo2fa_make_my_plan_mo{
@@ -252,7 +251,7 @@ i.fa-times {
 .mo2fa_purchase_limit_mo{
 	font-size: 16px;
 }
-.mo2fa_pricing_head_h5{
+.mo2fa_pricing_head_h4{
 	margin :0.67em;
 }
 .mo2fa_h4{
@@ -317,9 +316,6 @@ table.mo2fa_table_features tr:last-child
 {
    border-bottom: 1px solid #c1c1c1;
 }
-.mo2fa_hide{
-	display: none !important
-}
 
 .mo2fa_hide1{
 	display: none;
@@ -332,11 +328,105 @@ table.mo2fa_table_features tr:last-child
 	min-width: 22%!important;
 	width:10%;
 }
+.mo2fa_select_option{
+	font-weight: 600;
+	font-size: 22px;
+}
+
+.mo2f_toggle,
+.mo2f_toggler {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+}
+.mo2f_toggler {
+  color: #c0b0b0;
+  transition: 0.2s;
+  font-weight: bold;
+  font-size: 16px;
+}
+.mo2f_toggler:hover{
+	font-size: 17px;
+}
+.mo2f_toggler--is-active {
+	font-weight: 600;
+	font-size: 22px;
+  color: #2271b1;
+}
+.mo2f_toggler--is-active:hover{
+	font-size: 23px;
+}
+.mo2f_toggle {
+  position: relative;
+  width: 80px;
+  height: 35px;
+  border-radius: 100px;
+  background-color: #2271b1;
+  overflow: hidden;
+  box-shadow: inset 0 0 2px 1px rgba(0, 0, 0, 0.05);
+}
+.mo2f_check {
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 6;
+}
+.mo2f_check:checked ~ .mo2f_switch {
+    right: 7px;
+    left: 63.5%;
+    transition: 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition-property: left, right;
+    transition-delay: 0.08s, 0s;
+}
+.mo2f_switch {
+    border-radius: 15px;
+    left: 2px;
+    height: 28px;
+    top: 3px;
+    bottom: 2px;
+    right: 57.5%;
+    background-color: #fff;
+    /* border-radius: 36px; */
+    z-index: 1;
+    transition: 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+    transition-property: left, right;
+    transition-delay: 0s, 0.08s;
+    box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+    position: relative;
+    display: inline-block;
+    width: 27px;
+    margin-left: -50px;
+}
+.mo2f_block {
+    display: block;
+}
 .mo2fa_tooltip_sms_info {
   position: relative;
   display: inline-block;
 }
-
+.mo2f_check {
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0;
+  z-index: 6;
+}
+.mo2f_check:checked ~ .mo2f_switch {
+  right: 2px;
+  left: 57.5%;
+  transition: 0.25s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition-property: left, right;
+  transition-delay: 0.08s, 0s;
+}
 .mo2fa_tooltip_sms_info .mo2fa_sms_info {
     visibility: hidden;
     width: 15em;
@@ -365,19 +455,81 @@ table.mo2fa_table_features tr:last-child
   visibility: visible;
 }
 
-.mo2fa_tooltip_methodlist {
+.mo2fa_tooltip_sms_info_cost {
   position: relative;
   display: inline-block;
 }
 
-.mo2fa_tooltip_methodlist .methodlist {
+.mo2fa_tooltip_sms_info_cost .mo2fa_sms_info_cost {
     visibility: hidden;
-  	width: 14em;
+    width: 15em;
     background-color: #000000b8;
     color: #fff;
     text-align: left;
     border-radius: 6px;
-    padding: 7px 0px 8px 61px;
+    padding: 7px 0px 8px 8px;
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+    margin-left: -2em;
+}
+
+.mo2fa_tooltip_sms_info_cost .mo2fa_sms_info_cost::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+.mo2fa_tooltip_sms_info_cost:hover .mo2fa_sms_info_cost {
+  visibility: visible;
+}
+.mo2fa_tooltip_sms_info .mo2fa_left_sms_info {
+	left: unset;
+	  top: -5px;
+  right: 105%;
+}
+.mo2fa_tooltip_sms_info_cost .mo2fa_left_sms_info_cost {
+	left: unset;
+	  top: -5px;
+  right: 105%;	
+}
+.mo2fa_tooltip_sms_info .mo2fa_left_sms_info::after {
+	content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+.mo2fa_tooltip_sms_info_cost .mo2fa_left_sms_info_cost::after {
+	content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+.mo2fa_tooltip_methodlist {
+  position: relative;
+  display: inline-block;
+}
+.mo2fa_tooltip_methodlist .methodlist {
+    visibility: hidden;
+  	width: 13em;
+    background-color: #000000b8;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 7px 0px 8px 2em;
     position: absolute;
     z-index: 1;
     top: -11em;
@@ -397,18 +549,52 @@ table.mo2fa_table_features tr:last-child
 .mo2fa_tooltip_methodlist:hover .methodlist {
   visibility: visible;
 }
+.mo2fa_tooltip_methodlist .methodlist_left {
+	left: unset;
+	  top: -11em;
+  right: 105%;	
+}
+.mo2fa_tooltip_methodlist .methodlist_left::after {
+	content: " ";
+  position: absolute;
+  top: 50%;
+  left: 100%; /* To the right of the tooltip */
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
 .mo2fa_enterprise_getting_started{
 	margin-top: -1em;
 }
 .mo2fa_table-scrollbar{
-	overflow-y: scroll; 
-	overflow-x:scroll;
+	overflow-y: auto; 
+	overflow-x:auto;
 	height: 50%;
 }
 .mo2fa_fa-check{
 	color: #fff!important;
 }
+.mo2fa_hide{
+	display: none !important;
+}
+button{
+	cursor: pointer;
+}
+#mo2f_plan_type{
+	margin-left: 1em;
+}
 @media only screen and (max-width: 600px) {
+	.mo2f_toggler{
+		width: 3em;
+		margin-right: 1.5em;
+	}
+	#mo2f_unlimited_sites{
+		margin-left: -0.5em;
+	}
+	#mo2f_plan_type{
+		margin-left: -4em;
+	}
 	.mo2f_upgrade_super_div{
 		display: block;
 	}
@@ -416,6 +602,9 @@ table.mo2fa_table_features tr:last-child
 		width: 96%;
 	    margin-bottom: 6em;
 	    height: 93em;
+	}
+	.wp-core-ui select{
+		max-width: 15rem;
 	}
 	.mo2fa_compare1{
 		width: 101%;
@@ -429,6 +618,9 @@ table.mo2fa_table_features tr:last-child
 	}
 	.mo_2fa_card{
 		width: 98%;
+	}
+	.mo_upgrade_toggle_2fa{
+		width: 12em;
 	}
 	.mo_upgrade_toggle_2fa_lable{
 		font-size: 1em;

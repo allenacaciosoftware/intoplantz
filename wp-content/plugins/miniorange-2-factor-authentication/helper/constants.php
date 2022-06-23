@@ -12,7 +12,7 @@
 		const DEFAULT_CUSTOMER_KEY		= "16555";
 		const DEFAULT_API_KEY 			= "fFd2XcvTGDemZvbw1bcUesNJWEqKbbUq";
 		const DB_VERSION				= 155;
-		const DB_FEATURE_MAIL			= 1;
+		const DB_FEATURE_MAIL			= 2;
 		const SUPPORT_EMAIL				= 'info@xecurify.com';
 		const REAL_TIME_IP_HOST			= 'https://firewall.xecurify.com/';
 		const IP_LOOKUP_TEMPLATE		= '<span style="font-size:14px;font-weight:bold">GENERAL INFORMATION</span><table style="margin-left:2%;"><tr><td style="width:100px;">Response</td><td >:</td><td>{{status}}</td></tr><tr><td style="width:100px;">IP Address</td><td>:</td><td>{{ip}}</td></tr><tr><td>HostName</td><td>:</td><td>{{hostname}}</td></tr><tr><td>TimeZone</td><td>:</td><td>{{timezone}}</td></tr><tr><td>Time Difference</td><td>:</td><td>{{offset}}</td></tr></table><hr><span style="font-size:14px;font-weight:bold">LOCATION INFORMATION</span><table style="margin-left:2%;"><tr><td>Latitude</td><td>:</td><td>{{latitude}}</td></tr><tr><td>Longitude</td><td>:</td><td>{{longitude}}</td></tr><tr><td>Region</td><td>:</td><td>{{region}}</td></tr><tr><td>Country</td><td>:</td><td>{{country}}</td></tr><tr><td>City</td><td>:</td><td>{{city}}</td></tr><tr><td>Continent</td><td>:</td><td>{{continent}}</td></tr><tr><td>Curreny Code</td><td>:</td><td>{{curreny_code}}</td></tr><tr><td>Curreny Symbol</td><td>:</td><td>{{curreny_symbol}}</td></tr><tr><td>Per Dollar Value</td><td>:</td><td>{{per_dollar_value}}</td></tr></table>';

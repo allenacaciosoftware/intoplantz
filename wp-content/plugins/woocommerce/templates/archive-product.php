@@ -29,131 +29,6 @@ get_header( 'shop' );
 do_action( 'woocommerce_before_main_content' );
 
 ?>
-<style>
-    /* Product Page */
-
-    .products {
-        margin-top: 100px;
-    }
-
-    .products .filters {
-        text-align: center;
-        border-bottom: 1px solid #eee;
-        padding-bottom: 10px;
-        margin-bottom: 60px;
-    }
-
-    .products .filters li {
-        text-transform: uppercase;
-        font-size: 13px;
-        font-weight: 700;
-        color: #121212;
-        display: inline-block;
-        margin: 0px 10px;
-        transition: all .3s;
-        cursor: pointer;
-    }
-
-    .products .filters ul li.active,
-    .products .filters ul li:hover {
-        color: #f33f3f;
-    }
-
-    .products ul.pages {
-        margin-top: 30px;
-        text-align: center;
-    }
-
-    .products ul.pages li {
-        display: inline-block;
-        margin: 0px 2px;
-    }
-
-    .products ul.pages li a {
-        width: 44px;
-        height: 44px;
-        display: inline-block;
-        line-height: 42px;
-        border: 1px solid #eee;
-        font-size: 15px;
-        font-weight: 700;
-        color: #121212;
-        transition: all .3s;
-    }
-
-    .products ul.pages li a:hover,
-    .products ul.pages li.active a {
-        background-color: #f33f3f;
-        border-color: #f33f3f;
-        color: #fff;
-    }
-
-    /* Latest Produtcs */
-
-    .latest-products {
-        margin-top: 100px;
-    }
-
-    .latest-products .section-heading a {
-        float: right;
-        margin-top: -35px;
-        text-transform: uppercase;
-        font-size: 13px;
-        font-weight: 700;
-        color: #f33f3f;
-    }
-
-    .product-item {
-        border: 1px solid #eee;
-        margin-bottom: 30px;
-    }
-
-    .product-item .down-content {
-        padding: 30px;
-        position: relative;
-    }
-
-    .product-item img {
-        width: 100%;
-        overflow: hidden;
-    }
-
-    .product-item .down-content h4 {
-        font-size: 17px;
-        color: #1a6692;
-        margin-bottom: 20px;
-    }
-
-    .product-item .down-content h6 {
-        position: absolute;
-        top: 30px;
-        right: 30px;
-        font-size: 18px;
-        color: #121212;
-    }
-
-    .product-item .down-content p {
-        margin-bottom: 20px;
-    }
-
-    .product-item .down-content ul li {
-        display: inline-block;
-    }
-
-    .product-item .down-content ul li i {
-        color: #f33f3f;
-        font-size: 14px;
-    }
-
-    .product-item .down-content span {
-        position: absolute;
-        right: 30px;
-        bottom: 30px;
-        font-size: 13px;
-        color: #f33f3f;
-        font-weight: 500;
-    }
-</style>
 <header class="woocommerce-products-header">
 	<?php if ( apply_filters( 'woocommerce_show_page_title', true ) ) : ?>
 		<h1 class="woocommerce-products-header__title page-title"><?php woocommerce_page_title(); ?></h1>
@@ -183,7 +58,7 @@ if ( woocommerce_product_loop() ) {
 
 	woocommerce_product_loop_start();
 
-	// if ( wc_get_loop_prop( 'total' ) ) {
+	if ( wc_get_loop_prop( 'total' ) ) {
 		while ( have_posts() ) {
 			the_post();
 
@@ -194,7 +69,7 @@ if ( woocommerce_product_loop() ) {
 
 			wc_get_template_part( 'content', 'product' );
 		}
-	// }
+	}
 
 	woocommerce_product_loop_end();
 

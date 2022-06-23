@@ -1,5 +1,106 @@
 <?php
 
+function mo2f_configure_google_authenticator_setupWizard($secret,$url,$otpcode, $session_id_encrypt)
+{
+    $gauth_name = $_SERVER['SERVER_NAME'];
+    echo "<b><h3>1. Please scan the QR code below in your Authenticator App</h3></b>
+           <table>
+           <tbody>
+           <tr><td><li>Google Authenticator</li> </td>
+           <td> <li>Microsoft Authenticator</li> </td></tr>
+           <tr><td colspan='2'> <li> Authy Authenticator and other popular TOTP Authenticators</li></td></tr>
+           
+           
+</tbody>
+            </table>
+    ";
+    ?>
+          <div style="margin-left:40px;">
+            <ol>
+                <li><?php echo mo2f_lt( 'In the app, tap on Menu and select "Set up account".' ); ?></li>
+                <li><?php echo mo2f_lt( 'Select "Scan a barcode".' ); ?></li>
+                <br><br>
+            <form name="f"  id="login_settings_appname_form" method="post" action="">
+                <input type="hidden" name="option" value="mo2f_google_appname" />
+                <input type="hidden" name="mo2f_google_appname_nonce"
+                value="<?php echo wp_create_nonce( "mo2f-google-appname-nonce" ) ?>"/>
+                <div style="margin-left: 14%;">
+                    <div class="mo2f_gauth_column mo2f_gauth_left" >
+
+                        <div class="mo2f_gauth" style="background: white;" data-qrcode="<?php echo $url;?>" ></div>
+                    </div>
+                </div>
+
+               
+            </form>
+
+            </ol>
+
+            <div><a data-toggle="collapse" href="#mo2f_scanbarcode_a"
+                    aria-expanded="false"><b><?php echo mo2f_lt( 'Can\'t scan the barcode? ' ); ?></b></a>
+            </div>
+            <div class="mo2f_collapse"  id="mo2f_scanbarcode_a" style="background: white; display: none;">
+                <ol class="mo2f_ol">
+                    <li><?php echo mo2f_lt( 'Tap on Menu and select' ); ?>
+                        <b> <?php echo mo2f_lt( ' Set up account ' ); ?></b>.
+                    </li>
+                    <li><?php echo mo2f_lt( 'Select' ); ?>
+                        <b> <?php echo mo2f_lt( ' Enter provided key ' ); ?></b>.
+                    </li>
+                    <li><?php echo mo2f_lt( 'For the' ); ?>
+                        <b> <?php echo mo2f_lt( ' Enter account name ' ); ?></b>
+                        <?php echo mo2f_lt( 'field, type your preferred account name' ); ?>.
+                    </li>
+                    <li><?php echo mo2f_lt( 'For the' ); ?>
+                        <b> <?php echo mo2f_lt( ' Enter your key ' ); ?></b>
+                        <?php echo mo2f_lt( 'field, type the below secret key' ); ?>:
+                    </li>
+
+                    <div class="mo2f_google_authy_secret_outer_div">
+                        <div class="mo2f_google_authy_secret_inner_div">
+                            <?php echo $secret; ?>
+                        </div>
+                        <div class="mo2f_google_authy_secret">
+                            <?php echo mo2f_lt( 'Spaces do not matter' ); ?>.
+                        </div>
+                    </div>
+                    <li><?php echo mo2f_lt( 'Key type: make sure' ); ?>
+                        <b> <?php echo mo2f_lt( ' Time-based ' ); ?></b>
+                        <?php echo mo2f_lt( ' is selected' ); ?>.
+                    </li>
+
+                    <li><?php echo mo2f_lt( 'Tap Add.' ); ?></li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="mo2f_entergoogle_auth_code">
+            
+            <b><h3>2. Enter the code generated in your Authenticator app <input style="padding: 5px" class ='mo_input_text_box_size' type="text" id="mo2f_google_auth_code" name="mo2f_google_auth_code" placeholder="Enter OTP" /> </h3></b>
+            <input type="hidden" name="mo2f_session_id" id="mo2f_session_id" value="<?php echo $session_id_encrypt ?>">
+                        
+        </div>
+        <script type="text/javascript">
+            jQuery('a[href="#mo2f_scanbarcode_a"]').click(function(e){
+
+                var element = document.getElementById('mo2f_scanbarcode_a');
+                if(element.style.display === 'none')
+                    element.style.display = 'block';
+                
+                else
+                    element.style.display = "none";
+            });
+            jQuery(document).ready(function() {
+                jQuery('.mo2f_gauth').qrcode({
+                    'render': 'image',
+                    size: 175,
+                    'text': jQuery('.mo2f_gauth').data('qrcode')
+                });
+            });
+            
+        </script>
+    <?php   
+}
 function mo2f_configure_google_authenticator_onprem( $secret,$url,$otpcode, $session_id_encrypt ) {
 	$h_size               = 'h3';
 	$gauth_name= get_option('mo2f_google_appname');
@@ -10,7 +111,7 @@ function mo2f_configure_google_authenticator_onprem( $secret,$url,$otpcode, $ses
         <tr>
             <td class="mo2f_google_authy_step2">
 				<?php echo '<' . $h_size . '>' . mo2f_lt( 'Step-1: Set up Google/Authy/LastPass Authenticator' ) . '<span style="float:right">
-                        <a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/google-authenticator" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:26px;color:#269eb3;float: right;"></span></a>
+                        <a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/google-authenticator" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:26px;color:#413c69;float: right;"></span></a>
 
                         <a href="https://www.youtube.com/watch?v=vVGXjedIaGs" target="_blank"><span class="dashicons dashicons-video-alt3" style="font-size:30px;color:red;float: right;    margin-right: 16px;margin-top: -3px;"></span></a>
                      </span></' . $h_size . '>'; ?>
@@ -125,7 +226,7 @@ function mo2f_configure_google_authenticator_onprem( $secret,$url,$otpcode, $ses
                     <form name="f" method="post" action="" id="mo2f_go_back_form">
                                         <input type="hidden" name="option" value="mo2f_go_back"/>
                                         <input style="margin-left: 5px;" type="submit" name="back" id="go_back" class="button button-primary button-large"
-                                                value="<?php echo mo2f_lt( 'Back' ); ?>"/>
+                                               value="<?php echo mo2f_lt( 'Back' ); ?>"/>
 											   <input type="hidden" name="mo2f_go_back_nonce"
 						value="<?php echo wp_create_nonce( "mo2f-go-back-nonce" ) ?>"/>
                                     </form>

@@ -1,9 +1,9 @@
     <div class="mo2f_table_layout">
         <div class="mo2f_vertical-submenu">
-            <a id="defaultOpen" class="nav-tab"  onclick="openPage('rba', this, '#20b2aa')" 
+            <a id="defaultOpen" class="nav-tab"  onclick="openPage('rba', this, '#2271b1')" 
             ><?php echo __( 'Remember Device', 'miniorange-2-factor-authentication' ); ?></a>
-            <a id="onclickOpen" class="nav-tab"  onclick="openPage('personal', this, '#20b2aa')" ><?php echo __( 'Customize login Popups', 'miniorange-2-factor-authentication' ); ?></a>
-            <a id="onclick" class="nav-tab"  onclick="openPage('shortcode', this, '#20b2aa')" ><?php echo __( 'Shortcode', 'miniorange-2-factor-authentication' ); ?></a>
+            <a id="onclickOpen" class="nav-tab"  onclick="openPage('personal', this, '#2271b1')" ><?php echo __( 'Customize login Popups', 'miniorange-2-factor-authentication' ); ?></a>
+            <a id="onclick" class="nav-tab"  onclick="openPage('shortcode', this, '#2271b1')" ><?php echo __( 'Shortcode', 'miniorange-2-factor-authentication' ); ?></a>
         </div>
         <br><br><br><br>
         <div class="mo2f_addon_spacing">

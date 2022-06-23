@@ -139,6 +139,13 @@ function prompt_user_to_select_2factor_mthod_inline($current_user_id, $login_sta
                                         </label>
                                     <br>
                                 </span>
+                                <span class="<?php if(  !(in_array("OTP OVER WHATSAPP", $opt))  ){ echo "mo2f_td_hide"; }else { echo "mo2f_td_show"; } ?>" >
+                                        <label title="<?php echo __('You will get an OTP on your WHATSAPP app from miniOrange Bot.', 'miniorange-2-factor-authentication'); ?>" >
+                                            <input type="radio"  name="mo2f_selected_2factor_method"  value="OTP OVER WHATSAPP"  />
+                                            <?php echo __('OTP Over WHATSAPP', 'miniorange-2-factor-authentication'); ?>
+                                        </label>
+                                    <br>
+                                </span>
                                 <span class="<?php if(  !(in_array("MOBILE AUTHENTICATION", $opt))  ){ echo "mo2f_td_hide"; }else { echo "mo2f_td_show"; }?>">
                                         <label title="<?php echo __('You have to scan the QR Code from your phone using miniOrange Authenticator App to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
                                             <input type="radio"  name="mo2f_selected_2factor_method"  value="MOBILE AUTHENTICATION"  />
@@ -611,7 +618,31 @@ function prompt_user_for_duo_authenticator_setup($current_user_id, $login_status
 function prompt_user_for_google_authenticator_setup($current_user_id, $login_status, $login_message,$redirect_to,$session_id){
     $ga_secret = MO2f_Utility::mo2f_get_transient($session_id, 'secret_ga');
     $data = MO2f_Utility::mo2f_get_transient($session_id, 'ga_qrCode');
+    global $Mo2fdbQueries;
+    if(empty($data)){
+        $user = get_user_by('ID',$current_user_id);
+        if(!MO2F_IS_ONPREM){
+            if(!get_user_meta($user->ID, 'mo2f_google_auth', true)){
+                Miniorange_Authentication::mo2f_get_GA_parameters($user);
+            }
+            $mo2f_google_auth = get_user_meta($user->ID, 'mo2f_google_auth', true);
+            $data = isset($mo2f_google_auth['ga_qrCode']) ? $mo2f_google_auth['ga_qrCode'] : null;
+            $ga_secret = isset($mo2f_google_auth['ga_secret']) ? $mo2f_google_auth['ga_secret'] : null;
+            MO2f_Utility::mo2f_set_transient($session_id, 'secret_ga', $mo2f_google_auth['ga_secret']);
+            MO2f_Utility::mo2f_set_transient($session_id, 'ga_qrCode', $mo2f_google_auth['ga_qrCode']);
+        }else{
+             include_once dirname(dirname(dirname( __FILE__ ))) .DIRECTORY_SEPARATOR . 'handler'.DIRECTORY_SEPARATOR . 'twofa'. DIRECTORY_SEPARATOR . 'gaonprem.php';
+            $gauth_obj = new Google_auth_onpremise();
+            $email = $Mo2fdbQueries->get_user_detail('mo2f_user_email',$user->ID);
+            $onpremise_secret              = $gauth_obj->createSecret();
+            $issuer                        = get_site_option( 'mo2f_GA_account_name', 'miniOrangeAu' );
+            $url                           = $gauth_obj->geturl( $onpremise_secret, $issuer, $email );
+            $data = $url;
+            MO2f_Utility::mo2f_set_transient($session_id, 'secret_ga', $onpremise_secret);
+            MO2f_Utility::mo2f_set_transient($session_id, 'ga_qrCode', $url);
 
+        }
+    }
 	?>
     <html>
         <head>  <meta charset="utf-8"/>

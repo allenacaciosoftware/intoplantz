@@ -8,6 +8,11 @@
 		delete_option('mo2f_email');
 	}
 	update_option('mo2f_activate_plugin', 1);
+
+	delete_option('mo2f_trial_dismiss');
+	delete_option('mo2f_donot_show_trial_notice_always');
+
+	
 	delete_option('mo2f_customerKey');
 	delete_option('mo2f_api_key');
 	delete_option('mo2f_customer_token');
@@ -26,7 +31,14 @@
 	delete_site_option('mo2f_added_ips_realtime');
 	delete_site_option('mo2f_mail_notify_new_release');
 	delete_site_option('mo2f_mail_notify');
+	delete_site_option('mo2fa_free_plan_new_user_methods');
+	delete_site_option('mo2fa_free_plan_existing_user_methods');
+	delete_site_option("mo2f_banner_never_show_again");
+	delete_option('mo2fa_reconfiguration_via_email');
+	delete_option('mo2fa_userProfile_method');
 	delete_site_option('mo2f_feature_vers');
+	delete_site_option('mo2f_is_inline_used');
+	delete_site_option('mo2f_login_with_mfa_use');
 	delete_site_option('mo2f_user_IP');
 	delete_option('mo_wpns_enable_brute_force');
 	delete_option('mo_wpns_show_remaining_attempts');
@@ -56,7 +68,9 @@
 	delete_option( 'mo_2f_switch_all');
 	delete_option( 'mo2f_login_option');
 	delete_option( 'mo_wpns_scan_initialize');
-	delete_option( 'mo2f_planname');
+	delete_site_option( 'mo2f_planname');
+	delete_site_option( 'mo_2fa_plan_type');
+	delete_site_option( 'mo_2fa_addon_plan_type');
 	delete_option( 'mo2f_activated_time');
 	delete_option( 'mo2f_number_of_transactions');	
 	delete_option( 'mo2f_set_transactions');	
@@ -150,12 +164,12 @@
  	delete_site_option('mo_file_manual_backup_plugins');
 	delete_site_option('mo_file_manual_backup_themes');
 	delete_site_option('mo_schedule_database_backup');
-        delete_site_option('mo2f_enable_debug_log');
+    delete_site_option('mo2f_enable_debug_log');
     delete_site_option('duo_credentials_save_successfully');
-	
 	delete_site_option('mo2f_d_integration_key');
     delete_site_option('mo2f_d_secret_key');
     delete_site_option('mo2f_d_api_hostname');
+    delete_site_option('mo2f_nonce_enable_configured_methods');
  	if(get_option('is_onprem'))
 	{
 		$users = get_users( array() );
@@ -170,8 +184,7 @@
 		delete_user_meta( $user->ID, 'kba_questions_user');
 		delete_user_meta( $user->ID, 'Google Authenticator');
 		delete_user_meta( $user->ID, 'mo2f_gauth_key');
-		delete_user_meta( $user->ID, 'mo2f_get_auth_rnd_string');
-		
+		delete_user_meta( $user->ID, 'mo2f_get_auth_rnd_string');	
 		}
 	}
 

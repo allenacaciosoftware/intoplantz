@@ -4,21 +4,22 @@ $setup_dirName = $mo2f_dirName.'views'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEP
  include $setup_dirName;
  include_once $mo2f_dirName.'handler'.DIRECTORY_SEPARATOR.'WAF'.DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'mo-waf-db-common.php';
  ?>
-<div class="mo_wpns_divided_layout_tab">
-<div class="mo_wpns_tab">
-  <button class="tablinks" onclick="waf_function(event, 'waf_dash')" id="defaultOpen">Firewall Dashboard</button>
-  <button class="tablinks" onclick="waf_function(event, 'settings')" id="settingsTab">Settings</button>
-  <button class="tablinks" onclick="waf_function(event, 'real_time')" id="RealTimeTab">Real Time Blocking</button>
-  <button class="tablinks" onclick="waf_function(event, 'rate_limiting')" id="RateLimitTab">Rate Limiting</button>
-  <button class="tablinks" onclick="waf_function(event, 'waf_report')" id="ReportTab">Report</button>
+<div class="mo_wpns_divided_layout_method">
+<div class="nav-tab-wrapper">
+  <button class="nav-tab" onclick="mo2f_wpns_waf_function(this)" id="mo2f_firewall_attack_dash">Firewall Dashboard</button>
+  <button class="nav-tab" onclick="mo2f_wpns_waf_function(this)" id="mo2f_settings_tab">Settings</button>
+  <button class="nav-tab" onclick="mo2f_wpns_waf_function(this)" id="mo2f_real_time">Real Time Blocking</button>
+  <button class="nav-tab" onclick="mo2f_wpns_waf_function(this)" id="mo2f_rate_limiting">Rate Limiting</button>
+  <button class="nav-tab" onclick="mo2f_wpns_waf_function(this)" id="mo2f_waf_report">Report</button>
 </div>
 </div>
 <br>
-<div id="waf_dash" class="tabcontent">
+<div>
+<div id="mo2f_firewall_attack_dash_div" class="tabcontent">
   <div class="mo_wpns_divided_layout">
-  	<div class="mo_wpns_divided_layout_tab" id ="mo2f_firewall_attack_dash">
+  	<div class="mo_wpns_waf_divided_layout_tab" id ="mo2f_firewall_attack_dash_div">
 		<div class="mo_wpns_small_2_layout">
-			<div class ="mo_wpns_sub_dashboards_layout">Attacks Blocked<hr class="line"><p class="wpns_font_shown" ><?php echo $totalAttacks; ?></p></div>
+			<div class ="mo_wpns_sub_dashboards_layout">Attacks Blocked<hr><div class="wpns_font_shown" ><?php echo $totalAttacks; ?></div></div>
 			<div class="mo_wpns_small_3_layout">
 				<div class ="mo_wpns_sub_sub_dashboard_layout">Injections<hr class="line"><?php echo $sqlC; ?></></div>
 				<div class ="mo_wpns_sub_sub_dashboard_layout">RCE<hr class="line"><?php echo $rceC; ?></div>
@@ -27,13 +28,12 @@ $setup_dirName = $mo2f_dirName.'views'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEP
 			</div>
 		</div>
 		<div class="mo_wpns_small_2_layout">
-			
-			<div class ="mo_wpns_sub_dashboards_layout">Blocked IPs<hr class="line"><p class="wpns_font_shown"><?php echo $totalIPBlocked; ?></p></div>
+			<div class ="mo_wpns_sub_dashboards_layout">Blocked IPs<hr class="line"><div class="wpns_font_shown"><?php echo $totalIPBlocked; ?></div></div>
 			<div class="mo_wpns_small_3_layout">
-				<div class ="mo_wpns_sub_sub_dashboard_layout">Manual<hr class="line"><?php echo $manualBlocks; ?></div>
-				<div class ="mo_wpns_sub_sub_dashboard_layout">Real Time<hr class="line"><?php echo $realTime; ?></div>
-				<div class ="mo_wpns_sub_sub_dashboard_layout">Country Blocked<hr class="line"><?php echo $countryBlocked; ?></div>
-				<div class ="mo_wpns_sub_sub_dashboard_layout">IP Blocked by WAF<hr class="line"><?php echo $IPblockedByWAF ?></div>
+					<div class ="mo_wpns_sub_sub_dashboard_layout">Manual<hr class="line"><?php echo $manualBlocks; ?></div>
+					<div class ="mo_wpns_sub_sub_dashboard_layout">Real Time<hr class="line"><?php echo $realTime; ?></div>
+					<div class ="mo_wpns_sub_sub_dashboard_layout">Country Blocked<hr class="line"><?php echo $countryBlocked; ?></div>
+					<div class ="mo_wpns_sub_sub_dashboard_layout">IP Blocked by WAF<hr class="line"><?php echo $IPblockedByWAF ?></div>
 			</div>
 		</div>
 		</div>
@@ -42,7 +42,7 @@ $setup_dirName = $mo2f_dirName.'views'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEP
 					<p><i class="mo_wpns_not_bold">
 					This contains settings of your <b>Website Application Firewall</b> with settings of <b>SQL Injecton, Cross Site Scripting, Local File Inclusion, Remote File Inclusion, Remote Code Inclusion,</b> etc.<br><br><br><br>
 					</i></p>
-					<input type="button" name="SettingPage" id="SettingPage" value="Settings" class="mo_wpsn_button mo_wpsn_button1" />
+					<input type="button" name="SettingPage" id="SettingPage" value="Settings" class="button button-primary button-large" />
 				
 				</div>
 				<div class="mo_wpns_small_layout">
@@ -50,7 +50,7 @@ $setup_dirName = $mo2f_dirName.'views'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEP
 					<p><i class="mo_wpns_not_bold">
 					Real Time Blocking is <b>blocking IPs in real time</b> by miniOrange IP dataset. If any IP is found malicious then that IP will be added to the <b>miniOrange IP dataset</b> which is <b>maintained in real time.</b> By enabling this feature, if any IP is found malicious on <b>any miniOrange customer's site</b> then that IP will be <b>automatically blocked from your site as well.</b> <br><br>
 					</i></p>
-					<input type="button" name="RTBPage" id="RTBPage" value="Real Time Blocking" class="mo_wpsn_button mo_wpsn_button1" />
+					<input type="button" name="RTBPage" id="RTBPage" value="Real Time Blocking" class="button button-primary button-large" />
 					
 				</div>
 				<div class="mo_wpns_small_layout">
@@ -58,18 +58,18 @@ $setup_dirName = $mo2f_dirName.'views'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEP
 					<p><i class="mo_wpns_not_bold">
 					Rate Limiting is used for <b>controlling the amount of incoming requests</b> from a <b>specific IP</b> to a service(Website). In this feature you can decide the <b>number of requests</b> a user can make to your website. If this is not enabled, an attacker can send <b>any number of requests</b> to a service that can lead to a <b>denial of service</b> by which legitimate users of the website will not be able to access the website.
 					</i></p>
-					<input type="button" name="RLPage" id="RLPage" value="Rate limiting" class="mo_wpsn_button mo_wpsn_button1" />
+					<input type="button" name="RLPage" id="RLPage" value="Rate limiting" class="button button-primary button-large" />
 					
 
 				</div>
 		
-	</div>
+</div>
 	
 
 
 </div>
 
-<div id="waf_report" class="tabcontent">
+<div id="mo2f_waf_report_div" class="tabcontent">
 	<div class="mo_wpns_divided_layout">
 		<div class="mo_wpns_setting_layout">
 			<h2>Blocked attacks Report</h2>
@@ -98,7 +98,7 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 	</div>
 </div>
 
-<div id="real_time" class="tabcontent">
+<div id="mo2f_real_time_div" class="tabcontent">
 	<div class="mo_wpns_divided_layout">
 		<div class="mo_wpns_setting_layout">
 
@@ -121,14 +121,14 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 	</div>
 </div>
 
-<div id="rate_limiting" class="tabcontent">
+<div id="mo2f_rate_limiting_div" class="tabcontent">
    <div class="mo_wpns_divided_layout">
-     <div class="mo_wpns_setting_layout" id='mo2f_ratelimiting'>
+     <div class="mo_wpns_setting_layout" id='mo2f_ratelimiting_div'>
 		<div id="RL" name="RL">
 	    	<table style="width:100%">
 			<tr>
 			<th align="left">
-			<h3>Rate Limiting : <a href='<?php echo $two_factor_premium_doc['Rate Limiting'];?>' target="_blank"><span class="	dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;"></span></a>
+			<h3>Rate Limiting : <a href='<?php echo $two_factor_premium_doc['Rate Limiting'];?>' target="_blank"><span class="	dashicons dashicons-text-page" style="font-size:23px;color:#413c69;"></span></a>
 				<br>
 				<p><i class="mo_wpns_not_bold">This will protect your Website from Dos attack and block request after a limit exceed.</i></p>
 	  		</th>
@@ -163,7 +163,7 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 		</th></tr>
 		<tr><th></th>
 		<th align="center">
-			<br><input type="button" name="saveRateL" id="saveRateL" value="Save" class="mo_wpsn_button mo_wpsn_button1">
+			<br><input type="button" name="saveRateL" id="saveRateL" value="Save" class="button button-primary button-large">
 			</th>
 		</tr>
 		</table>
@@ -205,7 +205,7 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 				</th></tr>
 				<tr><th></th>
 				<th align="center">
-					<br><input type="button" name="saveRateLCrawler" id="saveRateLCrawler" value="Save" class="mo_wpsn_button mo_wpsn_button1">
+					<br><input type="button" name="saveRateLCrawler" id="saveRateLCrawler" value="Save" class="button button-primary button-large">
 					</th>
 				</tr>
 				</table>
@@ -371,7 +371,7 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 
 </div>
 
-<div id="settings" class="tabcontent">
+<div id="mo2f_settings_tab_div" class="tabcontent">
 
 
 <?php
@@ -384,11 +384,11 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 
 ?>
 <div class="mo_wpns_divided_layout">
-	<div class="mo_wpns_setting_layout" id= 'mo_waf_options_tour'>
+	<div class="mo_wpns_setting_layout" id= 'mo2f_settings_tab_div'>
 	<table style="width:100%">
 		<tr><th align="left">
 		<h3>Website Firewall on Plugin Level : <a href='<?php echo $two_factor_premium_doc['Plugin level waf'];?>' target="_blank">
-  			<span class="	dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;"></span></a>
+  			<span class="	dashicons dashicons-text-page" style="font-size:23px;color:#413c69;"></span></a>
 			<br>
 			<p><i class="mo_wpns_not_bold">This will activate WAF after the WordPress load. This will block illegitimate requests after making connection to WordPress. This will check Every Request in plugin itself.</i></p>
   		</th><th align="right">
@@ -399,8 +399,8 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 		</tr></th>
 		 </h3>
 		 <tr><th align="left">
-	<h3>Website Firewall on .htaccess Level <strong style="color: #20b2aa">[Recommended] </strong>: <a href='<?php echo $two_factor_premium_doc['htaccess level waf'];?>' target="_blank">
-  			<span class="dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;"></span></a>
+	<h3>Website Firewall on .htaccess Level <strong style="color: #2271b1">[Recommended] </strong>: <a href='<?php echo $two_factor_premium_doc['htaccess level waf'];?>' target="_blank">
+  			<span class="dashicons dashicons-text-page" style="font-size:23px;color:#413c69;"></span></a>
 			<p><i class="mo_wpns_not_bold">This will activate WAF before the WordPress load. This will block illegitimate request before any connection to WordPress. This level doesnot allow illegal requests to before any page gets loaded.</i></p>
 		</th><th align="right">
 		<label class='mo_wpns_switch'>
@@ -416,10 +416,10 @@ echo 			"<td>".date("M j, Y, g:i:s a",$blockedattack->time)."</td><td>".$blocked
 		 	</i></p> 
 <?php
 echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
-		 <input type='button' name='CDhtaccess' id='CDhtaccess' value='Confirm & Download' class="mo_wpsn_button mo_wpsn_button1" />
+		 <input type='button' name='CDhtaccess' id='CDhtaccess' value='Confirm & Download' class="button button-primary button-large" />
 		 </a>
 		 
-		 <input type='button' name='cnclDH' id='cnclDH' value='Cancel' class="mo_wpsn_button mo_wpsn_button1"/>
+		 <input type='button' name='cnclDH' id='cnclDH' value='Cancel' class="button button-primary button-large"/>
 	</div>
 	</div>	
 	<div name = 'AttackTypes' id ='AttackTypes'>
@@ -433,13 +433,13 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 				
 			</tr>
 		</table>
-		<hr color = "#20b2aa"/>
+		<hr color = "#2271b1"/>
 	<table style="width:100%">
 	<tr>
 
-		<th align="left"><h2>	SQL Injection Protection <strong style="color: #20b2aa">[Basic Level Protection] </strong>:: 
+		<th align="left"><h2>	SQL Injection Protection <strong style="color: #2271b1">[Basic Level Protection] </strong>:: 
 			
-			<p><i class="mo_wpns_not_bold">SQL Injection attacks are used for attack on database. This option will block all illegal requests which tries to access your database. <a href="admin.php?page=mo_2fa_upgrade"><strong style="color: #20b2aa">Advance Signatures</strong></a></i></p>
+			<p><i class="mo_wpns_not_bold">SQL Injection attacks are used for attack on database. This option will block all illegal requests which tries to access your database. <a href="admin.php?page=mo_2fa_upgrade"><strong style="color: #2271b1">Advance Signatures</strong></a></i></p>
 		</th>  
 		<th align="right">
 			<label class='mo_wpns_switch'>
@@ -452,9 +452,9 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 
 	</tr>
 		<tr>
-		<th align="left"><h2>	Cross Site scripting Protection <strong style="color: #20b2aa">[Basic Level Protection] </strong>:: 
+		<th align="left"><h2>	Cross Site scripting Protection <strong style="color: #2271b1">[Basic Level Protection] </strong>:: 
 			<br>
-			<p><i class="mo_wpns_not_bold">cross site scripting is used for script attacks. This will block illegal scripting on website. <a href="admin.php?page=mo_2fa_upgrade"><strong style="color: #20b2aa">Advance Signatures</strong></a></i></p>
+			<p><i class="mo_wpns_not_bold">cross site scripting is used for script attacks. This will block illegal scripting on website. <a href="admin.php?page=mo_2fa_upgrade"><strong style="color: #2271b1">Advance Signatures</strong></a></i></p>
 		</th>
 		<th align="right">
 			<label class='mo_wpns_switch'>
@@ -464,9 +464,9 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 			</th>
 		</h2></tr>
 			<tr>
-		<th align="left"><h2>	Local File Inclusion Protection <strong style="color: #20b2aa">[Basic Level Protection] </strong>::  
+		<th align="left"><h2>	Local File Inclusion Protection <strong style="color: #2271b1">[Basic Level Protection] </strong>::  
 				<br>
-			<p><i class="mo_wpns_not_bold">Local File inclusion is used for making changes to the local files of the server. This option will block Local File Inclusion. <a href="admin.php?page=mo_2fa_upgrade"><strong style="color: #20b2aa">Advance Signatures</strong></a></i></p>
+			<p><i class="mo_wpns_not_bold">Local File inclusion is used for making changes to the local files of the server. This option will block Local File Inclusion. <a href="admin.php?page=mo_2fa_upgrade"><strong style="color: #2271b1">Advance Signatures</strong></a></i></p>
 		</th>
 		<th align="right">
 			<label class='mo_wpns_switch'>
@@ -503,7 +503,7 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 		</h2>
 	</tr>
 	<tr>
-		<th align="left"><h2>	SQL Injection Protection <strong style="color: #20b2aa">[Advance Level Protection]</strong> <strong style="color: red"><a href="admin.php?page=mo_2fa_upgrade"> [Premium Feature] </a></strong>::
+		<th align="left"><h2>	SQL Injection Protection <strong style="color: #2271b1">[Advance Level Protection]</strong> <strong style="color: red"><a href="admin.php?page=mo_2fa_upgrade"> [Premium Feature] </a></strong>::
 			<br>
 			<p><i class="mo_wpns_not_bold">Advance Level Protection includes advance signatures to detect SQL injection. It is the recommended protection for all websites. </i></p>
 		</th>  
@@ -516,7 +516,7 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 		</h2>
 	</tr>
 	<tr>
-		<th align="left"><h2>	Cross Site scripting Protection<strong style="color: #20b2aa"> [Advance Level Protection]</strong> <strong style="color: red"><a href="admin.php?page=mo_2fa_upgrade"> [Premium Feature] </a></strong>::
+		<th align="left"><h2>	Cross Site scripting Protection<strong style="color: #2271b1"> [Advance Level Protection]</strong> <strong style="color: red"><a href="admin.php?page=mo_2fa_upgrade"> [Premium Feature] </a></strong>::
 			<br>
 			<p><i class="mo_wpns_not_bold">Advance Level Protection includes advance signatures to detect Cross Site Scripting attacks.</i></p>
 		</th>  
@@ -529,7 +529,7 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 		</h2>
 	</tr>
 	<tr>
-		<th align="left"><h2>	Local File Inclusion Protection Protection<strong style="color: #20b2aa"> [Advance Level Protection]</strong> <strong style="color: red"><a href="admin.php?page=mo_2fa_upgrade"> [Premium Feature] </a></strong>::
+		<th align="left"><h2>	Local File Inclusion Protection Protection<strong style="color: #2271b1"> [Advance Level Protection]</strong> <strong style="color: red"><a href="admin.php?page=mo_2fa_upgrade"> [Premium Feature] </a></strong>::
 			<br>
 			<p><i class="mo_wpns_not_bold">Advance Level Protection includes advance signatures to detect LFI attacks on your website. Advance protection covers all files of your server to get protected from any kind of LFI attack.</i></p>
 		</th>  
@@ -548,12 +548,12 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 	<div class="mo_wpns_setting_layout" id="mo2f_waf_block_after">
 		<table style="width: 100%">
 		<tr>
-		<th align="left"><h2>Block After <strong style="color: #20b2aa">[Recommended : 10] </strong>:
+		<th align="left"><h2>Block After <strong style="color: #2271b1">[Recommended : 10] </strong>:
 			<p><i class="mo_wpns_not_bold">Option for blocking the IP if the limit of the attacks has been exceeds.</i></p>
 		</th>  
 		<th align="right"><input type ="number" name ="limitAttack" id = "limitAttack" required min="5"/></th>
 		<th><h2 align="left"> attacks</h2></th>
-		<th align="right"><input type="button" name="saveLimitAttacks" id="saveLimitAttacks" value="Save" class="mo_wpsn_button mo_wpsn_button1" /></th>
+		<th align="right"><input type="button" name="saveLimitAttacks" id="saveLimitAttacks" value="Save" class="button button-primary button-large" /></th>
 		</h2>
 		</tr>
 		</table>
@@ -563,7 +563,7 @@ echo	 "<a href='". $url."' download='".$nameDownload."'>";?>
 	
 	
 	</div>
-
+	</div>
 
 
 <script type="text/javascript">
@@ -1186,62 +1186,32 @@ jQuery('#waf_report').click(function(){
 	document.getElementById("ReportTab").click();
 });
 	
-function waf_function(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
 
-  localStorage.setItem("last_tab",cityName);
-  evt.currentTarget.className += " active";
-  if(cityName == "settings")
-  {
-  	jQuery("#settingsTab").addClass(" active");
-  }
-  document.getElementById(cityName).style.display = "block";
+	function mo2f_wpns_waf_function(elmt){
+		var tabname = elmt.id;
+		var tabarray = ["mo2f_firewall_attack_dash","mo2f_settings_tab","mo2f_rate_limiting","mo2f_real_time","mo2f_waf_report"];
+		for (var i = 0; i < tabarray.length; i++) {
+			if(tabarray[i] == tabname){
+				jQuery("#"+tabarray[i]).addClass("nav-tab-active");
+				jQuery("#"+tabarray[i]+"_div").css("display", "block");
+			}else{
+				jQuery("#"+tabarray[i]).removeClass("nav-tab-active");
+				jQuery("#"+tabarray[i]+"_div").css("display", "none");
+			}
+		}
+		
+		localStorage.setItem("waf_last_tab", tabname);
+	}		
 
-}
+	jQuery('#mo_2fa_waf').addClass('nav-tab-active');
 
-	
-	var tour 			= '<?php echo get_option("mo2f_tour_firewall");?>';
-	
-	if(tour != 1)
-		var tab 	= localStorage.getItem("last_tab");
-	else
-		var tab = '<?php echo get_option("mo2f_tour_tab");?>';
-	
+	var tab = localStorage.getItem("waf_last_tab"); 
 
-	if(tab == "waf_dash")
-	{
-		document.getElementById("defaultOpen").click();
-	}
-	else if(tab == "settings")
-	{
-		document.getElementById("settingsTab").click();	
+	if(tab)
+		document.getElementById(tab).click();
+	else{
+		document.getElementById("mo2f_firewall_attack_dash").click();
 	}
 
 
-	else if(tab == "real_time")
-	{
-		document.getElementById("RealTimeTab").click();	
-	}
-	
-	else if(tab == "rate_limiting")
-	{
-		document.getElementById("RateLimitTab").click();	
-	}
-	else if(tab == "waf_report")
-	{
-		document.getElementById("ReportTab").click();	
-	}
-	else 
-	{
-		document.getElementById("settingsTab").click();	
-	}
 </script>

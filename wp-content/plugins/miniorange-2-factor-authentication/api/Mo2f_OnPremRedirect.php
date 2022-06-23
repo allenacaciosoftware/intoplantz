@@ -68,7 +68,7 @@ class Mo2f_OnPremRedirect {
 				return $content;
 			case "EMAIL":
 				
-			case "OTP Over Email": $content = $this->OnpremOTPOverEMail($currentuser);
+			case "OTP Over Email": $content = $this->OnpremOTPOverEMail($currentuser,$useremail);
 				return $content;
 			case "KBA": $content = $this->OnpremSecurityQuestions($currentuser);
 						return $content;
@@ -104,9 +104,9 @@ class Mo2f_OnPremRedirect {
 		$content=$gauth_obj->verifyCode($secret, $otpToken);
 		return $content;
 	}
-	function OnpremOTPOverEMail($current_user)
+	function OnpremOTPOverEMail($current_user,$useremail=false)
 	{
-		return $this->OnpremSendOTPEMail($current_user,'mo2f_otp_email_code','mo2f_otp_email_time');
+		return $this->OnpremSendOTPEMail($current_user,'mo2f_otp_email_code','mo2f_otp_email_time',$useremail);
 	}
 	function OnpremSendOTPEMail($current_user,$tokenName,$timeName,$email=null)
 	{

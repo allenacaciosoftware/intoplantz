@@ -27,7 +27,7 @@ function mo2f_display_test_2fa_notification( $user ) {
             <div class="modal-content" style="width:660px !important;">
                 <center>
                 <div class="modal-header">
-                    <h2 class="mo2f_modal-title" style="color: #20b2aa;">2FA Setup Successful.</h2>
+                    <h2 class="mo2f_modal-title" style="color: #2271b1;">2FA Setup Successful.</h2>
                     <span type="button" id="test-methods" class="modal-span-close" data-dismiss="modal">&times;</span>
                 </div>
                 <div class="mo2f_modal-body">

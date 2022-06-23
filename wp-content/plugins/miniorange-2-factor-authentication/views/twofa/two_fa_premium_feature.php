@@ -10,7 +10,7 @@ $premium_feature_tooltip_array = array ('This option will provide users an alter
 	'Checking this option will hide default login form');
  ?>
 
-<div class="mo2f_table_layout" id = "premium_feature_phone_lost">
+<div id = "premium_feature_phone_lost">
     <h3>What happens if my phone is lost, discharged or not with me
        <?php echo mo2f_tooltip_array($premium_feature_tooltip_array[0]); ?>
     	<a href='<?php echo $two_factor_premium_doc['What happens if my phone is lost, discharged or not with me'];?>' target="_blank">
@@ -236,7 +236,7 @@ $premium_feature_tooltip_array = array ('This option will provide users an alter
       
     <?php echo mo2f_tooltip_array($premium_feature_tooltip_array[6]); ?>
 	<div id="mo2f_hide_login" style="display: none;">
-		<?php
+		 <?php
 		echo '<div style="text-align:center;"><img  style="margin-top:5px;" src="'.$hide_login_form_url.'"></div><br>';?>
 	</div>
 

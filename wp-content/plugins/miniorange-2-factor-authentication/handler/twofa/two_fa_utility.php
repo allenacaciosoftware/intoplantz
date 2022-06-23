@@ -248,7 +248,6 @@ class MO2f_Utility {
 		
         if(isset($_SESSION[$session_id])){
         	$transient_array = $_SESSION[$session_id];
-
         	$transient_value = isset($transient_array[$key]) ? $transient_array[$key] : null;
         	return $transient_value;
         }else if(isset($_COOKIE[base64_decode($session_id)])){
@@ -273,9 +272,9 @@ class MO2f_Utility {
     public static function mo2f_start_session() {
 		if ( ! session_id() || session_id() == '' || ! isset( $_SESSION ) ) {
 			$session_path = ini_get('session.save_path');
-			if( is_writable($session_path) && is_readable($session_path) ) {
+			if( is_writable($session_path) && is_readable($session_path) && !headers_sent() ) {
 			   if(session_status() != PHP_SESSION_DISABLED )
-			    session_start(); 
+				   session_start();
 			}
 		}
 	}
@@ -398,7 +397,12 @@ class MO2f_Utility {
 				$decrypted_data_array = explode( '&', $decrypted_data );
 
 				$cookie_value         = $decrypted_data_array[0];
-				$cookie_creation_time = new DateTime( $decrypted_data_array[1] );
+				if(sizeof($decrypted_data_array) == 2 ){
+					$cookie_creation_time = new DateTime( $decrypted_data_array[1] );
+				}else{
+					$cookie_creation_time = new DateTime( array_pop($decrypted_data_array) );
+					$cookie_value = implode('&', $decrypted_data_array);
+				}
 				$current_time         = new DateTime( 'now' );
 
 				$interval = $cookie_creation_time->diff( $current_time );
@@ -547,7 +551,8 @@ class MO2f_Utility {
 			"SecurityQuestions"              => "Security Questions",
 			"EmailVerification"              => "Email Verification",
 			"OTPOverSMS"                     => "OTP Over SMS",
-			"OTPOverEmail"					 => "OTP Over Email"
+			"OTPOverEmail"					 => "OTP Over Email",
+			"DuoAuthenticator"               => "Duo Authenticator"
 		);
 
 		$server_2fa_methods = array(
@@ -560,7 +565,12 @@ class MO2f_Utility {
 			"Email Verification"                => "OUT OF BAND EMAIL",
 			"OTP Over SMS"                      => "SMS",
 			"EMAIL"                             => "OTP Over Email",
-			"OTPOverEmail"					 	=> "OTP Over Email"
+			"OTPOverEmail"					 	=> "OTP Over Email",
+			"Duo Authenticator"                 => "Duo Authenticator",
+			"DUO AUTHENTICATOR"					=> "Duo Authenticator",
+			"OTP Over Email"					=> "EMAIL",
+			"OTP OVER EMAIL"                    => "EMAIL"
+
 		);
 
 		$server_to_wpdb_2fa_methods = array(
@@ -589,6 +599,11 @@ class MO2f_Utility {
 		}
 		return $methodname;
 
+	}
+	public static function is_same_method($method,$current_method){
+		if($method == $current_method || $method == MO2f_Utility::mo2f_decode_2_factor($current_method,'wpdb') || $method == MO2f_Utility::mo2f_decode_2_factor($current_method,'') || MO2f_Utility::mo2f_decode_2_factor($current_method,'server') == $method)
+			return true;
+		return false;
 	}
 
 	public static function get_plugin_name_by_identifier( $plugin_identitifier ){
@@ -636,8 +651,12 @@ class MO2f_Utility {
         <p style="margin-top:0;margin-bottom:10px">You initiated a transaction from <b>WordPress 2 Factor Authentication Plugin</b>:</p>
         <p style="margin-top:0;margin-bottom:10px">Your backup codes are:-
         <table cellspacing="10">
-            <tr><td>'.$codes[0].'</td><td>'.$codes[1].'</td><td>'.$codes[2].'</td><td>'.$codes[3].'</td><td>'.$codes[4].'</td>
-        </table></p>
+            <tr>';
+            for ($x = 0; $x < sizeof($codes); $x++) {
+		        $message = $message.'<td>'.$codes[$x].'</td>';
+		       
+	        }
+        $message = $message.'</table></p>
         <p style="margin-top:0;margin-bottom:10px">Please use this carefully as each code can only be used once. Please do not share these codes with anyone.</p>
         <p style="margin-top:0;margin-bottom:10px">Also, we would highly recommend you to reconfigure your two-factor after logging in.</p>
         <p style="margin-top:0;margin-bottom:15px">Thank you,<br>miniOrange Team</p>
@@ -684,18 +703,9 @@ class MO2f_Utility {
         return $message;
     }
 
-    public static function mo_2f_generate_backup_codes(){
-        $codes=array();
-        for ($x = 0; $x < 5; $x++) {
-            $str = MO2f_Utility::random_str(10);
-            array_push($codes,$str);
-        }
-        return $codes;
-    }
-
     public static function mo2f_get_codes_hash($codes){
         $codes_hash=array();
-        for ($x = 0; $x < 5; $x++) {
+        for ($x = 0; $x < sizeof($codes); $x++) {
             $str = $codes[$x];
             array_push($codes_hash,md5($str));
         }
@@ -714,8 +724,8 @@ class MO2f_Utility {
         update_user_meta($id, 'mo_backup_code_downloaded', 1);
         header('Content-Disposition: attachment; filename=miniOrange2-factor-BackupCodes.txt');
         echo "Two Factor Backup Codes:".PHP_EOL.PHP_EOL;
-        echo "These are the codes which can be used incase you lose your phone or cannot access your email. Please reconfigure you authentication method after login.".PHP_EOL."Please use this carefully as each code can only be used once. Please do not share these codes with anyone.".PHP_EOL.PHP_EOL;
-        for ($x = 0; $x < 5; $x++){
+        echo "These are the codes that can be used in case you lose your phone or cannot access your email. Please reconfigure your authentication method after login.".PHP_EOL."Please use this carefully as each code can only be used once. Please do not share these codes with anyone..".PHP_EOL.PHP_EOL;
+        for ($x = 0; $x < sizeof($codes); $x++){
             $str1= $codes[$x];
             echo(($x+1).". ".$str1." ");
         }
@@ -737,19 +747,25 @@ class MO2f_Utility {
 
 
     public static function mo2f_mail_and_download_codes(){
-        global $Mo2fdbQueries;
-        $codes=MO2f_Utility::mo_2f_generate_backup_codes();
-        $codes_hash=MO2f_Utility::mo2f_get_codes_hash($codes);
+      global $Mo2fdbQueries;
+       
         $id = get_current_user_id();
         $mo2f_user_email = $Mo2fdbQueries->get_user_detail( 'mo2f_user_email', $id );
         if(empty($mo2f_user_email)){
             $currentuser = get_user_by( 'id', $id );
             $mo2f_user_email = $currentuser->user_email;
         }
+        $generate_backup_code = new Customer_Cloud_Setup();
+        $codes=$generate_backup_code->mo_2f_generate_backup_codes($mo2f_user_email, site_url());
+         
+        if($codes == 'LimitReached'|| $codes == 'UserLimitReached' || $codes == 'AllUsed' || $codes == 'invalid_request')
+        	return $codes;
+
+        $codes = explode(' ', $codes);
+        $codes_hash=MO2f_Utility::mo2f_get_codes_hash($codes);
         $result = MO2f_Utility::mo2f_email_backup_codes($codes, $mo2f_user_email);
         update_user_meta($id, 'mo_backup_code_generated', 1);
         update_user_meta($id, 'mo_backup_code_downloaded', 1);
-        update_user_meta($id,'mo2f_backup_codes', $codes_hash);
         MO2f_Utility::mo2f_download_backup_codes($id, $codes);
     }
 

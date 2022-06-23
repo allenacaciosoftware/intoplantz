@@ -3,6 +3,7 @@ function mo_IP_template()
 {
 global $moWpnsUtility;
 $IPaddress = $moWpnsUtility->get_client_ip(); 
+$IPaddress = sanitize_text_field( $IPaddress );
 $result=@json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=".$IPaddress),true);
 $ipLookUpTemplate  = MoWpnsConstants::IP_LOOKUP_TEMPLATE; 
 $hostname = get_site_url();
@@ -30,7 +31,7 @@ return '<!DOCTYPE html>
 		width :91%;
 		margin-left:3%;
 		font-size:19px;
-		border: 4px solid #20b2aa;
+		border: 4px solid #2271b1;
 
 	}
 	.mo_2fa_feature
@@ -49,7 +50,7 @@ return '<!DOCTYPE html>
 		margin: 1%;
 		float: left;
 		background-color: white;
-		border-top: 5px solid #20b2aa;
+		border-top: 5px solid #2271b1;
 		min-height: 320px;
 		text-align: center;
 		overflow: hidden;
@@ -108,7 +109,7 @@ return '<!DOCTYPE html>
 	.mo_2fa_ef_button
 	{
 		font-size: x-large;
-	    background-color:#20b2aa;
+	    background-color:#2271b1;
 	    color: white;
 	    padding: 17px 127px;
 	    font-family: cursive;
@@ -116,8 +117,8 @@ return '<!DOCTYPE html>
 	}
 	.mo_2fa_ef_read_more
 	{
-		color: #20b2aa;
-    	border: 2px solid #20b2aa;
+		color: #2271b1;
+    	border: 2px solid #2271b1;
 	    padding: 17px 27px;
 	    font-family: cursive;
 	}
@@ -125,7 +126,7 @@ return '<!DOCTYPE html>
 	{
 		
 		/*font-size: x-large;*/
-	    background-color: #20b2aa;
+	    background-color: #2271b1;
 	    color: white;
 	    border: 1px solid white;
 	    padding: 17px 27px;

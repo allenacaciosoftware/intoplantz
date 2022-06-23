@@ -6,7 +6,7 @@ class Google_auth_onpremise{
 
 	}
 
-	function mo_GAuth_get_details()
+	function mo_GAuth_get_details($setupWizard = false)
     {
 		
         $user=wp_get_current_user();
@@ -28,10 +28,16 @@ class Google_auth_onpremise{
         $email=$user->user_email;
         $otpcode=$this->getCode($secret_ga);
         $url=$this->geturl($secret_ga ,$issuer,$email);
+        if(!$setupWizard)
+        {
         echo '<div class="mo2f_table_layout">';
         mo2f_configure_google_authenticator_onprem( $secret_ga ,$url,$otpcode, $session_id_encrypt );
         echo '</div>';
-
+        }
+        else
+        { 
+            mo2f_configure_google_authenticator_setupWizard($secret_ga ,$url,$otpcode, $session_id_encrypt);
+        }
     }
 
     function mo_GAuth_set_secret($user_id,$secret){

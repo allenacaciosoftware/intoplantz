@@ -24,7 +24,6 @@ if ( is_user_logged_in() ) {
 }
 
 ?>
-
 <form class="woocommerce-form woocommerce-form-login login" method="post" <?php echo ( $hidden ) ? 'style="display:none;"' : ''; ?>>
 
 	<?php do_action( 'woocommerce_login_form_start' ); ?>

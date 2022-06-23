@@ -5,7 +5,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
 		$current_user = wp_get_current_user();
 		global $Mo2fdbQueries;
 	?>
-	<div class="mo2f_table_layout" id="mo2f_customization_tour">
+	<div class="mo2f_table_divide_border" id="mo2f_customization_tour">
 		<form name="f" id="custom_css_form_add" method="post" action="">
 			<input type="hidden" name="option" value="mo_auth_custom_options_save" />
 			
@@ -22,7 +22,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
 			<div id="mo2f_Personalization_Plugin_Icon" style="display: none;">
 						
 				<h3><?php echo mo2f_lt('Customize Plugin Icon');?><a href='<?php echo $two_factor_premium_doc['Custom plugin logo'];?>'  target="_blank">
-			         	<span class="dashicons dashicons-text-page" style="font-size:19px;color:#269eb3;float: right;"></span>
+			         	<span class="dashicons dashicons-text-page" style="font-size:19px;color:#413c69;float: right;"></span>
 			         	
 			         	</a> </h3><br>
 			     <div>   	
@@ -36,7 +36,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
 					 </div>
 				</div> </div><hr>
 				<h3><?php echo mo2f_lt('Customize Plugin Name');?><a href='<?php echo $two_factor_premium_doc['Custom plugin name'];?>' target="_blank">
-			         	<span class="dashicons dashicons-text-page" style="font-size:19px;color:#269eb3;float: right;"></span>
+			         	<span class="dashicons dashicons-text-page" style="font-size:19px;color:#413c69;float: right;"></span>
 			         	
 			         	</a></h3>
 			         	<div> 
@@ -54,7 +54,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
 	<div id="mo2f_Personalization_Plugin_Icon" style="display: none;">
 	
 	<h3><?php echo mo2f_lt('Custom Email and SMS Templates');?>
-	<a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/customize-email-template" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:19px;color:#269eb3;float: right;"></span> </a>	</h3>  <hr>
+	<a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/customize-email-template" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:19px;color:#413c69;float: right;"></span> </a>	</h3>  <hr>
     <div>
 	<div style="margin-left:2%">
 					<p><?php echo mo2f_lt('You can change the templates for Email and SMS as per your requirement.');?></p>
@@ -101,12 +101,12 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
 			<input type="hidden" name="option" value="mo_auth_custom_design_options_reset" />
 			
 			<h3><?php echo mo2f_lt('Customize UI of Login Pop up\'s');?><a href='<?php echo $two_factor_premium_doc['custom login popup'];?>' target="_blank">
-			         	<span class="dashicons dashicons-text-page" style="font-size:19px;color:#269eb3;float: right;"></span>
+			         	<span class="dashicons dashicons-text-page" style="font-size:19px;color:#413c69;float: right;"></span>
 			         	
 			         	</a> </h3>
 
 			         	<div>
-			<input type="submit" name="submit" value="Reset Settings" class="button button-primary button-large"  style="float:right; background-color: #20b2aa; color: white;box-shadow: none;"<?php
+			<input type="submit" name="submit" value="Reset Settings" class="button button-primary button-large"  style="float:right; background-color: #2271b1; color: white;box-shadow: none;"<?php
 						 echo 'disabled' ;  ?> />
 			
 						</form>

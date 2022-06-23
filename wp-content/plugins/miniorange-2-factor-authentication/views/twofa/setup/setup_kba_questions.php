@@ -5,18 +5,20 @@ function mo2f_configure_kba_questions() { ?>
 
     <div class="mo2f_kba_header"><?php echo mo2f_lt( 'Please choose 3 questions' ); ?></div>
     <br>
-    <table cellspacing="10">
+    <table id="mo2f_configure_kba" cellspacing="10">
+        <thead>
         <tr class="mo2f_kba_header">
-            <td>
-				<?php echo mo2f_lt( 'Sr. No.' ); ?>
-            </td>
-            <td class="mo2f_kba_tb_data">
-				<?php echo mo2f_lt( 'Questions' ); ?>
-            </td>
-            <td>
-				<?php echo mo2f_lt( 'Answers' ); ?>
-            </td>
+            <th>
+                <?php echo mo2f_lt( 'Sr. No.' ); ?>
+            </th>
+            <th class="mo2f_kba_tb_data">
+                <?php echo mo2f_lt( 'Questions' ); ?>
+            </th>
+            <th>
+                <?php echo mo2f_lt( 'Answers' ); ?>
+            </th>
         </tr>
+    </thead>
         <tr class="mo2f_kba_body">
             <td>
                 <center>1.</center>

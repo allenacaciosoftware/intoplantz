@@ -273,6 +273,19 @@ class Mo2fConstants {
 			case 'ANSWER_SECURITY_QUESTIONS':
 				Return mo2f_lt( 'Please answer the following security questions.' );
 				break;
+			
+			case 'BACKUP_CODE_LIMIT_REACH':
+				Return mo2f_lt( 'You have already downloaded the backup codes for this domain.' );
+				break;
+			case 'BACKUP_CODE_DOMAIN_LIMIT_REACH':
+			    Return mo2f_lt( 'User Limit is reached for your domain.' );
+			    break;
+			case 'BACKUP_CODE_INVALID_REQUEST':
+			    Return mo2f_lt( 'Invalid request.' );
+			    break;
+			case 'USED_ALL_BACKUP_CODES':
+				Return mo2f_lt( 'You have used all of the backup codes' );
+				break;
 			case 'RESET_DUO_CONFIGURATON':
 				Return mo2f_lt( 'Your Duo configuration has been reset successfully.' );
 				break;

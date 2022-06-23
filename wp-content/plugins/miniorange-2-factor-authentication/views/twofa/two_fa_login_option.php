@@ -1,11 +1,7 @@
 <?php
 global $Mo2fdbQueries;
     $roles = get_editable_roles();
-    $login_option_tooltip_array = array(
-        'By default 2nd Factor is enabled after password authentication. If you do not want to remember passwords anymore and just login with 2nd Factor, please select 2nd option.',
-        'Users have an option to Login with Username and password or Login with just username + One Time Passcode',
-        'This option will provide you an alternate way of logging in to your site in case you are unable to login with your primary authentication method.',
-        'Users will be able to login through external applications which support XML-RPC without authenticating from miniOrange');
+ 
     $mo_2factor_user_registration_status = $Mo2fdbQueries->get_user_detail( 'mo_2factor_user_registration_status', $user->ID );
     ?>
 <?php if ( !MoWpnsUtility::get_mo2f_db_option('mo2f_is_NC', 'get_option') && MoWpnsUtility::get_mo2f_db_option('mo2f_is_NC', 'get_option') ) { ?>
@@ -28,47 +24,101 @@ global $Mo2fdbQueries;
 					<input type="hidden" name="mo_auth_login_settings_save_nonce"
 						value="<?php echo wp_create_nonce( "mo-auth-login-settings-save-nonce" ) ?>"/>
                     <div class="row">
-                        <h3>Select Login Screen Options
-        <a href='<?php echo $two_factor_premium_doc['Select login screen option'];?>'  target="_blank">
-                        <span class="dashicons dashicons-text-page" title="More Information" style="font-size:19px;color:#413c69;float: right;"></span>
-    </a></h3>
-    
-        <input type="radio" class="option_for_auth" name="mo2f_all_users_method" value="1" checked="checked" disabled> Login with password + 2nd Factor <span style="color: red">(Recommended)</span>
-       <?php echo mo2f_tooltip_array($login_option_tooltip_array[0]); ?>
-  
-     </br>
-     </br>
-        <input type="radio" class="option_for_auth" name="mo2f_all_users_method" value="0" disabled>
-         Login with 2nd Factor only <span style="color: red">(No password required)
-            <a 
+                        <h3 style="padding:10px;"><?php echo mo2f_lt( 'Select Login Screen Options' ); ?>
+
+                    </div>
+                    <hr>
+                    <br>
+
+
+                    <div style="margin-left: 2%;">
+                        <input type="radio" name="mo2f_login_option" value="1"
+							<?php checked( MoWpnsUtility::get_mo2f_db_option('mo2f_login_option', 'get_option') );
+							if ( $mo_2factor_user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS' or MO2F_IS_ONPREM) {
+							} else {
+								echo 'disabled';
+							} ?> />
+						<?php echo mo2f_lt( 'Login with password + 2nd Factor ' ); ?>
+                        <i>(<?php echo mo2f_lt( 'Default & Recommended' ); ?>)&nbsp;&nbsp;</i>
+
+                        <br><br>
+
+                        <div style="margin-left:6%;">
+                            <input type="checkbox" id="mo2f_remember_device" name="mo2f_remember_device"
+                                   value="1" <?php checked( get_option( 'mo2f_remember_device' ) == 1 );
+							if ( $mo_2factor_user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS' and MO2F_IS_ONPREM!=1)  {
+							} else {
+								echo 'disabled';
+							} ?> />Enable
+                            '<b><?php echo mo2f_lt( 'Remember device' ); ?></b>' <?php echo mo2f_lt( 'option ' ); ?><br>
+
+                            <div class="mo2f_advanced_options_note"><p style="padding:5px;">
+                                    <i><?php echo mo2f_lt( ' Checking this option will display an option ' ); ?>
+                                        '<b><?php echo mo2f_lt( 'Remember this device' ); ?></b>'<?php echo mo2f_lt( 'on 2nd factor screen. In the next login from the same device, user will bypass 2nd factor, i.e. user will be logged in through username + password only.' ); ?>
+                                    </i></p></div>
+                        </div>
+
+                        <br>
+
+                        <input type="radio" name="mo2f_login_option" value="0"
+							<?php checked( ! MoWpnsUtility::get_mo2f_db_option('mo2f_login_option', 'get_option') );
+							if ( $mo_2factor_user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS' or MO2F_IS_ONPREM) {
+							} else {
+								echo 'disabled';
+							} ?> />
+						<?php echo mo2f_lt( 'Login with 2nd Factor only ' ); ?>
+                        <i>(<?php echo mo2f_lt( 'No password required.' ); ?>)</i> &nbsp;<a 
                         data-toggle="collapse"
-                        id="showpreview1"
-                        href="#preview8"
+                        id="showLoginwith2ndFactoronly"
+                        href="#Loginwith2ndFactoronly"
                         aria-expanded="false"><?php echo mo2f_lt( 'See preview' ); ?></a>
-            <?php echo mo2f_tooltip_array($login_option_tooltip_array[1]); ?>
-            <div class="mo2f_collapse" id="preview8" style="height:300px;">
+                        <br>
+                        <div class="mo2f_collapse" id="Loginwith2ndFactoronly" style="height:300px; ">
                             <center><br>
                                 <img style="height:300px;"
                                      src="https://login.xecurify.com/moas/images/help/login-help-1.png">
                             </center>
                         </div>
+                        <br>
+                        <br>
+                        <div class="mo2f_advanced_options_note"><p style="padding:5px;">
+                                <i><?php echo mo2f_lt( 'Checking this option will add login with your phone button below default login form. Click above link to see the preview.' ); ?></i>
+                            </p></div>
+                        <div id="loginphonediv" hidden><br>
+                            <input type="checkbox" id="mo2f_login_with_username_and_2factor"
+                                   name="mo2f_login_with_username_and_2factor"
+                                   value="1" <?php checked( get_option( 'mo2f_enable_login_with_2nd_factor' ) == 1 );
+							if ( $mo_2factor_user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS' or MO2F_IS_ONPREM ){
+							} else {
+								echo 'disabled';
+							} ?> />
+							<?php echo mo2f_lt( '	I want to hide default login form.' ); ?> &nbsp;<a
+                                    class=""
+                                    data-toggle="collapse"
+                                    href="#hideDefaultLoginForm"
+                                    id = 'showhideDefaultLoginForm'
+                                    aria-expanded="false"><?php echo mo2f_lt( 'See preview' ); ?></a>
+                            <br>
+                            <div class="mo2f_collapse" id="showhideDefaultLoginForm" style="height:300px;">
+                                <center><br>
+                                    <img style="height:300px;"
+                                         src="https://login.xecurify.com/moas/images/help/login-help-3.png">
+                                </center>
+                            </div>
+                            
+                            <br>
+                            <br>
+                            <div class="mo2f_advanced_options_note"><p style="padding:5px;">
+                                    <i><?php echo mo2f_lt( 'Checking this option will hide default login form and just show login with your phone. Click above link to see the preview.' ); ?></i>
+                                </p></div>
+                        </div>
+                        <br>
                     </div>
-                    <br>
-                    <hr>
-                    <br>
                     <div>
-                        <h3 style="padding:10px;"><?php echo mo2f_lt( 'Backup Methods ' ); ?><span><a 
-                            class="mo2fa_see_preview"
-                        data-toggle="collapse"
-                        id="showpreview2"
-                        href="#preview9"
-                        aria-expanded="false"><?php echo mo2f_lt( 'See preview' ); ?></a>
-                        <?php echo mo2f_tooltip_array($login_option_tooltip_array[2]); ?></span></h3>
-                    </div>
-                    <br>
+                        <h3 style="padding:10px;"><?php echo mo2f_lt( 'Backup Methods' ); ?></h3></div>
                     <hr>
                     <br>
-                    <div style="margin-left: 2%" id='preview9' hidden>
+                    <div style="margin-left: 2%">
                         <input type="checkbox" id="mo2f_forgotphone" name="mo2f_forgotphone"
                                value="1" <?php checked( MoWpnsUtility::get_mo2f_db_option('mo2f_enable_forgotphone', 'get_option') == 1 );
 						if ( $mo_2factor_user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS' ) {
@@ -84,16 +134,10 @@ global $Mo2fdbQueries;
 
                     </div>
                     <div>
-                        <h3 style="padding:10px;">XML-RPC <?php echo mo2f_lt( 'Settings' ); ?>
-                        <span><a 
-                            class="mo2fa_see_preview"
-                        data-toggle="collapse"
-                        id="showpreview3"
-                        href="#preview10"
-                        aria-expanded="false"><?php echo mo2f_lt( 'See preview' ); ?></a>
-                        <?php echo mo2f_tooltip_array($login_option_tooltip_array[3]); ?></span></h3>
-                    </div>
-                    <div style="margin-left: 2%" id="preview10" hidden>
+                        <h3 style="padding:10px;">XML-RPC <?php echo mo2f_lt( 'Settings' ); ?></h3></div>
+                    <hr>
+                    <br>
+                    <div style="margin-left: 2%">
                         <input type="checkbox" id="mo2f_enable_xmlrpc" name="mo2f_enable_xmlrpc"
                                value="1" <?php checked( MoWpnsUtility::get_mo2f_db_option('mo2f_enable_xmlrpc', 'get_option') == 1 );
 						if ( $mo_2factor_user_registration_status == 'MO_2_FACTOR_PLUGIN_SETTINGS' ) {
@@ -118,7 +162,7 @@ global $Mo2fdbQueries;
 						} else {
                             ?>
                             <input type="submit" name="submit" value="<?php echo mo2f_lt( 'Save Settings' ); ?>"
-                               class="mo_wpns_button" disabled style="background-color: #20b2aa;padding: 11px 28px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px;">
+                               class="mo_wpns_button" disabled style="background-color: #2271b1;padding: 11px 28px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px;">
                             <?php
 						} ?> 
                         </center>
@@ -148,42 +192,29 @@ global $Mo2fdbQueries;
         });
 
         
-        jQuery('#preview9').hide();
-        jQuery('#showpreview1').click(function(){
-            jQuery('#preview8').slideToggle(700);    
+        jQuery('#Loginwith2ndFactoronly').hide();
+        jQuery('#showLoginwith2ndFactoronly').click(function(){
+                    jQuery('#Loginwith2ndFactoronly').slideToggle(700);    
+        });        
+        jQuery('#Loginwith2ndFactoronlyStandard').hide();
+        jQuery('#showLoginwith2ndFactoronlyStandard').click(function(){
+            jQuery('#Loginwith2ndFactoronlyStandard').slideToggle(700);    
         });
-        
-        jQuery('#showpreview2').click(function(){
-            jQuery('#preview9').slideToggle(700);    
+        jQuery('#LoginWithUsernameOnlyStandard').hide();
+        jQuery('#showLoginWithUsernameOnlyStandard').click(function(){
+            jQuery('#LoginWithUsernameOnlyStandard').slideToggle(700);    
         });
-        jQuery('#showpreview3').click(function(){
-            jQuery('#preview10').slideToggle(700);    
+        jQuery('#Loginwith2ndFactoronlyPremium').hide();
+        jQuery('#showLoginwith2ndFactoronlyPremium').click(function(){
+            jQuery('#Loginwith2ndFactoronlyPremium').slideToggle(700);    
         });
-        jQuery('#showpreview4').click(function(){
-            jQuery('#preview11').slideToggle(700);    
-        });
-        jQuery('#showpreview5').click(function(){
-            jQuery('#preview12').slideToggle(700);    
-        });
-        jQuery('#showpreview6').click(function(){
-            jQuery('#preview13').slideToggle(700);    
-        });
-        jQuery('#showpreview7').click(function(){
-            jQuery('#preview14').slideToggle(700);    
-        });
-        jQuery('#preview7').hide();
-        jQuery('#showpreview7').click(function(){
-            jQuery('#preview7').slideToggle(700);    
-        });
-        
-        jQuery('#preview6').hide();
-        jQuery('#showpreview6').click(function(){
-            jQuery('#preview6').slideToggle(700);    
-        });
-        
-        jQuery('#preview8').hide();
-        jQuery('#showpreview8').click(function(){
-            jQuery('#preview8').slideToggle(700);    
+        jQuery('#LoginWithUsernameOnlyPremium').hide();
+        jQuery('#showLoginWithUsernameOnlyPremium').click(function(){
+            jQuery('#LoginWithUsernameOnlyPremium').slideToggle(700);    
+        });                
+        jQuery('#showhideDefaultLoginForm').hide();
+        jQuery('#showhideDefaultLoginForm').click(function(){
+            jQuery('#showhideDefaultLoginForm').slideToggle(700);    
         });
         
        
@@ -313,10 +344,10 @@ function get_standard_premium_options( $user ) {
             <div>
                 <ul style="margin-left:4%" class="mo2f_ol">
                     <li><?php echo mo2f_lt( 'Login with Wordpress username/password and 2nd Factor' ); ?> <a
-                                class="" data-toggle="collapse" id="showpreview4" href="#preview11"
+                                class="" data-toggle="collapse" id="showLoginwith2ndFactoronlyStandard" href="#Loginwith2ndFactoronlyStandard"
                                 aria-expanded="false">[ <?php echo mo2f_lt( 'See Preview' ); ?>
                             ]</a>
-                            <div class="mo2f_collapse" id="preview11" style="height:300px;">
+                            <div class="mo2f_collapse" id="Loginwith2ndFactoronlyStandard" style="height:300px;">
                             <center><br>
                                 <img style="height:300px;"
                                      src="https://login.xecurify.com/moas/images/help/login-help-1.png">
@@ -325,11 +356,11 @@ function get_standard_premium_options( $user ) {
                         
                     </li><br>
                     <li><?php echo mo2f_lt( 'Login with Wordpress username and 2nd Factor only' ); ?> <a
-                                class="" data-toggle="collapse" id="showpreview5" href="#preview12"
+                                class="" data-toggle="collapse" id="showLoginWithUsernameOnlyStandard" href="#LoginWithUsernameOnlyStandard"
                                 aria-expanded="false">[ <?php echo mo2f_lt( 'See Preview' ); ?>
                             ]</a>
                         <br>
-                        <div class="mo2f_collapse" id="preview12" style="height:300px;">
+                        <div class="mo2f_collapse" id="LoginWithUsernameOnlyStandard" style="height:300px;">
                             <center><br>
                                 <img style="height:300px;"
                                      src="https://login.xecurify.com/moas/images/help/login-help-3.png">
@@ -386,10 +417,10 @@ function get_standard_premium_options( $user ) {
             <div>
                 <ul style="margin-left:4%" class="mo2f_ol">
                     <li><?php echo mo2f_lt( 'Login with Wordpress username/password and 2nd Factor' ); ?> <a
-                                 data-toggle="collapse" id="showpreview6" href="#preview13"
+                                 data-toggle="collapse" id="showLoginwith2ndFactoronlyPremium" href="#Loginwith2ndFactoronlyPremium"
                                 aria-expanded="false">[ <?php echo mo2f_lt( 'See Preview' ); ?>
                             ]</a>
-                        <div class="mo2f_collapse" id="preview13" style="height:300px;">
+                        <div class="mo2f_collapse" id="Loginwith2ndFactoronlyPremium" style="height:300px;">
                             <center><br>
                                 <img style="height:300px;"
                                      src="https://login.xecurify.com/moas/images/help/login-help-1.png">
@@ -398,11 +429,11 @@ function get_standard_premium_options( $user ) {
                         </div>
                         <br></li>
                     <li><?php echo mo2f_lt( 'Login with Wordpress username and 2nd Factor only' ); ?> <a
-                                 data-toggle="collapse" id="showpreview7" href="#preview14"
+                                 data-toggle="collapse" id="showLoginWithUsernameOnlyPremium" href="#LoginWithUsernameOnlyPremium"
                                 aria-expanded="false">[ <?php echo mo2f_lt( 'See Preview' ); ?>
                             ]</a>
                         <br>
-                        <div class="mo2f_collapse" id="preview14" style="height:300px;">
+                        <div class="mo2f_collapse" id="LoginWithUsernameOnlyPremium" style="height:300px;">
                             <center><br>
                                 <img style="height:300px;"
                                      src="https://login.xecurify.com/moas/images/help/login-help-3.png">

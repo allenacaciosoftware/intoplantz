@@ -105,15 +105,13 @@
     },
     "31f1": function(t, e, i) {
         var s = {
-            "./amazonses.svg": "7de8",
-            "./gmail.svg": "ddc9",
-            "./mailgun.svg": "776b",
-            "./outlook.svg": "2db4",
-            "./sendgrid.svg": "b1c2",
-            "./sendinblue.svg": "7f3e",
-            "./smtp.svg": "5f30",
-            "./smtpcom.svg": "78cb",
-            "./zoho.svg": "2bc2"
+            "./googleAuthenticator.svg": "7de8",
+            "./AuthyAuthenticator.svg": "ddc9",
+            "./OTPOverSMS.svg": "776b",
+            "./OTPOverEmail.svg": "2db4",
+            "./KBA.svg": "b1c2",
+            "./DuoPush.svg": "7f3e",
+            "./OTPOverTelegram.svg": "5f30",
         };
 
         function a(t) {

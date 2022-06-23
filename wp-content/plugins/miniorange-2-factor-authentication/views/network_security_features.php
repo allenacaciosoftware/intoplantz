@@ -11,7 +11,7 @@ if ( 'admin.php' == basename( $_SERVER['PHP_SELF'] ) )
   <div class="mo_wpns_divided_layout" style="margin-left: 13%;">
     <div class="mo_wpns_setting_layout" style="padding-bottom: 16px;">
         
-    <h1 style="color: #20b2aa; font-size: x-large; text-align: center;">What are you looking for?</h1>
+    <h1 style="color: #2271b1; font-size: x-large; text-align: center;">What are you looking for?</h1>
 
  <form id="mo_wpns_2fa_with_network_security" method="post" action="">
     <div style="width: 100%;">

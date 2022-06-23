@@ -14,6 +14,7 @@ class mo2f_Logger
 		global $moWpnsUtility;
 			$mo_wpns_config = new MoWpnsHandler();
 			$userIp 		= $moWpnsUtility->get_client_ip();
+			$userIp = sanitize_text_field( $userIp );
 			$url			= $moWpnsUtility->get_current_url();
 			$user  			= wp_get_current_user();
 			$username		= is_user_logged_in() ? $user->user_login : 'GUEST';
@@ -28,6 +29,7 @@ class mo2f_Logger
 			return;
 			$mo_wpns_config = new MoWpnsHandler();
 			$userIp 		= $moWpnsUtility->get_client_ip();
+			$userIp = sanitize_text_field( $userIp );
 			$url			= $moWpnsUtility->get_current_url();
 			$user  			= wp_get_current_user();
 			$username		= is_user_logged_in() ? $user->user_login : 'GUEST';

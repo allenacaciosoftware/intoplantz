@@ -399,13 +399,13 @@
                     jQuery(data.anchor_id).css('position','');  
                     switch(data.anchor_id){
                         case '#scan_status_table':
-                            document.getElementById("scan_set").click();
+                            document.getElementById("mo2f_scan_set").click();
                             break;
                         case '#mo2f_select_scanning_files':
-                            document.getElementById("report_scan").click();
+                            document.getElementById("mo2f_report_scan").click();
                             break;
                         case '#scan_report_table':
-                            document.getElementById("malware_view").click();
+                            document.getElementById("mo2f_malware_view").click();
                             break;
                         case '#mo2f_scan_dash':
                             jQuery('#mo_2fa_upgrade_tour').css('z-index',1);

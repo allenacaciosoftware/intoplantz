@@ -156,6 +156,8 @@
             $free_plan_existing_user = $methods_of_users['existing_user'];
             $free_plan_new_user = $methods_of_users['new_user'];
         }
+        update_site_option('mo2fa_free_plan_new_user_methods',$free_plan_new_user);
+        update_site_option('mo2fa_free_plan_existing_user_methods',$free_plan_existing_user);
 
 		$free_plan_methods_existing_user     = array_chunk( $free_plan_existing_user, 3 );
 		$free_plan_methods_new_user          = array_chunk( $free_plan_new_user, 3 );
@@ -179,15 +181,23 @@
         } 
         ?>
 
-        <div>
-            <div>
+
+            <div class="mo2f_table_layout_method">
+
                 <div class="test_auth_button">
-                    <br>
+                    <?php
+                
+                    if($mo2f_two_fa_method != '' and (!get_user_meta( $user->ID, 'mo_backup_code_generated', true) and !get_user_meta( $user->ID, 'mo_backup_code_downloaded', true))){
+                        ?>
+                        <button class="btn btn-primary btn-large" id="mo_2f_generate_codes">Download backup codes
+                        </button>
+                        <?php
+                    }
+                    ?>
                     <button class="btn btn-primary btn-large " id="test" onclick="testAuthenticationMethod('<?php echo $selectedMethod; ?>');"
                         <?php echo $is_customer_registered && ( $selectedMethod != 'NONE' ) ? "" : " disabled "; ?>>Test - <?php echo $selectedMethod; ?>
                     </button>
                 </div>
-
 
                 <div>
                     <a class="mo2f_view_free_plan_auth_methods" onclick="show_free_plan_auth_methods()">
@@ -197,16 +207,6 @@
 	                        <?php if ( $can_display_admin_features ) { ?>
                                 <span style="color:limegreen">( <?php echo mo2f_lt( 'Current Plan' ); ?> )</span>
 	                        <?php } ?>
-
-
-                            <?php
-                            if((!get_user_meta($user->ID, 'mo_backup_code_generated', true) || ($backup_codes_remaining == 5 && !get_user_meta($user->ID, 'mo_backup_code_downloaded', true))) && $mo2f_two_fa_method != ''){
-                            ?>
-                                <button class="btn btn-primary btn-large" id="mo_2f_generate_codes" style="float:right; margin-right: 3%; height: 36px;">Download backup codes
-                                </button>
-                            <?php
-                            }
-                            ?>
 
                             
                         </p>
@@ -229,9 +229,8 @@
                  echo mo2f_create_2fa_form( $user, "free_plan", $is_NC ? $free_plan_methods_new_user : $free_plan_methods_existing_user, $can_display_admin_features ); ?>
             </div>
 
-            <hr>
 			<?php if ( $can_display_admin_features ) { ?>
-                <div>
+                <div >
                    <span id="mo2f_premium_plan"> <a class="mo2f_view_premium_plan_auth_methods" onclick="show_premium_auth_methods()">
                         <img src="<?php echo plugins_url( 'includes/images/right-arrow.png"', dirname(dirname(__FILE__))); ?>"
                              class="mo2f_2factor_heading_images"/>
@@ -240,7 +239,6 @@
 					<?php echo mo2f_create_2fa_form( $user, "premium_plan", $is_NC ? $premium_plan_methods_new_user : $premium_plan_methods_existing_user ); ?>
 
                 </div>
-                <hr>
                 <br>
 				<?php } ?>
                 <form name="f" method="post" action="" id="mo2f_2factor_test_authentication_method_form">
@@ -263,13 +261,13 @@
                 </form>              
 
 
-        </div>
+
          <div id="EnterEmailCloudVerification" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
             <!--    <span class="close">&times;</span>  -->
                 <div class="modal-header">
-                    <h3 class="modal-title" style="text-align: center; font-size: 20px; color: #20b2aa">Email Address for miniOrange</h3><span id="closeEnterEmailCloud" class="modal-span-close">X</span>
+                    <h3 class="modal-title" style="text-align: center; font-size: 20px; color: #2271b1">Email Address for miniOrange</h3><span id="closeEnterEmailCloud" class="modal-span-close">X</span>
                 </div>
                 <div class="modal-body" style="height: auto">
                     <h2 style="color: red;">The email associated with your account is already registered in miniOrange. Please Choose another email.</h2>
@@ -285,7 +283,7 @@
             <div class="modal-content">
             <!--    <span class="close">&times;</span>  -->
                 <div class="modal-header">
-                    <h3 class="modal-title" style="text-align: center; font-size: 20px; color: #20b2aa">Email Address for OTP</h3><span id="closeEnterEmail" class="modal-span-close">X</span>
+                    <h3 class="modal-title" style="text-align: center; font-size: 20px; color: #2271b1">Email Address for OTP</h3><span id="closeEnterEmail" class="modal-span-close">X</span>
                 </div>
                 <div class="modal-body" style="height: auto">
                     <h2><i>Enter your Email:&nbsp;&nbsp;&nbsp;  <input type ='email' id='emailEntered' name='emailEntered' size= '40' required value="<?php echo $email;?>"/></i></h2> 

@@ -23,14 +23,5 @@ global $product;
 ?>
 
 <?php if ( $price_html = $product->get_price_html() ) : ?>
-    <?php
-        $stock_quantity = $product->get_stock_quantity();
-        $product_avail  = $product->get_availability();
-        $availability   = $product_avail['availability'];
-    ?>
-	<h2 class="price"  style="font-size: xx-large; margin-bottom: 0"><?php echo $price_html; ?></h2>
-    <?php if ( $stock_quantity > 0 ) : ?>
-	    <span class="price"  style="font-size: large; margin-bottom: 0"><?php echo $availability; ?></span>
-    <?php endif; ?>
+	<span class="price"><?php echo $price_html; ?></span>
 <?php endif; ?>
-

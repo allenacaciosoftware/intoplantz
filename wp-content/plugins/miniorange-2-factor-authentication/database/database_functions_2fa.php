@@ -211,7 +211,6 @@ class Mo2fDB {
 		);
 		return $count;
 	}
-
 	function get_all_user_2fa_methods() {
 		global $wpdb;
 		$all_methods = [];
@@ -321,6 +320,11 @@ class Mo2fDB {
 		$value              = empty( $user_column_detail ) ? '' : get_object_vars( $user_column_detail[0] );
 
 		return $value == '' ? '' : $value[ $column_name ];
+	}
+	function get_user_configured_methods( $user_id ) {
+		global $wpdb;
+		$user_methods_detail = $wpdb->get_results( "SELECT *  FROM " . $this->userDetailsTable . " WHERE user_id = " . $user_id . ";" );
+		return $user_methods_detail;
 	}
 	
 	function delete_user_login_sessions($session_id ) {

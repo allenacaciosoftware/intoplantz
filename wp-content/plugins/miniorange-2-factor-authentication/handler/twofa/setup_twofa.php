@@ -81,10 +81,11 @@
 
 	function mo2f_create_2fa_form( $user, $category, $auth_methods, $can_display_admin_features='' ) {
 	global $Mo2fdbQueries;
+
 	$miniorange_authenticator = array(
-		"miniOrange QR Code Authentication",
-		"miniOrange Soft Token",
-		"miniOrange Push Notification",
+        "miniOrange QR Code Authentication",
+        "miniOrange Soft Token",
+        "miniOrange Push Notification",
         );
 	$all_two_factor_methods = array(
 		"miniOrange Authenticator",
@@ -119,7 +120,6 @@
 	$two_factor_methods_doc = array(
 			"Security Questions"            	=> "https://developers.miniorange.com/docs/security/wordpress/wp-security/step-by-setup-guide-to-set-up-security-question",
 			"Google Authenticator" 				=> "https://developers.miniorange.com/docs/security/wordpress/wp-security/google-authenticator",
-			"miniOrange Authenticator" => "https://developers.miniorange.com/docs/security/wordpress/wp-security/step-by-setup-guide-to-set-up-miniorange-QR-code",
 			"Email Verification" 				=> "https://developers.miniorange.com/docs/security/wordpress/wp-security/email_verification",
 			"miniOrange Soft Token" 			=> "https://developers.miniorange.com/docs/security/wordpress/wp-security/step-by-setup-guide-to-set-up-miniorange-soft-token",
 			"miniOrange Push Notification"  	=> "https://developers.miniorange.com/docs/security/wordpress/wp-security/step-by-setup-guide-to-set-up-miniorange-push-notification",
@@ -134,7 +134,7 @@
 	$two_factor_methods_video = array(
 			"Security Questions"            	=> "https://www.youtube.com/watch?v=pXPqQ047o-0",
 			"Google Authenticator" 				=> "https://www.youtube.com/watch?v=BS6tY-Goa1Q",
-			"miniOrange Authenticator" => "https://www.youtube.com/watch?v=IPYizmgzTd8",
+			"miniOrange Authenticator" 			=> "https://www.youtube.com/watch?v=oRaGtKxouiI",
 			"Email Verification" 				=> "https://www.youtube.com/watch?v=OacJWBYx_AE",
 			"miniOrange Soft Token" 			=> "https://www.youtube.com/watch?v=9HV8V4f80k8",
 			"miniOrange Push Notification"  	=> "https://www.youtube.com/watch?v=it_dAhFcxvw",
@@ -312,6 +312,23 @@
 
 		     		break;
 
+		     		case 'miniOrange Authenticator':
+			     	$form .='   <span style="float:right">';
+			     	if(isset($two_factor_methods_doc[$auth_method])){
+			     	$form .='<a href='.$two_factor_methods_doc[$auth_method].' target="_blank">
+				         	<span title="View Setup Guide" class="dashicons dashicons-text-page" style="font-size:19px;color:#413c69;float: right;"></span>
+				         	</a>';
+				    }
+
+				    if(isset($two_factor_methods_video[$auth_method])){
+			     	$form .='<a href='.$two_factor_methods_video[$auth_method].' target="_blank">
+				         	<span title="Watch Setup Video" class="dashicons dashicons-video-alt3" style="font-size:18px;color:red;float: right;margin-right: 5px;"></span>
+				         	</a>';
+				   	}
+
+				    $form .='</span>';
+		     		break;
+
 		     		case 'miniOrange QR Code Authentication':
 		     			$form .='   <span style="float:right">
 				         	<a href='.$two_factor_methods_doc[$auth_method].' target="_blank">
@@ -385,7 +402,7 @@
 				if($auth_method_abr == 'miniOrangeAuthenticator'){	
 					$is_auth_method_configured = $Mo2fdbQueries->get_user_detail( 'mo2f_miniOrangeSoftToken_config_status', $user->ID );			
 				}else{	
-				$is_auth_method_configured = $Mo2fdbQueries->get_user_detail( 'mo2f_' . $auth_method_abr . '_config_status', $user->ID );
+					$is_auth_method_configured = $Mo2fdbQueries->get_user_detail( 'mo2f_' . $auth_method_abr . '_config_status', $user->ID );	
 				}
 				if(($auth_method == 'OUT OF BAND EMAIL' or $auth_method == 'OTP Over Email') and !MO2F_IS_ONPREM )
 					$is_auth_method_configured = 1;
@@ -449,15 +466,15 @@
 						$form .= $can_user_configure_2fa_method ? "" : " disabled ";
 						$form .= $show==1 ? "" : " disabled ";
 						if($show == 1 and $is_auth_method_configured and $iscurrentMethod == 0){
-						$form .= '>Set as 2-factor</button>
-	                              </div>';	
+							$form .= '>Set as 2-factor</button>
+		                              </div>';	
 		                }else{
 	                    	$form .= '
 	                    	</button>
 	                              </div>';
+	                    }
 					}
-					}
-
+					
 				}
 				else	
 				{
@@ -499,6 +516,7 @@
 							      <option value="miniOrangePushNotification">Push Notification</option>
 							  </select></div>
 							  <br><br>
+
 							  ';
 					}
 					$form .= '</div>';

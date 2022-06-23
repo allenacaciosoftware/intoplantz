@@ -1,5 +1,5 @@
 <?php
-
+global $mo2f_dirName;
 $security_features_nonce = wp_create_nonce('mo_2fa_security_features_nonce');
 
 	$user = wp_get_current_user();
@@ -30,37 +30,30 @@ if( isset( $_GET[ 'page' ]) && $_GET['page'] != 'mo_2fa_upgrade')
 	{	
 			echo'<div class="wrap">';
 
-				$date1 = "2021-01-20";
+				$date1 = "2022-01-10";
 				$dateTimestamp1 = strtotime($date1);
 
 				$date2 = date("Y-m-d");
 				$dateTimestamp2 = strtotime($date2);
 
-				if($dateTimestamp2<=$dateTimestamp1)
+				if($dateTimestamp2<=$dateTimestamp1 && ($userID == $onprem_admin) && !get_site_option("mo2f_banner_never_show_again"))
 				{
 					echo'<div class="mo2f_offer_main_div">
 
 					
 
 					<div class="mo2f_offer_first_section">
-						<img style="height: 201px;width: 540px;" src="'.dirname(plugin_dir_url(__FILE__)).'/includes/images/new_year_offer.png">
-
-					</div>
+                        <p class="mo2f_offer_christmas">CHRISTMAS</p>
+                        <h3 class= "mo2fa_hr_line"><span>&</span></h3>
+                        <p class="mo2f_offer_cyber">NEW YEAR&nbsp;<spn style="color:white;">SALE</span></p>
+                    </div>
 
 					<div class="mo2f_offer_middle_section">
-						<p class="mo2f_offer_get_upto">Get Upto </p>
-						<p class="mo2f_offer_first_section_text">50% off</p>
-						<center><a class="mo2f_offer_contact_us" href="'.$request_offer_url.'">Contact Us</a></center>
+						<p class="mo2f_offer_get_upto"><span style="font-size: 30px;">GET UPTO <span style="color: white;font-size: larger; font-weight:bold">50%</span> OFF ON PREMIUM PLUGINS</p><br>
+						<p class="mo2f_offer_valid">Offer valid for limited period only!</p>
 					</div>
 
-					<div class="mo2f_offer_last_section">
-						<img src="'.dirname(plugin_dir_url(__FILE__)).'/includes/images/new_year.gif">
-					</div>
-
-
-
-
-						
+					<div id="mo2f_offer_last_section" class="mo2f_offer_last_section"><button class="mo2f_banner_never_show_again mo2f_close">CLOSE <span class=" mo2f_cross">X</span></button><a class="mo2f_offer_contact_us" href="'.$request_offer_url.'">Contact Us</a></p></div>
 
 					</div><br><br>';
 				}
@@ -96,39 +89,29 @@ if( isset( $_GET[ 'page' ]) && $_GET['page'] != 'mo_2fa_upgrade')
 ?>
 
 
-
-		<div class="mo_flex-container">
-			<?php 
-		if(MoWpnsUtility::get_mo2f_db_option('mo_wpns_2fa_with_network_security', 'get_option'))
-		{
-			echo '<a class="nav-tab '.($active_tab == 'mo_2fa_dashboard' 	  ? 'nav-tab-active' : '').'" href="'.$dashboard_url	.'">Dashboard</a>';
-			if($is_onprem){
-				if(  ($flag) or ($userID == $onprem_admin) ){
-					echo '<a class="nav-tab '.($active_tab == 'mo_2fa_two_fa'		  ?	'nav-tab-active' : '').'" href="'.$two_fa		 	.'">Two Factor</a>'; 
-				}
-			}
-			else{
-				echo '<a class="nav-tab '.($active_tab == 'mo_2fa_two_fa'		  ?	'nav-tab-active' : '').'" href="'.$two_fa		 	.'">Two Factor</a>';
-				}	
-		
-			if(get_site_option('mo_2f_switch_waf')){
-	 			echo '<a id="mo_2fa_waf" class="nav-tab '.($active_tab == 'mo_2fa_waf' 			  ? 'nav-tab-active' : '').'" href="'.$waf				.'">Firewall</a>';
-	 		}
-	 		if(get_site_option('mo_2f_switch_loginspam')){
-	 			echo '<a id="login_spam_tab" class="nav-tab '.($active_tab == 'mo_2fa_login_and_spam'  ? 'nav-tab-active' : '').'" href="'.$login_and_spam	.'">Login and Spam</a>';
-	 		}
-	 		if(get_site_option('mo_2f_switch_backup')){
-				echo '<a id="backup_tab" class="nav-tab '.($active_tab == 'mo_2fa_backup' 	  	  ? 'nav-tab-active' : '').'" href="'.$backup			.'">Encrypted Backup</a>';
-			}
-			if(get_site_option('mo_2f_switch_malware')){
-				echo '<a id="malware_tab" class="nav-tab '.($active_tab == 'mo_2fa_malwarescan'	  ?	'nav-tab-active' : '').'" href="'.$scan_url 		.'">Malware Scan</a>';
-			}
-			if(get_site_option('mo_2f_switch_adv_block')){
-				echo '<a id="adv_block_tab" class="nav-tab '.($active_tab == 'mo_2fa_advancedblocking'? 'nav-tab-active' : '').'" href="'.$advance_block	.'">IP Blocking</a>';
-			}
-		
-		}
-			?>
-		</div>
+		<?php 
+		if(MoWpnsUtility::get_mo2f_db_option('mo_wpns_2fa_with_network_security', 'get_option')){ ?>
+			<?php if($_GET['page'] != 'mo_2fa_troubleshooting' && $_GET['page'] != 'mo_2fa_addons' && $_GET['page'] != 'mo_2fa_account'){ ?>
+				<div class="nav-tab-wrapper">
+					<?php
+								echo '<a id="mo_2fa_dashboard"  class="nav-tab" href="'.$dashboard_url.'" >Dashboard</a>';
+								
+								echo '<a id="mo_2fa_2fa" class="nav-tab" href="'.$two_fa.'" >Two Factor</a>';	
+						
+								echo '<a id="mo_2fa_waf" class="nav-tab"  href="'.$waf.'" >Firewall</a>';
+				
+								echo '<a id="login_spam_tab" class="nav-tab"  href="'.$login_and_spam.'" >Login and Spam</a>';
+							
+								echo '<a id="backup_tab" class="nav-tab"  href="'.$backup.'" >Encrypted Backup</a>';
+							
+								echo '<a id="malware_tab" class="nav-tab"  href="'.$scan_url.'">Malware Scan</a>';
+							
+								echo '<a id="adv_block_tab" class="nav-tab"  href="'.$advance_block.'">IP Blocking</a>';
+						?>
+				</div>
 <?php 
+		}
 	}
+}
+?>
+

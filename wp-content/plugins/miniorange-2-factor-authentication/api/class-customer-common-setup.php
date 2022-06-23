@@ -301,6 +301,69 @@ class Customer_Cloud_Setup  {
 		return $content;
 	}
 
+	public function mo_2f_generate_backup_codes($mo2f_user_email,$site_url){
+        
+         
+         $url = 'https://sitestats.xecurify.com/backupcodeservice/index.php';
+		
+          $headers = array('header' => "Authorization:Basic" . base64_encode("$mo2f_user_email:$site_url") );
+		  	 
+							$postdata = array('mo2f_email'=> $mo2f_user_email,
+											   'mo2f_domain' =>$site_url,
+											    'headers'=>$headers['header'],
+											    'mo2f_generate_backup_codes'=>'initiated_backup_codes');
+
+							$handle = curl_init();
+
+							curl_setopt_array($handle,
+								array(
+									CURLOPT_URL => $url,
+									CURLOPT_POST       => true,
+									CURLOPT_POSTFIELDS => $postdata,
+									CURLOPT_RETURNTRANSFER     => true,
+									CURLOPT_SSL_VERIFYHOST => FALSE,
+									CURLOPT_SSL_VERIFYPEER => FALSE,
+								)
+							);
+
+							$data = curl_exec($handle);
+							
+							curl_close($handle);
+						return $data;	
+      
+    }
+
+    public function mo2f_validate_backup_codes($mo2f_backup_code,$mo2f_user_email){
+    	$url = 'https://sitestats.xecurify.com/backupcodeservice/backup_code_validation.php';
+    	
+    	    $site_url = site_url(); 
+			$headers = array('header' => "Authorization:Basic" . base64_encode("$mo2f_user_email:$site_url") );
+
+											$postdata = array('mo2f_otp_token' => $mo2f_backup_code,
+															   'mo2f_user_email'=> $mo2f_user_email,
+															   'headers'=>$headers['header'],
+															   'mo2f_site_url' => $site_url);
+
+											$handle = curl_init();
+
+											curl_setopt_array($handle,
+												array(
+													CURLOPT_URL => $url,
+													CURLOPT_POST       => true,
+													CURLOPT_POSTFIELDS => $postdata,
+													CURLOPT_RETURNTRANSFER     => true,
+													CURLOPT_SSL_VERIFYHOST => FALSE,
+													CURLOPT_SSL_VERIFYPEER => FALSE,
+												)
+											);
+
+											$data = curl_exec($handle);
+											
+											curl_close($handle);
+
+											return $data;
+    }
+
 
 	function validate_otp_token( $authType, $username, $transactionId, $otpToken, $cKey, $customerApiKey, $current_user =null) {
 		$content='';
@@ -361,7 +424,6 @@ class Customer_Cloud_Setup  {
 
 			
 			$content = $mo2fApi->make_curl_call( $url, $field_string, $headers );
-
 		return $content;
 	}
 

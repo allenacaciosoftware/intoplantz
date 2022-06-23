@@ -5,13 +5,16 @@ WP-Cache Config Sample File
 See wp-cache.php for author details.
 */
 
+$wp_cache_home_path = '/';
+$wp_cache_slash_check = 1;
+$cache_page_secret = '0d51c218225e5a6e241925561dc5c462';
 $cache_time_interval = 600;
 if ( ! defined('WPCACHEHOME') )
 	define( 'WPCACHEHOME', WP_CONTENT_DIR . "/plugins/wp-super-cache/" );
 
 $cache_compression = 0; // Super cache compression
-$cache_enabled = true;
-$super_cache_enabled = true;
+$cache_enabled = false;
+$super_cache_enabled = false;
 $cache_max_time = 1800;
 //$use_flock = true; // Set it true or false if you know what to use
 $cache_path = WP_CONTENT_DIR . '/cache/';
@@ -21,7 +24,7 @@ $ossdlcdn = 0;
 // Array of files that have 'wp-' but should still be cached
 $cache_acceptable_files = array( 'wp-comments-popup.php', 'wp-links-opml.php', 'wp-locations.php' );
 
-$cache_rejected_uri = array('wp-.*\\.php', 'index\\.php');
+$cache_rejected_uri = array ( 0 => 'wp-.*\\.php', 1 => 'index\\.php', 2 => '/shop/', 3 => '/blog/', );
 $cache_rejected_user_agent = array ( 0 => 'bot', 1 => 'ia_archive', 2 => 'slurp', 3 => 'crawl', 4 => 'spider', 5 => 'Yandex' );
 
 $cache_rebuild_files = 1;
@@ -66,7 +69,7 @@ $wp_cache_debug_email = '';
 $wp_cache_pages[ "search" ] = 0;
 $wp_cache_pages[ "feed" ] = 0;
 $wp_cache_pages[ "category" ] = 0;
-$wp_cache_pages[ "home" ] = 0;
+$wp_cache_pages[ "home" ] = 1;
 $wp_cache_pages[ "frontpage" ] = 0;
 $wp_cache_pages[ "tag" ] = 0;
 $wp_cache_pages[ "archives" ] = 0;
@@ -96,7 +99,7 @@ $wp_cache_preload_taxonomies = 0;
 $wp_cache_preload_email_me = 0;
 $wp_cache_preload_email_volume = 'none';
 $wp_cache_mobile_prefixes = '';
-$cached_direct_pages = array();
+$cached_direct_pages = array(  );
 $wpsc_served_header = false;
 $cache_gc_email_me = 0;
 $wpsc_save_headers = 0;

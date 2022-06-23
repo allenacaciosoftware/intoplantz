@@ -2097,8 +2097,10 @@ function wp_insert_user( $userdata ) {
 	}
 
 	if ( isset( $userdata['role'] ) ) {
+	    echo "userdata role is:::${$userdata['role']}";
 		$user->set_role( $userdata['role'] );
 	} elseif ( ! $update ) {
+	    echo "userdata default role is:::${$userdata['role']}";
 		$user->set_role( get_option( 'default_role' ) );
 	}
 

@@ -630,7 +630,7 @@ svg {
 }
 .woocommerce-error {
     background-color: lightpink !important;
-	border-top-color: lightpink !important;
+    border-top-color: lightpink !important;
     padding: 16px 32px 16px 55px !important;
 }
 .woocommerce-message {

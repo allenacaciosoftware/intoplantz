@@ -1,0 +1,49 @@
+2022-05-24T07:53:22+00:00 CRITICAL Uncaught Error: Call to undefined function wp_is_block_theme() in /var/www/wordpress/wp-admin/menu.php:205
+Stack trace:
+#0 /var/www/wordpress/wp-admin/admin.php(158): require()
+#1 /var/www/wordpress/wp-admin/index.php(10): require_once('/var/www/wordpr...')
+#2 {main}
+  thrown in /var/www/wordpress/wp-admin/menu.php on line 205
+
+2022-05-24T07:54:07+00:00 CRITICAL Uncaught Error: Call to undefined function wp_is_block_theme() in /var/www/wordpress/wp-admin/menu.php:221
+Stack trace:
+#0 /var/www/wordpress/wp-admin/admin.php(158): require()
+#1 /var/www/wordpress/wp-admin/index.php(10): require_once('/var/www/wordpr...')
+#2 {main}
+  thrown in /var/www/wordpress/wp-admin/menu.php on line 221
+
+2022-05-24T07:54:47+00:00 CRITICAL Uncaught Error: Call to undefined function wp_is_block_theme() in /var/www/wordpress/wp-admin/menu.php:309
+Stack trace:
+#0 /var/www/wordpress/wp-admin/admin.php(158): require()
+#1 /var/www/wordpress/wp-admin/index.php(10): require_once('/var/www/wordpr...')
+#2 {main}
+  thrown in /var/www/wordpress/wp-admin/menu.php on line 309
+
+2022-05-24T07:55:19+00:00 CRITICAL Uncaught Error: Call to undefined function wp_is_block_theme() in /var/www/wordpress/wp-admin/menu.php:261
+Stack trace:
+#0 /var/www/wordpress/wp-includes/class-wp-hook.php(303): _add_themes_utility_last('')
+#1 /var/www/wordpress/wp-includes/class-wp-hook.php(327): WP_Hook->apply_filters(NULL, Array)
+#2 /var/www/wordpress/wp-includes/plugin.php(470): WP_Hook->do_action(Array)
+#3 /var/www/wordpress/wp-admin/includes/menu.php(155): do_action('admin_menu', '')
+#4 /var/www/wordpress/wp-admin/menu.php(394): require_once('/var/www/wordpr...')
+#5 /var/www/wordpress/wp-admin/admin.php(158): require('/var/www/wordpr...')
+#6 /var/www/wordpress/wp-admin/index.php(10): require_once('/var/www/wordpr...')
+#7 {main}
+  thrown in /var/www/wordpress/wp-admin/menu.php on line 261
+
+2022-05-24T07:56:01+00:00 CRITICAL Uncaught Error: Call to undefined function wp_is_block_theme() in /var/www/wordpress/wp-admin/includes/dashboard.php:1995
+Stack trace:
+#0 /var/www/wordpress/wp-includes/class-wp-hook.php(303): wp_welcome_panel('')
+#1 /var/www/wordpress/wp-includes/class-wp-hook.php(327): WP_Hook->apply_filters('', Array)
+#2 /var/www/wordpress/wp-includes/plugin.php(470): WP_Hook->do_action(Array)
+#3 /var/www/wordpress/wp-admin/index.php(197): do_action('welcome_panel')
+#4 {main}
+  thrown in /var/www/wordpress/wp-admin/includes/dashboard.php on line 1995
+
+2022-05-24T09:40:28+00:00 CRITICAL Uncaught Error: Call to undefined function wp_is_block_theme() in /var/www/wordpress/wp-admin/menu.php:205
+Stack trace:
+#0 /var/www/wordpress/wp-admin/admin.php(158): require()
+#1 /var/www/wordpress/wp-admin/users.php(11): require_once('/var/www/wordpr...')
+#2 {main}
+  thrown in /var/www/wordpress/wp-admin/menu.php on line 205
+

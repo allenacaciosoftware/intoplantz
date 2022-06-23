@@ -379,13 +379,15 @@ function mo2f_inline_download_instruction_for_duo_mobile_app($mobile_registratio
 function mo2f_save_duo_configuration_credentials(){
 
 ?>
-<h3><?php echo mo2f_lt( 'Please enter required Details' ); ?>
+<h3><?php echo mo2f_lt( 'Please enter required details' ); ?>
      </h3> 
      <p  style = "font-size: 17px;">
         <?php echo mo2f_lt( '1. If you do not have an account in duo, please'); ?>  <a href="https://signup.duo.com/" target="_blank">Click Here </a><?php echo mo2f_lt( 'to create an account.'); ?> 
+
      </p>
      <p  style = "font-size: 17px;">
         <?php echo mo2f_lt( '2. Follow these steps( ') ?> <a href=" https://duo.com/docs/authapi#first-steps" target="_blank">Click Here </a> <?php echo mo2f_lt( ') to create AUTH API application on duo side. After creating auth API, you will get the all credentials which you need to enter below.'); ?> 
+
      </p>
    <br>
    <div> 

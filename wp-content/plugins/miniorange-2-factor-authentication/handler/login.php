@@ -35,7 +35,10 @@ class LoginHandler
 
 		function mo_wpns_init()
 		{
-			
+			add_action( 'show_user_profile', array($this,'twofa_on_user_profile') ,10,3);
+			add_action( 'edit_user_profile', array($this,'twofa_on_user_profile') ,10,3);
+			add_action( 'personal_options_update', array( $this, 'user_two_factor_options_update' ) ,10,3);
+			add_action( 'edit_user_profile_update', array( $this, 'user_two_factor_options_update' ) ,10,3);
 			global $moWpnsUtility,$mo2f_dirName;
 			$WAFEnabled = get_option('WAFEnabled');
 			$WAFLevel = get_option('WAF');
@@ -51,15 +54,12 @@ class LoginHandler
 				{
 					if(file_exists($mo2f_dirName .'handler'.DIRECTORY_SEPARATOR.'WAF'.DIRECTORY_SEPARATOR.'mo-waf-plugin.php'))
 						include_once($mo2f_dirName .'handler'.DIRECTORY_SEPARATOR.'WAF'.DIRECTORY_SEPARATOR.'mo-waf-plugin.php');
-					else
-					{
-						//UNable to find file. Please reconfigure.
-					}
 				}
 			}
 		
 
 			$userIp 			= $moWpnsUtility->get_client_ip();
+			$userIp = sanitize_text_field( $userIp );
 			$mo_wpns_config = new MoWpnsHandler();
 			$isWhitelisted   = $mo_wpns_config->is_whitelisted($userIp);
 			$isIpBlocked = false;
@@ -113,39 +113,44 @@ class LoginHandler
 			}
 
 		}
+		function twofa_on_user_profile( $user ) {
+			global $mo2f_dirName;
+			if(file_exists($mo2f_dirName .'handler'.DIRECTORY_SEPARATOR.'user-profile-2fa.php')){
+				include_once($mo2f_dirName .'handler'.DIRECTORY_SEPARATOR.'user-profile-2fa.php');
+			}
+		}
+		function user_two_factor_options_update( $user ) {
+			global $mo2f_dirName;
+			if(file_exists($mo2f_dirName .'handler'.DIRECTORY_SEPARATOR.'user-profile-2fa-update.php')){
+				include_once($mo2f_dirName .'handler'.DIRECTORY_SEPARATOR.'user-profile-2fa-update.php');
+			}
+		}
 
 		function mo2f_IP_email_send()
     		  	{
-    		  		global $moWpnsUtility;
+    		  		global $moWpnsUtility, $Mo2fdbQueries;
     		  		$userIp = $moWpnsUtility->get_client_ip();	
-					
- 					if(!get_site_option('mo2f_user_IP'))
-			 	 	{
-			 	 		update_site_option('mo2f_user_IP',$userIp );
-			 	 	}
-			 		$check_Ip = get_site_option('mo2f_user_IP');
+					$userIp = sanitize_text_field( $userIp );
+					$user  =  wp_get_current_user();
+					$user_id = $user->ID;
+ 					$meta_key = 'mo2f_user_IP';
+					add_user_meta($user->ID, $meta_key,$userIp);
+     				$email = $Mo2fdbQueries->get_user_detail( 'mo2f_user_email', $user->ID);
+     				if (empty($email)) {
+     					$email = $user->user_email;
+     				}
+    		  		$check_Ip = get_user_meta($user->ID,$meta_key)[0];
 
 			 		if ($check_Ip != $userIp) 
-			 		{
-
-			 			$email = get_option('admin_email');
+			 		{	
 			 			$subject ="Alert: New IP Detected";
 			 			$message = mo_IP_template();
 			 			$headers=array('Content-Type: text/html; charset=UTF-8');
-			 			if(empty($email))
-          					{
-               				 	$user  =  wp_get_current_user();
-                				$email = $user->user_email;
-            				}
-            				if(is_email($email))
-            				{
-
-								wp_mail( $email,$subject,$message,$headers);	
-								
-							}	
-			 		 
-			 		}
-            			
+            			if(is_email($email))
+            			{
+							wp_mail( $email,$subject,$message,$headers);		
+						}	
+			 		} 			
     		}
 
 		function wooc_validate_user_captcha_register($username, $email, $validation_errors) {
@@ -286,7 +291,7 @@ class LoginHandler
 
 				$mo_wpns_config = new MoWpnsHandler();
 				$userIp 		= $moWpnsUtility->get_client_ip();
-
+				$userIp = sanitize_text_field( $userIp );
 				$mo_wpns_config->move_failed_transactions_to_past_failed($userIp);
 
 				if(get_option('mo_wpns_enable_unusual_activity_email_to_user'))
@@ -330,7 +335,7 @@ class LoginHandler
 		{
 			global $moWpnsUtility;
 				$userIp 		= $moWpnsUtility->get_client_ip();
-			
+				$userIp = sanitize_text_field( $userIp );
 				if(empty($userIp) || empty($username) || !MoWpnsUtility::get_mo2f_db_option('mo2f_enable_brute_force', 'get_option'))
 					return;
 

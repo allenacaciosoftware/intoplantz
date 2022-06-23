@@ -20,7 +20,7 @@ class class_miniorange_2fa_strong_password {
 	}
 	public static function validatePassword($errors, $update, $userData){
 		$Users 		 = MoWpnsUtility::get_mo2f_db_option('mo2f_enforce_strong_passswords_for_accounts', 'get_option');
-		$UserRole 	 = $_POST['role'];
+		$UserRole = isset($_POST['role'])?sanitize_text_field($_POST['role']):NULL;
 		if(is_null($UserRole) and $Users == 'user')
 		{
 			return true;

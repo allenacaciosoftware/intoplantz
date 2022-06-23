@@ -469,6 +469,19 @@ class Miniorange_Authentication {
 private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $footer = '' ) {
 
 		$contact_url = 'https://wordpress.org/plugins/miniorange-2-factor-authentication/';
+		echo '<head>';
+        echo '<script type="text/javascript" src="'.plugins_url( "/includes/jquery-qrcode/jquery-qrcode.js", 	 dirname(dirname(__FILE__ ))).'"></script>';
+        echo '<script type="text/javascript" src="'.plugins_url( "/includes/jquery-qrcode/jquery-qrcode.min.js", dirname(dirname(__FILE__ ))).'"></script>';
+        echo '<script type="text/javascript" src="'.plugins_url( "/includes/js/phone.js", 						 dirname(dirname(__FILE__ ))).'"></script>';
+        
+        echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/phone.css', dirname(dirname(__FILE__))). '" />';
+	//	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/twofa_style_settings.css', dirname(dirname(__FILE__))). '" />';
+	//	echo '<link rel="stylesheet" type="text/css" href="' . plugins_url('includes/css/style_settings.css', dirname(dirname(__FILE__))). '" />';
+
+
+        echo '</head>';
+		
+		
 		?>
 		<style type="text/css">
 			#mo2f-setup-wizard-settings-area {
@@ -502,6 +515,7 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				padding: 0 10px;
 			}
 
+
 			#mo2f-setup-wizard-settings-area .mo2f-setup-logo img {
 				width: 100%;
 				height: 100%;
@@ -519,7 +533,54 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
 				padding: 20px 30px;
 			}
-
+			#mo2f-setup-settings-error-loading-area2 {
+				box-sizing: border-box;
+				max-width: 90%;
+				width: auto;
+				margin: 0 auto;
+				background: #fff;
+				border: 1px solid #DDDDDD;
+				border-radius: 6px;
+				webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				padding: 20px 30px;
+			}
+			#mo2f-setup-settings-error-loading-area3 {
+				box-sizing: border-box;
+				max-width: 90%;
+				width: auto;
+				margin: 0 auto;
+				background: #fff;
+				border: 1px solid #DDDDDD;
+				border-radius: 6px;
+				webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				padding: 20px 30px;
+			}
+			#mo2f-setup-settings-error-loading-area4 {
+				box-sizing: border-box;
+				max-width: 90%;
+				width: auto;
+				margin: 0 auto;
+				background: #fff;
+				border: 1px solid #DDDDDD;
+				border-radius: 6px;
+				webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				padding: 20px 30px;
+			}
+			#mo2f-setup-settings-error-loading-area1 {
+				box-sizing: border-box;
+				max-width: 90%;
+				width: auto;
+				margin: 0 auto;
+				background: #fff;
+				border: 1px solid #DDDDDD;
+				border-radius: 6px;
+				webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
+				padding: 20px 30px;
+			}
 			#mo2f-setup-wizard-settings-area .mo2f-setup-error-footer {
 				text-align: center;
 				margin-top: 20px;
@@ -548,6 +609,40 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 
 			#mo2f-setup-error-js ul.info {
 				margin: -10px 0 20px;
+			}
+			.mo2f-input-radios-with-icons label {
+				width: 90%;
+				height: 40px;
+				color: #444;
+				border: 1px solid #ddd;
+				background: #fff;
+				border-radius: 3px;
+				font-size: 16px;
+				display: block;
+				margin-bottom: 20px;
+				padding: 24px 9px 9px 9px;
+				cursor: pointer
+			}
+
+			.mo2f-input-radios-with-icons label:hover {
+				border: 1px solid #999;
+				-webkit-box-shadow: 0 0 0 1px #999;
+				box-shadow: 0 0 0 1px #999
+			}
+
+			.mo2f-styled-radio {
+				width: 32px;
+				height: 32px;
+				position: relative;
+				display: inline-block;
+				border-radius: 50%;
+				background-color: #e6e6e6
+				float: left;
+    			margin-top: -4px;
+			}
+			.mo_wpns_table_textbox {
+				width:100%;
+				height:30px;
 			}
 
 			#mo2f-setup-error-js a.button {
@@ -582,7 +677,13 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				font-weight: 300;
 				text-align: left;
 			}
-
+			table {
+			  table-layout: fixed ;
+			  width: 100% ;
+			}
+			td {
+			  width: 48% ;
+			}
 			@media (min-width: 782px) {
 				#mo2f-setup-wizard-settings-area .mo2f-setup-logo {
 					margin-top: 50px;
@@ -593,6 +694,36 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 					width: 650px;
 					margin-top: 40px;
 					padding: 52px 67px 49px;
+				}
+				#mo2f-setup-settings-error-loading-area1 {
+					width: 650px;
+					margin-top: 40px;
+					padding: 52px 67px 49px;
+				}
+				#mo2f-setup-settings-error-loading-area2 {
+					width: 650px;
+					margin-top: 40px;
+					padding: 52px 67px 49px;
+				}
+				#mo2f-setup-settings-error-loading-area3 {
+					width: 650px;
+					margin-top: 40px;
+					padding: 52px 67px 49px;
+				}
+				#mo2f-setup-settings-error-loading-area4 {
+					width: 650px;
+					margin-top: 40px;
+					padding: 52px 67px 49px;
+				}
+				 .mo2f-styled-radio {
+				    width: 32px;
+				    height: 32px;
+				    position: relative;
+				    display: inline-block;
+				    border-radius: 50%;
+				    background-color: #e6e6e6;
+				    float: left;
+   					margin-top: -4px;
 				}
 
 				#mo2f-setup-wizard-settings-area .mo2f-setup-error-footer {
@@ -612,6 +743,9 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				    font-size: 18px;
 				    padding: 19px 39px;
 				}
+				.mo2f-styled-radio-text {
+					margin-left: 10px
+				}
 				.mo2f-setup-button.mo2f-setup-button-main:hover {
 				    background-color: #c45e1b;
 				}
@@ -620,6 +754,305 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				    color: #fff;
 				    font-weight: 500;
 				}
+				.mo2f-setup-wizard-timeline {
+					-webkit-box-align: center;
+					-ms-flex-align: center;
+					align-items: center;
+					display: -webkit-box;
+					display: -ms-flexbox;
+					display: flex;
+					margin: 41px auto 0;
+					max-width: 650px;
+					padding: 0 20px
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step-line {
+					background: #ddd;
+					height: 2px;
+					margin: 0 6px;
+					width: 100%
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step-line.mo2f-setup-wizard-timeline-line-active {
+					background: #6aa08b
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step {
+					border: none;
+					background-color: #b6b6b6;
+					border-radius: 50%;
+					-ms-flex-negative: 0;
+					flex-shrink: 0;
+					height: 16px;
+					width: 16px
+				}
+
+				.mo2f-setup-wizard-step-footer {
+					display: block;
+					text-align: center;
+					min-height: 110px;
+					padding: 0 20px;
+					margin-top: 30px
+				}
+				.popup_text
+				{
+				    color:black;
+				    margin-top: 2%;
+				    font-weight: 600; 
+				    font-size: 12px !important;
+ 	 			}	
+ 	 			.overlay{
+				  position: fixed;
+				  top: 0;
+				  left: 0;
+				  right: 0;
+				  bottom: 0;
+				  width: 100%;
+				  height: 100%;
+				  background: #000;
+				  opacity: .5;
+				  z-index: 0;
+				}
+ 	 			.overlay_success {
+				    width: min-content;
+				    height: 40px;
+				    float: left;
+				    z-index: 1;
+				    top: 0;
+				    right: 0;
+				    text-align: center;
+				    margin-bottom: 4%
+				    background-color:#bcffb4 !important ;
+				    /* overflow-x: hidden; */ 
+				    background: #b1ffb1;
+				    border-left: 4px solid #46b450;
+				  }
+				.overlay_error {
+				    width: min-content;
+				    height: min-content;
+				    padding-bottom: 1%;
+				    float: left;
+				    z-index: 1;
+				    top: 0;
+				    right: 0;
+				    margin-bottom: 4%;
+				    text-align: center;
+				    background-color:bisque !important ;
+				    /* overflow-x: hidden; */
+				    border-left: 4px solid red;
+				  }
+
+				.mo2f-setup-wizard-step-footer a {
+					font-size: 14px;
+					display: block;
+					color: #999;
+					margin: 20px 0
+				}
+
+				.mo2f-setup-wizard-step-footer a:active,
+				.mo2f-setup-wizard-step-footer a:hover {
+					color: #777;
+					text-decoration: underline
+				}
+
+
+				.mo2f-button.mo2f-button-main {
+					background-color: #e27730;
+					color: #fff;
+					font-weight: 500;
+					-webkit-box-flex: 11;
+					-ms-flex: 11;
+					flex: 11;
+					padding: 12px 25px;
+					font-size: 16px;
+				}
+
+				.mo2f-button.mo2f-button-main:focus,
+				.mo2f-button.mo2f-button-main:hover {
+					background-color: #c45e1b
+				}
+
+				.mo2f-button.mo2f-button-main:disabled {
+					opacity: .65;
+					cursor: not-allowed;
+					background-color: #e27730;
+					-webkit-box-flex: 11;
+					-ms-flex: 11;
+					flex: 11;
+					margin-right: 30px
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step .icon {
+					display: none
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step.mo2f-setup-wizard-timeline-step-active,
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step.mo2f-setup-wizard-timeline-step-completed {
+					background-color: #6aa08b;
+					position: relative
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step.mo2f-setup-wizard-timeline-step-failed {
+					background-color: #d83638;
+					position: relative
+				}
+
+				.mo2f-step-show{
+					margin: 0 0 16px;
+				    font-size: 14px;
+				    line-height: 18px;
+				    color: #b6b6b6;
+				}
+				.mo2f_table_textbox {
+				    width: 200px;
+				    height: 20px !important;
+				    font-size: 14px !important;
+				}
+				.mo2f_table_textbox_phone {
+				    width: 200px;
+				    height: 40px !important;
+				    font-size: 14px !important;
+				}
+				.mo2f_kba_ques {
+				    width: 394px !important;
+				    border-radius: 4px !important;
+				    height: 40px !important;
+				    font-size: 14px !important;
+				}
+
+				.mo2f_kba_tb_data {
+				    padding-left: 15px;
+				}
+
+				.mo2f_kba_table {
+				    padding: 0 10px;
+				    width: 100%;
+				}
+				.mo2f_kba_body {
+				    border: hidden !important;
+				}
+
+				
+				.mo2f_table_textbox_KBA {
+				    width: 200px;
+				    height: 40px !important;
+				    font-size: 14px !important;
+				}
+
+				
+				.mo2f_kba_header {
+				    font-weight: bold;
+				}
+
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step.mo2f-setup-wizard-timeline-step-completed .icon-success,
+				.mo2f-setup-wizard-timeline .mo2f-setup-wizard-timeline-step.mo2f-setup-wizard-timeline-step-failed .icon-failed {
+					color: #fff;
+					display: block;
+					position: absolute;
+					left: 3px;
+					top: 3px
+				}
+				.mo2f-setup-wizard-step-footer {
+					display: -webkit-box;
+					display: -ms-flexbox;
+					display: flex;
+					-webkit-box-pack: justify;
+					-ms-flex-pack: justify;
+					justify-content: space-between;
+					-webkit-box-align: center;
+					-ms-flex-align: center;
+					align-items: center;
+					padding: 0;
+					margin-top: 0
+				}
+				.mo2f_blur   {
+				    filter: blur(5px);
+				    -webkit-filter: blur(5px);
+				    -moz-filter: blur(5px);
+				    -o-filter: blur(5px);
+				    -ms-filter: blur(5px);
+				}
+				.mo2f_loader {
+				  border: 16px solid #b9acac;
+				  border-radius: 50%;
+				  border-top: 16px solid #fb540b;
+				  width: 50px;
+				  height: 50px;
+				  -webkit-animation: spin 2s linear infinite; /* Safari */
+				  animation: spin 2s linear infinite;
+				  position: fixed;
+				  left: 50%;
+				  top: 50%;
+				  z-index: 100;
+				}
+
+				/* Safari */
+				@-webkit-keyframes spin {
+				  0% { -webkit-transform: rotate(0deg); }
+				  100% { -webkit-transform: rotate(360deg); }
+				}
+
+				@keyframes spin {
+				  0% { transform: rotate(0deg); }
+				  100% { transform: rotate(360deg); }
+				}
+				.mo2f-setup-wizard-step-footer-buttons {
+					margin-bottom: 0;
+				}
+				.mo2f-setup-wizard-step-footer-buttons button {
+					margin-bottom: 0;
+					margin-right: 15px;
+					width: inherit
+				}
+				.miniorange_button
+				{
+				    background:#00A0D2!important;
+				    border-color:#0073AA!important;
+				    box-shadow:0 1px 0 rgba(120,200,230,.5) inset,0 1px 0 rgba(0,0,0,.15)!important;
+				    color:#FFF!important;
+				    text-decoration:none!important;
+				    cursor:pointer!important;
+				    border-width:1px!important;
+				    border-style:solid!important;
+				    border-radius:3px!important;
+				    white-space:nowrap!important;
+				    box-sizing:border-box!important;
+				    line-height:28px!important;
+				    padding:0 12px!important;
+				    font-size:13px!important;
+				}
+
+
+				.mo2f_IR_phone_OTP{
+				    font-size:15px;
+				    width:150px !important;
+				    color:#212F3C;
+				    border:none;
+				    display:block; 
+				    border-bottom-style: solid;    
+				    border-width: 2px;
+				    border-color:#D0D3D4;
+				    border-radius:0px;
+				    outline:none;
+				    padding:5px;
+
+				}
+				.mo2f-setup-wizard-step-footer-buttons button:last-child {
+					margin-right: 0
+				}
+				a .text-with-arrow-left .icon {
+					margin-right: 10px
+				}
+
+				a .text-with-arrow {
+					display: -webkit-box;
+					display: -ms-flexbox;
+					display: flex;
+					-webkit-box-pack: center;
+					-ms-flex-pack: center;
+					justify-content: center
+				}
+
 			}
 		</style>
 		<!--[if IE]>
@@ -630,7 +1063,9 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 		</style>
 
 		<![endif]-->
-			<div id="mo2f-setup-wizard-settings-area" class="mo2f-setup-wizard-settings-area wpms-container">
+			<div class="mo2f_loader" id="mo2f_loader" style="display: none;"></div>
+					
+			<div id="mo2f-setup-wizard-settings-area"  class="mo2f-setup-wizard-settings-area wpms-container">
 				<header class="mo2f-setup-wizard-header">
 					<h1 >
 						<div>
@@ -643,14 +1078,12 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 					<div id="mo2f-setup-settings-error-loading-area">
 						<div>
 							<div id="mo2f-setup-error-js">
-								<h3 style="text-align:center;"> Welcome to the 2FA Setup Wizard! </h3>
-								<br>
 								<p class="subtitle" style="text-align:center;" > This setup guide will take you through all the steps you need to follow to enable the two-factor authentication for your website.</p>
 								
 								<br><br>
 								<button type="button" style="text-align:center;display: flex;margin: auto;" class="mo2f-setup-button mo2f-setup-button-main mo2f-setup-button-large" id ='mo2f_get_started' target="_blank" class="button" rel="noopener noreferrer"> <?php esc_html_e("Let's Get Started", 'mo2f-setup'); ?></button>
 								
-								<br><br><br>
+								<br><br>
 								<div style="text-align:center;display: flex;margin: auto;flex-direction: column;">
 									<a href="<?php echo esc_url( $contact_url ); ?>" target="_blank" rel="noopener noreferrer">
 										<?php esc_html_e( 'Facing issues? Contact Us', 'mo2f-setup' ); ?>
@@ -664,64 +1097,267 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 					</div>
 				</div>
 				<div id = "mo2f_methods_setup_wizard">
-					<div id="mo2f-setup-settings-error-loading-area" style="width: 900px">
-					 
-					<h3 style="text-align:center;"> Select the Authentication method you want to configure </h3>
-					<br>			
-					<label title="<?php echo __('You have to enter 6 digits code generated by Authenticator App to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
-                        <input type="radio"  name="mo2f_selected_2factor_method"  value="Google Authenticator"  />
-                        <?php echo __('Google / Authy / Microsoft Authenticator (Any TOTP Based Authenticatior App)', 'miniorange-2-factor-authentication'); ?>
-                    </label>
-                    <br><br>
-                    
-                    <label title="<?php echo __('You will receive a one time passcode via SMS on your phone. You have to enter the otp on your screen to login. Supported in Smartphones, Feature Phones.', 'miniorange-2-factor-authentication'); ?>">
-                        <input type="radio"  name="mo2f_selected_2factor_method"  value="OTP Over SMS"  />
-                        <?php echo __('OTP Over SMS (Registration required)', 'miniorange-2-factor-authentication'); ?>
-                    </label>
-					<br><br>
-
-					<label title="<?php echo __('You will receive a one time passcode on your email. You have to enter the otp on your screen to login. Supported in Smartphones, Feature Phones.', 'miniorange-2-factor-authentication'); ?>" >
-                        <input type="radio"  name="mo2f_selected_2factor_method"  value="OTP Over Email"  />
-                        <?php echo __('OTP Over Email', 'miniorange-2-factor-authentication'); ?>
-                    </label>
-     			    <br><br>
+					<div class="mo2f-setup-wizard-timeline">
+						
+						<div class="mo2f-setup-wizard-timeline-step mo2f-setup-wizard-timeline-step-active" id="mo2f-setup-wizard-step1"></div>
+						<div class="mo2f-setup-wizard-timeline-step-line" id="mo2f-setup-wizard-line1"></div>
+						<div class="mo2f-setup-wizard-timeline-step" id="mo2f-setup-wizard-step2"> </div>
+						<div class="mo2f-setup-wizard-timeline-step-line" id="mo2f-setup-wizard-line2"></div>
+						<div class="mo2f-setup-wizard-timeline-step"id="mo2f-setup-wizard-step3"> </div>
+						<div class="mo2f-setup-wizard-timeline-step-line" id="mo2f-setup-wizard-line3"></div>
+						<div class="mo2f-setup-wizard-timeline-step" id="mo2f-setup-wizard-step4"> </div>
+						
+					</div>
+					<div id="mo2f-setup-settings-error-loading-area1" style="width: 900px">
 					
-					<label title="<?php echo __('You have to enter 6 digits code generated by Authy 2-Factor Authentication App to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
-                        <input type="radio"  name="mo2f_selected_2factor_method"  value="Google Authenticator"  />
-                        <?php echo __('Authy 2-Factor Authentication', 'miniorange-2-factor-authentication'); ?>
+					<p class="mo2f-step-show"> Step 1 of 4</p>
+					<h3 style="text-align:center;font-size:xx-large;"> Select the Authentication method you want to configure </h3>
+					<br>
+					<div class="mo2f-input-radios-with-icons">
+					<table>
+						<tr>
+						<td>
+					<label title="<?php echo __('You have to enter 6 digits code generated by google Authenticator App to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio"  value="Google Authenticator"  />
+                   		<span class="mo2f-styled-radio-text"> Google Authenticator</span>
                     </label>
-                    <br><br>                                      
-                               
-                    <label title="<?php echo __('You will receive a push notification on your phone. You have to ACCEPT or DENY it to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
-                        <input type="radio"  name="mo2f_selected_2factor_method"  value="Duo Authenticator"  />
-                        <?php echo __('Duo Push Notification', 'miniorange-2-factor-authentication'); ?>
+                    </td>
+                    	<td>
+                    <label title="<?php echo __('You will receive a one time passcode via SMS on your phone. You have to enter the otp on your screen to login. Supported in Smartphones, Feature Phones.', 'miniorange-2-factor-authentication'); ?>">
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio"  value="OTP Over SMS"  />
+                        <span class="mo2f-styled-radio-text">
+                        <?php echo __('OTP Over SMS (Registration required)', 'miniorange-2-factor-authentication'); ?>
+                    </span>
+                    </label></td>
+                </tr>
+                		<tr>
+						<td>
+				
+					<label title="<?php echo __('You will receive a one time passcode on your email. You have to enter the otp on your screen to login. Supported in Smartphones, Feature Phones.', 'miniorange-2-factor-authentication'); ?>" >
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio"  value="OTP Over Email"  />
+                        <span class="mo2f-styled-radio-text">
+                        <?php echo __('OTP Over Email', 'miniorange-2-factor-authentication'); ?>
+                    </span>
                     </label>
-    				<br><br> 
+     			    </td>
 
-	                <label title="<?php echo __('You have to answers some knowledge based security questions which are only known to you to authenticate yourself. Supported in Desktops,Laptops,Smartphones.', 'miniorange-2-factor-authentication'); ?>" >
-			            <input type="radio"  name="mo2f_selected_2factor_method"  value="Security Questions"  />
+     			    <td>
+					<label title="<?php echo __('You have to answers some knowledge based security questions which are only known to you to authenticate yourself. Supported in Desktops,Laptops,Smartphones.', 'miniorange-2-factor-authentication'); ?>" >
+			            <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio" value="Security Questions"  />
+                        <span class="mo2f-styled-radio-text">
 			                            <?php echo __('Security Questions ( KBA )', 'miniorange-2-factor-authentication'); ?>
+                    </span>
                     </label>
-	                <br><br>
-                    
+                	</td>
+                	</tr>
+                	<tr>
+					<td>
+				
+					<label title="<?php echo __('You have to enter 6 digits code generated by Microsoft Authenticator App to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio"  value="Google Authenticator"  />
+                        <span class="mo2f-styled-radio-text">
+                        <?php echo __('Microsoft Authenticator', 'miniorange-2-factor-authentication'); ?>
+                    </span>
+                    </label>
+                	</td>
+                	<td>
+					<label title="<?php echo __('You have to enter 6 digits code generated by Authy 2-Factor Authentication App to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio"  value="Google Authenticator"  />
+                        <span class="mo2f-styled-radio-text">
+                        <?php echo __('Authy 2-Factor Authentication', 'miniorange-2-factor-authentication'); ?>
+                    </span>
+                    </label>
+                    </td></tr>
+                    <tr><td>
+				       
+                    <label title="<?php echo __('You will receive a push notification on your phone. You have to ACCEPT or DENY it to login. Supported in Smartphones only.', 'miniorange-2-factor-authentication'); ?>">
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio" value="Duo Authenticator"  />
+                        <span class="mo2f-styled-radio-text">
+                        <?php echo __('Duo Push Notification', 'miniorange-2-factor-authentication'); ?>
+                    </span>
+                    </label>
+    				</td>
+    				<td>
                     <label title="<?php echo __('You will get an OTP on your TELEGRAM app from miniOrange Bot.', 'miniorange-2-factor-authentication'); ?>" >
-                        <input type="radio"  name="mo2f_selected_2factor_method"  value="OTP Over Telegram"  />
+                        <input type="radio"  name="mo2f_selected_2factor_method" class="mo2f-styled-radio" value="OTP Over Telegram"  />
+                        <span class="mo2f-styled-radio-text">
                         <?php echo __('OTP Over Telegram', 'miniorange-2-factor-authentication'); ?>
+                    </span>
                     </label>
-				    <br><br>
-                                 
+                    </td>
+                </table>
+				    </div>             
 
-                      <br><a href="#skiptwofactor" style="color:#F4D03F ;font-weight:bold;margin-left:35%;"><?php echo __('Skip Setup', 'miniorange-2-factor-authentication'); ?></a>>>
+                      <br><a href="#skiptwofactor" style="color:#F4D03F ;font-weight:bold;margin-left:45%;"><?php echo __('Skip Setup', 'miniorange-2-factor-authentication'); ?></a>
                                 <br />
                                  
                               
-                  </div>             
+                  <div class="mo2f-setup-wizard-step-footer">
+                  	<a href="#previousStep1"><span class="text-with-arrow text-with-arrow-left"><svg viewBox="0 0 448 512" role="img" class="icon" data-icon="long-arrow-alt-left" data-prefix="far" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="18"><path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M107.515 150.971L8.485 250c-4.686 4.686-4.686 12.284 0 16.971L107.515 366c7.56 7.56 20.485 2.206 20.485-8.485v-71.03h308c6.627 0 12-5.373 12-12v-32c0-6.627-5.373-12-12-12H128v-71.03c0-10.69-12.926-16.044-20.485-8.484z"></path></svg>  Previous Step </span></a>
+                  	<div class="mo2f-setup-wizard-step-footer-buttons">
+                  		<input type="button" name="mo2f_next_step1" id="mo2f_next_step1" class="mo2f-button mo2f-button-main"  value="Save and Continue" />
+                  		  
+                  	</div>
+                  </div> 
+                  </div> 
+
+                 
+
+
+
+                <div id="mo2f-setup-settings-error-loading-area2" style="width: 900px; display: none;">
+	                <p class="mo2f-step-show"> Step 2 of 4</p>
+					
+	                <h4 style="text-align:center;font-size: xx-large;"> Register with miniOrange </h4>
+					
+					<form name="f" id="mo2f_registration_form" method="post" action="">
+						<input type="hidden" name="option" value="mo_wpns_register_customer" />
+						<div class="mo2f_table_layout">
+						<div style="margin-bottom:30px;">
+								<div class="overlay_error" style="width:760px; display: none;" id= "mo2f_Error_block">
+								<p class ="popup_text" id="mo2f_Error_message" style="color: red;" >Seems like email is already registered. Please click on 'Already have an account'</p></div>
+								<p> Please enter a valid email id that you have access to and select a password</p>
+								<table class="mo_wpns_settings_table">
+									<tr>
+										<td><b><font color="#FF0000">*</font>Email:</b></td>
+										<td><input style="padding: 5px;" class="mo_wpns_table_textbox" type="email" id="mo2f_email" name="email"
+											required placeholder="person@example.com" /></td>
+									</tr>
+
+									<tr>
+										<td><b><font color="#FF0000">*</font>Password:</b></td>
+										<td><input style="padding: 5px;" class="mo_wpns_table_textbox" required id= "mo2f_password" type="password"
+											name="password" placeholder="Choose your password (Min. length 6)" /></td>
+									</tr>
+									<tr>
+										<td><b><font color="#FF0000">*</font>Confirm Password:</b></td>
+										<td><input style="padding: 5px;" class="mo_wpns_table_textbox" id= "mo2f_confirmPassword" required type="password"
+											name="confirmPassword" placeholder="Confirm your password" /></td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td><br>
+											<a href="#mo2f_account_exist">Already have an account?</a>
+
+									</tr>
+								</table>
+						</div>	
+						</div>
+					</form>
+					<form name="f" id="mo2f_login_form" style="display: none;" method="post" action="">
+						<input type="hidden" name="option" value="mo_wpns_verify_customer" />
+						<div class="mo2f_table_layout">
+						<div style="margin-bottom:30px;">
+								<div class="overlay_error" style="width:760px; display: none;" id= "mo2f_Error_block">
+								<p class ="popup_text" id="mo2f_Error_message" style="color: red;" >Invalid Credentials</p></div>
+								
+								<p>Please enter your miniOrange email and password. <a target="_blank" href="https://login.xecurify.com/moas/idp/resetpassword"> Click here if you forgot your password?</a></p>
+								<table class="mo_wpns_settings_table">
+									<tr>
+										<td><b><font color="#FF0000">*</font>Email:</b></td>
+										<td><input  style="padding: 5px;" class="mo_wpns_table_textbox" type="email" id="mo2f_email_login" name="email"
+											required placeholder="person@example.com" /></td>
+									</tr>
+									<tr>
+										<td><b><font color="#FF0000">*</font>Password:</b></td>
+										<td><input style="padding: 5px;" class="mo_wpns_table_textbox" required  id= "mo2f_password_login" type="password"
+											name="password" placeholder="Enter your miniOrange password" /></td>
+									</tr>
+									<tr>
+										<td>&nbsp;</td>
+										<td><br>
+											<a href="#mo2f_register_new_account">Go Back to Registration Page</a>
+
+									</tr>
+									
+								</table>
+						</div>	
+						</div>
+					</form>
+		
+
+					<br><a href="#skiptwofactor" style="color:#F4D03F ;font-weight:bold;margin-left:45%;"><?php echo __('Skip Setup', 'miniorange-2-factor-authentication'); ?></a>
+	                <br/>
+	                      
+
+	              	<div class="mo2f-setup-wizard-step-footer">
+		              	<a href="#previousStep2"><span class="text-with-arrow text-with-arrow-left"><svg viewBox="0 0 448 512" role="img" class="icon" data-icon="long-arrow-alt-left" data-prefix="far" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="18"><path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M107.515 150.971L8.485 250c-4.686 4.686-4.686 12.284 0 16.971L107.515 366c7.56 7.56 20.485 2.206 20.485-8.485v-71.03h308c6.627 0 12-5.373 12-12v-32c0-6.627-5.373-12-12-12H128v-71.03c0-10.69-12.926-16.044-20.485-8.484z"></path></svg>  Previous Step </span></a>
+		              	<div class="mo2f-setup-wizard-step-footer-buttons">
+		              		<input type="button" name="mo2f_next_step2" id="mo2f_next_step2" class="mo2f-button mo2f-button-main"  value="Create Account and continue" />
+		              		  
+	              		</div>
+	                </div> 
+                 
+
+                  </div>
+
+                 <div id="mo2f-setup-settings-error-loading-area3" style="width: 900px; display: none;">
+                 <p class="mo2f-step-show"> Step 3 of 4</p>
+				
+				 <h3 style="text-align:center;font-size: xx-large;" id="mo2f_setup_method_title"> Configure 2-factor authentication </h3>
+
+				 <div class="overlay_success" style="width:760px; display: none;" id= "mo2f_success_block_configuration">
+				 <p class ="popup_text" id="mo2f_configure_success_message" >An OTP has been sent to the below email.</p>
+				 <br><br></div>
+				
+				 <div class="overlay_error" style="width:760px; display: none;" id= "mo2f_Error_block_configuration">
+				 <p class ="popup_text" id="mo2f_configure_Error_message" style="color: red;" >Invalid OTP</p>
+				</div>
+						<div id="mo2f_main_content"> </div>
+
+				 	<br><a href="#skiptwofactor" style="color:#F4D03F ;font-weight:bold;margin-left:45%;"><?php echo __('Skip Setup', 'miniorange-2-factor-authentication'); ?></a>
+	                <br/>
+	                
+
+
+	              	<div class="mo2f-setup-wizard-step-footer">
+		              	<a href="#previousStep3"><span class="text-with-arrow text-with-arrow-left"><svg viewBox="0 0 448 512" role="img" class="icon" data-icon="long-arrow-alt-left" data-prefix="far" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="18"><path xmlns="http://www.w3.org/2000/svg" fill="currentColor" d="M107.515 150.971L8.485 250c-4.686 4.686-4.686 12.284 0 16.971L107.515 366c7.56 7.56 20.485 2.206 20.485-8.485v-71.03h308c6.627 0 12-5.373 12-12v-32c0-6.627-5.373-12-12-12H128v-71.03c0-10.69-12.926-16.044-20.485-8.484z"></path></svg>  Previous Step </span></a>
+		              	<div class="mo2f-setup-wizard-step-footer-buttons">
+		              		<input type="button" name="mo2f_next_step3" id="mo2f_next_step3" class="mo2f-button mo2f-button-main"  value="Save and Continue" />
+		              		  
+	              	</div>
+                </div> 
+                 
+
+                </div>
+
+                 <div id="mo2f-setup-settings-error-loading-area4" style="width: 900px; display: none;">
+                 <p class="mo2f-step-show"> Step 4 of 4</p>
+					 <div style="text-align: center;">	
+					 <h3 style="text-align:center;font-size: xx-large;"> Congratulations! </h3>
+					 <br>
+							You have successfully configured the two-factor authentication. 
+							<br><br><br>
+							<input type="button" name="mo2f_next_step4" id="mo2f_next_step4" class="mo2f-button mo2f-button-main"  value="Advance Settings" />
+
+	                 </div> 
+                 </div>
+
+                 </div>
+
+
 				</div>
 			</div>
 		
 
 
 		<script type="text/javascript">
+
+           var selected_2FA_method = '';
+            var ele = document.getElementsByName('mo2f_selected_2factor_method');
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                    selected_2FA_method = ele[i].value;
+            }
+            jQuery("#mo2f_setup_method_title").text(selected_2FA_method);
+
+			jQuery('#mo2f_next_step4').click(function(e){
+				localStorage.setItem("last_tab", 'unlimittedUser_2fa');
+				window.location.href = '<?php echo (admin_url()."admin.php?page=mo_2fa_two_fa"); ?>'; 
+			
+			});
+
+			
 			jQuery('#mo2f_methods_setup_wizard').css('display', 'none');
 			jQuery("#mo2f_get_started").click(function(e){
 				jQuery('#mo2f-setup-settings-error-loading-area-container').css('display', 'none');
@@ -729,21 +1365,417 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				
 			});
 
+			jQuery('a[href="#previousStep3"]').click(function(e){
+				document.getElementById('mo2f_success_block_configuration').style.display = "none";
+		        document.getElementById('mo2f_Error_block_configuration').style.display = "none";
+		        	
+				var selected_2FA_method = '';
+				var ele = document.getElementsByName('mo2f_selected_2factor_method');
+				for(i = 0; i < ele.length; i++) {
+                	if(ele[i].checked)
+            			selected_2FA_method = ele[i].value;
+            	}
+            	if(selected_2FA_method =='OTP Over SMS')
+            	{
+	            	document.getElementById('mo2f-setup-settings-error-loading-area3').style.display  = "none";
+	            	document.getElementById('mo2f-setup-settings-error-loading-area2').style.display  = "block";
+	            	var lineElement = document.getElementById("mo2f-setup-wizard-line2");
+					lineElement.classList.remove("mo2f-setup-wizard-timeline-line-active");
+					var stepElement = document.getElementById("mo2f-setup-wizard-step3");
+					stepElement.classList.remove("mo2f-setup-wizard-timeline-step-active");
+            	}
+            	else
+            	{
+            		var lineElement = document.getElementById("mo2f-setup-wizard-line2");
+					lineElement.classList.remove("mo2f-setup-wizard-timeline-line-active");
+					var stepElement = document.getElementById("mo2f-setup-wizard-step3");
+					stepElement.classList.remove("mo2f-setup-wizard-timeline-step-active");
+            		var lineElement = document.getElementById("mo2f-setup-wizard-line1");
+					lineElement.classList.remove("mo2f-setup-wizard-timeline-line-active");
+					var stepElement = document.getElementById("mo2f-setup-wizard-step2");
+					stepElement.classList.remove("mo2f-setup-wizard-timeline-step-active");
+					document.getElementById('mo2f-setup-settings-error-loading-area3').style.display  = "none";
+            		document.getElementById('mo2f-setup-settings-error-loading-area1').style.display  = "block";
+            	
+            	}
+			}); 
+
+			jQuery('a[href="#previousStep2"]').click(function(e){
+				document.getElementById('mo2f-setup-settings-error-loading-area2').style.display  = "none";
+            	document.getElementById('mo2f-setup-settings-error-loading-area1').style.display  = "block";
+            	var lineElement = document.getElementById("mo2f-setup-wizard-line1");
+				lineElement.classList.remove("mo2f-setup-wizard-timeline-line-active");
+				var stepElement = document.getElementById("mo2f-setup-wizard-step2");
+				stepElement.classList.remove("mo2f-setup-wizard-timeline-step-active");
+            	
+			}); 
+
+			jQuery('a[href="#previousStep1"]').click(function(e){
+				jQuery('#mo2f-setup-settings-error-loading-area-container').css('display', 'block');
+				jQuery('#mo2f_methods_setup_wizard').css('display', 'none');
+				
+			}); 
+
+			jQuery('a[href=\"#mo2f_account_exist\"]').click(function (e) {
+	            document.getElementById('mo2f_registration_form').style.display = "none";
+	            document.getElementById('mo2f_login_form').style.display = "block";
+	            document.getElementById('mo2f_next_step2').value = 'Login and Continue';
+	    	});
+			
+			jQuery('a[href=\"#mo2f_register_new_account\"]').click(function (e) {
+	            document.getElementById('mo2f_registration_form').style.display = "block";
+	            document.getElementById('mo2f_login_form').style.display = "none";
+	            document.getElementById('mo2f_next_step2').value = 'Create Account and Continue';
+	    	});
+			
+			jQuery('#mo2f_next_step3').click(function(e){
+				document.getElementById('mo2f_loader').style.display = "block";
+				document.getElementById('mo2f_success_block_configuration').style.display = "none";
+		        document.getElementById('mo2f_Error_block_configuration').style.display = "none";
+		       document.getElementById('mo2f-setup-wizard-settings-area').className = ' overlay';
+				
+				var selected_2FA_method = '';
+				var ele = document.getElementsByName('mo2f_selected_2factor_method');
+				for(i = 0; i < ele.length; i++) {
+                	if(ele[i].checked)
+            			selected_2FA_method = ele[i].value;
+            	}
+            	var data ='';
+            	if(selected_2FA_method == 'Google Authenticator')
+            	{
+					data= { 'action':'mo_two_factor_ajax',
+	                	'mo_2f_two_factor_ajax' : 'mo_2fa_verify_GA_setup_wizard',
+	                	'mo2f_google_auth_code' : jQuery('#mo2f_google_auth_code').val(),
+		              	'mo2f_session_id'		: jQuery('#mo2f_session_id').val()
+		              	};
+
+            	}
+            	else if (selected_2FA_method =='OTP Over SMS')
+            	{
+            		data= { 'action':'mo_two_factor_ajax',
+	                	'mo_2f_two_factor_ajax' : 'mo_2fa_verify_OTPOverSMS_setup_wizard',
+	                	'mo2f_otp_token' : jQuery('#mo2f_otp_token').val()
+		              	};
+	
+            	}
+            	else if(selected_2FA_method == 'OTP Over Email')
+            	{
+            		data= { 'action':'mo_two_factor_ajax',
+	                	'mo_2f_two_factor_ajax' : 'mo_2fa_verify_OTPOverEmail_setup_wizard',
+	                	'mo2f_otp_token' : jQuery('#mo2f_otp_token').val()
+		              	};
+
+            	}
+            	else if(selected_2FA_method == 'Security Questions')
+            	{
+            			data= { 'action':'mo_two_factor_ajax',
+	                	'mo_2f_two_factor_ajax' : 'mo_2fa_verify_KBA_setup_wizard',
+	                	'mo2f_kbaquestion_1' : jQuery('#mo2f_kbaquestion_1').val(),
+	                	'mo2f_kbaquestion_2' : jQuery('#mo2f_kbaquestion_2').val(),
+	                	'mo2f_kbaquestion_3' : jQuery('#mo2f_kbaquestion_3').val(),
+	                	'mo2f_kba_ans1' 	 : jQuery('#mo2f_kba_ans1').val(),
+	                	'mo2f_kba_ans2' 	 : jQuery('#mo2f_kba_ans2').val(),
+	                	'mo2f_kba_ans3' 	 : jQuery('#mo2f_kba_ans3').val()
+		              	};
+
+            	}
+            	var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+		        jQuery.post(ajax_url, data, function(response){
+		        	document.getElementById('mo2f_loader').style.display = "none";
+		        	      	document.getElementById('mo2f-setup-wizard-settings-area').classList.remove('overlay');
+		
+		        	if(response =='SUCCESS')
+		        	{
+		        		var lineElement = document.getElementById("mo2f-setup-wizard-line3");
+						lineElement.className += " mo2f-setup-wizard-timeline-line-active";
+						var stepElement = document.getElementById("mo2f-setup-wizard-step4");
+						stepElement.className += " mo2f-setup-wizard-timeline-step-active";
+						document.getElementById('mo2f-setup-settings-error-loading-area3').style.display  = "none";
+						jQuery('#mo2f-setup-settings-error-loading-area4').css('display','block');
+
+		        	}
+		        	else
+		        	{
+		        		document.getElementById('mo2f_configure_Error_message').innerHTML = response;
+                		document.getElementById('mo2f_Error_block_configuration').style.display = "block";
+		        	}
+		        });
+
+			});
+
+			jQuery("#mo2f_next_step2").click(function(e){
+				document.getElementById('mo2f-setup-wizard-settings-area').className = ' overlay';
+				document.getElementById('mo2f_loader').style.display = "block";
+				document.getElementById('mo2f_Error_block').style.display = "none";
+                document.getElementById('mo2f_next_step2').disabled = true;		
+				var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+                var email = jQuery("#mo2f_email").val();
+                var password = jQuery("#mo2f_password").val();
+                if(jQuery("#mo2f_next_step2").val() == 'Login and Continue')
+                {
+                	email = jQuery("#mo2f_email_login").val();
+                	password = jQuery("#mo2f_password_login").val();
+                }
+				var data= { 'action':'mo_two_factor_ajax',
+                	'mo_2f_two_factor_ajax' : 'mo_wpns_register_verify_customer',
+	                'email': email,
+	                'password':password,
+	                'confirmPassword' : jQuery("#mo2f_confirmPassword").val(),
+	                'Login and Continue' : jQuery("#mo2f_next_step2").val()
+	           	};
+		              	
+                jQuery.post(ajax_url, data, function(response){
+                	document.getElementById('mo2f-setup-wizard-settings-area').classList.remove('overlay');
+					
+                	document.getElementById('mo2f_next_step2').disabled = false;
+                	if(response == 'SUCCESS')
+                	{
+                		var lineElement = document.getElementById("mo2f-setup-wizard-line2");
+						lineElement.className += " mo2f-setup-wizard-timeline-line-active";
+						var stepElement = document.getElementById("mo2f-setup-wizard-step3");
+						stepElement.className += " mo2f-setup-wizard-timeline-step-active";
+						document.getElementById('mo2f-setup-settings-error-loading-area2').style.display  = "none";
+						jQuery('#mo2f-setup-settings-error-loading-area3').css('display','block');
+						
+						var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+	            		var data= { 'action':'mo_two_factor_ajax',
+		                	'mo_2f_two_factor_ajax' : 'mo_2fa_configure_OTPOverSMS_setup_wizard'
+			              	};
+			            jQuery.post(ajax_url, data, function(response){
+	
+			            	document.getElementById('mo2f_loader').style.display = "none";
+			            	document.getElementById('mo2f_main_content').innerHTML = response;
+							jQuery("#phone").intlTelInput();
+
+							jQuery('#mo2f_send_otp').click(function(e){
+							document.getElementById('mo2f_loader').style.display = "block";
+		            		document.getElementById('mo2f-setup-wizard-settings-area').className = ' overlay';
+							
+							document.getElementById('mo2f_success_block_configuration').style.display = "none";
+		        			document.getElementById('mo2f_Error_block_configuration').style.display = "none";
+		        	
+							var data = { 'action':'mo_two_factor_ajax',
+			                	'mo_2f_two_factor_ajax' : 'mo_2fa_send_otp_token',
+			                	'phone' 				: jQuery('#phone').val(),
+				              	'selected_2FA_method'	: 'SMS'	              	
+				              	};
+							var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+					        jQuery.post(ajax_url, data, function(response){
+					        	document.getElementById('mo2f_loader').style.display = "none";
+					        	document.getElementById('mo2f-setup-wizard-settings-area').classList.remove('overlay');
+								
+					        	if(response == 'SUCCESS')
+					        	{
+					        		$message = 'An OTP has been sent to the below phone number. Please enter the OTP to set the 2FA';
+					        		document.getElementById('mo2f_configure_success_message').innerHTML = $message;
+                					document.getElementById('mo2f_success_block_configuration').style.display = "block";
+		        		
+					        	}
+					        	else
+					        	{
+					        		document.getElementById('mo2f_configure_Error_message').innerHTML = response;
+                					document.getElementById('mo2f_Error_block_configuration').style.display = "block";
+		        	
+					        	}
+					        });
+
+							});
+		            
+			            });
+                	}
+                	else
+                	{
+                		document.getElementById('mo2f_loader').style.display = "none";
+                		document.getElementById('mo2f_Error_message').innerHTML = response;
+                		document.getElementById('mo2f_Error_block').style.display = "block";
+                	}
+                	
+	            });
+
+			});
+
+			jQuery("#mo2f_next_step1").click(function(e){
+				var ele = document.getElementsByName('mo2f_selected_2factor_method');
+				var selected_2FA_method = '';
+				for(i = 0; i < ele.length; i++) {
+                	if(ele[i].checked)
+            			selected_2FA_method = ele[i].value;
+            	}
+                var configMessage = 'Configure '+selected_2FA_method;
+                jQuery("#mo2f_setup_method_title").text(configMessage);
+        		
+            	if(selected_2FA_method == '')
+            	{
+            		return '';
+            	}
+
+
+
+            	document.getElementById('mo2f-setup-settings-error-loading-area1').style.display  = "none";
+        		var lineElement = document.getElementById("mo2f-setup-wizard-line1");
+				lineElement.className += " mo2f-setup-wizard-timeline-line-active";
+				var stepElement = document.getElementById("mo2f-setup-wizard-step2");
+				stepElement.className += " mo2f-setup-wizard-timeline-step-active";
+				
+            	if(selected_2FA_method !="OTP Over SMS" && selected_2FA_method != '')
+            	{
+            		var lineElement = document.getElementById("mo2f-setup-wizard-line2");
+					lineElement.className += " mo2f-setup-wizard-timeline-line-active";
+					var stepElement = document.getElementById("mo2f-setup-wizard-step3");
+					stepElement.className += " mo2f-setup-wizard-timeline-step-active";
+					jQuery('#mo2f-setup-settings-error-loading-area3').css('display','block');
+
+					document.getElementById('mo2f_loader').style.display = "block";
+				
+					var mo2f_setup_call = "";
+            		if(selected_2FA_method == "Google Authenticator")
+            		{
+            			mo2f_setup_call = "mo_2fa_configure_GA_setup_wizard";
+            		}
+            		else if(selected_2FA_method =="OTP Over Email")
+            		{
+            			mo2f_setup_call ="mo_2fa_configure_OTPOverEmail_setup_wizard";
+            		}
+            		else if (selected_2FA_method == "Security Questions")
+            		{
+            			mo2f_setup_call = "mo_2fa_configure_KBA_setup_wizard";
+            		}
+            		var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+            		var data= { 'action':'mo_two_factor_ajax',
+	                	'mo_2f_two_factor_ajax' : mo2f_setup_call
+		              	};
+		            jQuery.post(ajax_url, data, function(response){
+		            	document.getElementById('mo2f_loader').style.display = "none";
+		            	document.getElementById('mo2f_main_content').innerHTML = response;
+		            	
+		            	if(selected_2FA_method == 'Google Authenticator')
+		            	{
+			            	jQuery('.mo2f_gauth').qrcode({
+			                    'render': 'image',
+			                    size: 175,
+			                    'text': jQuery('.mo2f_gauth').data('qrcode')
+			                });
+		            		jQuery('a[href="#mo2f_scanbarcode_a"]').click(function(e){
+				            var element = document.getElementById('mo2f_scanbarcode_a');
+					            if(element.style.display === 'none')
+					                element.style.display = 'block';
+					            
+					            else
+					                element.style.display = "none";
+					        });
+            
+		            	}
+		            	else if(selected_2FA_method =='OTP Over Email')
+						{
+							jQuery('#mo2f_send_otp').click(function(e){
+							document.getElementById('mo2f_loader').style.display = "block";
+		            		document.getElementById('mo2f-setup-wizard-settings-area').className = ' overlay';
+							
+							document.getElementById('mo2f_success_block_configuration').style.display = "none";
+		        			document.getElementById('mo2f_Error_block_configuration').style.display = "none";
+		        	
+							var data = { 'action':'mo_two_factor_ajax',
+			                	'mo_2f_two_factor_ajax' : 'mo_2fa_send_otp_token',
+			                	'phone' 				: jQuery('#phone').val(),
+				              	'mo2f_session_id'		: jQuery('#mo2f_session_id').val(),
+								'selected_2FA_method'	: 'OTP Over Email'	              	
+				              	};
+							var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
+					        jQuery.post(ajax_url, data, function(response){
+					        	document.getElementById('mo2f_loader').style.display = "none";
+					        	document.getElementById('mo2f-setup-wizard-settings-area').classList.remove('overlay');
+								
+					        	if(response == 'SUCCESS')
+					        	{
+					        		$message = 'An OTP has been sent to the below email please enter the OTP to set the 2FA';
+					        		document.getElementById('mo2f_configure_success_message').innerHTML = $message;
+                					document.getElementById('mo2f_success_block_configuration').style.display = "block";
+		        		
+					        	}
+					        	else
+					        	{
+					        		document.getElementById('mo2f_configure_Error_message').innerHTML = response;
+                					document.getElementById('mo2f_Error_block_configuration').style.display = "block";
+		        	
+					        	}
+					        });
+
+							});
+						}
+						else if (selected_2FA_method =='Security Questions')
+						{
+							
+							var mo_option_to_hide1;
+					        //hidden element in dropdown list 2
+					        var mo_option_to_hide2;
+
+							jQuery('#mo2f_kbaquestion_1').change(function(){
+								list = 1;
+							  	var list_selected = document.getElementById("mo2f_kbaquestion_" + list).selectedIndex;
+					            //if an element is currently hidden, unhide it
+					            if (typeof (mo_option_to_hide1) != "undefined" && mo_option_to_hide1 !== null && list == 2) {
+					                mo_option_to_hide1.style.display = 'block';
+					            } else if (typeof (mo_option_to_hide2) != "undefined" && mo_option_to_hide2 !== null && list == 1) {
+					                mo_option_to_hide2.style.display = 'block';
+					            }
+					            //select the element to hide and then hide it
+					            if (list == 1) {
+					                if (list_selected != 0) {
+					                    mo_option_to_hide2 = document.getElementById("mq" + list_selected + "_2");
+					                    mo_option_to_hide2.style.display = 'none';
+					                }
+					            }
+							});
+							jQuery('#mo2f_kbaquestion_2').change(function(){
+								list = 2;
+							  	var list_selected = document.getElementById("mo2f_kbaquestion_" + list).selectedIndex;
+					            //if an element is currently hidden, unhide it
+					            if (typeof (mo_option_to_hide1) != "undefined" && mo_option_to_hide1 !== null && list == 2) {
+					                mo_option_to_hide1.style.display = 'block';
+					            } else if (typeof (mo_option_to_hide2) != "undefined" && mo_option_to_hide2 !== null && list == 1) {
+					                mo_option_to_hide2.style.display = 'block';
+					            }
+					            //select the element to hide and then hide it
+					            if (list == 2) {
+					                if (list_selected != 0) {
+					                    mo_option_to_hide1 = document.getElementById("mq" + list_selected + "_1");
+					                    mo_option_to_hide1.style.display = 'none';
+					                }
+					            }
+							});
+
+						}
+		            });
+			       
+            
+            	}
+            	else if(selected_2FA_method == 'OTP Over SMS')
+            	{
+            		jQuery('#mo2f-setup-settings-error-loading-area2').css('display','block');
+            	}
+            	
+				
+			});
 			jQuery('input:radio[name=mo2f_selected_2factor_method]').click(function() {
+               	
+
                 localStorage.setItem("last_tab", 'setup_2fa');
                 var selectedMethod = jQuery(this).val();
                 var ajax_url = "<?php echo admin_url('admin-ajax.php'); ?>";
                 var nonce = "<?php echo wp_create_nonce( 'miniorange-select-method-setup-wizard' ); ?>";
                 
-                var data= { 'action':'mo_two_factor_ajax',
-		                	'mo_2f_two_factor_ajax' : 'select_method_setup_wizard',
-			                'mo2f_method': selectedMethod,
-			                'nonce': nonce };
-		              	
-                 jQuery.post(ajax_url, data, function(response){
-                       	window.location.href = '<?php echo (admin_url()."admin.php?page=mo_2fa_two_fa"); ?>'; 
-                });
-           
+                if(selectedMethod == 'Duo Authenticator' || selectedMethod =='OTP Over Telegram')
+                {
+	                var data= { 'action':'mo_two_factor_ajax',
+			                	'mo_2f_two_factor_ajax' : 'select_method_setup_wizard',
+				                'mo2f_method': selectedMethod,
+				                'nonce': nonce };
+			              	
+	                 jQuery.post(ajax_url, data, function(response){
+	                       	window.location.href = '<?php echo (admin_url()."admin.php?page=mo_2fa_two_fa"); ?>'; 
+	                });
+           		}
+
            });
 
 			jQuery('a[href="#skiptwofactor"]').click(function(e){
@@ -3148,18 +4180,6 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 			} else {
 				update_option( 'mo2f_enable_2fa', isset( $_POST['mo2f_enable_2fa'] ) ? $_POST['mo2f_enable_2fa'] : 0 );
 			}
-		// }else if( isset( $_POST['option'] ) && $_POST['option'] == 'mo2f_enable_2FA_on_login_page_option' ) {
-		// 	$nonce = $_POST['mo2f_enable_2FA_on_login_page_option_nonce'];
-
-		// 	if ( ! wp_verify_nonce( $nonce, 'mo2f-enable-2FA-on-login-page-option-nonce' ) ) {
-		// 		$error = new WP_Error();
-		// 		$error->add( 'empty_username', '<strong>' . mo2f_lt( 'ERROR' ) . '</strong>: ' . mo2f_lt( 'Invalid Request.' ) );
-
-		// 		return $error;
-		// 	} else {
-		// 		if(!class_exists("UM_functions"))
-		// 		update_site_option('mo2f_enable_2fa_prompt_on_login_page', isset( $_POST['mo2f_enable_2fa_prompt_on_login_page'] ) ? $_POST['mo2f_enable_2fa_prompt_on_login_page'] : 0 );
-		// 	}
 		}else if ( isset( $_POST['option'] ) && $_POST['option'] == 'mo_2factor_test_authentication_method' ) {
 		//network security feature 
 			$nonce = $_POST['mo_2factor_test_authentication_method_nonce'];
@@ -3429,7 +4449,25 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 				$error->add('empty_username', '<strong>'. __('ERROR','miniorange-2-factor-authentication') .'</strong>: '. __('Invalid Request.', 'miniorange-2-factor-authentication'));
 				return $error;
 			}else {
-				MO2f_Utility::mo2f_mail_and_download_codes();
+				$codes = MO2f_Utility::mo2f_mail_and_download_codes();
+                 
+				 if($codes == 'LimitReached' || $codes == 'UserLimitReached' || $codes == 'AllUsed' || $codes == 'invalid_request'){
+				 	 $id = get_current_user_id();
+				 	 update_user_meta($id, 'mo_backup_code_generated', 1);
+                     update_user_meta($id, 'mo_backup_code_downloaded', 1);
+                 if($codes == 'AllUsed'){
+                 update_option( 'mo2f_message',  Mo2fConstants::langTranslate("USED_ALL_BACKUP_CODES"));
+                 }else if($codes == 'LimitReached'){    
+				 update_option( 'mo2f_message',  Mo2fConstants::langTranslate("BACKUP_CODE_LIMIT_REACH"));
+                 }else if($codes == 'UserLimitReached'){
+                 update_option( 'mo2f_message',  Mo2fConstants::langTranslate("BACKUP_CODE_DOMAIN_LIMIT_REACH"));
+                 }else if($codes == 'invalid_request'){
+                 update_user_meta($id, 'mo_backup_code_generated', 0);
+                 update_user_meta($id, 'mo_backup_code_downloaded', 0);
+                 update_option( 'mo2f_message',  Mo2fConstants::langTranslate("BACKUP_CODE_INVALID_REQUEST"));
+                 }
+                 $this->mo_auth_show_error_message();
+                 }
 			}
 		}
 
@@ -3471,7 +4509,7 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 			<!-- Modal content -->
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3 class="modal-title" style="text-align: center; font-size: 20px; color: #20b2aa">Email Address for miniOrange</h3><span id="closeEnterEmailCloud" class="modal-span-close">X</span>
+					<h3 class="modal-title" style="text-align: center; font-size: 20px; color: #2271b1">Email Address for miniOrange</h3><span id="closeEnterEmailCloud" class="modal-span-close">X</span>
 				</div>
 				<div class="modal-body" style="height: auto">
 					<h2><i>Enter your Email:&nbsp;&nbsp;&nbsp;  <input type ='email' id='emailEnteredCloud' name='emailEnteredCloud' size= '40' required value="<?php echo $email;?>"/></i></h2> 
@@ -3863,18 +4901,18 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 			$url =  get_site_option('siteurl').'/wp-login.php?'; //login page can change
 			$message =  '<table cellpadding="25" style="margin:0px auto">
 			<tbody>
-			<tr>
+			<td>
 			<td>
 			<table cellpadding="24" width="584px" style="margin:0 auto;max-width:584px;background-color:#f6f4f4;border:1px solid #a8adad">
 			<tbody>
-			<tr>
+			<td>
 			<td><img src="https://ci5.googleusercontent.com/proxy/10EQeM1udyBOkfD2dwxGhIaMXV4lOwCRtUecpsDkZISL0JIkOL2JhaYhVp54q6Sk656rW2rpAFJFEgGQiAOVcYIIKxXYMHHMNSNB=s0-d-e1-ft#https://login.xecurify.com/moas/images/xecurify-logo.png" style="color:#5fb336;text-decoration:none;display:block;width:auto;height:auto;max-height:35px" class="CToWUd"></td>
 			</tr>
 			</tbody>
 			</table>
 			<table cellpadding="24" style="background:#fff;border:1px solid #a8adad;width:584px;border-top:none;color:#4d4b48;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px">
 			<tbody>
-			<tr>
+			<td>
 			<td>
 			<p style="margin-top:0;margin-bottom:20px">Dear Customers,</p>
 			<p style="margin-top:0;margin-bottom:10px">You initiated a transaction <b>WordPress 2 Factor Authentication Plugin</b>:</p>
@@ -3955,18 +4993,18 @@ private function settings_error_page( $id = 'mo2f-setup-vue-site-settings', $foo
 			$headers[] = 'Cc: 2fasupport <2fasupport@xecurify.com>';
 			$message =  '<table cellpadding="25" style="margin:0px auto">
 			<tbody>
-			<tr>
+			<td>
 			<td>
 			<table cellpadding="24" width="584px" style="margin:0 auto;max-width:584px;background-color:#f6f4f4;border:1px solid #a8adad">
 			<tbody>
-			<tr>
+			<td>
 			<td><img src="https://ci5.googleusercontent.com/proxy/10EQeM1udyBOkfD2dwxGhIaMXV4lOwCRtUecpsDkZISL0JIkOL2JhaYhVp54q6Sk656rW2rpAFJFEgGQiAOVcYIIKxXYMHHMNSNB=s0-d-e1-ft#https://login.xecurify.com/moas/images/xecurify-logo.png" style="color:#5fb336;text-decoration:none;display:block;width:auto;height:auto;max-height:35px" class="CToWUd"></td>
 			</tr>
 			</tbody>
 			</table>
 			<table cellpadding="24" style="background:#fff;border:1px solid #a8adad;width:584px;border-top:none;color:#4d4b48;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px">
 			<tbody>
-			<tr>
+			<td>
 			<td>
 			<p style="margin-top:0;margin-bottom:20px">Dear Customer,</p>
 			<p style="margin-top:0;margin-bottom:20px"> You are going to exhaust all your '.$string.'. You have only <b>'.$count.'</b> '.$string.' remaining. You can recharge or add '.$string.' to your account: <a href='.MoWpnsConstants::rechargeLink.'>Recharge</a></p>

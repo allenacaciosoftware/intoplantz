@@ -12,7 +12,7 @@ add_action('admin_footer','mo_wpns_schedule_backup');
 		<tr>
 			<th>Scheduled file backup </th>
 			<th>Scheduled database backup </th>
-			<th><a href='<?php echo $two_factor_premium_doc['Scheduled database'];?>' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;margin-top: 0.5em;float: right;"></span></a></th>
+			<th><a href='<?php echo $two_factor_premium_doc['Scheduled database'];?>' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#413c69;margin-top: 0.5em;float: right;"></span></a></th>
 		</tr>
 		<tr><td>&nbsp;</td><td></td></tr>
 		<tr>

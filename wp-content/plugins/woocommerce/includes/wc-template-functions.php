@@ -36,7 +36,7 @@ function wc_template_redirect() {
 
 	// Logout.
 	if ( isset( $wp->query_vars['customer-logout'] ) && ! empty( $_REQUEST['_wpnonce'] ) && wp_verify_nonce( sanitize_key( $_REQUEST['_wpnonce'] ), 'customer-logout' ) ) {
-		wp_safe_redirect( str_replace( '&amp;', '&', wp_logout_url( wc_get_page_permalink( 'myaccount' ) ) ) );
+		wp_safe_redirect( str_replace( '&amp;', '&', wp_logout_url( apply_filters( 'woocommerce_logout_default_redirect_url', wc_get_page_permalink( 'myaccount' ) ) ) ) );
 		exit;
 	}
 
@@ -1162,7 +1162,7 @@ if ( ! function_exists( 'woocommerce_template_loop_product_title' ) ) {
 	 * Show the product title in the product loop. By default this is an H2.
 	 */
 	function woocommerce_template_loop_product_title() {
-		echo '<h6 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '" title="' . get_the_title() . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<h2 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 if ( ! function_exists( 'woocommerce_template_loop_category_title' ) ) {
@@ -1259,7 +1259,54 @@ if ( ! function_exists( 'woocommerce_product_archive_description' ) ) {
 		if ( is_post_type_archive( 'product' ) && in_array( absint( get_query_var( 'paged' ) ), array( 0, 1 ), true ) ) {
 			$shop_page = get_post( wc_get_page_id( 'shop' ) );
 			if ( $shop_page ) {
-				$description = wc_format_content( wp_kses_post( $shop_page->post_content ) );
+
+				$allowed_html = wp_kses_allowed_html( 'post' );
+
+				// This is needed for the search product block to work.
+				$allowed_html = array_merge(
+					$allowed_html,
+					array(
+						'form'   => array(
+							'action'         => true,
+							'accept'         => true,
+							'accept-charset' => true,
+							'enctype'        => true,
+							'method'         => true,
+							'name'           => true,
+							'target'         => true,
+						),
+
+						'input'  => array(
+							'type'        => true,
+							'id'          => true,
+							'class'       => true,
+							'placeholder' => true,
+							'name'        => true,
+							'value'       => true,
+						),
+
+						'button' => array(
+							'type'  => true,
+							'class' => true,
+							'label' => true,
+						),
+
+						'svg'    => array(
+							'hidden'    => true,
+							'role'      => true,
+							'focusable' => true,
+							'xmlns'     => true,
+							'width'     => true,
+							'height'    => true,
+							'viewbox'   => true,
+						),
+						'path'   => array(
+							'd' => true,
+						),
+					)
+				);
+
+				$description = wc_format_content( wp_kses( $shop_page->post_content, $allowed_html ) );
 				if ( $description ) {
 					echo '<div class="page-description">' . $description . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				}
@@ -3079,64 +3126,21 @@ if ( ! function_exists( 'woocommerce_account_content' ) ) {
 				if ( 'pagename' === $key ) {
 					continue;
 				}
-                $soldItemsPage = serialize($wp->query_vars);
-                if (strpos($soldItemsPage, "sold-items") !== false) {
-                    $current_page    = empty( $current_page ) ? 1 : absint( $current_page );
-                    $customer_orders = wc_get_orders(
-                        apply_filters(
-                            'woocommerce_my_account_my_orders_query',
-                            array(
-                                'customer' => get_current_user_id(),
-                                'page'     => $current_page,
-                                'paginate' => true,
-                            )
-                        )
-                    );
-                    wc_get_template(
-                        'myaccount/sold-items.php',
-                        array(
-                            'current_user' => get_user_by( 'id', get_current_user_id() ),
-                            'current_page'    => absint( $current_page ),
-                            'customer_orders' => $customer_orders,
-                            'has_orders'      => 0 < $customer_orders->total,
-                        )
-                    );
-                    return;
-                } else {
-                    if (has_action('woocommerce_account_' . $key . '_endpoint')) {
-                        do_action('woocommerce_account_' . $key . '_endpoint', $value);
-                        return;
-                    }
-                }
+
+				if ( has_action( 'woocommerce_account_' . $key . '_endpoint' ) ) {
+					do_action( 'woocommerce_account_' . $key . '_endpoint', $value );
+					return;
+				}
 			}
 		}
 
-		// No endpoint found? Default to my orders.
-        $current_page    = empty( $current_page ) ? 1 : absint( $current_page );
-        $customer_orders = wc_get_orders(
-            apply_filters(
-                'woocommerce_my_account_my_orders_query',
-                array(
-                    'customer' => get_current_user_id(),
-                    'page'     => $current_page,
-                    'paginate' => true,
-                )
-            )
-        );
-        wc_get_template(
-            'myaccount/orders.php',
-            array(
-                'current_page'    => absint( $current_page ),
-                'customer_orders' => $customer_orders,
-                'has_orders'      => 0 < $customer_orders->total,
-            )
-        );
-//		wc_get_template(
-//			'myaccount/dashboard.php',
-//			array(
-//				'current_user' => get_user_by( 'id', get_current_user_id() ),
-//			)
-//		);
+		// No endpoint found? Default to dashboard.
+		wc_get_template(
+			'myaccount/dashboard.php',
+			array(
+				'current_user' => get_user_by( 'id', get_current_user_id() ),
+			)
+		);
 	}
 }
 
@@ -3544,7 +3548,7 @@ function wc_get_rating_html( $rating, $count = 0 ) {
 	if ( 0 < $rating ) {
 		/* translators: %s: rating */
 		$label = sprintf( __( 'Rated %s out of 5', 'woocommerce' ), $rating );
-//		$html  = '<div class="star-rating" role="img" aria-label="' . esc_attr( $label ) . '">' . wc_get_star_rating_html( $rating, $count ) . '</div>';
+		$html  = '<div class="star-rating" role="img" aria-label="' . esc_attr( $label ) . '">' . wc_get_star_rating_html( $rating, $count ) . '</div>';
 	}
 
 	return apply_filters( 'woocommerce_product_get_rating_html', $html, $rating, $count );

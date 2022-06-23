@@ -628,7 +628,7 @@ function mo2f_create_li_2fa_lite( $mo2f_array ) {
 function mo2f_get_binary_equivalent_2fa_lite( $mo2f_var ) {
 	switch ( $mo2f_var ) {
 		case 1:
-			return "<div style='color: #20b2aa;font-size: x-large;float:left;margin:0px 5px;'>🗸</div>";
+			return "<div style='color: #2271b1;font-size: x-large;float:left;margin:0px 5px;'>🗸</div>";
 		case 0:
 			return "<div style='color: red;font-size: x-large;float:left;margin:0px 5px;'>×</div>";
 		default:

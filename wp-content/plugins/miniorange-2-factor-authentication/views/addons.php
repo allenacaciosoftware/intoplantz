@@ -24,7 +24,7 @@
        	<div>
 			
 			<center>
-				<div style="width: 92%;background-color: white;padding: 10px;border-top: 4px solid #20b2aa">
+				<div style="width: 92%;background-color: white;padding: 10px;border-top: 4px solid #2271b1">
 					<div style="float: left;">
 			    <?php echo '<a class="button button-primary button-large" href="'.$two_fa.'">Back</a>';?>
 				</div>
@@ -34,7 +34,7 @@
 		</div>
            <div class="mo_2fa_container">
            <div class="mo_2fa_card-deck">
-        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;
+        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;
     background-color: white;width: 30%;margin: 10px;">
                 <div class="mo_2fa_Card-header">
                 <h3>Learning Management System / Online Courses</h3>
@@ -59,7 +59,7 @@
 		    	</div><br>
 		    	<?php echo mo2f_addon_contact_us();?>
         </div>
-            <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;
+            <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;
     background-color: white;width: 30%;margin: 10px;">
                 <div class="mo_2fa_Card-header">
                 <h3>User Session Control</h3>
@@ -85,7 +85,7 @@
 		    	<?php echo mo2f_addon_contact_us();?>
 
                 </div>
-        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;background-color: white;width: 30%;margin: 10px;">
+        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;background-color: white;width: 30%;margin: 10px;">
                 <div class="mo_2fa_Card-header">
                 <h3>Password-Less Login</h3>
                 </div>
@@ -107,7 +107,7 @@
 		    	</div><br>
 		    	<?php echo mo2f_addon_contact_us();?>
         </div>
-        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;background-color: white;width: 30%;margin: 10px;">
+        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;background-color: white;width: 30%;margin: 10px;">
                 <div class="mo_2fa_Card-header">
                 <h3>WooCommerce</h3>
                 </div>
@@ -125,7 +125,7 @@
 		    	</div><br>
 		    	<?php echo mo2f_addon_contact_us();?>
         </div>
-        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;background-color: white;width: 30%;margin: 10px;">
+        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;background-color: white;width: 30%;margin: 10px;">
                 <div class="mo_2fa_Card-header">
                 <h3>User Registration</h3>
                 </div>
@@ -143,7 +143,7 @@
 		    	</div><br>
 		    	<?php echo mo2f_addon_contact_us();?>
         </div>
-        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;background-color: white;width: 30%;margin: 10px;">
+        <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;background-color: white;width: 30%;margin: 10px;">
                 <div class="mo_2fa_Card-header">
                 <h3>Ultimate Member</h3>
                 </div>
@@ -162,13 +162,13 @@
 		    	</div><br>
 		    	<?php echo mo2f_addon_contact_us();?>
         </div>
-           <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;
+           <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;
     background-color: white;width: 30%;margin: 10px">
                 <div class="mo_2fa_Card-header">
                  <h3>RBA & Trusted Devices Management</h3>
                 </div>
                 <hr>
-                <h1 class="mo_wpns_upgrade_pade_pricing" style="color: #20b2aa">$49</h1> 
+                <h1 class="mo_wpns_upgrade_pade_pricing" style="color: #2271b1">$49</h1> 
                 <div class="mo_2fa_card-body" style="padding-bottom: 0%;">
                 	<h3>Features</h3>
                 <h4>
@@ -194,13 +194,13 @@
 		    	</div>
 		    	<br>
             </div>
-          <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;
+          <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;
     background-color: white;width: 30%;margin: 10px">
                 <div class="mo_2fa_Card-header">
                 <h3>Personalization Add-on Features</h3>
                 </div>
                 <hr>
-                <h1 class="mo_wpns_upgrade_pade_pricing" style="color: #20b2aa">$199</h1>
+                <h1 class="mo_wpns_upgrade_pade_pricing" style="color: #2271b1">$199</h1>
                 <div class="mo_2fa_card-body" style="padding-bottom: 0%;">
                 	<h3>Features</h3>
                 <h4>
@@ -225,13 +225,13 @@
 		    		</div>
 		    		<br>
             </div>
-          <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #20b2aa;
+          <div class="mo_2fa_card mo_2fa_animation" style="border-top: 4px solid #2271b1;
     background-color: white;width: 30%;margin: 10px">
                 <div class="mo_2fa_Card-header">
                 <h3>Short Codes Add-on Features</h3>
                 </div>
                 <hr>
-                <h1 class="mo_wpns_upgrade_pade_pricing" style="color: #20b2aa">$99</h1>
+                <h1 class="mo_wpns_upgrade_pade_pricing" style="color: #2271b1">$99</h1>
                 <div class="mo_2fa_card-body" style="padding-bottom: 0%;">
                 <h3>Features</h3>
                 <h4>

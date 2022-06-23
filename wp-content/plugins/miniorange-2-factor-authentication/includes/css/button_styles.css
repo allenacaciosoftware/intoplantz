@@ -91,10 +91,10 @@ input:checked + .mo_wpns_slider:before {
   transition: .4s;
 }
 input:checked + .mo_wpns_slider_small {
-  background-color: #20b2aa;
+  background-color: #2271b1;
 }
 input:focus + .mo_wpns_slider_small {
-  box-shadow: 0 0 1px #20b2aa;
+  box-shadow: 0 0 1px #2271b1;
 }
 
 input:checked + .mo_wpns_slider_small:before {

@@ -66,7 +66,7 @@ jQuery(document).ready(function(){
 			    setInterval(function(){  jQuery("#backupinprogress").fadeIn(700); }, 1000);
 			    document.getElementById("save_backup_settings").value = "Taking Backup...";
 			    jQuery('input[name="save_backup_settings"]').attr('disabled', true);
-			    document.getElementById('save_backup_settings').style.backgroundColor = '#20b2aa';
+			    document.getElementById('save_backup_settings').style.backgroundColor = '#2271b1';
 
 		var data={
 			'action':'mo_wpns_backup_redirect',
@@ -131,7 +131,7 @@ function barfw_response_handler(para1, para2){
         	jQuery(".filebackupmessage").css("background-color","#1EC11E");
 
         	jQuery('input[name="save_backup_settings"]').removeAttr('disabled');
-			document.getElementById('save_backup_settings').style.backgroundColor = '#20b2aa';
+			document.getElementById('save_backup_settings').style.backgroundColor = '#2271b1';
 			document.getElementById("save_backup_settings").value = "Take Backup";
 }
 

@@ -100,7 +100,8 @@ jQuery(document).ready(function () {
     $(".new_plugin_dismiss").click(function(){
         ajaxCall("dismissplugin",".plugin_warning_hide-notice",true);
     });
-
+    
+    
 
      $(".dismiss_website_backup_notice").click(function(){
         ajaxCall("dismissbackup",".plugin_warning_hide-notice",true);
@@ -120,6 +121,10 @@ jQuery(document).ready(function () {
     
      $(".plugin_warning_never_show_again").click(function(){
         ajaxCall("plugin_warning_never_show_again",".plugin_warning_hide-notice",true);
+    });
+
+    $(".mo2f_banner_never_show_again").click(function(){
+        ajaxCall("mo2f_banner_never_show_again",".mo2f_offer_main_div",true);
     });
 
     $(".wpns_premium_option :input").attr("disabled",true);
@@ -160,6 +165,34 @@ window.onload =  nav_popup();
 }
 
 function nav_popup() {
-  document.getElementById("notice_div").style.width = "40%";
-  setTimeout(function(){ jQuery('#notice_div').fadeOut('slow'); }, 3000);
+  if(document.getElementById("notice_div") !== null){
+      document.getElementById("notice_div").style.width = "40%";
+      setTimeout(function(){ jQuery('#notice_div').fadeOut('slow'); }, 3000);
+  }
 }
+
+// OFFER TIMER
+var countDownDate = new Date("Jan 15, 2022 23:59:59").getTime();
+
+var x = setInterval(function() {
+
+  var now = new Date().getTime();
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+ if(document.getElementById("mo2f_offer_timer")!= null){
+  document.getElementById("mo2f_offer_timer").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+}
+
+  if (distance < 0) {
+    clearInterval(x);
+    if(document.getElementById("mo2f_offer_timer")!= null){
+        document.getElementById("mo2f_offer_timer").innerHTML = "EXPIRED";
+    }
+  }
+}, 1000);
+// -----OFFER TIMER

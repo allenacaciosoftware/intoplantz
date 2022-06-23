@@ -8,11 +8,12 @@ function mo2f_configure_google_authenticator( $user ) {
     $gauth_name= get_option('mo2f_google_appname');
     $gauth_name = $gauth_name ? $gauth_name : 'miniOrangeAu';
     ?>
+
     <table>
         <tr>
             <td class="mo2f_google_authy_step2">
                 <?php echo '<' . $h_size . '>' . mo2f_lt( 'Step-1: Set up Google/Authy/LastPass Authenticator' ) . '<span style="float:right">
-                        <a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/google-authenticator" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:26px;color:#269eb3;float: right;"></span></a>
+                        <a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/google-authenticator" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:26px;color:#413c69;float: right;"></span></a>
 
                         <a href="https://www.youtube.com/watch?v=vVGXjedIaGs" target="_blank"><span class="dashicons dashicons-video-alt3" style="font-size:30px;color:red;float: right;    margin-right: 16px;margin-top: -3px;"></span></a>
                      </span></' . $h_size . '>'; ?>

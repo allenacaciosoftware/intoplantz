@@ -3,7 +3,7 @@ $setup_dirName = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'views'
 include $setup_dirName;
 
 ?>
-<div class="mo2f_table_layout">
+<div class="mo2f_table_divide_border">
     <form id="settings_from_addon" method="post" action="">
         <input type="hidden" name="option" value="mo_auth_addon_settings_save"/>
         <h2><?php echo mo2f_lt( '1. Remember Device' ); ?>
@@ -40,7 +40,7 @@ include $setup_dirName;
 
 
     </p>
-    <div class="mo2f_table_layout" style="background-color: aliceblue; border:none;">
+    <div style="background-color: aliceblue; border:none;">
         <h3 style="display: inline;float: left">Device Configuration</h3><h3 style="color: red;"><b >&nbsp;&nbsp;&nbsp;&nbsp;
             </b></h3><hr>
         <label class="mo_wpns_switch">
@@ -77,7 +77,7 @@ include $setup_dirName;
         document.getElementById("set_device_limit_button").disabled = true;
     </script>
 </div>
-<div>
+<div style="padding-top: 10px; padding-bottom: 10px">
     <h3><?php echo mo2f_lt( 'IP Restriction: Limit users to login from specific IPs' ); ?> <a class="mo2fa-addons-preview-alignment" onclick="mo2f_rba_functionality1()">&nbsp;&nbsp;See Preview</a> </h3>
     <hr>
     <p><?php echo mo2f_lt( 'The Admin can enable IP restrictions for the users. It will provide additional security to the accounts and perform different action to the accounts only from the listed IP Ranges. If user tries to access with a restricted IP, Admin can set three action: Allow, challenge or deny. Depending upon the action it will allow the user to login, challenge(prompt) for authentication or deny the access.' ); ?>
@@ -87,7 +87,7 @@ include $setup_dirName;
         <br><br>
 
     </p>
-    <div class="mo2f_table_layout" style="background-color: aliceblue; border:none;">
+    <div style="background-color: aliceblue; border:none;">
         <h2 style="display: inline;float: left">IP Blocking Configuration </h2><h3 style="color: red;"></h3><hr>
         <label class="mo_wpns_switch">
             <input type="checkbox" id="pluginWAF" name="pluginWAF" <?php  echo 'disabled'; ?>>

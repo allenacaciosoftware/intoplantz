@@ -20,4 +20,4 @@
 		$total_malicious=($total_malicious/1000);
 		$total_malicious= round($total_malicious,1)."k";
 	}
-    include $mo2f_dirName . 'views'.DIRECTORY_SEPARATOR.'dashboard.php';
+    include_once $mo2f_dirName . 'views'.DIRECTORY_SEPARATOR.'dashboard.php';

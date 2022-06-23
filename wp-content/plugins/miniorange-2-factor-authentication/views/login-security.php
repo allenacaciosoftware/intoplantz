@@ -10,7 +10,7 @@ echo '
 		<div class="mo_wpns_setting_layout" id ="mo2f_bruteforce">';
 
 
-echo ' 		<h3>Brute Force Protection ( Login Protection )<a href='.$two_factor_premium_doc['Brute Force Protection'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;float: right;"></span></a></h3>
+echo ' 		<h3>Brute Force Protection ( Login Protection )<a href='.$two_factor_premium_doc['Brute Force Protection'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#413c69;float: right;"></span></a></h3>
 			<div class="mo_wpns_subheading">This protects your site from attacks which tries to gain access / login to a site with random usernames and passwords.</div>
 			
 				<input id="mo_bf_button" type="checkbox" name="enable_brute_force_protection" '.$brute_force_enabled.'> Enable Brute force protection
@@ -58,7 +58,7 @@ echo'			<form id="mo_wpns_enable_brute_force_form" method="post" action="">
 echo'	
        </div>
 		<div class="mo_wpns_setting_layout" id="mo2f_google_recaptcha">		
-			<h3>Google reCAPTCHA<a href='.$two_factor_premium_doc['Google reCAPTCHA'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;float: right;"></span></a></h3>
+			<h3>Google reCAPTCHA<a href='.$two_factor_premium_doc['Google reCAPTCHA'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#413c69;float: right;"></span></a></h3>
 			<div class="mo_wpns_subheading">Google reCAPTCHA protects your website from spam and abuse. reCAPTCHA uses an advanced risk analysis engine and adaptive CAPTCHAs to keep automated software from engaging in abusive activities on your site. It does this while letting your valid users pass through with ease.</div>
 
 			<form id="mo_wpns_activate_recaptcha" method="post" action="">
@@ -132,7 +132,7 @@ echo		'<br>
 		</div>
 		
 		<div class="mo_wpns_setting_layout" id="mo2f_enforce_strong_password_div">		
-			<h3>Enforce Strong Passwords <a href='.$two_factor_premium_doc['Enforce Strong Passwords'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#269eb3;float: right;"></span></a></h3>
+			<h3>Enforce Strong Passwords <a href='.$two_factor_premium_doc['Enforce Strong Passwords'].' target="_blank"><span class="dashicons dashicons-text-page" style="font-size:23px;color:#413c69;float: right;"></span></a></h3>
 			<div class="mo_wpns_subheading">Checks the password strength of admin and other users to enhance login security</div>
 			
 			<form id="mo_wpns_enable_brute_force_form" method="post" action="">

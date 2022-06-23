@@ -4,56 +4,57 @@
 
 	$controller = $mo2f_dirName . 'controllers'.DIRECTORY_SEPARATOR;
 
-include $controller 	 . 'navbar.php';
+include_once $controller 	 . 'navbar.php';
 if(current_user_can('administrator'))
 {
 
-	include $controller 	 . 'newtork_security_features.php';
-                
-      
-	if( isset( $_GET[ 'page' ])) 
-	{
-		switch($_GET['page'])
+	include_once $controller 	 . 'newtork_security_features.php';    
+        
+		if( isset( $_GET[ 'page' ])) 
 		{
-			case 'mo_2fa_dashboard':
-		                include $controller . 'dashboard.php';			    break;
-			case 'mo_2fa_login_and_spam':
-				include $controller . 'login-spam.php';				break;
-			case 'default':
-				include $controller . 'login-security.php';			break;
-			case 'mo_2fa_account':
-				include $controller . 'account.php';				break;		
-			case 'mo_2fa_backup':
-				include $controller . 'backup'.DIRECTORY_SEPARATOR.'backup.php'; 				break;
-			case 'mo_2fa_upgrade':
-				include $controller . 'upgrade.php';                break;
-			case 'mo_2fa_waf':
-				include $controller . 'waf.php';		    		break;
-			case 'mo_2fa_blockedips':
-				include $controller . 'ip-blocking.php';			break;
-			case 'mo_2fa_advancedblocking':
-				include $controller . 'advanced-blocking.php';		break;
-			case 'mo_2fa_notifications':
-				include $controller . 'notification-settings.php';	break;
-			case 'mo_2fa_reports':
-				include $controller . 'reports.php';				break;
-			case 'mo_2fa_licensing':
-				include $controller . 'licensing.php';				break;
-			case 'mo_2fa_troubleshooting':
-				include $controller . 'troubleshooting.php';		break;
-			case 'mo_2fa_addons':
-				include $controller . 'addons.php';					break;
-			case 'mo_2fa_malwarescan':
-				include $controller . 'malware_scanner'.DIRECTORY_SEPARATOR.'scan_malware.php';			break;
-			case 'mo_2fa_two_fa':
-				include $controller .'twofa'.DIRECTORY_SEPARATOR. 'two_fa.php';					break;
-			case 'mo_2fa_request_demo':
-				include $controller . 'request_demo.php';			break;	
-			case 'mo_2fa_request_offer':
-				include $controller . 'request_offer.php';
-		}
-	}
+			switch($_GET['page'])
+			{
+				case 'mo_2fa_dashboard':
+					include_once $controller . 'dashboard.php';			    break;
+				case 'mo_2fa_login_and_spam':
+					include_once $controller . 'login-spam.php';				break;
+				case 'default':
+					include_once $controller . 'login-security.php';			break;
+				case 'mo_2fa_account':
+					include_once $controller . 'account.php';				break;		
+				case 'mo_2fa_backup':
+					include_once $controller . 'backup'.DIRECTORY_SEPARATOR.'backup.php'; 				break;
+				case 'mo_2fa_upgrade':
+					include_once $controller . 'upgrade.php';                break;
+				case 'mo_2fa_waf':
+					include_once $controller . 'waf.php';		    		break;
+				case 'mo_2fa_blockedips':
+					include_once $controller . 'ip-blocking.php';			break;
+				case 'mo_2fa_advancedblocking':
+					include_once $controller . 'advanced-blocking.php';		break;
+				case 'mo_2fa_notifications':
+					include_once $controller . 'notification-settings.php';	break;
+				case 'mo_2fa_reports':
+					include_once $controller . 'reports.php';				break;
+				case 'mo_2fa_licensing':
+					include_once $controller . 'licensing.php';				break;
+				case 'mo_2fa_troubleshooting':
+					include_once $controller . 'troubleshooting.php';		break;
+				case 'mo_2fa_addons':
+					include_once $controller . 'addons.php';					break;
+				case 'mo_2fa_malwarescan':
+					include_once $controller . 'malware_scanner'.DIRECTORY_SEPARATOR.'scan_malware.php';			break;
+				case 'mo_2fa_two_fa':
+					include_once $controller .'twofa'.DIRECTORY_SEPARATOR. 'two_fa.php';					break;
+				case 'mo_2fa_request_demo':
+					include_once $controller . 'request_demo.php';			break;	
+				case 'mo_2fa_request_offer':
+					include_once $controller . 'request_offer.php';          break;
+				case 'mo2f_trial':
+					include_once $controller . 'trial.php';				    break;
 
+			}
+		}
 	}
 	else
 	{
@@ -62,7 +63,7 @@ if(current_user_can('administrator'))
 			switch($_GET['page'])
 			{
 				case 'mo_2fa_two_fa':
-					include $controller .'twofa'.DIRECTORY_SEPARATOR. 'two_fa.php';					break;	
+					include_once $controller .'twofa'.DIRECTORY_SEPARATOR. 'two_fa.php';					break;	
 			
 			}
 
@@ -71,38 +72,12 @@ if(current_user_can('administrator'))
 	}
 	if (isset( $_GET[ 'page' ])) {
 
-	if ($_GET[ 'page' ] == "mo_2fa_upgrade" || $_GET[ 'page' ] == "mo_2fa_addons") 
+
+	if (MoWpnsUtility::get_mo2f_db_option('mo_wpns_2fa_with_network_security', 'get_option') || $_GET[ 'page' ] == "mo_2fa_upgrade" || $_GET[ 'page' ] == "mo_2fa_addons" || $_GET['page'] == "mo_2fa_account"
+	|| $_GET['page']=="mo_2fa_waf" || $_GET['page']=="mo_2fa_login_and_spam" || $_GET['page']=="mo_2fa_dashboard")
 	{
-		include $controller . 'feedback_footer.php';
-	}
-	else
-	{
-		if(current_user_can('administrator')){
-            include $controller . 'feedback_footer.php';
-		}
+		include_once $controller . 'feedback_footer.php';
 	}
 }
 ?>
-
-<!-- <script>
-    	jQuery(document).ready(function(){
-	    	 var nonce 	= "<?php //echo wp_create_nonce('wpns-quick-scan');?>";
-	         var data={
-					'action':'mo_wpns_malware_redirect',
-					'call_type':'malware_scan_initiate',
-					'scan':'scan_start',
-					'scantype':'quick_scan',
-					'nonce': nonce
-	               };
-	        jQuery.post(ajaxurl, data, function(response){
-	        	jQuery('input[name="quick_scan_button"]').removeAttr('disabled');
-				document.getElementById('quick_scan_button').style.backgroundColor = '#20b2aa';
-				jQuery('input[name="standard_scan_button"]').removeAttr('disabled');
-				document.getElementById('standard_scan_button').style.backgroundColor = '#20b2aa';
-				jQuery('input[name="custom_scan_button"]').removeAttr('disabled');
-				document.getElementById('custom_scan_button').style.backgroundColor = '#20b2aa'; 
-				document.getElementById("quick_scan_button").value = "Quick Scan";
-	        });
-        });
-</script>   -->   
 

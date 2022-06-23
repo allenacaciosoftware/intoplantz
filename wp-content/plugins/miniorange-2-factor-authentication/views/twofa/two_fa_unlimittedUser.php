@@ -59,8 +59,9 @@ $imagepath=plugins_url( '/includes/images/', dirname(dirname(__FILE__ )));
 <?php
 if(current_user_can('administrator')){
 	?>
+    <div id="disable_two_factor_tour">
 
-    <div class="mo2f_table_layout" id="disable_two_factor_tour">
+
         <h2>Enable 2FA for Users<?php echo mo2f_setting_tooltip_array($settings_tab_tooltip_array[0]); ?>
             <a href='<?php echo $two_factor_premium_doc['Enable/disable 2-factor Authentication'];?>' target="_blank">
             <span class="dashicons dashicons-text-page" title="More Information" style="font-size:19px;color:#4a47a3;float: right;"></span>
@@ -99,7 +100,7 @@ if(current_user_can('administrator')){
                 <span class="mo_wpns_slider"></span>
                 </label>
                 </p>
-            
+
            </form>
         </div>
        </br>
@@ -120,9 +121,9 @@ if(current_user_can('administrator')){
                 <input type="hidden" id="mo2f_delete_logs" name="option"
                    value="log_file_delete"/>
            </form>
-      <?php } ?>     
+      <?php } ?>
      </br><hr>
-     </br> 
+     </br>
         <h2>2FA Prompt on Wordpress Login Page
        <a class=" btn-link" data-toggle="collapse" id="showpreviewwploginpage" href="#previewwploginpage" aria-expanded="false"><?php echo __('See preview','miniorange-2-factor-authentication');?></a>
            <?php echo mo2f_setting_tooltip_array($settings_tab_tooltip_array[1]); ?>
@@ -152,7 +153,7 @@ if(current_user_can('administrator')){
         <h2>On the Fly 2FA Configuration
         <?php echo mo2f_setting_tooltip_array($settings_tab_tooltip_array[2]); ?>
         </h2>
-       
+
         <div>
             <form name="f" method="post" action="" >
                 <input type="hidden" id="mo2f_nonce_enable_inline" name="mo2f_nonce_enable_inline"
@@ -167,15 +168,30 @@ if(current_user_can('administrator')){
             </form>
         </div>
      </br><hr>
+     <h2>Enable the login with all configured methods
+        <?php echo mo2f_setting_tooltip_array($settings_tab_tooltip_array[2]); ?>
+        </h2>   
+        <div>
+            <form name="f" method="post" action="" >
+                <label class="mo_wpns_switch" style="float: right;">
+                <input type="checkbox" onChange="mo_toggle_configured_methods()" style="padding-top: 50px;float: right;" id="mo2f_nonce_enable_configured_methods"
+                       name="mo2f_nonce_enable_configured_methods"
+                       value="<?php MoWpnsUtility::get_mo2f_db_option('mo2f_nonce_enable_configured_methods', 'site_option') ?>" <?php  checked( MoWpnsUtility::get_mo2f_db_option('mo2f_nonce_enable_configured_methods', 'site_option') == true);?>/>
+                <span class="mo_wpns_slider"></span>
+                </label>
+                <p>It will help the user to login with any of the configured methods</p>
+            </form>
+        </div>
+        </br><hr>
     <script type="text/javascript">
 
         jQuery('#mo2f_debug_delete_form').click(function(){
-         
+
          var data =  {
                 'action'                        : 'mo_two_factor_ajax',
                 'mo_2f_two_factor_ajax'         : 'mo2f_delete_log_file',
                 'mo2f_nonce_delete_log'         :  jQuery('#mo2f_delete_log').val(),
-                
+
             };
             jQuery.post(ajaxurl, data, function(response) {
                 var response = response.replace(/\s+/g,' ').trim();
@@ -185,9 +201,9 @@ if(current_user_can('administrator')){
                     error_msg("Log file is not available.");
                 }
             });
- 
 
-         
+
+
         });
 
         function mo_toggle_twofa(){
@@ -218,10 +234,10 @@ if(current_user_can('administrator')){
                 var response = response.replace(/\s+/g,' ').trim();
                 if (response == "true"){
                     success_msg("Plugin log is now enabled.");
-                   
+
                 }else{
                     error_msg("Plugin log is now disabled.");
-                    
+
                 }
             });
 
@@ -272,11 +288,33 @@ if(current_user_can('administrator')){
             });
 
         }
+        function mo_toggle_configured_methods(){
+            var nonce = '<?php echo wp_create_nonce("WAFsettingNonce_configurd_methods");?>';
+            var data =  {
+                'action'                                    : 'mo_two_factor_ajax',
+                'mo_2f_two_factor_ajax'                     : 'mo2f_enable_disable_configurd_methods',
+                'nonce'                                     :  nonce,
+                'mo2f_nonce_enable_configured_methods'      :  jQuery('#mo2f_nonce_enable_configured_methods').is(":checked")
+            };
+            jQuery.post(ajaxurl, data, function(response) {
+                var response = response.replace(/\s+/g,' ').trim();
+                if (response == "true"){
+                    success_msg('Login with the configured method is enabled');
+                }
+                else if (response == "error"){
+                    error_msg('Unknown error occured. Please try again!');
+                }
+                else{
+                    error_msg('Login with the configured method is disabled');
+                }
+            });
+
+        }
          jQuery('#previewwploginpage').hide();
          jQuery('#showpreviewwploginpage').on('click', function() {
-           if ( jQuery("#previewwploginpage").is(":visible") ) { 
+           if ( jQuery("#previewwploginpage").is(":visible") ) {
               jQuery('#previewwploginpage').hide();
-          } else if ( jQuery("#previewwploginpage").is(":hidden") ) { 
+          } else if ( jQuery("#previewwploginpage").is(":hidden") ) {
               jQuery('#previewwploginpage').show();
           }
          });
@@ -288,7 +326,7 @@ if(current_user_can('administrator')){
 if(current_user_can('administrator'))
 {
 	?>
-   
+
         <input type="hidden" name="option" value="" />
         <span>
                         <h2>Select User Roles to enable 2-Factor for <b  style="font-size: 70%;color: red;">(Upto 3 users in Free version)</b>
@@ -296,9 +334,9 @@ if(current_user_can('administrator'))
                         <a href= '<?php echo $two_factor_premium_doc['Enable 2FA Role Based'];?>' target="_blank">
                         <span class="dashicons dashicons-text-page" title="More Information" style="font-size:19px;color:#4a47a3;float: right;"></span>
                         </a></h2>
-        </br>                
+        </br>
         <span>
-                      
+
 	                    <?php
 	                    echo miniorange_2_factor_user_roles($current_user);
 	                    ?>
@@ -308,8 +346,8 @@ if(current_user_can('administrator'))
                         <br>
         </span>
         <br><br>
-     
-   
+
+
 
     <script>
         jQuery("#save_role_2FA").click(function(){
@@ -366,7 +404,7 @@ if(current_user_can('administrator'))
                     jQuery('#mo2f_configured_2FA_method_free_plan').val('SecurityQuestions');
                     jQuery('#mo2f_selected_action_free_plan').val('configure2factor');
                     jQuery('#mo2f_save_free_plan_auth_methods_form').submit();
-                    openTab2fa(setup_2fa);
+                    mo2f_wpns_openTab2fa(setup_2fa);
                 }
                 else
                 {
@@ -392,7 +430,7 @@ if(current_user_can('administrator'))
                     jQuery('#mo2f_configured_2FA_method_free_plan').val('GoogleAuthenticator');
                     jQuery('#mo2f_selected_action_free_plan').val('configure2factor');
                     jQuery('#mo2f_save_free_plan_auth_methods_form').submit();
-                    openTab2fa(setup_2fa);
+                    mo2f_wpns_openTab2fa(setup_2fa);
                 }
                 else
                 {

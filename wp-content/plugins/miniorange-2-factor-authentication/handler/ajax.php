@@ -41,6 +41,10 @@ class AjaxHandler
 			    case "plugin_warning_never_show_again":
 			          $this->wpns_plugin_warning_never_show_again(); 
 			          break;
+
+                  case "mo2f_banner_never_show_again":
+                      $this->wpns_mo2f_banner_never_show_again();
+                      break;
 				 
 				 case "dismissSms":
 					$this->wpns_sms_notice();  				break;
@@ -56,6 +60,8 @@ class AjaxHandler
 					
 			    case "dismisscodeswarning":
 					$this->mo2f_backup_codes_dismiss(); 	break;
+
+
 			}
 		}
 	}
@@ -138,6 +144,12 @@ class AjaxHandler
 	 wp_send_json('success');
 	}
 
+	function wpns_mo2f_banner_never_show_again(){
+	 update_site_option('mo2f_banner_never_show_again', 1);
+	 wp_send_json('success');
+	}
+
+
 	function wpns_dismiss_firewall_notice(){
        update_site_option('waf_notification_option', 1);
        update_site_option('notice_dismiss_time',time());
@@ -169,7 +181,7 @@ class AjaxHandler
 		update_user_meta($user_id, 'donot_show_backup_code_notice' , 1);
 		wp_send_json('success');
 	}
-	
+
     
 
 }new AjaxHandler;

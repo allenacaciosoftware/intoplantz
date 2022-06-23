@@ -12,7 +12,6 @@ class mo_2f_ajax
 	}
 
 	function mo_two_factor_ajax(){
-		
 		$GLOBALS['mo2f_is_ajax_request'] = true;
 		switch ($_POST['mo_2f_two_factor_ajax']) {
 			case 'mo2f_ajax_login_redirect':
@@ -33,6 +32,8 @@ class mo_2f_ajax
 				$this->mo2f_enable_disable_twofactor();	break;
 			case 'mo2f_enable_disable_inline':
 				$this->mo2f_enable_disable_inline();	break;
+			case 'mo2f_enable_disable_configurd_methods':
+				$this->mo2f_enable_disable_configurd_methods();	break;
 			case 'mo2f_shift_to_onprem':
 				$this->mo2f_shift_to_onprem();break;
 			case 'mo2f_enable_disable_twofactor_prompt_on_login':
@@ -46,12 +47,630 @@ class mo_2f_ajax
 			case 'mo2f_delete_log_file':
 				$this->mo2f_delete_log_file();
 				break;
-			case 'select_method_setup_wizard':
-				$this->select_method_setup_wizard();
+				case 'select_method_setup_wizard':
+				$this->mo2f_select_method_setup_wizard();
 				break;
+			case 'mo_wpns_register_verify_customer':
+				$this->mo_wpns_register_verify_customer();
+				break;
+			case 'mo_2fa_configure_GA_setup_wizard':
+				$this->mo_2fa_configure_GA_setup_wizard();
+				break;
+			case 'mo_2fa_verify_GA_setup_wizard':
+				$this->mo_2fa_verify_GA_setup_wizard();
+				break;
+			case 'mo_2fa_configure_OTPOverSMS_setup_wizard':
+				$this->mo_2fa_configure_OTPOverSMS_setup_wizard();
+				break;
+			case 'mo_2fa_configure_OTPOverEmail_setup_wizard':
+				$this->mo_2fa_configure_OTPOverEmail_setup_wizard();
+				break;
+			case 'mo_2fa_verify_OTPOverEmail_setup_wizard':
+				$this->mo_2fa_verify_OTPOverEmail_setup_wizard();
+				break;
+			case 'mo_2fa_verify_OTPOverSMS_setup_wizard':
+				$this->mo_2fa_verify_OTPOverSMS_setup_wizard();
+				break;
+			case 'mo_2fa_configure_KBA_setup_wizard':
+				$this->mo_2fa_configure_KBA_setup_wizard();
+				break;
+			case 'mo_2fa_verify_KBA_setup_wizard':
+				$this->mo_2fa_verify_KBA_setup_wizard();
+				break;
+			case 'mo_2fa_send_otp_token':
+				$this->mo_2fa_send_otp_token();
+				break;
+			case "mo2f_set_otp_over_sms":
+				$this->mo2f_set_otp_over_sms();	break;
+			case "mo2f_set_miniorange_methods":
+				$this->mo2f_set_miniorange_methods();	break;
+			case "mo2f_set_GA":
+				$this->mo2f_set_GA();	break;
 		}
 	}
-	function select_method_setup_wizard()
+	function mo_2fa_verify_KBA_setup_wizard()
+	{
+		global $Mo2fdbQueries;
+		$kba_q1 = sanitize_text_field($_POST['mo2f_kbaquestion_1']);
+		$kba_a1 = sanitize_text_field( $_POST['mo2f_kba_ans1'] );
+		$kba_q2 = sanitize_text_field($_POST['mo2f_kbaquestion_2']);
+		$kba_a2 = sanitize_text_field( $_POST['mo2f_kba_ans2'] );
+		$kba_q3 = sanitize_text_field( $_POST['mo2f_kbaquestion_3'] );
+		$kba_a3 = sanitize_text_field( $_POST['mo2f_kba_ans3'] );
+		$user   = wp_get_current_user();
+		$this->mo2f_check_and_create_user($user->ID);
+		if ( MO2f_Utility::mo2f_check_empty_or_null( $kba_q1 ) || MO2f_Utility::mo2f_check_empty_or_null( $kba_a1 ) || MO2f_Utility::mo2f_check_empty_or_null( $kba_q2 ) || MO2f_Utility::mo2f_check_empty_or_null( $kba_a2) || MO2f_Utility::mo2f_check_empty_or_null( $kba_q3) || MO2f_Utility::mo2f_check_empty_or_null( $kba_a3) ) {
+				echo "Invalid Questions or Answers";
+				exit;
+			}
+		if ( strcasecmp( $kba_q1, $kba_q2 ) == 0 || strcasecmp( $kba_q2, $kba_q3 ) == 0 || strcasecmp( $kba_q3, $kba_q1 ) == 0 ) {
+			echo "The questions you select must be unique.";
+			exit;
+		}
+		$kba_q1 = addcslashes( stripslashes( $kba_q1 ), '"\\' );
+		$kba_q2 = addcslashes( stripslashes( $kba_q2 ), '"\\' );
+		$kba_q3 = addcslashes( stripslashes( $kba_q3 ), '"\\' );
+		$kba_a1 = addcslashes( stripslashes( $kba_a1 ), '"\\' );
+		$kba_a2 = addcslashes( stripslashes( $kba_a2 ), '"\\' );
+		$kba_a3 = addcslashes( stripslashes( $kba_a3 ), '"\\' );
+		$email            = $user->user_email;
+		$kba_registration = new Two_Factor_Setup();
+		$Mo2fdbQueries->update_user_details( $user->ID, array(
+			'mo2f_SecurityQuestions_config_status'  => true,
+			'mo_2factor_user_registration_status'   => 'MO_2_FACTOR_PLUGIN_SETTINGS',
+			'mo2f_user_email'						=> $email
+			));
+		$kba_reg_reponse  = json_decode( $kba_registration->register_kba_details( $email, $kba_q1, $kba_a1, $kba_q2, $kba_a2, $kba_q3, $kba_a3, $user->ID ), true );
+	
+		if($kba_reg_reponse['status']=='SUCCESS')
+		{
+			echo "SUCCESS";
+			exit;
+		}
+		else 
+		{
+			echo "An error has occured while saving KBA details. Please try again.";
+			exit;
+		}
+	}
+	function mo_2fa_send_otp_token()
+	{
+		$enduser 	  		 = new Customer_Setup();
+		$email   	  		 = sanitize_text_field($_POST['phone']);
+		$customer_key 		 = get_site_option('mo2f_customerKey');
+		$api_key 	  		 = get_site_option('mo2f_api_key');
+		$selected_2FA_method = sanitize_text_field($_POST['selected_2FA_method']);
+		$user_id  			 = wp_get_current_user()->ID;
+				
+		if($selected_2FA_method == 'OTP Over Email')
+		{
+			update_user_meta($user_id,'tempRegEmail',$email);
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			  $emailErr = "Invalid email format";
+			  echo $emailErr;
+			  exit;
+			}
+		}
+		else if($selected_2FA_method == 'OTP Over SMS')
+		{
+
+		}
+		$content 	  		= $enduser->send_otp_token($email,$selected_2FA_method,$customer_key,$api_key);
+		$content 			= json_decode($content);
+		
+		if($content->status =='SUCCESS')
+		{
+			echo 'SUCCESS';
+			update_user_meta($user_id,'txId',$content->txId);
+			update_user_meta($user_id,'tempRegPhone',$email);
+			exit;
+		}
+		else 
+			echo "An error has occured while sending the OTP.";	
+			exit;
+	}
+	function mo2f_check_and_create_user($user_id)
+	{	
+		global $Mo2fdbQueries;
+		$twofactor_transactions = new Mo2fDB;			
+		$exceeded = $twofactor_transactions->check_alluser_limit_exceeded($user_id);
+		if($exceeded){
+			echo 'User Limit has been exceeded';
+			exit;
+		}
+		$Mo2fdbQueries->insert_user( $user_id );			
+	}
+	function mo_2fa_verify_OTPOverSMS_setup_wizard()
+	{
+		global $Mo2fdbQueries;
+		$enduser 	  		= new Customer_Setup();
+		$current_user 		= wp_get_current_user();
+		$otpToken 			= sanitize_text_field($_POST['mo2f_otp_token']);
+		$user_id    	 	= wp_get_current_user()->ID;
+		$email 				= get_user_meta($user_id,'tempRegPhone',true);
+		$content = json_decode($enduser->validate_otp_token( 'SMS', null, get_user_meta($user_id,'txId',true), $otpToken, get_site_option('mo2f_customerKey'), get_site_option('mo2f_api_key') ),true);
+		
+		if($content['status'] == 'SUCCESS')
+		{
+			$this->mo2f_check_and_create_user($user_id);
+			$Mo2fdbQueries->update_user_details( $user_id, array(
+				'mo2f_OTPOverSMS_config_status' => true,
+				'mo2f_configured_2FA_method'             => "OTP Over SMS",
+				'mo2f_user_phone'						 => $email,
+				'user_registration_with_miniorange'      => 'SUCCESS',
+				'mo_2factor_user_registration_status'    => 'MO_2_FACTOR_PLUGIN_SETTINGS'
+			) );
+			echo "SUCCESS";	
+		} 
+		else
+		{
+			echo "Invalid OTP";
+		}
+		exit;
+	
+	}
+	function mo_2fa_verify_OTPOverEmail_setup_wizard()
+	{
+		global $Mo2fdbQueries;
+		$enduser 	  		= new Customer_Setup();
+		$current_user 		= wp_get_current_user();
+		$otpToken 			= sanitize_text_field($_POST['mo2f_otp_token']);
+		$user_id    	 	= wp_get_current_user()->ID;
+		$email 				= get_user_meta($user_id,'tempRegEmail',true);
+		$content = json_decode($enduser->validate_otp_token( 'OTP_OVER_EMAIL', null, get_user_meta($current_user->ID,'mo2f_transactionId',true), $otpToken, get_site_option('mo2f_customerKey'), get_site_option('mo2f_api_key') ),true);
+		
+		if($content['status'] == 'SUCCESS')
+		{
+			$this->mo2f_check_and_create_user($user_id);
+			$Mo2fdbQueries->update_user_details( $user_id, array(
+				'mo2f_OTPOverEmail_config_status' => true,
+				'mo2f_configured_2FA_method'             => "OTP Over Email",
+				'mo2f_user_email'						 => $email,
+				'user_registration_with_miniorange'      => 'SUCCESS',
+				'mo_2factor_user_registration_status'    => 'MO_2_FACTOR_PLUGIN_SETTINGS'
+			) );
+			echo "SUCCESS";	
+		} 
+		else
+		{
+			echo "Invalid OTP";
+		}
+		exit;
+	}
+	function mo_2fa_verify_GA_setup_wizard()
+	{
+		global $Mo2fdbQueries;
+		$path = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'handler'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEPARATOR.'gaonprem.php';
+		include_once $path;
+		$obj_google_auth = new Google_auth_onpremise();
+		$user_id = wp_get_current_user()->ID;
+		$otpToken = sanitize_text_field($_POST['mo2f_google_auth_code']);
+		$session_id_encrypt = isset($_POST['mo2f_session_id']) ? sanitize_text_field($_POST['mo2f_session_id']) : null;
+		$secret= $obj_google_auth->mo_GAuth_get_secret($user_id);
+		if($session_id_encrypt){
+			$secret = MO2f_Utility::mo2f_get_transient($session_id_encrypt, 'secret_ga');
+		}
+		$content = $obj_google_auth->verifyCode($secret, $otpToken);
+		$content = json_decode($content);
+		if($content->status== 'false')
+			echo "Invalid One time Passcode. Please enter again";
+		else
+		{
+			$obj_google_auth->mo_GAuth_set_secret($user_id,$secret);
+			$this->mo2f_check_and_create_user($user_id);
+			$Mo2fdbQueries->update_user_details( $user_id, array(
+				'mo2f_GoogleAuthenticator_config_status' => true,
+				'mo2f_AuthyAuthenticator_config_status'  => false,
+				'mo2f_configured_2FA_method'             => "Google Authenticator",
+				'user_registration_with_miniorange'      => 'SUCCESS',
+				'mo_2factor_user_registration_status'    => 'MO_2_FACTOR_PLUGIN_SETTINGS'
+			) );
+
+			echo 'SUCCESS';	
+		}
+		exit;
+	}
+	function mo_2fa_configure_GA_setup_wizard()
+	{
+		$path = dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR.'handler'.DIRECTORY_SEPARATOR.'twofa'.DIRECTORY_SEPARATOR.'gaonprem.php';
+		include_once $path;
+		$obj_google_auth = new Google_auth_onpremise();
+		update_option('mo2f_google_appname',$_SERVER['SERVER_NAME']);
+		$res = $obj_google_auth->mo_GAuth_get_details(true);
+		return $res;
+	}
+	function mo_2fa_configure_OTPOverSMS_setup_wizard()
+	{
+		global $Mo2fdbQueries;
+		$user = wp_get_current_user();
+		$mo2f_user_phone 	 = $Mo2fdbQueries->get_user_detail( 'mo2f_user_phone', $user->ID );
+		$user_phone      	 = $mo2f_user_phone ? $mo2f_user_phone : get_option( 'user_phone_temp' );
+    	$session_id_encrypt  = MO2f_Utility::random_str(20);
+        
+		?>
+		<h4 style="padding:10px; background-color: #a7c5eb;font-weight:normal"> Remaining SMS Transactions: <b><?php echo get_site_option('cmVtYWluaW5nT1RQVHJhbnNhY3Rpb25z');?> </b></h4>
+	    <form name="f" method="post" action="" id="mo2f_verifyphone_form">
+	        <input type="hidden" name="option" value="mo2f_configure_otp_over_sms_send_otp"/>
+	        <input type="hidden" name="mo2f_session_id" value="<?php echo $session_id_encrypt ?>"/>
+			<input type="hidden" name="mo2f_configure_otp_over_sms_send_otp_nonce"
+							value="<?php echo wp_create_nonce( "mo2f-configure-otp-over-sms-send-otp-nonce" ) ?>"/>
+
+	        <div style="display:inline;">
+	            <input class="mo2f_table_textbox_phone" style="width:200px;height: 30px;" type="text" name="phone" id="phone"
+	                   value="<?php echo $user_phone ?>" pattern="[\+]?[0-9]{1,4}\s?[0-9]{7,12}"
+	                   title="<?php echo mo2f_lt( 'Enter phone number without any space or dashes' ); ?>"/><br>
+	            <input type="button" name="mo2f_send_otp" id="mo2f_send_otp" class="miniorange_button"
+	                   value="<?php echo mo2f_lt( 'Send OTP' ); ?>"/>
+	        </div>
+	    </form>
+	    <br>
+	    <form name="f" method="post" action="" id="mo2f_validateotp_form">
+	        <input type="hidden" name="option" value="mo2f_configure_otp_over_sms_validate"/>
+	        <input type="hidden" name="mo2f_session_id" value="<?php echo $session_id_encrypt ?>"/>
+			<input type="hidden" name="mo2f_configure_otp_over_sms_validate_nonce"
+							value="<?php echo wp_create_nonce( "mo2f-configure-otp-over-sms-validate-nonce" ) ?>"/>
+	        <p><?php echo mo2f_lt( 'Enter One Time Passcode' ); ?></p>
+	        <input class="mo2f_table_textbox_phone" style="width:200px;height: 30px" autofocus="true" type="text" name="mo2f_otp_token" id="mo2f_otp_token"
+	               placeholder="<?php echo mo2f_lt( 'Enter OTP' ); ?>" style="width:95%;"/>
+	        <br><br>
+	    </form><br>
+    
+		<?php
+		exit;
+	}
+	function mo_2fa_configure_OTPOverEmail_setup_wizard()
+	{
+		$session_id_encrypt  = MO2f_Utility::random_str(20);
+        $user_email 		 = wp_get_current_user()->user_email;
+		?>
+		<h4 style="padding:10px; background-color: #f1f3f5"> Remaining Email Transactions: <b><?php echo get_site_option('cmVtYWluaW5nT1RQ');?> </b></h4>
+	    <form name="f" method="post" action="" id="mo2f_verifyemail_form">
+	        <input type="hidden" name="option" value="mo2f_configure_otp_over_email_send_otp"/>
+	        <input type="hidden" name="mo2f_session_id" value="<?php echo $session_id_encrypt ?>"/>
+			<input type="hidden" name="mo2f_configure_otp_over_email_send_otp_nonce"
+							value="<?php echo wp_create_nonce( "mo2f-configure-otp-over-email-send-otp-nonce" ) ?>"/>
+
+	        <div style="display:inline;">
+	            <b>Email Address: </b>
+	            <input class="mo2f_table_textbox" style="width:280px;height: 30px;" type="email" name="verify_phone" id="phone"
+	                   value="<?php echo $user_email ?>" 
+	                   title="<?php echo mo2f_lt( 'Enter your email address without any space or dashes' ); ?>"/><br><br>
+	            <input type="button" name="mo2f_send_otp" id="mo2f_send_otp" class="miniorange_button"
+	                   value="<?php echo mo2f_lt( 'Send OTP' ); ?>"/>
+	        </div>
+	    </form>
+	    <br><br>
+	    <form name="f" method="post" action="" id="mo2f_validateotp_form">
+	        <input type="hidden" name="option" value="mo2f_configure_otp_over_sms_validate"/>
+	        <input type="hidden" name="mo2f_session_id" value="<?php echo $session_id_encrypt ?>"/>
+			<input type="hidden" name="mo2f_configure_otp_over_email_validate_nonce"
+							value="<?php echo wp_create_nonce( "mo2f-configure-otp-over-email-validate-nonce" ) ?>"/>
+	        <b><?php echo mo2f_lt( 'Enter One Time Passcode:' ); ?>
+	        <input class="mo2f_table_textbox" style="width:200px;height: 30px;" autofocus="true" type="text" name="mo2f_otp_token" id ="mo2f_otp_token"
+	               placeholder="<?php echo mo2f_lt( 'Enter OTP' ); ?>" style="width:95%;"/></b>
+	        <br><br>
+	    </form><br>
+    	
+		<?php
+		exit;
+	}
+	function mo_2fa_configure_KBA_setup_wizard()
+	{
+		?>
+		    <div class="mo2f_kba_header"><?php echo mo2f_lt( 'Please choose 3 questions' ); ?></div>
+    <br>
+    <table cellspacing="10">
+        <tr class="mo2f_kba_header">
+            <th style="width: 10%;">
+				<?php echo mo2f_lt( 'Sr. No.' ); ?>
+            </th>
+            <th class="mo2f_kba_tb_data">
+				<?php echo mo2f_lt( 'Questions' ); ?>
+            </th>
+            <th>
+				<?php echo mo2f_lt( 'Answers' ); ?>
+            </th>
+        </tr>
+        <tr class="mo2f_kba_body">
+            <td>
+                <center>1.</center>
+            </td>
+            <td class="mo2f_kba_tb_data">
+                <select name="mo2f_kbaquestion_1" id="mo2f_kbaquestion_1" class="mo2f_kba_ques" required="true"
+                        >
+                    <option value="" selected="selected">
+                        -------------------------<?php echo mo2f_lt( 'Select your question' ); ?>
+                        -------------------------
+                    </option>
+                    <option id="mq1_1"
+                            value="What is your first company name?"><?php echo mo2f_lt( 'What is your first company name?' ); ?></option>
+                    <option id="mq2_1"
+                            value="What was your childhood nickname?"><?php echo mo2f_lt( 'What was your childhood nickname?' ); ?></option>
+                    <option id="mq3_1"
+                            value="In what city did you meet your spouse/significant other?"><?php echo mo2f_lt( 'In what city did you meet your spouse/significant other?' ); ?></option>
+                    <option id="mq4_1"
+                            value="What is the name of your favorite childhood friend?"><?php echo mo2f_lt( 'What is the name of your favorite childhood friend?' ); ?></option>
+                    <option id="mq5_1"
+                            value="What school did you attend for sixth grade?"><?php echo mo2f_lt( 'What school did you attend for sixth grade?' ); ?></option>
+                    <option id="mq6_1"
+                            value="In what city or town was your first job?"><?php echo mo2f_lt( 'In what city or town was your first job?' ); ?></option>
+                    <option id="mq7_1"
+                            value="What is your favourite sport?"><?php echo mo2f_lt( 'What is your favourite sport?' ); ?></option>
+                    <option id="mq8_1"
+                            value="Who is your favourite sports player?"><?php echo mo2f_lt( 'Who is your favourite sports player?' ); ?></option>
+                    <option id="mq9_1"
+                            value="What is your grandmother's maiden name?"><?php echo mo2f_lt( "What is your grandmother's maiden name?" ); ?></option>
+                    <option id="mq10_1"
+                            value="What was your first vehicle's registration number?"><?php echo mo2f_lt( "What was your first vehicle's registration number?" ); ?></option>
+                </select>
+            </td>
+            <td style="text-align: end;">
+                <input class="mo2f_table_textbox_KBA" type="password" name="mo2f_kba_ans1" id="mo2f_kba_ans1"
+                       title="<?php echo mo2f_lt( 'Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed.' ); ?>"
+                       pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+\-\s]{1,100}" required="true" autofocus="true"
+                       placeholder="<?php echo mo2f_lt( 'Enter your answer' ); ?>"/>
+            </td>
+        </tr>
+        <tr class="mo2f_kba_body">
+            <td>
+                <center>2.</center>
+            </td>
+            <td class="mo2f_kba_tb_data">
+                <select name="mo2f_kbaquestion_2" id="mo2f_kbaquestion_2" class="mo2f_kba_ques" required="true"
+                        >
+                    <option value="" selected="selected">
+                        -------------------------<?php echo mo2f_lt( 'Select your question' ); ?>
+                        -------------------------
+                    </option>
+                    <option id="mq1_2"
+                            value="What is your first company name?"><?php echo mo2f_lt( 'What is your first company name?' ); ?></option>
+                    <option id="mq2_2"
+                            value="What was your childhood nickname?"><?php echo mo2f_lt( 'What was your childhood nickname?' ); ?></option>
+                    <option id="mq3_2"
+                            value="In what city did you meet your spouse/significant other?"><?php echo mo2f_lt( 'In what city did you meet your spouse/significant other?' ); ?></option>
+                    <option id="mq4_2"
+                            value="What is the name of your favorite childhood friend?"><?php echo mo2f_lt( 'What is the name of your favorite childhood friend?' ); ?></option>
+                    <option id="mq5_2"
+                            value="What school did you attend for sixth grade?"><?php echo mo2f_lt( 'What school did you attend for sixth grade?' ); ?></option>
+                    <option id="mq6_2"
+                            value="In what city or town was your first job?"><?php echo mo2f_lt( 'In what city or town was your first job?' ); ?></option>
+                    <option id="mq7_2"
+                            value="What is your favourite sport?"><?php echo mo2f_lt( 'What is your favourite sport?' ); ?></option>
+                    <option id="mq8_2"
+                            value="Who is your favourite sports player?"><?php echo mo2f_lt( 'Who is your favourite sports player?' ); ?></option>
+                    <option id="mq9_2"
+                            value="What is your grandmother's maiden name?"><?php echo mo2f_lt( 'What is your grandmother\'s maiden name?' ); ?></option>
+                    <option id="mq10_2"
+                            value="What was your first vehicle's registration number?"><?php echo mo2f_lt( 'What was your first vehicle\'s registration number?' ); ?></option>
+                </select>
+            </td>
+            <td style="text-align: end;">
+                <input class="mo2f_table_textbox_KBA" type="password" name="mo2f_kba_ans2" id="mo2f_kba_ans2"
+                       title="<?php echo mo2f_lt( 'Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed.' ); ?>"
+                       pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+\-\s]{1,100}" required="true"
+                       placeholder="<?php echo mo2f_lt( 'Enter your answer' ); ?>"/>
+            </td>
+        </tr>
+        <tr class="mo2f_kba_body">
+            <td>
+                <center>3.</center>
+            </td>
+            <td class="mo2f_kba_tb_data">
+                <input class="mo2f_kba_ques" type="text" style="width: 100%;"name="mo2f_kbaquestion_3" id="mo2f_kbaquestion_3"
+                       required="true"
+                       placeholder="<?php echo mo2f_lt( 'Enter your custom question here' ); ?>"/>
+            </td>
+            <td style="text-align: end;">
+                <input class="mo2f_table_textbox_KBA" type="password" name="mo2f_kba_ans3" id="mo2f_kba_ans3"
+                       title="<?php echo mo2f_lt( 'Only alphanumeric letters with special characters(_@.$#&amp;+-) are allowed.' ); ?>"
+                       pattern="(?=\S)[A-Za-z0-9_@.$#&amp;+\-\s]{1,100}" required="true"
+                       placeholder="<?php echo mo2f_lt( 'Enter your answer' ); ?>"/>
+            </td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+    	var mo_option_to_hide1;
+        //hidden element in dropdown list 2
+        var mo_option_to_hide2;
+
+        function mo_option_hide(list) {
+            //grab the team selected by the user in the dropdown list
+            var list_selected = document.getElementById("mo2f_kbaquestion_" + list).selectedIndex;
+            //if an element is currently hidden, unhide it
+            if (typeof (mo_option_to_hide1) != "undefined" && mo_option_to_hide1 !== null && list == 2) {
+                mo_option_to_hide1.style.display = 'block';
+            } else if (typeof (mo_option_to_hide2) != "undefined" && mo_option_to_hide2 !== null && list == 1) {
+                mo_option_to_hide2.style.display = 'block';
+            }
+            //select the element to hide and then hide it
+            if (list == 1) {
+                if (list_selected != 0) {
+                    mo_option_to_hide2 = document.getElementById("mq" + list_selected + "_2");
+                    mo_option_to_hide2.style.display = 'none';
+                }
+            }
+            if (list == 2) {
+                if (list_selected != 0) {
+                    mo_option_to_hide1 = document.getElementById("mq" + list_selected + "_1");
+                    mo_option_to_hide1.style.display = 'none';
+                }
+            }
+        }
+  
+
+    </script>
+
+			<?php
+			exit;
+	}
+
+	function mo2f_register_customer($post)
+	{
+		//validate and sanitize
+		global $moWpnsUtility, $Mo2fdbQueries;
+		$user   		 = wp_get_current_user();
+		$email 			 = sanitize_email($post['email']);
+		$company 		 = $_SERVER["SERVER_NAME"];
+
+		$password 		 = $post['password'];
+		$confirmPassword = $post['confirmPassword'];
+
+		if( strlen( $password ) < 6 || strlen( $confirmPassword ) < 6)
+		{
+			return "Password length is less then expected";
+		}
+		
+		if( $password != $confirmPassword )
+		{
+			return "Password and confirm Password does not match.";
+		}
+		if( MoWpnsUtility::check_empty_or_null( $email ) || MoWpnsUtility::check_empty_or_null( $password ) 
+			|| MoWpnsUtility::check_empty_or_null( $confirmPassword ) ) 
+		{
+			return "Unknown Error has occured.";
+		} 
+
+		update_option( 'mo2f_email', $email );
+		
+		update_option( 'mo_wpns_company'    , $company );
+		
+		update_option( 'mo_wpns_password'   , $password );
+		
+		$customer = new MocURL();
+		$content  = json_decode($customer->check_customer($email), true);
+		$Mo2fdbQueries->insert_user( $user->ID );
+			
+		switch ($content['status'])
+		{
+			case 'CUSTOMER_NOT_FOUND':
+			      $customerKey = json_decode($customer->create_customer($email, $company, $password, $phone = '', $first_name = '', $last_name = ''), true);
+				  
+			   if(strcasecmp($customerKey['status'], 'SUCCESS') == 0) 
+				{
+					update_site_option(base64_encode("totalUsersCloud"),get_site_option(base64_encode("totalUsersCloud"))+1);
+					update_option( 'mo2f_email', $email );
+					$this->save_success_customer_config($email, $customerKey['id'], $customerKey['apiKey'], $customerKey['token'], $customerKey['appSecret']);
+					$this->_get_current_customer($email,$password);
+					return "SUCCESS";
+				}
+				
+				break;
+			default:
+				$res = $this->_get_current_customer($email,$password);
+				if($res == "SUCCESS")
+					return $res;
+				return "Email is already registered in miniOrange. Please try to login to your account.";
+				
+		}
+
+	}
+	function _verify_customer($post)
+	{
+		global $moWpnsUtility;
+		$email 	  = sanitize_email( $post['email'] );
+		$password = sanitize_text_field( $post['password'] );
+
+		if( $moWpnsUtility->check_empty_or_null( $email ) || $moWpnsUtility->check_empty_or_null( $password ) ) 
+		{
+			return "Username or Password is missing.";
+		} 
+		return $this->_get_current_customer($email,$password);
+	}
+	function _get_current_customer($email,$password)
+	{
+		global $Mo2fdbQueries;
+		$user   = wp_get_current_user();
+		$customer 	 = new MocURL();
+		$content     = $customer->get_customer_key($email, $password);
+		$customerKey = json_decode($content, true);
+		if(json_last_error() == JSON_ERROR_NONE) 
+		{
+			if(isset($customerKey['phone'])){
+				update_option( 'mo_wpns_admin_phone', $customerKey['phone'] );
+			}
+			update_option('mo2f_email',$email);
+
+			$this->save_success_customer_config($email, $customerKey['id'], $customerKey['apiKey'], $customerKey['token'], $customerKey['appSecret']);
+			update_site_option(base64_encode("totalUsersCloud"),get_site_option(base64_encode("totalUsersCloud"))+1);
+			$customerT = new Customer_Cloud_Setup();
+			$content = json_decode( $customerT->get_customer_transactions( get_option( 'mo2f_customerKey' ), get_option( 'mo2f_api_key' ),'PREMIUM' ), true );
+			if($content['status'] == 'SUCCESS')
+			{
+				update_site_option('mo2f_license_type','PREMIUM');
+			}
+			else
+			{
+				update_site_option('mo2f_license_type','DEMO');
+				$content = json_decode( $customerT->get_customer_transactions( get_option( 'mo2f_customerKey' ), get_option( 'mo2f_api_key' ),'DEMO' ), true );
+			}
+			if(isset($content['smsRemaining']))
+				update_site_option('cmVtYWluaW5nT1RQVHJhbnNhY3Rpb25z',$content['smsRemaining']);
+			else if($content['status'] =='SUCCESS')
+				update_site_option('cmVtYWluaW5nT1RQVHJhbnNhY3Rpb25z',0);
+
+			if(isset($content['emailRemaining']))
+			{
+				if($content['emailRemaining']>30)
+				{
+					$currentTransaction = $content['emailRemaining'];
+					update_site_option('cmVtYWluaW5nT1RQ',$currentTransaction);
+					update_site_option('EmailTransactionCurrent',$content['emailRemaining']);				
+				}
+				else if($content['emailRemaining'] == 10 and get_site_option('cmVtYWluaW5nT1RQ')>30)
+				{
+					update_site_option('cmVtYWluaW5nT1RQ',30);
+				}
+			}
+			return "SUCCESS";			
+		} 
+		else 
+		{
+			update_option('mo_2factor_user_registration_status','MO_2_FACTOR_VERIFY_CUSTOMER' );
+			update_option('mo_wpns_verify_customer', 'true');
+			delete_option('mo_wpns_new_registration');
+			return "Invalid Username or Password";
+		}
+	}
+	
+
+	function save_success_customer_config($email, $id, $apiKey, $token, $appSecret)
+	{
+		global $Mo2fdbQueries;
+
+		$user   = wp_get_current_user();
+		update_option( 'mo2f_customerKey'  , $id 		  );
+		update_option( 'mo2f_api_key'       , $apiKey    );
+		update_option( 'mo2f_customer_token'		 , $token 	  );
+		update_option( 'mo2f_app_secret'			 , $appSecret );
+		update_option( 'mo_wpns_enable_log_requests' , true 	  );
+		update_option( 'mo2f_miniorange_admin', $user->ID );
+		update_option( 'mo_2factor_admin_registration_status', 'MO_2_FACTOR_CUSTOMER_REGISTERED_SUCCESS' );
+		update_option( 'mo_2factor_user_registration_status', 'MO_2_FACTOR_PLUGIN_SETTINGS' );
+
+		 $Mo2fdbQueries->update_user_details( $user->ID, array(
+		 							'mo2f_user_email'                      => $email,
+		 							'user_registration_with_miniorange'    => 'SUCCESS'
+		 						) );
+		$enduser               = new Two_Factor_Setup();
+		$userinfo              = json_decode( $enduser->mo2f_get_userinfo( $email ), true );
+		
+		
+		delete_option( 'mo_wpns_verify_customer'				  );
+		delete_option( 'mo_wpns_registration_status'			  );
+		delete_option( 'mo_wpns_password'						  );
+	}
+
+	function mo_wpns_register_verify_customer()
+	{
+		$res ="";
+		if(isset($_POST['Login_and_Continue']) && $_POST['Login_and_Continue'] =='Login and Continue')
+			$res = $this->_verify_customer($_POST);
+		
+		else
+			$res = $this->mo2f_register_customer($_POST);
+		wp_send_json($res);
+	}
+	function mo2f_select_method_setup_wizard()
 	{
 		global $Mo2fdbQueries;
 		if(!wp_verify_nonce(sanitize_text_field($_POST['nonce']),'miniorange-select-method-setup-wizard'))
@@ -92,17 +711,90 @@ class mo_2f_ajax
 			update_user_meta( $current_user->ID, 'configure_2FA', 1);
 		wp_send_json("SUCCESS");
 	}
-	function mo2f_ajax_login_redirect()
-	{	
-		if(!wp_verify_nonce(sanitize_text_field($_POST['nonce']),'miniorange-2-factor-login-nonce'))
-		{
-			wp_send_json("ERROR");
+	function mo2f_set_miniorange_methods(){
+		$nonce = sanitize_text_field($_POST['nonce']);
+		if ( ! wp_verify_nonce( $nonce, 'mo2f-update-mobile-nonce' ) ) {
+			$error = new WP_Error();
+			$error->add( 'empty_username', '<strong>' . mo2f_lt( 'ERROR' ) . '</strong>: ' . mo2f_lt( 'Invalid Request.' ) );
+			wp_send_json_error($error);
 			exit;
 		}
-		$username = sanitize_text_field($_POST['username']);
-		$password = $_POST['password'];
-		apply_filters( 'authenticate', null, $username, $password );
+		global $Mo2fdbQueries;
+		$transient_id=sanitize_text_field($_POST['transient_id']);
+		$user_id = MO2f_Utility::mo2f_get_transient($transient_id, 'mo2f_user_id');
+		if(empty($user_id)){
+			wp_send_json('UserIdNotFound');
+		}
+		$user = get_user_by('id',$user_id);
+		$email = !empty($Mo2fdbQueries->get_user_detail( 'mo2f_user_email', $user_id ))?$Mo2fdbQueries->get_user_detail( 'mo2f_user_email', $user_id ):$user->user_email;
+		$otpToken=sanitize_text_field($_POST['code']);
+		$customer = new Customer_Setup();
+		$content  = json_decode( $customer->validate_otp_token( 'SOFT TOKEN', $email, null, $otpToken, get_option( 'mo2f_customerKey' ), get_option( 'mo2f_api_key' ) ), true );
+		wp_send_json($content);
 	}
+	function mo2f_set_otp_over_sms(){
+		$nonce = sanitize_text_field($_POST['nonce']);
+		if ( ! wp_verify_nonce( $nonce, 'mo2f-update-mobile-nonce' ) ) {
+			$error = new WP_Error();
+			$error->add( 'empty_username', '<strong>' . mo2f_lt( 'ERROR' ) . '</strong>: ' . mo2f_lt( 'Invalid Request.' ) );
+			wp_send_json_error($error);
+			exit;
+		}
+		global $Mo2fdbQueries;
+		$transient_id=sanitize_text_field($_POST['transient_id']);
+		$user_id = MO2f_Utility::mo2f_get_transient($transient_id, 'mo2f_user_id');
+		if(empty($user_id)){
+			wp_send_json('UserIdNotFound');
+		}
+		$user = get_user_by('id',$user_id);
+		$new_phone = sanitize_text_field($_POST['phone']);
+		$new_phone = str_replace(' ','',$new_phone);
+		$Mo2fdbQueries->update_user_details($user_id, array("mo2f_user_phone" => $new_phone) );
+		$user_phone = $Mo2fdbQueries->get_user_detail( 'mo2f_user_phone', $user_id );
+		wp_send_json($user_phone);
+	}
+	function mo2f_set_GA(){
+		$nonce = sanitize_text_field($_POST['nonce']);
+		if ( ! wp_verify_nonce( $nonce, 'mo2f-update-mobile-nonce' ) ) {
+			$error = new WP_Error();
+			$error->add( 'empty_username', '<strong>' . mo2f_lt( 'ERROR' ) . '</strong>: ' . mo2f_lt( 'Invalid Request.' ) );
+			wp_send_json_error($error);
+			exit;
+		}
+		include_once dirname(dirname(dirname( __FILE__ ))) .DIRECTORY_SEPARATOR.'handler'. DIRECTORY_SEPARATOR.'twofa'. DIRECTORY_SEPARATOR. 'gaonprem.php';
+		global $Mo2fdbQueries;
+		$transient_id=sanitize_text_field($_POST['transient_id']);
+		$user_id = MO2f_Utility::mo2f_get_transient($transient_id, 'mo2f_user_id');
+		if(empty($user_id)){
+			wp_send_json('UserIdNotFound');
+		}
+		$google_auth = new Miniorange_Rba_Attributes();
+		$user = get_user_by('id',$user_id);
+		$email = !empty($Mo2fdbQueries->get_user_detail( 'mo2f_user_email', $user_id ))?$Mo2fdbQueries->get_user_detail( 'mo2f_user_email', $user_id ):$user->user_email;
+		$otpToken = sanitize_text_field($_POST['code']);
+		$ga_secret = sanitize_text_field($_POST['ga_secret']);
+		if(MO2F_IS_ONPREM){
+			$gauth_obj = new Google_auth_onpremise();
+			$gauth_obj->mo_GAuth_set_secret($user_id, $ga_secret);
+		}else{
+
+			$google_auth = new Miniorange_Rba_Attributes();
+			$google_response = json_decode( $google_auth->mo2f_google_auth_service( $email, 'miniOrangeAu' ), true );
+		}
+		$google_response = json_decode($google_auth->mo2f_validate_google_auth($email,$otpToken,$ga_secret),true);
+		wp_send_json($google_response['status']);
+	}
+	function mo2f_ajax_login_redirect()
+		{	
+			if(!wp_verify_nonce(sanitize_text_field($_POST['nonce']),'miniorange-2-factor-login-nonce'))
+			{
+				wp_send_json("ERROR");
+				exit;
+			}
+			$username = sanitize_text_field($_POST['username']);
+			$password = $_POST['password'];
+			apply_filters( 'authenticate', null, $username, $password );
+		}
 	function mo2f_save_custom_form_settings()
 	{
 
@@ -358,6 +1050,23 @@ function mo2f_shift_to_onprem(){
 			}
 			else{
 				update_site_option('mo2f_inline_registration' , 0);
+				wp_send_json('false');
+			}
+		}
+		function mo2f_enable_disable_configurd_methods(){
+			$nonce = sanitize_text_field($_POST['nonce']);
+
+			if ( ! wp_verify_nonce( $nonce, 'WAFsettingNonce_configurd_methods' ) ) {
+				wp_send_json_error("error");
+			}
+			$enable = sanitize_text_field($_POST['mo2f_nonce_enable_configured_methods']);
+
+			if($enable == 'true'){
+				update_site_option('mo2f_nonce_enable_configured_methods' ,true);
+				wp_send_json('true');
+			}
+			else{
+				update_site_option('mo2f_nonce_enable_configured_methods' , false);
 				wp_send_json('false');
 			}
 		}

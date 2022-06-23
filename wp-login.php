@@ -462,7 +462,7 @@ $interim_login = isset( $_REQUEST['interim-login'] );
  * @param string $login_link_separator The separator used between login form navigation links.
  */
 $login_link_separator = apply_filters( 'login_link_separator', ' | ' );
-
+echo "action is::: $action";
 switch ( $action ) {
 
 	case 'confirm_admin_email':

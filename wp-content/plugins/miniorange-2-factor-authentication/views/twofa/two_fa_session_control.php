@@ -1,5 +1,5 @@
-<div class="mo2f_table_layout">
-	<div>
+<div>
+	<div class="mo2f_table_divide_border">
 		<h2>4. Session Control
 			<span style="text-align: right;font-size: large;"><?php echo '<a href="'.$addons_url     .'" style="color: red">'; ?>[ PREMIUM ]</a></span>
 		</h2><hr>
@@ -33,8 +33,7 @@
 	<input type="radio" name="mo2f_allow_access" id="mo2f_block_access" value="block">Block Access
 </div>
 </div>
-<hr>
-	<div>
+	<div class="mo2f_table_divide_border">
 		<table style="width:100%">
 		<tr>
 			<th align="left">

@@ -26,7 +26,7 @@
 		}
 		else{
 
-			$query = 'REQUEST FOR NEW YEAR OFFERS';
+			$query = 'REQUEST FOR SPECIAL OFFERS';
 			$query .= ' =>';
 			$query .= ' : ';
 			$query .= $usecase;

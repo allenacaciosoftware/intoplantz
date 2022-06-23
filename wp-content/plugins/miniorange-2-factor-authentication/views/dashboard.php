@@ -10,11 +10,10 @@ $login_spam_on= get_site_option("mo_2f_switch_loginspam")?"checked":"";
 $backup_on= get_site_option("mo_2f_switch_backup")?"checked":"";
 $malware_on= get_site_option("mo_2f_switch_malware")?"checked":"";
 $adv_block_on= get_site_option("mo_2f_switch_adv_block")?"checked":"";
-echo '<div id="mo_switch_message" style=" padding:8px"></div>';
 echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<div class="mo_wpns_divided_layout">
+	<div class="mo2f_table_layout_method">
 		
-		<div class="mo_wpns_dashboard_layout" style= "background-color: white;width: 94.5%;border: 2px solid #20b2aa;padding-bottom: 52px;">
+		<div class="mo_wpns_dashboard_layout" >
 			<center>
 				<div class ="mo_wpns_inside_dashboard_layout "><p style="font-weight: bold;">Failed Login</p><p class ="wpns_font_size mo_wpns_dashboard_text" >'.$wpns_attacks_blocked.'</p>
 				<a class="mo_wpns_button_info_tab" onclick="clear_Local_storage()" style="color:white;" href="admin.php?page=mo_2fa_reports&tab=default&view">Details</a>
@@ -47,7 +46,8 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 			</h3>
 			</form>
 			</div>
-			
+		<div style="display:flex; flex-direction:column	">	
+		 <div style="display:flex;justify-content:center">
 			<div class="mo_wpns_small_layout">
 				<form name="tab_2fa" id="tab_2fa" method="post">
 				<h3>Two Factor Authentication ';
@@ -58,7 +58,7 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 					<span class="mo_wpns_slider mo_wpns_round"></span>
 					</label>';
 				}else{
-					echo ' <b style="color:green;">(Enabled)</b>';
+					echo ' <b style="color:#3dd23d;">(Enabled)</b>';
 				}
 			echo ' </h3>
 				</form>
@@ -88,6 +88,7 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 				<br><br>
 				<a class="button button-primary button-large" href="'.$waf.'">Settings</a>
 			</div>
+			
 			<div class="mo_wpns_small_layout">
 				<form name="tab_login" id="tab_login" method="post">
 				<h3 align="center">Login and Spam
@@ -107,6 +108,8 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 				 </div>
 				<a class="button button-primary button-large" href="'.$login_and_spam.'">Settings</a>
 			</div>
+			</div>
+			<div style="display:flex;justify-content:center">
 			<div class="mo_wpns_small_layout">
 				<form name="tab_backup" id="tab_backup" method="post">
 				<h3>Encrypted Backup
@@ -141,6 +144,7 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 				 </div>
 				<a class="button button-primary button-large" href="'.$scan_url.'">Settings</a>
 			</div>
+		
 			<div class="mo_wpns_small_layout">
 				<form name="tab_adv_block" id="tab_adv_block" method="post">
 				<h3>IP Blocking
@@ -158,6 +162,8 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 				</div>
 				<a class="button button-primary button-large" href="'.$advance_block.'">Settings</a>
 			</div>
+			</div>
+			<div style="display:flex;justify-content:center">
 		    <div class="mo_wpns_small_layout">
 		    	<form name="tab_report" id="tab_report" method="post">
 				<h3>Reports
@@ -184,6 +190,8 @@ echo '<meta name="viewport" content="width=device-width, initial-scale=1, maximu
 				<a class="button button-primary button-large" href="'.$notif_url.'">Settings</a>
 
 			</div>
+			</div>
+			</div>
 		
 	</div>
 	<script>
@@ -198,6 +206,9 @@ function mo_2fa_dashboard_switch(){
     }
 ?>
 	<script>
+		jQuery('#mo_2fa_dashboard').addClass('nav-tab-active');
+
+
 		jQuery(document).ready(function(){
 			jQuery("#switch_2fa").click(function(){
 				jQuery("#tab_2fa").submit();

@@ -63,6 +63,8 @@
 		//support form 
 		const SUPPORT_FORM_VALUES				= "Please submit your query along with email.";
 		const SUPPORT_FORM_SENT					= "Thanks for getting in touch! We shall get back to you shortly.";
+		const TRIAL_REQUEST_SENT			    = "Thanks for getting in touch! We shall provide you the trial plugin on your email shortly.";
+		const TRIAL_REQUEST_ALREADY_SENT		= "You have already sent a trial request for premium plugin. We will get back to you on your email soon.";
 		const SUPPORT_FORM_ERROR				= "Your query could not be submitted. Please try again.";
         // request demo form
         const DEMO_FORM_ERROR					= "Please fill out all the fields.";
@@ -73,6 +75,7 @@
 		const UNKNOWN_ERROR						= "Error processing your request. Please try again.";
 		const CONFIG_SAVED						= "Configuration saved successfully.";
 		const REQUIRED_FIELDS					= "Please enter all the required fields";
+		CONST SELECT_A_PLAN                     = "Please select a plan";
 		const RESET_PASS						= "You password has been reset successfully and sent to your registered email. Please check your mailbox.";
 		const TEMPLATE_SAVED					= "Email template saved.";
 		const GET_BACKUP_CODES					= "<div class='custom-notice notice notice-warning backupcodes-notice'><p><p class='notice-message'><b>Please download backup codes using the 'Get backup codes' button to avoid getting locked out. Backup codes will be emailed as well as downloaded.</b></p><button class='backup_codes_dismiss notice-button'><i>NEVER SHOW AGAIN</i></button></p></div>";
@@ -91,7 +94,7 @@
 		const INVALID_CRED						= 'Invalid username or password. Please try again.';
 		const REQUIRED_OTP 						= 'Please enter a value in OTP field.';
 		const INVALID_OTP 						= 'Invalid one time passcode. Please enter a valid passcode.';
-		const INVALID_PHONE						= 'Please enter the phone number in the following format: <b>+##country code## ##phone number##';
+		const INVALID_PHONE						= 'Please enter a valid phone number.';
 		const PASS_MISMATCH						= 'Password and Confirm Password do not match.';
                 const CRON_DB_BACKUP_ENABLE			    = 'Scheduled Database Backup enabled';
 		const CRON_DB_BACKUP_DISABLE			= 'Scheduled Database Backup disabled';
@@ -141,6 +144,37 @@
         const LOW_EMAIL_TRANSACTIONS			= "<div class='custom-notice notice notice-warning low_email-notice MOWrn'><p><p class='notice-message'><img style='width:15px;' src='".MO2F_PLUGIN_URL.'/includes/images/miniorange_icon.png'."'>&nbsp&nbspYou have left very few Email transaction. We advise you to recharge or change 2FA method before you have no Email left.</p><a class='notice-button' href='".MoWpnsConstants::rechargeLink."' target='_blank' style='margin-right: 15px;'>RECHARGE</a><a class='notice-button' href='admin.php?page=mo_2fa_two_fa'id='setuptwofa_redirect' style='margin-right: 15px;'>SET UP ANOTHER 2FA</a><button class='email_low_dismiss notice-button' style='margin-right: 15px;'><i>DISMISS</i></button><button class='email_low_dismiss_always notice-button'><i>NEVER SHOW AGAIN</i></button></p></div>";
 
 
+        const FREE_TRIAL_MESSAGE_TRIAL_PAGE				= "
+        <div class='notice notice-warning mo2f-notice-warning trial-notice MOWrn' id='mo2f_is-dismissible'>
+        <form id='MO2F_FREE_TRIAL_MESSAGE_TRIAL_PAGE' method='post' action=''>
+        <p>
+        <img style='width:15px;' src='".MO2F_PLUGIN_URL.'includes/images/miniorange_icon.png'."'>&nbsp&nbspInterested in the Trial of<b> 2 Factor Authentication Premium Plugins?</b> Click on the button below to get trial for <strong>7 days</strong>.
+        (<em>No credit card required</em>)
+        </p>
+        <p style='height:25px; padding: 10px;'>
+        <a class='button button-primary notice-button' href='admin.php?page=mo2f_trial' id='mo2f_trial_redirect'>Get Trial</a>
+        <input type='hidden' name='mo2f_dismiss_trial' value='mo2f_dismiss_trial'/>
+        <button type='submit' class='mo2f-trial-dismiss notice-button'><i>DISMISS</i></button>
+        </p>
+        </form>
+        </div>
+        ";
+
+        const FREE_TRIAL_MESSAGE_ACCOUNT_PAGE				= "
+        <div class='notice notice-warning mo2f-notice-warning trial-notice MOWrn'>
+        <form id='MO2F_FREE_TRIAL_MESSAGE_TRIAL_PAGE' method='post' action=''>
+        <p>
+        <img style='width:15px;' src='".MO2F_PLUGIN_URL.'includes/images/miniorange_icon.png'."'>&nbsp&nbspInterested in the Trial of<b> 2 Factor Authentication Premium Plugins?</b> Click on the button below to get trial for <strong>7 days</strong>.
+        (<em>No credit card required</em>)
+        </p>
+        <p style='height:25px; padding: 10px;'>
+        <a class='button button-primary notice-button' href='admin.php?page=mo_2fa_account' id='mo2f_trial_redirect'>Get Trial</a>
+        <input type='hidden' name='mo2f_dismiss_trial' value='mo2f_dismiss_trial'/>
+        <button type='submit' class='mo2f-trial-dismiss notice-button'><i>DISMISS</i></button>
+        </p>
+        </form>
+        </div>
+        ";
         
 
 

@@ -1,12 +1,12 @@
 
-<div class="mo_wpns_tab">
-	<button class="tablinks" onclick="openTabbackup(event, 'setting_backup')" id="backup_set">Manual Backup</button>
-    <button class="tablinks" onclick="openTabbackup(event, 'schdule_view')" id="schdule">Scheduled Backup</button>
-    <button class="tablinks" onclick="openTabbackup(event, 'report_view')" id="report">Report</button>
+<div class="nav-tab-wrapper">
+	<button class="nav-tab" onclick="mo2f_wpns_openTabbackup(this)" id="mo2f_setting_backup">Manual Backup</button>
+    <button class="nav-tab" onclick="mo2f_wpns_openTabbackup(this)" id="mo2f_schedule_view">Scheduled Backup</button>
+    <button class="nav-tab" onclick="mo2f_wpns_openTabbackup(this)" id="mo2f_report_view">Report</button>
   
 </div>
 
-<div class="tabcontent" id="setting_backup">
+<div class="tabcontent" id="mo2f_setting_backup_div">
 	<div class="mo_wpns_divided_layout">
 		<table style="width: 100%;">
 			<tr>
@@ -16,7 +16,7 @@
 		</table>
 	</div>
 </div>
-<div class="tabcontent" id="schdule_view">
+<div class="tabcontent" id="mo2f_schedule_view_div">
 	<div class="mo_wpns_divided_layout">
 		<table style="width: 100%;">
 			<tr>
@@ -26,7 +26,7 @@
 		</table>
 	</div>
 </div>
-<div class="tabcontent" id="report_view">
+<div class="tabcontent" id="mo2f_report_view_div">
 	<div class="mo_wpns_divided_layout">
 		<table style="width: 100%;">
 			<tr>
@@ -37,42 +37,30 @@
 	</div>
 </div>
 
-
-
 <script>
-	document.getElementById("setting_backup").style.display = "block";
-	document.getElementById("schdule_view").style.display = "none";
-	document.getElementById("report_view").style.display = "none";
+	jQuery('#backup_tab').addClass('nav-tab-active');
 	
-
-	document.getElementById("backup_set").className += " active";
-	function openTabbackup(evt, tabname){
-		var i, tablinks, tabcontent;
-		tabcontent = document.getElementsByClassName("tabcontent");
-  			for (i = 0; i < tabcontent.length; i++) {
-    		tabcontent[i].style.display = "none";
-  		}
-		tablinks = document.getElementsByClassName("tablinks");
-		for (i = 0; i < tablinks.length; i++) {
-			tablinks[i].className = tablinks[i].className.replace(" active", "");
+	function mo2f_wpns_openTabbackup(elmt){
+		var tabname = elmt.id;
+		var tabarray = ["mo2f_setting_backup","mo2f_schedule_view","mo2f_report_view"];
+		for (var i = 0; i < tabarray.length; i++) {
+			if(tabarray[i] == tabname){
+				jQuery("#"+tabarray[i]).addClass("nav-tab-active");
+				jQuery("#"+tabarray[i]+"_div").css("display", "block");
+			}else{
+				jQuery("#"+tabarray[i]).removeClass("nav-tab-active");
+				jQuery("#"+tabarray[i]+"_div").css("display", "none");
+			}
 		}
-		document.getElementById(tabname).style.display = "block";
-		localStorage.setItem("last_tab", tabname);
-  		evt.currentTarget.className += " active";
-	}
-	var tab = localStorage.getItem("last_tab");	
-	
-	if(tab == "setting_backup"){
-		document.getElementById("backup_set").click();
-	}
-	else if(tab == "schdule_view"){
-        document.getElementById("schdule").click();
-	}
-	else if(tab == "report_view"){
-        document.getElementById("report").click();
-	}
-	
+		
+		localStorage.setItem("backup_last_tab", tabname);
+	}	
+
+	var tab = localStorage.getItem("backup_last_tab"); 
+
+	if(tab)
+		document.getElementById(tab).click();
 	else{
-		document.getElementById("backup_set").click();
+		document.getElementById("mo2f_setting_backup").click();
 	}
 </script>

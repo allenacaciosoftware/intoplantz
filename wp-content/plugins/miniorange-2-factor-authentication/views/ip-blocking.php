@@ -3,7 +3,7 @@
 echo'<div class="mo_wpns_divided_layout">
 		<div class="mo_wpns_setting_layout">';
 
-echo'	<h2>IP LookUP<a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/IP-blocking-whitelisting-lookup#wp-ip-lookup" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#269eb3;float: right;"></span></a></h2>
+echo'	<h2>IP LookUP<a href="https://developers.miniorange.com/docs/security/wordpress/wp-security/IP-blocking-whitelisting-lookup#wp-ip-lookup" target="_blank"><span class="dashicons dashicons-text-page" style="font-size:30px;color:#413c69;float: right;"></span></a></h2>
 			<form name="f" method="post" action="" id="iplookup">
 				<input type="hidden" name="option" value="mo_wpns_ip_lookup" />
 				<table style="width:100%;">

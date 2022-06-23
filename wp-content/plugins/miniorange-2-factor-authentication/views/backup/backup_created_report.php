@@ -71,8 +71,11 @@ function backup_delete(elmt, file_path,file_name,id){
 });
 	
 }
-jQuery("#reports_table").DataTable({
-				"order": [[ 1, "desc" ]]
-			});
+
+	jQuery("#reports_table").DataTable({
+					"order": [[ 1, "desc" ]],
+					retrieve: true,
+					paging: false
+				});
 
 </script>

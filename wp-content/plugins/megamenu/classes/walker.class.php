@@ -62,7 +62,6 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 		 * @param int    $id     Current item ID.
 		 */
 		function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-
 			$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
 
 			if ( property_exists( $item, 'megamenu_settings' ) ) {
@@ -106,7 +105,6 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 			//	/** This filter is documented in wp-includes/post-template.php */
 			//	$item_output = apply_filters( 'the_content', $item->content );
 			} else {
-
 				$atts = array();
 
                 if (is_user_logged_in() && strcmp(strtolower($item->title), "sign in") == 0) {
@@ -169,10 +167,10 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 						$value       = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
                         if (is_user_logged_in() && $attr == "href"  && strcmp(strtolower($item->title), "logout") == 0) {
                             $attributes .= ' ' . $attr . '="' . wc_logout_url() . '"';
-                        } else {
-                            $attributes .= ' ' . $attr . '="' . $value . '"';
+                        } else {                       
+						    $attributes .= ' ' . $attr . '="' . $value . '"';
                         }
-                    }
+					}
 				}
 
 				$item_output  = $args->before;

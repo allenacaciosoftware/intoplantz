@@ -4,7 +4,7 @@ class wpns_ajax
 	function __construct(){
 		//add comment here
 		add_action( 'admin_init'  , array( $this, 'mo_login_security_ajax' ) );
-		
+		add_action('init', array( $this, 'mo2fa_elementor_ajax_fun' ));
 	}
 
 	function mo_login_security_ajax(){
@@ -25,6 +25,27 @@ class wpns_ajax
 					$this->mo2f_ajax_otp(); break;
 		}
 	}
+	 function mo2fa_elementor_ajax_fun()
+    	{
+		   		
+    		 if (isset( $_POST['miniorange_elementor_login_nonce'])){
+	    		$nonce = sanitize_text_field($_POST['miniorange_elementor_login_nonce']);
+		   		if ( ! wp_verify_nonce( $nonce, 'miniorange-2-factor-login-nonce' ) ){
+		   			wp_send_json('ERROR');
+		   		   		}
+	       		 if(isset($_POST['mo2fa_elementor_user_password']) && !empty($_POST['mo2fa_elementor_user_password']) && isset($_POST['mo2fa_elementor_user_name']))
+	        	{
+	        		$info = array();
+	            	$info['user_login'] = sanitize_text_field($_POST['mo2fa_elementor_user_name']);
+	            	$info['user_password'] = $_POST['mo2fa_elementor_user_password'];
+	            	$info['remember'] = false;
+	            	$user_signon = wp_signon($info, false);
+	            	if (is_wp_error($user_signon)) {
+	                wp_send_json(array('loggedin'=>false, 'message'=>__('Wrong username or password.')));
+	           		}  		
+	        	}
+	        }
+    	}
 		function wpns_login_security(){
 			switch($_POST['wpns_loginsecurity_ajax'])
 			{
@@ -64,15 +85,15 @@ class wpns_ajax
 		function update_plan(){
 			$mo2f_all_plannames = $_POST['planname'];
 			$mo_2fa_plan_type	= $_POST['planType'];
-				update_option('mo2f_planname', $mo2f_all_plannames);
+				update_site_option('mo2f_planname', $mo2f_all_plannames);
 			if ($mo2f_all_plannames == 'addon_plan') 
 			{
-				update_option('mo2f_planname', 'addon_plan');
+				update_site_option('mo2f_planname', 'addon_plan');
 				update_site_option('mo_2fa_addon_plan_type',$mo_2fa_plan_type);
 			}
 			elseif ($mo2f_all_plannames == '2fa_plan') 
 			{
-				update_option('mo2f_planname', '2fa_plan');
+				update_site_option('mo2f_planname', '2fa_plan');
 				update_site_option('mo_2fa_plan_type',$mo_2fa_plan_type);
 			}	
 		}
@@ -195,15 +216,15 @@ class wpns_ajax
 		{
 			$mo2f_all_plannames = $_POST['planname'];
 			$mo_2fa_plan_type	= $_POST['planType'];
-				update_option('mo2f_planname', $mo2f_all_plannames);
+				update_site_option('mo2f_planname', $mo2f_all_plannames);
 			if ($mo2f_all_plannames == 'addon_plan') 
 			{
-				update_option('mo2f_planname', 'addon_plan');
+				update_site_option('mo2f_planname', 'addon_plan');
 				update_site_option('mo_2fa_addon_plan_type',$mo_2fa_plan_type);
 			}
 			elseif ($mo2f_all_plannames == '2fa_plan') 
 			{
-				update_option('mo2f_planname', '2fa_plan');
+				update_site_option('mo2f_planname', '2fa_plan');
 				update_site_option('mo_2fa_plan_type',$mo_2fa_plan_type);
 			}	
 		}
