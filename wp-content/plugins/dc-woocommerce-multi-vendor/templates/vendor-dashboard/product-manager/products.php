@@ -111,7 +111,8 @@ do_action('before_wcmp_vendor_dashboard_product_list_table');
                 <button class="wcmp_black_btn btn btn-secondary" type="button" id="product_list_do_filter"><?php _e('Filter', 'dc-woocommerce-multi-vendor'); ?></button>
             </div>
         </div>
-            
+        <br/><br/>
+
         <table id="product_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead><tr>
             <?php

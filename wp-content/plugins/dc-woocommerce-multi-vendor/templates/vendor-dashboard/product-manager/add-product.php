@@ -34,11 +34,11 @@ if (is_user_logged_in() && is_user_wcmp_vendor($current_vendor_id) && !current_u
         <div class="select-cat-step-wrapper">
             <div class="cat-step1" >
                 <div class="panel panel-default pannel-outer-heading mt-0">
-                    <div class="panel-heading d-flex">
+                    <div class="panel-heading d-flex" style="flex-direction: column">
                         <h1><span class="primary-color"><span><?php _e( 'Step 1 of', 'dc-woocommerce-multi-vendor' );?></span> <?php _e( '2:', 'dc-woocommerce-multi-vendor' );?></span> <?php _e('Select a product category', 'dc-woocommerce-multi-vendor'); ?></h1>
                         <h3><?php _e('Once a category is assigned to a product, it cannot be altered.', 'dc-woocommerce-multi-vendor'); ?></h3>
                     </div>
-                    <div class="panel-body panel-content-padding form-horizontal breadcrumb-panel">
+                    <div class="panel-body panel-content-padding form-horizontal breadcrumb-panel" style="display: none">
                         <div class="product-search-wrapper categories-search-wrapper">
                             <div class="form-text"><?php _e('Search category', 'dc-woocommerce-multi-vendor'); ?></div>
                             <div class="form-input">
