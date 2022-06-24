@@ -2726,7 +2726,7 @@ Class WCMp_Admin_Dashboard {
                 var wc_setup_currencies = JSON.parse( decodeURIComponent( '<?php echo rawurlencode( wp_json_encode( $currency_by_country ) ); ?>' ) );
                 var wc_base_state       = "<?php echo esc_js( $state ); ?>";
             </script>
-            
+
             <p class="wc-setup-actions step">
                 <input type="submit" class="button-primary button button-large button-next" value="<?php esc_attr_e('Continue', 'dc-woocommerce-multi-vendor'); ?>" name="save_step" />
                 <a href="<?php echo esc_url($this->get_next_step_link()); ?>" class="button button-large button-next"><?php esc_html_e('Skip this step', 'dc-woocommerce-multi-vendor'); ?></a>
@@ -2734,7 +2734,7 @@ Class WCMp_Admin_Dashboard {
         </form>
         <?php
     }
-    
+
     /**
      * Save initial store settings.
      */
@@ -2792,11 +2792,11 @@ Class WCMp_Admin_Dashboard {
         wp_safe_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
-    
+
     /**
      * Payment setup step.
      */
-    public function vendor_payment_setup() { 
+    public function vendor_payment_setup() {
         $vendor_payment_mode = ( $this->vendor->payment_mode ) ? $this->vendor->payment_mode : '';
         $available_gateways   = apply_filters( 'wcmp_vendor_setup_wizard_available_payment_gateways', get_wcmp_available_payment_gateways(), $this->vendor );
         ?>
@@ -2811,7 +2811,7 @@ Class WCMp_Admin_Dashboard {
                 );
                 ?>
             </p>
-         
+
             <div class="product-type-container" style="visibility: hidden">
                 <label class="location-prompt" for="product_type">
                         <?php esc_html_e( 'Choose Payment Method', 'dc-woocommerce-multi-vendor' ); ?>
@@ -2831,7 +2831,7 @@ Class WCMp_Admin_Dashboard {
         </form>
         <?php
     }
-    
+
     /**
      * Save initial payment settings.
      */
@@ -2843,11 +2843,11 @@ Class WCMp_Admin_Dashboard {
         wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
         exit;
     }
-    
+
     /**
      * Final setup step.
      */
-    public function wcmp_store_setup_ready() { 
+    public function wcmp_store_setup_ready() {
         ?>
         <h1><?php esc_html_e( "You're ready to start selling!", 'dc-woocommerce-multi-vendor' ); ?></h1>
 
@@ -2855,18 +2855,22 @@ Class WCMp_Admin_Dashboard {
             <li class="wc-wizard-next-step-item">
                 <div class="wc-wizard-next-step-description">
                     <p class="next-step-heading"><?php esc_html_e( 'Next step', 'dc-woocommerce-multi-vendor' ); ?></p>
-                    <h3 class="next-step-description"><?php esc_html_e( 'Create some products', 'dc-woocommerce-multi-vendor' ); ?></h3>
-                    <p class="next-step-extra-info"><?php esc_html_e( "You're ready to add products to your store.", 'dc-woocommerce-multi-vendor' ); ?></p>
+                    <h3 class="next-step-description"><?php esc_html_e( 'Configure Stripe Account', 'dc-woocommerce-multi-vendor' ); ?></h3>
+                    <p class="next-step-extra-info"><?php esc_html_e( "You will go to Stripe integration page.", 'dc-woocommerce-multi-vendor' ); ?></p>
                 </div>
                 <div class="wc-wizard-next-step-action">
                     <p class="wc-setup-actions step">
-                        <a class="button button-primary button-large" href="<?php echo apply_filters( 'wcmp_vendor_setup_wizard_ready_add_product_url', wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_add_product_endpoint', 'vendor', 'general', 'add-product' ) ) ); ?>">
+                        <a class="button button-primary button-large" href="<?php echo wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_billing_endpoint', 'vendor', 'general', 'vendor-billing' ) ); ?>">
+                            <?php esc_html_e( 'Configure Stripe Account', 'dc-woocommerce-multi-vendor' ); ?>
+                        </a>
+
+                        <a style="display: none" class="button button-primary button-large" href="<?php echo apply_filters( 'wcmp_vendor_setup_wizard_ready_add_product_url', wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_add_product_endpoint', 'vendor', 'general', 'add-product' ) ) ); ?>">
                             <?php esc_html_e( 'Create a product', 'dc-woocommerce-multi-vendor' ); ?>
                         </a>
                     </p>
                 </div>
             </li>
-            <li class="wc-wizard-additional-steps">
+            <li class="wc-wizard-additional-steps" style="display: none">
                 <div class="wc-wizard-next-step-description">
                     <p class="next-step-heading"><?php esc_html_e( 'You can also:', 'dc-woocommerce-multi-vendor' ); ?></p>
                 </div>
