@@ -147,37 +147,37 @@ class WCMp_Products_Edit_Product {
                 'class'    => array( 'show_if_simple', 'show_if_variable', 'show_if_grouped', 'show_if_external' ),
                 'priority' => 20,
             ),
-            'shipping'       => array(
-                'label'    => __( 'Shipping', 'dc-woocommerce-multi-vendor' ),
-                'target'   => 'shipping_product_data',
-                'class'    => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external' ),
-                'priority' => 30,
-            ),
-            'linked_product' => array(
-                'label'    => __( 'Linked Products', 'dc-woocommerce-multi-vendor' ),
-                'target'   => 'linked_product_data',
-                'class'    => array(),
-                'priority' => 40,
-            ),
-            'attribute'      => array(
-                'label'    => __( 'Attributes', 'dc-woocommerce-multi-vendor' ),
-                'target'   => 'product_attributes_data',
-                'class'    => array(),
-                'priority' => 50,
-            ),
-            'variations'     => array(
-                'p_type'   => 'variable',
-                'label'    => __( 'Variations', 'dc-woocommerce-multi-vendor' ),
-                'target'   => 'variable_product_options',
-                'class'    => array( 'show_if_variable' ),
-                'priority' => 60,
-            ),
-            'advanced'       => array(
-                'label'    => __( 'Advanced', 'dc-woocommerce-multi-vendor' ),
-                'target'   => 'advanced_product_data',
-                'class'    => array(),
-                'priority' => 70,
-            ),
+            // 'shipping'       => array(
+            //     'label'    => __( 'Shipping', 'dc-woocommerce-multi-vendor' ),
+            //     'target'   => 'shipping_product_data',
+            //     'class'    => array( 'hide_if_virtual', 'hide_if_grouped', 'hide_if_external' ),
+            //     'priority' => 30,
+            // ),
+            // 'linked_product' => array(
+            //     'label'    => __( 'Linked Products', 'dc-woocommerce-multi-vendor' ),
+            //     'target'   => 'linked_product_data',
+            //     'class'    => array(),
+            //     'priority' => 40,
+            // ),
+            // 'attribute'      => array(
+            //     'label'    => __( 'Attributes', 'dc-woocommerce-multi-vendor' ),
+            //     'target'   => 'product_attributes_data',
+            //     'class'    => array(),
+            //     'priority' => 50,
+            // ),
+            // 'variations'     => array(
+            //     'p_type'   => 'variable',
+            //     'label'    => __( 'Variations', 'dc-woocommerce-multi-vendor' ),
+            //     'target'   => 'variable_product_options',
+            //     'class'    => array( 'show_if_variable' ),
+            //     'priority' => 60,
+            // ),
+            // 'advanced'       => array(
+            //     'label'    => __( 'Advanced', 'dc-woocommerce-multi-vendor' ),
+            //     'target'   => 'advanced_product_data',
+            //     'class'    => array(),
+            //     'priority' => 70,
+            // ),
             ) );
 
         // Sort tabs based on priority.
