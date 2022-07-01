@@ -302,7 +302,8 @@ global $WCMp;
                     </div>
                 <?php endif;
                 endif; ?>
-                <?php $product_tags = wcmp_get_product_terms_HTML( 'product_tag', $post->ID, apply_filters( 'wcmp_vendor_can_add_product_tag', true, get_current_user_id() ), false ); ?>
+                <?php #$product_tags = wcmp_get_product_terms_HTML( 'product_tag', $post->ID, apply_filters( 'wcmp_vendor_can_add_product_tag', true, get_current_user_id() ), false ); ?>
+                <?php $product_tags = false ?>
                 <?php if ( $product_tags ) : ?>
                     <div class="panel panel-default pannel-outer-heading">
                         <div class="panel-heading d-flex">
