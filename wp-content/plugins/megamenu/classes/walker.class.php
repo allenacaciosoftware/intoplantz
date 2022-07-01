@@ -107,7 +107,7 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 			} else {
 				$atts = array();
 
-                if (is_user_logged_in() && strcmp(strtolower($item->title), "sign in") == 0) {
+                if (is_user_logged_in() && strcmp(strtolower($item->title), "login") == 0) {
                     $item->title = "My Account";
                 }
 
