@@ -66,48 +66,57 @@ class WCMp_Vendor_Hooks {
                 , 'link_target' => '_self'
                 , 'nav_icon'    => 'wcmp-font ico-dashboard-icon'
             ),
-            'store-settings'       => array(
-                'label'       => __( 'Store Settings', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => '#'
-                , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_store_settings_capability', true )
+            'vendor-billing'  => array(
+                'label'       => __( 'Stripe Connect', 'dc-woocommerce-multi-vendor' )
+                , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_billing_endpoint', 'vendor', 'general', 'vendor-billing' ) )
+                , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_billing_capability', true )
                 , 'position'    => 10
-                , 'submenu'     => array(
-                    'storefront'      => array(
-                        'label'       => __( 'Storefront', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_store_settings_endpoint', 'vendor', 'general', 'storefront' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_shop_front_capability', true )
-                        , 'position'    => 10
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-storefront-icon'
-                    ),
-                    'vendor-policies' => array(
-                        'label'       => __( 'Policies', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_policies_endpoint', 'vendor', 'general', 'vendor-policies' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_policies_capability', false )
-                        , 'position'    => 20
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-policies-icon'
-                    ),
-                    'vendor-billing'  => array(
-                        'label'       => __( 'Billing', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_billing_endpoint', 'vendor', 'general', 'vendor-billing' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_billing_capability', true )
-                        , 'position'    => 30
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-billing-icon'
-                    ),
-                    'vendor-shipping' => array(
-                        'label'       => __( 'Shipping', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_shipping_endpoint', 'vendor', 'general', 'vendor-shipping' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_shipping_capability', wc_shipping_enabled() )
-                        , 'position'    => 40
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-shippingnew-icon'
-                    )
-                )
                 , 'link_target' => '_self'
-                , 'nav_icon'    => 'wcmp-font ico-store-settings-icon'
+                , 'nav_icon'    => 'wcmp-font ico-billing-icon'
             ),
+
+            // 'store-settings'       => array(
+            //     'label'       => __( 'Store Settings', 'dc-woocommerce-multi-vendor' )
+            //     , 'url'         => '#'
+            //     , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_store_settings_capability', true )
+            //     , 'position'    => 10
+            //     , 'submenu'     => array(
+            //         'storefront'      => array(
+            //             'label'       => __( 'Storefront', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_store_settings_endpoint', 'vendor', 'general', 'storefront' ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_shop_front_capability', true )
+            //             , 'position'    => 10
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-storefront-icon'
+            //         ),
+            //         'vendor-policies' => array(
+            //             'label'       => __( 'Policies', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_policies_endpoint', 'vendor', 'general', 'vendor-policies' ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_policies_capability', false )
+            //             , 'position'    => 20
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-policies-icon'
+            //         ),
+            //         'vendor-billing'  => array(
+            //             'label'       => __( 'Billing', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_billing_endpoint', 'vendor', 'general', 'vendor-billing' ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_billing_capability', true )
+            //             , 'position'    => 30
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-billing-icon'
+            //         ),
+            //         'vendor-shipping' => array(
+            //             'label'       => __( 'Shipping', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_shipping_endpoint', 'vendor', 'general', 'vendor-shipping' ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_shipping_capability', wc_shipping_enabled() )
+            //             , 'position'    => 40
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-shippingnew-icon'
+            //         )
+            //     )
+            //     , 'link_target' => '_self'
+            //     , 'nav_icon'    => 'wcmp-font ico-store-settings-icon'
+            // ),
             'vendor-products'      => array(
                 'label'       => __( 'Product Manager', 'dc-woocommerce-multi-vendor' )
                 , 'url'         => '#'
@@ -134,64 +143,85 @@ class WCMp_Vendor_Hooks {
                 , 'link_target' => '_self'
                 , 'nav_icon'    => 'wcmp-font ico-product-manager-icon'
             ),
-            'vendor-promte'        => array(
-                'label'       => __( 'Coupons', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => '#'
-                , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_promte_capability', 'edit_shop_coupons' )
-                , 'position'    => 30
-                , 'submenu'     => array(
-                    'coupons'    => array(
-                        'label'       => __( 'All Coupons', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => apply_filters( 'wcmp_vendor_coupons', wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_coupons_endpoint', 'vendor', 'general', 'coupons' ) ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_coupons_capability', 'edit_shop_coupons' )
-                        , 'position'    => 10
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-coupons-icon'
-                    ),
-                    'add-coupon' => array(
-                        'label'       => __( 'Add Coupon', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => apply_filters( 'wcmp_vendor_submit_coupon', wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_add_coupon_endpoint', 'vendor', 'general', 'add-coupon' ) ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_add_coupon_capability', 'edit_shop_coupons' )
-                        , 'position'    => 20
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-addcoupon-icon'
-                    )
-                )
-                , 'link_target' => '_self'
-                , 'nav_icon'    => 'wcmp-font ico-coupons-icon'
-            ),
-            'vendor-report'        => array(
-                'label'       => __( 'Stats / Reports', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => '#'
-                , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_report_capability', true )
-                , 'position'    => 40
-                , 'submenu'     => array(
-                    'vendor-report' => array(
-                        'label'       => __( 'Overview', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_report_endpoint', 'vendor', 'general', 'vendor-report' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_report_capability', true )
-                        , 'position'    => 10
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-reports-icon'
-                    ),
-                    'banking-overview' => array(
-                        'label'       => __( 'Banking Overview', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_banking_overview_endpoint', 'vendor', 'general', 'banking-overview' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_banking_report_capability', true )
-                        , 'position'    => 20
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-reports-icon'
-                    )
-                )
-                , 'link_target' => '_self'
-                , 'nav_icon'    => 'wcmp-font ico-reports-icon'
-            ),
+            // 'vendor-promte'        => array(
+            //     'label'       => __( 'Coupons', 'dc-woocommerce-multi-vendor' )
+            //     , 'url'         => '#'
+            //     , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_promte_capability', 'edit_shop_coupons' )
+            //     , 'position'    => 30
+            //     , 'submenu'     => array(
+            //         'coupons'    => array(
+            //             'label'       => __( 'All Coupons', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => apply_filters( 'wcmp_vendor_coupons', wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_coupons_endpoint', 'vendor', 'general', 'coupons' ) ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_coupons_capability', 'edit_shop_coupons' )
+            //             , 'position'    => 10
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-coupons-icon'
+            //         ),
+            //         'add-coupon' => array(
+            //             'label'       => __( 'Add Coupon', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => apply_filters( 'wcmp_vendor_submit_coupon', wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_add_coupon_endpoint', 'vendor', 'general', 'add-coupon' ) ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_add_coupon_capability', 'edit_shop_coupons' )
+            //             , 'position'    => 20
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-addcoupon-icon'
+            //         )
+            //     )
+            //     , 'link_target' => '_self'
+            //     , 'nav_icon'    => 'wcmp-font ico-coupons-icon'
+            // ),
+            // 'vendor-report'        => array(
+            //     'label'       => __( 'Stats / Reports', 'dc-woocommerce-multi-vendor' )
+            //     , 'url'         => '#'
+            //     , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_report_capability', true )
+            //     , 'position'    => 40
+            //     , 'submenu'     => array(
+            //         'vendor-report' => array(
+            //             'label'       => __( 'Overview', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_report_endpoint', 'vendor', 'general', 'vendor-report' ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_report_capability', true )
+            //             , 'position'    => 10
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-reports-icon'
+            //         ),
+            //         'banking-overview' => array(
+            //             'label'       => __( 'Banking Overview', 'dc-woocommerce-multi-vendor' )
+            //             , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_banking_overview_endpoint', 'vendor', 'general', 'banking-overview' ) )
+            //             , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_banking_report_capability', true )
+            //             , 'position'    => 20
+            //             , 'link_target' => '_self'
+            //             , 'nav_icon'    => 'wcmp-font ico-reports-icon'
+            //         )
+            //     )
+            //     , 'link_target' => '_self'
+            //     , 'nav_icon'    => 'wcmp-font ico-reports-icon'
+            // ),
             'vendor-orders'        => array(
                 'label'       => __( 'Orders', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_orders_endpoint', 'vendor', 'general', 'vendor-orders' ) )
+                , 'url'         => '#'
+                // , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_orders_endpoint', 'vendor', 'general', 'vendor-orders' ) )
                 , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_orders_capability', true )
                 , 'position'    => 50
-                , 'submenu'     => array()
+                , 'submenu'     => array(
+                    'vendor-orders-sold'   => array(
+                        'label'       => __( 'Order items I sold', 'dc-woocommerce-multi-vendor' )
+                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_orders_endpoint', 'vendor', 'general', 'vendor-orders' ) )
+                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_orders_capability', true )
+                        // , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_withdrawal_capability', false )
+                        , 'position'    => 10
+                        , 'link_target' => '_self'
+                        , 'nav_icon'    => 'wcmp-font ico-orders-icon'
+                    ),
+                    'vendor-orders-bought'   => array(
+                        'label'       => __( 'Order items I bought', 'dc-woocommerce-multi-vendor' )
+                        , 'url'         => 'https://intoplantz.com/my-account/orders/'
+                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_orders_capability', true )
+                        // , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_withdrawal_capability', false )
+                        , 'position'    => 20
+                        , 'link_target' => '_self'
+                        , 'nav_icon'    => 'wcmp-font ico-orders-icon'
+                    ),
+
+                )
                 , 'link_target' => '_self'
                 , 'nav_icon'    => 'wcmp-font ico-orders-icon'
             ),
@@ -221,24 +251,24 @@ class WCMp_Vendor_Hooks {
                 , 'link_target' => '_self'
                 , 'nav_icon'    => 'wcmp-font ico-payments-icon'
             ),
-            'vendor-knowledgebase' => array(
-                'label'       => __( 'Knowledgebase', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_knowledgebase_endpoint', 'vendor', 'general', 'vendor-knowledgebase' ) )
-                , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_knowledgebase_capability', true )
-                , 'position'    => 70
-                , 'submenu'     => array()
-                , 'link_target' => '_self'
-                , 'nav_icon'    => 'wcmp-font ico-knowledgebase-icon'
-            ),
-            'vendor-tools'         => array(
-                'label'       => __( 'Tools', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_tools_endpoint', 'vendor', 'general', 'vendor-tools' ) )
-                , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_tools_capability', true )
-                , 'position'    => 80
-                , 'submenu'     => array()
-                , 'link_target' => '_self'
-                , 'nav_icon'    => 'wcmp-font ico-tools-icon'
-            )
+            // 'vendor-knowledgebase' => array(
+            //     'label'       => __( 'Knowledgebase', 'dc-woocommerce-multi-vendor' )
+            //     , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_knowledgebase_endpoint', 'vendor', 'general', 'vendor-knowledgebase' ) )
+            //     , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_knowledgebase_capability', true )
+            //     , 'position'    => 70
+            //     , 'submenu'     => array()
+            //     , 'link_target' => '_self'
+            //     , 'nav_icon'    => 'wcmp-font ico-knowledgebase-icon'
+            // ),
+            // 'vendor-tools'         => array(
+            //     'label'       => __( 'Tools', 'dc-woocommerce-multi-vendor' )
+            //     , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_tools_endpoint', 'vendor', 'general', 'vendor-tools' ) )
+            //     , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_tools_capability', true )
+            //     , 'position'    => 80
+            //     , 'submenu'     => array()
+            //     , 'link_target' => '_self'
+            //     , 'nav_icon'    => 'wcmp-font ico-tools-icon'
+            // )
         );
         return apply_filters( 'wcmp_vendor_dashboard_nav', $vendor_nav );
     }
@@ -354,7 +384,7 @@ class WCMp_Vendor_Hooks {
         $WCMp->library->load_gmap_api();
         $WCMp->template->get_template( 'vendor-dashboard/shop-front.php', $user_array );
     }
-    
+
     /**
      * Display vendor profile management content
      * @global object $WCMp
@@ -421,7 +451,7 @@ class WCMp_Vendor_Hooks {
         if ( isset( $_POST['wcmp_stat_start_dt'] ) ) {
             $start_date = wc_clean( wp_unslash( $_POST['wcmp_stat_start_dt'] ) );
         } else {
-            // hard-coded '01' for first day     
+            // hard-coded '01' for first day
             $start_date = date( 'Y-m-01' );
         }
 
@@ -436,7 +466,7 @@ class WCMp_Vendor_Hooks {
         $array_report = $WCMp_Plugin_Post_Reports->vendor_sales_stat_overview( $vendor, $start_date, $end_date );
         $WCMp->template->get_template( 'vendor-dashboard/vendor-report.php', $array_report );
     }
-    
+
     public function wcmp_vendor_dashboard_banking_overview_endpoint() {
         global $WCMp;
         $table_headers = apply_filters('wcmp_vendor_dashboard_banking_overview_table_headers', array(
@@ -477,7 +507,7 @@ class WCMp_Vendor_Hooks {
         wp_enqueue_script( 'jquery-ui-autocomplete' );
         wp_enqueue_script( 'wp-a11y' );
         wp_enqueue_script( 'suggest' );
-        
+
         wp_register_script( 'wcmp_product_classify', $WCMp->plugin_url . 'assets/frontend/js/product-classify.js', array( 'jquery', 'jquery-blockui' ), $WCMp->version, true );
         $script_param = array(
             'ajax_url' => $WCMp->ajax_url(),
@@ -491,7 +521,7 @@ class WCMp_Vendor_Hooks {
 
         $WCMp->template->get_template( 'vendor-dashboard/product-manager/add-product.php' );
     }
-    
+
     public function wcmp_vendor_dashboard_edit_product_endpoint(){
         global $WCMp;
         // load scripts & styles
@@ -550,7 +580,7 @@ class WCMp_Vendor_Hooks {
 
     public function wcmp_vendor_dashboard_add_coupon_endpoint() {
         global $WCMp, $wp;
-              
+
         $WCMp->library->load_select2_lib();
         $WCMp->library->load_datepicker_lib();
         wp_enqueue_script( 'selectWoo' );
@@ -561,7 +591,7 @@ class WCMp_Vendor_Hooks {
         $WCMp->load_class( 'add-coupon', 'coupons' );
         $add_coupon = new WCMp_Coupons_Add_Coupon();
         $add_coupon->output();
-        
+
     }
 
     public function wcmp_vendor_dashboard_coupons_endpoint() {
@@ -668,24 +698,24 @@ class WCMp_Vendor_Hooks {
             } else {
                 $end_date = date( 'Y-m-d' );
             }
-            
+
             /**
              * Action hook befor order list.
              *
              * @since 3.4.7
              */
             do_action('wcmp_befor_vendor_dashboard_order_list_actions', $_POST );
-            
+
             // bulk actions
             $bulk_actions = apply_filters( 'wcmp_bulk_actions_vendor_order_list', array(
                 'mark_processing'   => __( 'Change status to processing', 'dc-woocommerce-multi-vendor' ),
                 'mark_on-hold'      => __( 'Change status to on-hold', 'dc-woocommerce-multi-vendor' ),
                 'mark_completed'   => __( 'Change status to completed', 'dc-woocommerce-multi-vendor' ),
             ), $vendor );
-                
-            $WCMp->template->get_template( 'vendor-dashboard/vendor-orders.php', array( 
-                'vendor' => $vendor, 
-                'start_date'    => strtotime( $start_date ), 
+
+            $WCMp->template->get_template( 'vendor-dashboard/vendor-orders.php', array(
+                'vendor' => $vendor,
+                'start_date'    => strtotime( $start_date ),
                 'end_date'      => strtotime( $end_date . ' +1 day' ),
                 'bulk_actions'  => $bulk_actions,
             ) );
@@ -714,7 +744,7 @@ class WCMp_Vendor_Hooks {
                 )
             );
             $vendor_unpaid_orders = $vendor->get_unpaid_orders( false, false, $meta_query );
-            
+
             // withdrawal table init
             $table_init = apply_filters( 'wcmp_vendor_dashboard_payment_withdrawal_table_init', array(
                 'ordering'    => 'false',
@@ -884,8 +914,8 @@ class WCMp_Vendor_Hooks {
         if ( $vendor && apply_filters( 'wcmp_vendor_dashboard_show_progress_bar', true, $vendor ) ) {
             $vendor_progress = wcmp_get_vendor_profile_completion( $vendor->id );
             if ( $vendor_progress['progress'] < 100 ) {
-                echo '<div class="col-md-12">';
-                echo '<div class="panel">';
+                echo '<div class="col-md-12" style="display: none">';
+                echo '<div class="panel" >';
                 if ( $vendor_progress['todo'] && is_array( $vendor_progress['todo'] ) ) {
                     $todo_link = isset( $vendor_progress['todo']['link'] ) ? esc_url( $vendor_progress['todo']['link'] ) : '';
                     $todo_label = isset( $vendor_progress['todo']['label'] ) ? $vendor_progress['todo']['label'] : '';

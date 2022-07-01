@@ -34,6 +34,11 @@ global $WCMp;
             <div class="right-primary-info"> 
                 <div class="form-group-wrapper">
                     <div class="form-group product-short-description">
+                        <style>
+                        #wp-product_excerpt-media-buttons {
+                            display: none;
+                        }
+                        </style>
                         <label class="control-label col-md-12 pt-0" for="product_short_description"><?php esc_html_e( 'Product short description', 'dc-woocommerce-multi-vendor' ); ?></label>
                         <div class="col-md-12">
                             <?php
@@ -51,11 +56,11 @@ global $WCMp;
                                 $settings['tinymce'] = $settings['quicktags'] = $settings['media_buttons'] = false;
                             }
                             wp_editor( htmlspecialchars_decode( isset($_POST['product_excerpt']) ? wc_clean($_POST['product_excerpt']) : $product_object->get_short_description( 'edit' ) ), 'product_excerpt', $settings );
-                            ?>  
+                            ?>
                         </div>
                     </div>
-                    
-                    <div class="form-group product-description">
+
+                    <div class="form-group product-description" style="display: none">
                         <label class="control-label col-md-12" for="product_description"><?php esc_attr_e( 'Product description', 'dc-woocommerce-multi-vendor' ); ?></label>
                         <div class="col-md-12">
                             <?php
@@ -76,7 +81,7 @@ global $WCMp;
                             ?>
                         </div>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="left-primary-info">
                 <div class="product-gallery-wrapper">
@@ -133,7 +138,7 @@ global $WCMp;
                                     update_post_meta( $post->ID, '_product_image_gallery', implode( ',', $updated_gallery_ids ) );
                                 }
                             }
-                            ?>    
+                            ?>
                         </ul>
                         <input type="hidden" id="product_image_gallery" name="product_image_gallery" value="<?php echo esc_attr( $product_image_gallery ); ?>" />
                         <p class="add_product_images">
@@ -142,13 +147,13 @@ global $WCMp;
                     </div>
                     <?php do_action('wcmp_product_manager_right_panel_after', $post->ID); ?>
                 </div>
-            </div> 
+            </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div id="woocommerce-product-data" class="add-product-info-holder">   
+                <div id="woocommerce-product-data" class="add-product-info-holder">
 
-                    <div class="add-product-info-header row-padding">
+                    <div class="add-product-info-header row-padding" style="display: none">
                         <div class="select-group">
                             <label for="product-type"><?php esc_html_e( 'Product Type', 'dc-woocommerce-multi-vendor' ); ?></label>
                             <select class="form-control inline-select" id="product-type" name="product-type">
@@ -219,7 +224,7 @@ global $WCMp;
                             <?php do_action( 'wcmp_product_tabs_content', $self, $product_object, $post ); ?>
                         </div>
                         <!-- Tab content End -->
-                    </div>        
+                    </div>
                     <!-- product Info Tab End -->
                 </div>
             </div>
@@ -229,10 +234,10 @@ global $WCMp;
             <div class="col-md-8">
                 <?php do_action( 'wcmp_after_product_excerpt_metabox_panel', $post->ID ); ?>
                 <?php do_action( 'wcmp_afm_after_product_excerpt_metabox_panel', $post->ID ); ?>
-                
-                <?php 
+
+                <?php
                 do_action( 'wcmp_before_product_note_metabox_panel', $post->ID );
-                $vendor = get_wcmp_vendor(get_current_user_id() ); 
+                $vendor = get_wcmp_vendor(get_current_user_id() );
                 $notes = WCMp_Product::get_product_note($post->ID);
                 ?>
                 <?php if($post->post_status == 'pending') { ?>
@@ -240,12 +245,12 @@ global $WCMp;
                     <div class="panel-heading d-flex">
                         <?php esc_html_e( 'Rejection Note', 'dc-woocommerce-multi-vendor' ); ?>
                     </div>
-                    <div class="panel-body panel-content-padding form-group-wrapper"> 
+                    <div class="panel-body panel-content-padding form-group-wrapper">
                         <ul class="order_notes list-group mb-0">
                             <li class="list-group-item list-group-item-action flex-column align-items-start add_note">
                                 <?php if (apply_filters('is_vendor_can_add_product_notes', true, $vendor->id)) : ?>
                                 <!--  <form method="post" name="add_product_comment"> -->
-                                <?php wp_nonce_field('dc-vendor-add-product-comment', 'vendor_add_product_nonce'); ?> 
+                                <?php wp_nonce_field('dc-vendor-add-product-comment', 'vendor_add_product_nonce'); ?>
                                     <h3><?php _e( 'Add note', 'dc-woocommerce-multi-vendor' ); ?> <span class="img_tip" data-desc="<?php echo __( 'Add a note for your reference, or add a customer note (the user will be notified).', 'dc-woocommerce-multi-vendor' ); ?>"></span></h3>
                                     <div class="form-group">
                                         <textarea placeholder="<?php _e('Enter text ...', 'dc-woocommerce-multi-vendor'); ?>" class="form-control" name="product_comment_text"></textarea>
@@ -255,8 +260,8 @@ global $WCMp;
                                     </div>
                                     <input type="hidden" name="product_id" value="<?php echo $post->ID; ?>">
                                     <input type="hidden" name="current_user_id" value="<?php echo $vendor->id; ?>">
-                                <!--  </form>  --> 
-                                <?php endif; ?>  
+                                <!--  </form>  -->
+                                <?php endif; ?>
                             </li>
                             <li class="list-group-item list-group-item-action flex-column align-items-start"><div class="form-group"><h3><?php esc_html_e( 'Communication Log', 'dc-woocommerce-multi-vendor' ); ?></h3></div></li>
                             <?php
@@ -289,7 +294,7 @@ global $WCMp;
                         <div class="panel-heading d-flex">
                             <h3 class="pull-left"><?php esc_html_e( 'Product categories', 'dc-woocommerce-multi-vendor' ); ?></h3>
                         </div>
-                        <div class="panel-body panel-content-padding form-group-wrapper"> 
+                        <div class="panel-body panel-content-padding form-group-wrapper">
                             <?php
                             echo $product_categories;
                             ?>
@@ -314,7 +319,7 @@ global $WCMp;
                         </div>
                     </div>
                 <?php endif; ?>
-                <?php 
+                <?php
                 $custom_taxonomies = get_object_taxonomies( 'product', 'objects' );
                 if( $custom_taxonomies ){
                     foreach ( $custom_taxonomies as $taxonomy ) {
@@ -342,7 +347,7 @@ global $WCMp;
             </div>
         </div>
         <?php if ( ! empty( wcmp_get_product_types() ) ) : ?>
-            <div class="wcmp-action-container">
+            <div class="wcmp-action-container" style="top: -135px;">
                 <?php
                 $primary_action = __( 'Submit', 'dc-woocommerce-multi-vendor' );    //default value
                 if ( current_vendor_can( 'publish_products' ) ) {
