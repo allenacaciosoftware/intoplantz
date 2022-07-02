@@ -31,17 +31,20 @@ defined( 'ABSPATH' ) || exit;
             if ( call_user_func_array( "wcmp_is_allowed_product_type", $manage_stock_visibility ) ) :
                 $manage_stock_classes = apply_filters( 'inventory_tab_manage_stock_class_list', implode( ' ', preg_filter( '/^/', 'show_if_', $manage_stock_visibility ) ) );
                 ?>
-                <div class="form-group-row <?php echo $manage_stock_classes; ?>"> 
-                    <div class="form-group">
-                        <label class="control-label col-sm-3 col-md-3" for="_manage_stock">
-                            <?php esc_html_e( 'Manage stock?', 'dc-woocommerce-multi-vendor' ); ?>
-                            <?php do_action( 'wcmp_afm_product_options_stock_description' ); ?>
-                        </label>
-                        <div class="col-md-6 col-sm-9">
-                            <input class="form-control" type="checkbox" id="_manage_stock" name="_manage_stock" value="yes"<?php checked( isset($_POST['_manage_stock']) && $_POST['_manage_stock'] == 'yes' ? true : $product_object->get_manage_stock( 'edit' ), true ); ?>/>
-                            <span class="form-text"><?php esc_html_e( 'Enable stock management at product level', 'dc-woocommerce-multi-vendor' ); ?> 
+                <input class="form-control" type="checkbox" id="_manage_stock" name="_manage_stock" value="yes" checked style="visibility: hidden"/>
+                <div style="display: none;">
+                    <div class="form-group-row <?php echo $manage_stock_classes; ?>">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3 col-md-3" for="_manage_stock">
+                                <?php esc_html_e( 'Manage stock?', 'dc-woocommerce-multi-vendor' ); ?>
+                                <?php do_action( 'wcmp_afm_product_options_stock_description' ); ?>
+                            </label>
+                            <div class="col-md-6 col-sm-9">
+                                <input class="form-control" type="checkbox" id="_manage_stock" name="_manage_stock" value="yes"<?php checked( isset($_POST['_manage_stock']) && $_POST['_manage_stock'] == 'yes' ? true : $product_object->get_manage_stock( 'edit' ), true ); ?>/>
+                                <span class="form-text"><?php esc_html_e( 'Enable stock management at product level', 'dc-woocommerce-multi-vendor' ); ?>
+                            </div>
                         </div>
-                    </div>  
+                    </div>
                 </div>
                 <?php do_action( 'wcmp_afm_product_options_stock', $post->ID, $product_object, $post ); ?>
                 <?php
@@ -52,15 +55,15 @@ defined( 'ABSPATH' ) || exit;
                     <div class = "form-group-row stock_fields <?php echo $stock_fields_classes; ?>">
                         <div class="form-group">
                             <label class="control-label col-sm-3 col-md-3" for="_stock">
-                                <?php _e( 'Stock quantity', 'dc-woocommerce-multi-vendor' ); ?> 
+                                <?php _e( 'Stock quantity', 'dc-woocommerce-multi-vendor' ); ?>
                                 <span class="img_tip" data-desc="<?php esc_html_e( 'Stock quantity. If this is a variable product this value will be used to control stock for all variations, unless you define stock at variation level.', 'dc-woocommerce-multi-vendor' ); ?>"></span>
                             </label>
                             <div class="col-md-6 col-sm-9">
-                                <input class="form-control" type="text" id="_stock" name="_stock" value="<?php echo isset($_POST['_stock']) ? absint($_POST['_stock']) : wc_stock_amount( $product_object->get_stock_quantity( 'edit' ) ); ?>" /> 
+                                <input class="form-control" type="text" id="_stock" name="_stock" value="<?php echo isset($_POST['_stock']) ? absint($_POST['_stock']) : wc_stock_amount( $product_object->get_stock_quantity( 'edit' ) ); ?>" />
                             </div>
                         </div>
                         <?php echo '<input type="hidden" name="_original_stock" value="' . esc_attr( wc_stock_amount( $product_object->get_stock_quantity( 'edit' ) ) ) . '" />'; ?>
-                        <div class="form-group">
+                        <div class="form-group" style="display: none;">
                             <label class="control-label col-sm-3 col-md-3" for="_backorders">
                                 <?php _e( 'Allow backorders?', 'dc-woocommerce-multi-vendor' ); ?>
                                 <span class="img_tip" data-desc="<?php esc_html_e( 'If managing stock, this controls whether or not backorders are allowed. If enabled, stock quantity can go below 0.', 'dc-woocommerce-multi-vendor' ); ?>"></span>
@@ -70,7 +73,7 @@ defined( 'ABSPATH' ) || exit;
                                     <?php foreach ( wc_get_product_backorder_options() as $key => $option ) : ?>
                                         <option value="<?php echo $key; ?>" <?php selected( isset($_POST['_backorders']) ? wc_clean($_POST['_backorders']) : $product_object->get_backorders( 'edit' ), $key ); ?>><?php echo $option; ?></option>
                                     <?php endforeach; ?>
-                                </select> 
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,7 +82,7 @@ defined( 'ABSPATH' ) || exit;
                                 <span class="img_tip" data-desc="<?php esc_html_e( 'When product stock reaches this amount you will be notified by email', 'dc-woocommerce-multi-vendor' ); ?>"></span>
                             </label>
                             <div class="col-md-6 col-sm-9">
-                                <input class="form-control" type="text" id="_low_stock_amount" name="_low_stock_amount" value="<?php echo isset($_POST['_low_stock_amount']) ? absint($_POST['_low_stock_amount']) : $product_object->get_low_stock_amount( 'edit' ); ?>" placeholder="<?php echo esc_attr(get_option( 'woocommerce_notify_low_stock_amount') ); ?>" /> 
+                                <input class="form-control" type="text" id="_low_stock_amount" name="_low_stock_amount" value="<?php echo isset($_POST['_low_stock_amount']) ? absint($_POST['_low_stock_amount']) : $product_object->get_low_stock_amount( 'edit' ); ?>" placeholder="<?php echo esc_attr(get_option( 'woocommerce_notify_low_stock_amount') ); ?>" />
                             </div>
                         </div>
                     </div>
@@ -91,7 +94,7 @@ defined( 'ABSPATH' ) || exit;
             $hide_classes = '';
             if ( call_user_func_array( "wcmp_is_allowed_product_type", $stock_status_invisibility ) ) :
                 $hide_classes = implode( ' ', preg_filter( '/^/', 'hide_if_', $stock_status_invisibility ) );
-            endif; ?> 
+            endif; ?>
             <div class="form-group-row stock_status_field <?php echo $hide_classes; ?>">
                 <div class="form-group">
                     <label class="control-label col-sm-3 col-md-3" for="_stock_status"><?php _e( 'Stock status', 'dc-woocommerce-multi-vendor' ); ?></label>
@@ -102,25 +105,27 @@ defined( 'ABSPATH' ) || exit;
                             <?php endforeach; ?>
                         </select>
                     </div>
-                </div>    
+                </div>
             </div>
-            <?php do_action( 'wcmp_afm_product_options_stock_status', $post->ID, $product_object, $post ); ?> 
-            
-        <?php endif; ?> 
+            <?php do_action( 'wcmp_afm_product_options_stock_status', $post->ID, $product_object, $post ); ?>
+
+        <?php endif; ?>
         <?php
         $sold_individually_visibility = apply_filters( 'inventory_tab_sold_individually_section', array( 'simple', 'variable' ) );
         if ( call_user_func_array( "wcmp_is_allowed_product_type", $sold_individually_visibility ) ) :
             $show_classes = implode( ' ', preg_filter( '/^/', 'show_if_', $sold_individually_visibility ) );
             ?>
-            <div class="form-group-row <?php echo $show_classes; ?>"> 
-                <div class="form-group">
-                    <label class="control-label col-sm-3 col-md-3" for="_sold_individually"><?php esc_html_e( 'Sold individually', 'dc-woocommerce-multi-vendor' ); ?></label>
-                    <div class="col-md-6 col-sm-9">
-                        <input class="form-control" type="checkbox" id="_sold_individually" name="_sold_individually" value="yes"<?php checked( isset($_POST['_sold_individually']) && $_POST['_sold_individually'] == 'yes' ? true : $product_object->get_sold_individually( 'edit' ), true ); ?>/>
-                        <span class="form-text"><?php esc_html_e( 'Enable this to only allow one of this item to be bought in a single order', 'dc-woocommerce-multi-vendor' ); ?></span>
+            <div style="display: none">
+                <div class="form-group-row <?php echo $show_classes; ?>">
+                    <div class="form-group">
+                        <label class="control-label col-sm-3 col-md-3" for="_sold_individually"><?php esc_html_e( 'Sold individually', 'dc-woocommerce-multi-vendor' ); ?></label>
+                        <div class="col-md-6 col-sm-9">
+                            <input class="form-control" type="checkbox" id="_sold_individually" name="_sold_individually" value="yes"<?php checked( isset($_POST['_sold_individually']) && $_POST['_sold_individually'] == 'yes' ? true : $product_object->get_sold_individually( 'edit' ), true ); ?>/>
+                            <span class="form-text"><?php esc_html_e( 'Enable this to only allow one of this item to be bought in a single order', 'dc-woocommerce-multi-vendor' ); ?></span>
+                        </div>
                     </div>
-                </div> 
-                <?php do_action( 'wcmp_afm_product_options_sold_individually', $post->ID, $product_object, $post ); ?>
+                    <?php do_action( 'wcmp_afm_product_options_sold_individually', $post->ID, $product_object, $post ); ?>
+                </div>
             </div>
         <?php endif; ?>
         <?php do_action( 'wcmp_afm_after_inventory_section_ends', $post->ID, $product_object, $post ); ?>
