@@ -32,8 +32,13 @@ global $WCMp;
         <?php } ?>
                 <tr>
                     <td style="padding:10px 10px; background:none; border-right: 1px solid #e4e4e4; border-bottom: 1px solid #e4e4e4; width:50%;" align="left" valign="top">
-                        <p><strong><?php echo esc_html_e('Vendor Name', 'dc-woocommerce-multi-vendor'); ?> </strong><br>
+                        <p><strong><?php echo esc_html_e('Name', 'dc-woocommerce-multi-vendor'); ?> </strong><br>
                             <?php echo $vendor->page_title; ?> </p>
+                        <p><strong><?php echo esc_html_e('Email', 'dc-woocommerce-multi-vendor'); ?> </strong><br>
+                            <?php echo $vendor->user_data->user_email; ?> </p>
+                        <p><strong><?php echo esc_html_e('Phone', 'dc-woocommerce-multi-vendor'); ?> </strong><br>
+                            <?php echo $vendor_meta['_vendor_phone'][0]; ?> </p>
+
                         <p><strong><?php echo esc_html_e('Product Name', 'dc-woocommerce-multi-vendor'); ?> </strong> <br>
                         <?php echo esc_html($products); ?>
                         </p>
@@ -121,7 +126,3 @@ global $WCMp;
 } ?>                           
     </tbody>
 </table>
-
-
-
-
