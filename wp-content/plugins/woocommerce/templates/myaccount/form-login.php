@@ -54,7 +54,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 				<button type="submit" class="woocommerce-button button woocommerce-form-login__submit" name="login" value="<?php esc_attr_e( 'Log in', 'woocommerce' ); ?>"><?php esc_html_e( 'Log in', 'woocommerce' ); ?></button>
 			</p>
 			<p class="woocommerce-LostPassword lost_password">
-				<a href="<?php echo esc_url( wp_lostpassword_url() ); ?>"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
+				<a href="/my-account/lost-password"><?php esc_html_e( 'Lost your password?', 'woocommerce' ); ?></a>
 			</p>
 
 			<?php do_action( 'woocommerce_login_form_end' ); ?>
@@ -66,6 +66,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 	</div>
 	<div class="u-column2 col-2">
 
+
 		<h2>Register here</h2>
 
         <form class="woocommerce-form woocommerce-form-register register">
@@ -74,7 +75,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 			</p>
 
             <p >
-                <a class="woocommerce-button button" href="/vendor-registration">Register</a>
+                <a class="woocommerce-button button" href="/registration">Register</a>
             </p>
         </form>
 
