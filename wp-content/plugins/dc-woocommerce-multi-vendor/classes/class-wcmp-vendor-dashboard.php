@@ -2619,9 +2619,9 @@ Class WCMp_Admin_Dashboard {
             wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
         );
         ?></h1>
-        <p><?php _e('Thank you for being the part of us. <br/> If you are intending to sell now or in the future, we recommend to proceed with the setup. This quick setup wizard should not take longer than five minutes. It will help you configure the basic store settings and you will have your marketplace ready in no time.', 'dc-woocommerce-multi-vendor'); ?></p>
+        <p><?php _e('Thank you for being part of us. <br/> If you are intending to sell now or in the future, we recommend to proceed with the setup. This quick setup wizard should not take longer than five minutes. It will help you configure the basic store settings and you will have your marketplace ready in no time.', 'dc-woocommerce-multi-vendor'); ?></p>
 
-        <p><?php esc_html_e("If you don’t want to go through the wizard right now, you can skip and return to the dashboard. Come back anytime if you change your mind!", 'dc-woocommerce-multi-vendor'); ?></p>
+        <p><?php esc_html_e("If you don’t want to go through the wizard right now, you can skip and return to the dashboard. Come back anytime if you change your mind.", 'dc-woocommerce-multi-vendor'); ?></p>
         <?php } ?>
         <p class="wc-setup-actions step">
             <a href="<?php echo esc_url($this->get_next_step_link()); ?>" class="button-primary button button-large button-next"><?php esc_html_e("Proceed to setup", 'dc-woocommerce-multi-vendor'); ?></a>
