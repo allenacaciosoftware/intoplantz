@@ -2507,12 +2507,12 @@ Class WCMp_Admin_Dashboard {
                 'handler' => array( $this, 'wcmp_setup_store_setup_save' ),
             ),
             'payment'     => array(
-                'name'    => __( 'Payment', 'dc-woocommerce-multi-vendor' ),
+                'name'    => __( 'Payment method', 'dc-woocommerce-multi-vendor' ),
                 'view'    => array( $this, 'vendor_payment_setup' ),
                 'handler' => array( $this, 'wcmp_setup_payment_save' ),
             ),
             'next_steps'  => array(
-                'name'    => __( 'Ready!', 'dc-woocommerce-multi-vendor' ),
+                'name'    => __( 'Configure Stripe', 'dc-woocommerce-multi-vendor' ),
                 'view'    => array( $this, 'wcmp_store_setup_ready' ),
                 'handler' => '',
             ),
@@ -2806,11 +2806,14 @@ Class WCMp_Admin_Dashboard {
             <p>
                 <?php
                 printf(
-                    __( '%s offers the following payment methods for you.', 'dc-woocommerce-multi-vendor' ),
+                    __( '%s offers Stripe Connect payment method for your safety and convenience. There’s no cost in setting up.', 'dc-woocommerce-multi-vendor' ),
                     wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
                 );
                 ?>
             </p>
+            <br/>
+            For more information on Stripe Connect, click <a href="https://stripe.com/nz/connect">here</a>.
+            <br/>
 
             <div class="product-type-container" style="visibility: hidden">
                 <label class="location-prompt" for="product_type">
