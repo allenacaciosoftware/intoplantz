@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 global $WCMp;
-?> 
+?>
 <div class="col-md-12 add-product-wrapper">
     <?php do_action( 'before_wcmp_add_product_form' ); ?>
     <form id="wcmp-edit-product-form" class="woocommerce form-horizontal" method="post">
@@ -30,8 +30,8 @@ global $WCMp;
         $image_size = apply_filters('wcmp_product_uploaded_image_size', 'medium');
         ?>
         <!-- End of Top product highlight -->
-        <div class="product-primary-info custom-panel"> 
-            <div class="right-primary-info"> 
+        <div class="product-primary-info custom-panel">
+            <div class="right-primary-info">
                 <div class="form-group-wrapper">
                     <div class="form-group product-short-description">
                         <style>
@@ -350,6 +350,8 @@ global $WCMp;
         <?php if ( ! empty( wcmp_get_product_types() ) ) : ?>
             <div class="wcmp-action-container" style="top: -135px;">
                 <?php
+                $user_id = get_current_user_id();
+                $vendor_connected = get_user_meta($user_id, 'vendor_connected', true);
                 $primary_action = __( 'Submit', 'dc-woocommerce-multi-vendor' );    //default value
                 if ( current_vendor_can( 'publish_products' ) ) {
                     if ( ! empty( $product_object->get_id() ) && get_post_status( $product_object->get_id() ) === 'publish' ) {
@@ -359,11 +361,16 @@ global $WCMp;
                     }
                 }
                 ?>
-                <input type="submit" class="btn btn-default" name="submit-data" value="<?php echo esc_attr( $primary_action ); ?>" id="wcmp_afm_product_submit" />
+                <input type="submit" class="btn btn-default" name="submit-data" value="<?php echo esc_attr( $primary_action ); ?>" id="wcmp_afm_product_submit" <?php if ($vendor_connected != 1){ ?> disabled <?php   } ?>/>
                 <input type="submit" class="btn btn-default" name="draft-data" value="<?php esc_attr_e( 'Draft', 'dc-woocommerce-multi-vendor' ); ?>" id="wcmp_afm_product_draft" />
                 <input type="hidden" name="status" value="<?php echo esc_attr( get_post_status( $post ) ); ?>">
                 <?php wp_nonce_field( 'wcmp-product', 'wcmp_product_nonce' ); ?>
             </div>
+            <?php if ( $vendor_connected != 1 ) : ?>
+                <div class="wcmp-action-container" style="top: -95px; background: antiquewhite;">
+                    <span style="padding: 5px 10px;">Connect <a href="https://intoplantz.com/dashboard/vendor-billing/">Stripe account </a> to publish this product.</span>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
         <?php do_action( 'wcmp_add_product_form_end' ); ?>
     </form>
