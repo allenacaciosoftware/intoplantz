@@ -171,6 +171,11 @@ function wp_print_media_templates() {
 
 	<?php // Template for the media frame: used both in the media grid and in the media modal. ?>
 	<script type="text/html" id="tmpl-media-frame">
+        <style>
+            button.media-menu-item {
+                color: #1d2327;
+            }
+        </style>
 		<div class="media-frame-title" id="media-frame-title"></div>
 		<h2 class="media-frame-menu-heading"><?php _ex( 'Actions', 'media modal menu actions' ); ?></h2>
 		<button type="button" class="button button-link media-frame-menu-toggle" aria-expanded="false">

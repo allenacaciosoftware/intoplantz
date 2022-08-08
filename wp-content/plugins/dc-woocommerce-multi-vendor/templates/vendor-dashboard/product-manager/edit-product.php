@@ -35,11 +35,11 @@ global $WCMp;
                 <div class="form-group-wrapper">
                     <div class="form-group product-short-description">
                         <style>
-                        #wp-product_excerpt-media-buttons {
+                        #wp-product_excerpt-media-buttons, .mce-statusbar {
                             display: none;
                         }
                         </style>
-                        <label class="control-label col-md-12 pt-0" for="product_short_description"><?php esc_html_e( 'Product short description', 'dc-woocommerce-multi-vendor' ); ?></label>
+                        <label class="col-md-12 pt-0" for="product_short_description"><h3><?php esc_html_e( 'Product short description', 'dc-woocommerce-multi-vendor' ); ?></h3></label>
                         <div class="col-md-12">
                             <?php
                             $settings = array(
@@ -59,9 +59,14 @@ global $WCMp;
                             ?>
                         </div>
                     </div>
-
-                    <div class="form-group product-description" style="display: none">
-                        <label class="control-label col-md-12" for="product_description"><?php esc_attr_e( 'Product description', 'dc-woocommerce-multi-vendor' ); ?></label>
+                    <br/>
+                    <div class="form-group product-description">
+                        <style>
+                        #wp-product_description-media-buttons, .mce-statusbar {
+                            display: none;
+                        }
+                        </style>
+                        <label class="col-md-12" for="product_description"><h3><?php esc_attr_e( 'Delivery or pickup details', 'dc-woocommerce-multi-vendor' ); ?></h3></label>
                         <div class="col-md-12">
                             <?php
                             $settings = array(
