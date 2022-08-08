@@ -2131,12 +2131,13 @@ Class WCMp_Admin_Dashboard {
                 $stock = null;
                 // Handle stock changes.
                 if ( isset( $_POST['_stock'] ) ) {
-                    if ( isset( $_POST['_original_stock'] ) && wc_stock_amount( $product->get_stock_quantity( 'edit' ) ) !== wc_stock_amount( $_POST['_original_stock'] ) ) {
-                        $error_msg = sprintf( __( 'The stock has not been updated because the value has changed since editing. Product %1$d has %2$d units in stock.', 'dc-woocommerce-multi-vendor' ), $product->get_id(), $product->get_stock_quantity( 'edit' ) );
-                        $errors[] = $error_msg;
-                    } else {
-                        $stock = wc_stock_amount( wc_clean($_POST['_stock']) );
-                    }
+                    $stock = wc_stock_amount( wc_clean($_POST['_stock']) );
+                    // if ( isset( $_POST['_original_stock'] ) && wc_stock_amount( $product->get_stock_quantity( 'edit' ) ) !== wc_stock_amount( $_POST['_original_stock'] ) ) {
+                    //     $error_msg = sprintf( __( 'The stock has not been updated because the value has changed since editing. Product %1$d has %2$d units in stock.', 'dc-woocommerce-multi-vendor' ), $product->get_id(), $product->get_stock_quantity( 'edit' ) );
+                    //     $errors[] = $error_msg;
+                    // } else {
+                    //     $stock = wc_stock_amount( wc_clean($_POST['_stock']) );
+                    // }
                 }
                 // Group Products
                 $grouped_products = isset( $_POST['grouped_products'] ) ? array_filter( array_map( 'intval', (array) $_POST['grouped_products'] ) ) : array();
@@ -2238,7 +2239,7 @@ Class WCMp_Admin_Dashboard {
             endif;
         }
     }
-    
+
     public function save_coupon() {
         global $WCMp;
         $current_endpoint_key = $WCMp->endpoints->get_current_endpoint();
@@ -2262,7 +2263,7 @@ Class WCMp_Admin_Dashboard {
             wc_add_notice( __( "Coupon code can't be empty.", 'dc-woocommerce-multi-vendor' ), 'error' );
             $can_publish = false;
         }
-           
+
         $cpn_pro_supports = false;
         $cpn_pro_supports = ( !isset( $_POST['product_ids'] ) || empty( $_POST['product_ids'] ) ) ? $cpn_pro_supports : true;
         $cpn_pro_supports = ( !$cpn_pro_supports && ( !isset( $_POST['product_categories'] ) || empty( $_POST['product_categories'] ) ) ) ? $cpn_pro_supports : true;
@@ -2360,7 +2361,7 @@ Class WCMp_Admin_Dashboard {
             }
             $coupon->save();
             do_action( 'wcmp_afm_coupon_options_save', $post_id, $coupon );
-            
+
             $status_for_send_mail_to_admin = apply_filters('wcmp_send_coupon_mail_admin_status', array('draft'));
             if ( !in_array( $status, $status_for_send_mail_to_admin) ) {
                 $current_user = get_current_vendor_id();
@@ -2374,7 +2375,7 @@ Class WCMp_Admin_Dashboard {
                     update_post_meta($post_id, 'wcmp_coupon_mail_send_to_admin', true);
                 }
             }
-            
+
             foreach ( $errors as $error ) {
                 wc_add_notice( $error, 'error' );
             }
@@ -2396,36 +2397,36 @@ Class WCMp_Admin_Dashboard {
         }
         endif;
     }
-    
+
     public function wcmp_vendor_dashboard_add_product_url( $url ) {
         if( !get_wcmp_vendor_settings('is_singleproductmultiseller', 'general') == 'Enable' && get_wcmp_vendor_settings('is_disable_marketplace_plisting', 'general') == 'Enable' ){
             return esc_url(wcmp_get_vendor_dashboard_endpoint_url(get_wcmp_vendor_settings('wcmp_edit_product_endpoint', 'vendor', 'general', 'edit-product')));
         }
         return $url;
     }
-    
+
     public function vendor_setup_wizard(){
         global $WCMp;
-        
+
         if (filter_input(INPUT_GET, 'page') != 'vendor-store-setup' || !apply_filters('wcmp_vendor_store_setup_wizard_enabled', true)) {
             return;
         }
         if ( !is_user_wcmp_vendor( get_current_user_id() ) ) {
             return;
         }
-     
+
         $this->steps = $this->vendor_setup_wizard_steps();
         $current_step = filter_input(INPUT_GET, 'step');
         $this->step = $current_step ? sanitize_key($current_step) : current(array_keys($this->steps));
         $this->vendor = get_current_vendor();
-        
+
         // skip setup
-        if (filter_input(INPUT_GET, 'page') == 'vendor-store-setup' && filter_input(INPUT_GET, 'skip_setup') ) { 
+        if (filter_input(INPUT_GET, 'page') == 'vendor-store-setup' && filter_input(INPUT_GET, 'skip_setup') ) {
             update_user_meta( $this->vendor->id, '_vendor_skipped_setup_wizard', true );
             wp_redirect( wcmp_get_vendor_dashboard_endpoint_url( 'dashboard' ) );
             exit;
         }
-        
+
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
         wp_register_script('jquery-blockui', WC()->plugin_url() . '/assets/js/jquery-blockui/jquery.blockUI' . $suffix . '.js', array('jquery'), '2.70', true);
         wp_register_script( 'jquery-tiptip', WC()->plugin_url() . '/assets/js/jquery-tiptip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), WC_VERSION, true );
@@ -2455,11 +2456,11 @@ Class WCMp_Admin_Dashboard {
             'locale_info' => json_encode(include( WC()->plugin_path() . '/i18n/locale-info.php' )),
             'states'                  => WC()->countries->get_states(),
         ));
-        
+
         if (!empty($_POST['save_step']) && isset($this->steps[$this->step]['handler'])) {
             call_user_func($this->steps[$this->step]['handler'], $this);
         }
-        
+
         ob_start();
         $this->setup_wizard_header();
         $this->setup_wizard_steps();
@@ -2467,7 +2468,7 @@ Class WCMp_Admin_Dashboard {
         $this->setup_wizard_footer();
         exit();
     }
-    
+
     /**
      * Get the URL for the next step's screen.
      * @param string step   slug (default: current step)
@@ -2493,7 +2494,7 @@ Class WCMp_Admin_Dashboard {
 
         return add_query_arg('step', $keys[$step_index + 1]);
     }
-    
+
     public function vendor_setup_wizard_steps(){
         $default_steps = array(
             'introduction' => array(
@@ -2519,7 +2520,7 @@ Class WCMp_Admin_Dashboard {
         );
         return apply_filters('wcmp_vendor_setup_wizard_steps', $default_steps);
     }
-    
+
     /**
      * Setup Wizard Header.
      */
@@ -2532,7 +2533,7 @@ Class WCMp_Admin_Dashboard {
                 <meta name="viewport" content="width=device-width" />
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
                 <title>
-                    <?php 
+                    <?php
                     printf(
                         __( '%s &rsaquo; Store Setup Wizard', 'dc-woocommerce-multi-vendor' ),
                         wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
@@ -2592,7 +2593,7 @@ Class WCMp_Admin_Dashboard {
         call_user_func($this->steps[$this->step]['view'], $this);
         echo '</div>';
     }
-    
+
     /**
      * Setup Wizard Footer.
      */
@@ -2613,7 +2614,7 @@ Class WCMp_Admin_Dashboard {
             echo htmlspecialchars_decode( wpautop( $setup_wizard_introduction ), ENT_QUOTES );
         }else{
         ?>
-        <h1><?php 
+        <h1><?php
         printf(
             __( 'Welcome to the %s family!', 'dc-woocommerce-multi-vendor' ),
             wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES )
@@ -2812,7 +2813,7 @@ Class WCMp_Admin_Dashboard {
                 ?>
             </p>
             <br/>
-            For more information on Stripe Connect, click <a href="https://stripe.com/nz/connect">here</a>.
+            For more information on Stripe Connect, click <a href="https://stripe.com/nz/connect" target="_blank">here</a>.
             <br/>
 
             <div class="product-type-container" style="visibility: hidden">
