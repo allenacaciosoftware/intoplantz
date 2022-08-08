@@ -18,11 +18,11 @@ class WCMp_Frontend {
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_scripts'));
         //enqueue styles
         add_action('wp_enqueue_scripts', array(&$this, 'frontend_styles'), 999);
-        if ( apply_filters( 'wcmp_load_default_vendor_store', false ) ) {
-            add_action('woocommerce_archive_description', array(&$this, 'product_archive_vendor_info'), 10);
-        } else {
-            add_action('wcmp_archive_description', array(&$this, 'product_archive_vendor_info'), 10);
-        }
+        // if ( apply_filters( 'wcmp_load_default_vendor_store', false ) ) {
+        //     add_action('woocommerce_archive_description', array(&$this, 'product_archive_vendor_info'), 10);
+        // } else {
+        //     add_action('wcmp_archive_description', array(&$this, 'product_archive_vendor_info'), 10);
+        // }
         add_filter('body_class', array(&$this, 'set_product_archive_class'));
         add_action('template_redirect', array(&$this, 'template_redirect'));
 
@@ -189,7 +189,7 @@ class WCMp_Frontend {
                 $validation_errors->add('recaptcha is not validate', __('Please Verify  Recaptcha', 'dc-woocommerce-multi-vendor'));
             }
         }
-        
+
         if (isset($_FILES['wcmp_vendor_fields'])) {
             $attacment_files = array_filter($_FILES['wcmp_vendor_fields']);
             if (!empty($attacment_files) && is_array($attacment_files)) {
@@ -274,7 +274,7 @@ class WCMp_Frontend {
     }
 
     /**
-     * split woocommerce shipping packages 
+     * split woocommerce shipping packages
      * @since 2.6.6
      * @param array $packages
      * @return array
@@ -329,7 +329,7 @@ class WCMp_Frontend {
     }
 
     /**
-     * 
+     *
      * @param object $item
      * @param sting $package_key as $vendor_id
      */
@@ -342,7 +342,7 @@ class WCMp_Frontend {
     }
 
     /**
-     * Rename shipping packages 
+     * Rename shipping packages
      * @since 2.6.6
      * @param string $package_name
      * @param string $vendor_id
@@ -352,7 +352,7 @@ class WCMp_Frontend {
     public function woocommerce_shipping_package_name($package_name, $vendor_id, $package) {
         if ($vendor_id && $vendor_id != 0) {
             $vendor = get_wcmp_vendor($vendor_id);
-            
+
             if ($vendor) {
                 return $vendor->page_title . __(' Shipping', 'dc-woocommerce-multi-vendor');
             }
@@ -397,7 +397,7 @@ class WCMp_Frontend {
         wp_register_script('wcmp_country_state_js', $frontend_script_path . 'wcmp-country-state.js', array('jquery'), $WCMp->version, true);
         wp_register_script('wcmp-vendor-shipping', $frontend_script_path . 'vendor-shipping.js', array( 'jquery' ), $WCMp->version, true );
         wp_register_script('wcmp-meta-boxes', $frontend_script_path . 'meta-boxes.js', array( 'jquery' ), $WCMp->version, true );
-     
+
         /** localize script data * */
         $WCMp->localize_script('frontend_js');
         $WCMp->localize_script('wcmp_frontend_vdashboard_js');
@@ -405,7 +405,7 @@ class WCMp_Frontend {
         $WCMp->localize_script('wcmp_seller_review_rating_js');
         $WCMp->localize_script('wcmp_customer_qna_js');
         $WCMp->localize_script('wcmp-vendor-shipping');
-        
+
         if (is_vendor_dashboard()) {
             wp_enqueue_script('jquery-ui-core');
             wp_enqueue_script('jquery-ui-tabs');
@@ -438,7 +438,7 @@ class WCMp_Frontend {
             if (wcmp_mapbox_api_enabled()) {
                 $WCMp->library->load_mapbox_api();
             } else {
-                $WCMp->library->load_gmap_api();                
+                $WCMp->library->load_gmap_api();
             }
             wp_enqueue_script( 'wcmp_checkout_location_js', $frontend_script_path . 'checkout/wcmp-script-checkout-location' . $suffix . '.js', array('jquery' ), $WCMp->version, true );
             wp_localize_script( 'wcmp_checkout_location_js', 'wcmp_checkout_map_options', array( 'search_location' => __( 'Insert your address ..', 'dc-woocommerce-multi-vendor' ), 'mapbox_emable' => wcmp_mapbox_api_enabled(), 'default_lat' => -79.4512, 'default_lng' => 43.6568, 'default_zoom' => 2, 'store_icon' => $WCMp->plugin_url . 'assets/images/store-marker.png', 'icon_width' => apply_filters( 'wcmp_map_icon_width', 40 ), 'icon_height' => apply_filters( 'wcmp_map_icon_height', 57 ) ) );
@@ -663,7 +663,7 @@ class WCMp_Frontend {
                 <div style="max-width: 214px; margin: 0 auto;">
                     <h3><p class="product_translations"><strong><?php esc_html_e( 'Translations', 'dc-woocommerce-multi-vendor' ); ?></strong></p></h3>
                     <label class="screen-reader-text" for="product_translations"><?php esc_html_e( 'Translations', 'dc-woocommerce-multi-vendor' ); ?></label>
-                    
+
                     <table style="margin-top:0px;">
                         <tbody id="wcmp_product_translations" data-product_id="<?php echo esc_attr($product_id); ?>">
                             <?php echo $translation_html; ?>
@@ -681,7 +681,7 @@ class WCMp_Frontend {
      * @return array
      */
     public function get_filtered_active_lanugages() {
-        global $sitepress; 
+        global $sitepress;
         $active_languages = $sitepress->get_active_languages();
         return apply_filters( 'wpml_active_languages_access', $active_languages, array( 'action' => 'edit' ) );
     }
@@ -726,7 +726,7 @@ class WCMp_Frontend {
         if ( $WCMp->endpoints->get_current_endpoint() != 'edit-product' ) {
             ?><div style="height: 100px; overflow: scroll;">
                 <?php do_action( 'wpml_footer_language_selector'); ?>
-            </div><?php 
+            </div><?php
         }
     }
 
@@ -852,7 +852,7 @@ class WCMp_Frontend {
         <div class='wcmp-main-section'>
             <?php if (get_wcmp_vendor_settings('store_sidebar_position', 'general') == 'left') do_action( 'wcmp_store_widget_contents' ); ?>
             <div class="column-class wcmp-middle-sec ">
-                <div class="wcmp-tab-header">
+                <div class="wcmp-tab-header" style="display: none">
                     <?php foreach( $store_tabs as $key => $tab ) { 
                         ?>
                         <?php if ( $tab['url'] ): ?>
