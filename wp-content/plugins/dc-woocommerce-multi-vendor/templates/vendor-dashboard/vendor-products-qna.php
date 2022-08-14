@@ -31,6 +31,7 @@ do_action('before_wcmp_vendor_dashboard_products_qna_table');
             </div>
             <button id="show_qna_by_products_btn" class="wcmp_black_btn btn btn-default" type="button" name="show_qna_by_products_btn"><?php _e('Show', 'dc-woocommerce-multi-vendor'); ?></button>
         </div>
+        <br/><br/>
         <table id="vendor_products_qna_table" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
