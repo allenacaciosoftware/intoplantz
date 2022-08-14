@@ -204,39 +204,15 @@ class ProductCategories extends AbstractDynamicBlock {
 			__( 'List of categories with their product counts', 'woocommerce' );
 
 		$output = '
-			<div class="wc-block-product-categories__dropdown">
-				<label
-				class="screen-reader-text"
-					for="' . esc_attr( $uid ) . '-select"
-				>
-					' . esc_html__( 'Select a category', 'woocommerce' ) . '
-				</label>
+            <div style="display:flex">
 				<select aria-label="' . esc_attr( $aria_label ) . '" id="' . esc_attr( $uid ) . '-select">
 					<option value="false" hidden>
 						' . esc_html__( 'Select a category', 'woocommerce' ) . '
 					</option>
 					' . $this->renderDropdownOptions( $categories, $attributes, $uid ) . '
 				</select>
-			</div>
-			<button
-				type="button"
-				class="wc-block-product-categories__button"
-				aria-label="' . esc_html__( 'Go to category', 'woocommerce' ) . '"
-				onclick="const url = document.getElementById( \'' . esc_attr( $uid ) . '-select\' ).value; if ( \'false\' !== url ) document.location.href = url;"
-			>
-				<svg
-					aria-hidden="true"
-					role="img"
-					focusable="false"
-					class="dashicon dashicons-arrow-right-alt2"
-					xmlns="http://www.w3.org/2000/svg"
-					width="20"
-					height="20"
-					viewBox="0 0 20 20"
-				>
-					<path d="M6 15l5-5-5-5 1-2 7 7-7 7z" />
-				</svg>
-			</button>
+            <a href="#" data-quantity="1" onclick="const url = document.getElementById( \'' . esc_attr( $uid ) . '-select\' ).value; if ( \'false\' !== url ) document.location.href = url;" class="button product_type_simple" rel="nofollow" style="padding-right: 0.75em; padding-left: 0.75em; padding-top: 1em;">Search</a>
+            </div>
 		';
 		return $output;
 	}
