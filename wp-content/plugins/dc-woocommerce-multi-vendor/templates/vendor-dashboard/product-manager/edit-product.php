@@ -68,6 +68,11 @@ global $WCMp;
                         </style>
                         <label class="col-md-12" for="product_description"><h3><?php esc_attr_e( 'Delivery or pickup details', 'dc-woocommerce-multi-vendor' ); ?></h3></label>
                         <div class="col-md-12">
+                            <div><label>Please provide pickup or delivery details.</label></div>
+                            <label><i>If pickup only, include location/city for example, “Pickup only, Hamilton”.</i></label>
+                            <label><i>For delivery options, provide contact details for example, “Delivery only, contact seller @ (seller email address) for shipping cost information.”</i></label>
+                        </div>
+                        <div class="col-md-12">
                             <?php
                             $settings = array(
                                 'textarea_name' => 'product_description',
