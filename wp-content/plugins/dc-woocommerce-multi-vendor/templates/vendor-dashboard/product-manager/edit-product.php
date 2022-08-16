@@ -377,7 +377,7 @@ global $WCMp;
                 <?php wp_nonce_field( 'wcmp-product', 'wcmp_product_nonce' ); ?>
             </div>
             <?php if ( $vendor_connected != 1 ) : ?>
-                <div class="wcmp-action-container" style="top: -95px; background: antiquewhite;">
+                <div class="wcmp-action-container" style="top: 190px; background: antiquewhite;">
                     <span style="padding: 5px 10px;">Connect <a href="https://intoplantz.com/dashboard/vendor-billing/">Stripe account </a> to publish this product.</span>
                 </div>
             <?php endif; ?>
