@@ -58,7 +58,7 @@ $transactions_list_table_headers = apply_filters('wcmp_datatable_vendor_transact
                         </tbody>
                     </table>
                 </div>
-                <div id="export_transaction_wrap" class="wcmp-action-container wcmp_table_loader" style="display: none;">
+                <div id="export_transaction_wrap" class="wcmp-action-container wcmp_table_loader" style="margin-top: 85px">
                     <input type="hidden" id="export_transaction_start_date" name="from_date" value="<?php echo date('Y-m-01'); ?>" />
                     <input id="export_transaction_end_date" type="hidden" name="to_date" value="<?php echo date('Y-m-d'); ?>" />
                     <button type="submit" name="export_transaction" class="btn btn-default"><?php _e('Download CSV', 'dc-woocommerce-multi-vendor'); ?></button>

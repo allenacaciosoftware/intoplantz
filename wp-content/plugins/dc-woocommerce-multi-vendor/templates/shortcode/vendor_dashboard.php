@@ -22,8 +22,8 @@ $WCMp->template->get_template('vendor-dashboard/dashboard-header.php');
 do_action('wcmp_vendor_dashboard_navigation', array());
 $is_single = !is_null($WCMp->endpoints->get_current_endpoint_var()) ? '-single' : '';
 ?>
-<div id="page-wrapper" class="side-collapse-container">
-    <div id="current-endpoint-title-wrapper" class="current-endpoint-title-wrapper">
+<div id="page-wrapper" class="side-collapse-container" style="margin-top: -15px">
+    <div id="current-endpoint-title-wrapper" class="current-endpoint-title-wrapper" style="display:none">
         <div class="current-endpoint">
             <?php echo $WCMp->vendor_hooks->wcmp_create_vendor_dashboard_breadcrumbs($WCMp->endpoints->get_current_endpoint()); ?>
         </div>

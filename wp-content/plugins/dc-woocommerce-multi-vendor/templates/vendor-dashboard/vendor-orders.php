@@ -93,7 +93,7 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
                     <tbody></tbody>
                 </table>
             <?php if(apply_filters('can_wcmp_vendor_export_orders_csv', true, get_current_vendor_id())) : ?>
-            <div class="wcmp-action-container">
+            <div class="wcmp-action-container" style="margin-top: 150px; margin-right: 20px;">
                 <input class="btn btn-default" type="submit" name="wcmp_download_vendor_order_csv" value="<?php esc_attr_e('Download CSV', 'dc-woocommerce-multi-vendor') ?>" />
             </div>
             <?php endif; ?>

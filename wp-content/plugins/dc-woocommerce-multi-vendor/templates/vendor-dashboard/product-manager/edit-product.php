@@ -358,7 +358,7 @@ global $WCMp;
             </div>
         </div>
         <?php if ( ! empty( wcmp_get_product_types() ) ) : ?>
-            <div class="wcmp-action-container" style="top: -135px;">
+            <div class="wcmp-action-container" style="top: 150px;">
                 <?php
                 $user_id = get_current_user_id();
                 $vendor_connected = get_user_meta($user_id, 'vendor_connected', true);

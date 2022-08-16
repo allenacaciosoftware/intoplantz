@@ -24,7 +24,7 @@ if(!$add_vendor_navigation){
 do_action('wcmp_before_vendor_dashboard_navigation');
 ?>
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0;position: relative;top: 0px;">
     <!-- /.navbar-header -->
     <div class="navbar-default sidebar side-collapse" id="side-collapse" role="navigation">
         <div class="mCustomScrollbar" data-mcs-theme="minimal-dark">

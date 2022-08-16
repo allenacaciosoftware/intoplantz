@@ -233,7 +233,7 @@ $multi_split_payment_options = $WCMp->vendor_dashboard->is_multi_option_split_en
             </div>
         </div>
 
-        <div class="wcmp-action-container">
+        <div class="wcmp-action-container" style="display:none;">
             <button class="btn btn-default" name="store_save_billing" ><?php _e('Save Options', 'dc-woocommerce-multi-vendor'); ?></button>
             <div class="clear"></div>
         </div>
