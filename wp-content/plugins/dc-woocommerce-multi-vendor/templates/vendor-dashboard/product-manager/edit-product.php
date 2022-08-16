@@ -358,7 +358,7 @@ global $WCMp;
             </div>
         </div>
         <?php if ( ! empty( wcmp_get_product_types() ) ) : ?>
-            <div class="wcmp-action-container" style="top: 150px;">
+            <div class="wcmp-action-container" style="top: -45px; position: absolute; z-index: 0">
                 <?php
                 $user_id = get_current_user_id();
                 $vendor_connected = get_user_meta($user_id, 'vendor_connected', true);
@@ -377,7 +377,7 @@ global $WCMp;
                 <?php wp_nonce_field( 'wcmp-product', 'wcmp_product_nonce' ); ?>
             </div>
             <?php if ( $vendor_connected != 1 ) : ?>
-                <div class="wcmp-action-container" style="top: 190px; background: antiquewhite;">
+                <div class="wcmp-action-container" style="top: 0px; position: absolute; z-index: 0; background: antiquewhite;">
                     <span style="padding: 5px 10px;">Connect <a href="https://intoplantz.com/dashboard/vendor-billing/">Stripe account </a> to publish this product.</span>
                 </div>
             <?php endif; ?>
