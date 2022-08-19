@@ -22,6 +22,28 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
     'order_status'  => array('label' => __( 'Status', 'dc-woocommerce-multi-vendor' )),
     'action'        => array('label' => __( 'Action', 'dc-woocommerce-multi-vendor' )),
 ), get_current_user_id());
+
+$orders_list_table_headers2 = apply_filters('wcmp_datatable_order_list_table_headers', array(
+    'order-number'      => array('label' => __( 'Order ID', 'dc-woocommerce-multi-vendor' )),
+    'sub_order_id'      => array('label' => __( 'Sub-Order ID', 'dc-woocommerce-multi-vendor' )),
+    'order-date'    => array('label' => __( 'Date', 'dc-woocommerce-multi-vendor' )),
+    'order-status'  => array('label' => __( 'Status', 'dc-woocommerce-multi-vendor' )),
+    'order-total'=> array('label' => __( 'Total', 'dc-woocommerce-multi-vendor' )),
+), get_current_user_id());
+
+$customer_orders = get_posts(
+	apply_filters(
+		'woocommerce_my_account_my_orders_query',
+		array(
+			'numberposts' => $order_count,
+			'meta_key'    => '_customer_user',
+			'meta_value'  => get_current_user_id(),
+			'post_type'   => wc_get_order_types( 'view-orders' ),
+			'post_status' => array_keys( wc_get_order_statuses() ),
+		)
+	)
+);
+
 ?>
 <div class="col-md-12">
     <div class="panel panel-default">
@@ -58,11 +80,11 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
                         ?>
                     </select>
                     <button class="wcmp_black_btn btn btn-secondary" type="button" id="order_list_do_bulk_action"><?php esc_html_e('Apply', 'dc-woocommerce-multi-vendor'); ?></button>
-                    <?php 
-                    $filter_by_status = apply_filters( 'wcmp_vendor_dashboard_order_filter_status_arr', array_merge( 
-                        array( 'all' => __('All', 'dc-woocommerce-multi-vendor'), 'request_refund' => __('Request Refund', 'dc-woocommerce-multi-vendor') ), 
+                    <?php
+                    $filter_by_status = apply_filters( 'wcmp_vendor_dashboard_order_filter_status_arr', array_merge(
+                        array( 'all' => __('All', 'dc-woocommerce-multi-vendor'), 'request_refund' => __('Request Refund', 'dc-woocommerce-multi-vendor') ),
                         wc_get_order_statuses()
-                    ) ); 
+                    ) );
                     echo '<select id="filter_by_order_status" name="order_status" class="wcmp-filter-dtdd wcmp_filter_order_status form-control inline-input">';
                     if( $filter_by_status ) :
                     foreach ( $filter_by_status as $key => $status ) {
@@ -77,13 +99,13 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
                 <table class="table table-striped table-bordered" id="wcmp-vendor-orders" style="width:100%;">
                     <thead>
                         <tr>
-                        <?php 
+                        <?php
                             if($orders_list_table_headers) :
                                 foreach ($orders_list_table_headers as $key => $header) {
                                     if($key == 'select_order'){ ?>
                             <th class="<?php if(isset($header['class'])) echo $header['class']; ?>"><input type="checkbox" class="select_all_all" onchange="toggleAllCheckBox(this, 'wcmp-vendor-orders');" /></th>
                                 <?php }else{ ?>
-                            <th class="<?php if(isset($header['class'])) echo $header['class']; ?>"><?php if(isset($header['label'])) echo $header['label']; ?></th>         
+                            <th class="<?php if(isset($header['class'])) echo $header['class']; ?>"><?php if(isset($header['label'])) echo $header['label']; ?></th>
                                 <?php }
                                 }
                             endif;
@@ -102,10 +124,77 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
             <?php endif; ?>
             <?php if (isset($_POST['wcmp_end_date_order'])) : ?>
                 <input type="hidden" name="wcmp_end_date_order" value="<?php echo isset($_POST['wcmp_end_date_order']) ? wc_clean($_POST['wcmp_end_date_order']) : date('Y-m-d'); ?>" />
-            <?php endif; ?>    
+            <?php endif; ?>
             </form>
         </div>
     </div>
+
+    Order Items I bought
+    <table class="table table-striped table-bordered" id="my-orders-datatable" style="width:100%;">
+        <thead>
+            <tr>
+            <?php
+                if($orders_list_table_headers2) :
+                    foreach ($orders_list_table_headers2 as $key => $header) {
+                        if($key == 'select_order'){ ?>`
+                <th class="<?php if(isset($header['class'])) echo $header['class']; ?>"><input type="checkbox" class="select_all_all" onchange="toggleAllCheckBox(this, 'wcmp-vendor-orders');" /></th>
+                    <?php }else{ ?>
+                <th class="<?php if(isset($header['class'])) echo $header['class']; ?>"><?php if(isset($header['label'])) echo $header['label']; ?></th>
+                    <?php }
+                    }
+                endif;
+            ?>
+            </tr>
+        </thead>
+        <tbody>
+			<?php
+			foreach ( $customer_orders as $customer_order ) :
+				$order      = wc_get_order( $customer_order ); // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+				$item_count = $order->get_item_count();
+				?>
+				<tr class="order">
+					<?php foreach ( $orders_list_table_headers2 as $column_id => $column_name ) : ?>
+						<td class="<?php echo esc_attr( $column_id ); ?>" data-title="<?php echo esc_attr( $column_name ); ?>">
+							<?php if ( has_action( 'woocommerce_my_account_my_orders_column_' . $column_id ) ) : ?>
+								<?php do_action( 'woocommerce_my_account_my_orders_column_' . $column_id, $order ); ?>
+
+							<?php elseif ( 'order-number' === $column_id ) : ?>
+								<a href="<?php echo esc_url( $order->get_view_order_url() ); ?>">
+									<?php echo _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</a>
+
+							<?php elseif ( 'order-date' === $column_id ) : ?>
+								<time datetime="<?php echo esc_attr( $order->get_date_created()->date( 'c' ) ); ?>"><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></time>
+
+							<?php elseif ( 'order-status' === $column_id ) : ?>
+								<?php echo esc_html( wc_get_order_status_name( $order->get_status() ) ); ?>
+
+							<?php elseif ( 'order-total' === $column_id ) : ?>
+								<?php
+								/* translators: 1: formatted order total 2: total order items */
+								printf( _n( '%1$s for %2$s item', '%1$s for %2$s items', $item_count, 'woocommerce' ), $order->get_formatted_order_total(), $item_count ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								?>
+
+							<?php elseif ( 'order-actions' === $column_id ) : ?>
+								<?php
+								$actions = wc_get_account_orders_actions( $order );
+
+								if ( ! empty( $actions ) ) {
+									foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+										echo '<a href="' . esc_url( $action['url'] ) . '" class="button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
+									}
+								}
+								?>
+							<?php endif; ?>
+						</td>
+					<?php endforeach; ?>
+				</tr>
+			<?php endforeach; ?>
+
+
+        </tbody>
+    </table>
+
 
     <!-- Modal -->
     <div id="marke-as-ship-modal" class="modal fade" role="dialog">
@@ -158,6 +247,10 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
         <?php }
         }
         ?>
+        orders_table2 = $('#my-orders-datatable').DataTable({
+
+        });
+
         orders_table = $('#wcmp-vendor-orders').DataTable({
             processing: true,
             serverSide: true,
