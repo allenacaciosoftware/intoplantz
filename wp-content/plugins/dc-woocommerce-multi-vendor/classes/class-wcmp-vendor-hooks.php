@@ -197,31 +197,9 @@ class WCMp_Vendor_Hooks {
             // ),
             'vendor-orders'        => array(
                 'label'       => __( 'Orders', 'dc-woocommerce-multi-vendor' )
-                , 'url'         => '#'
-                // , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_orders_endpoint', 'vendor', 'general', 'vendor-orders' ) )
+                , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_orders_endpoint', 'vendor', 'general', 'vendor-orders' ) )
                 , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_orders_capability', true )
                 , 'position'    => 50
-                , 'submenu'     => array(
-                    'vendor-orders-sold'   => array(
-                        'label'       => __( 'Order items I sold', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => wcmp_get_vendor_dashboard_endpoint_url( get_wcmp_vendor_settings( 'wcmp_vendor_orders_endpoint', 'vendor', 'general', 'vendor-orders' ) )
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_orders_capability', true )
-                        // , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_withdrawal_capability', false )
-                        , 'position'    => 10
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-orders-icon'
-                    ),
-                    'vendor-orders-bought'   => array(
-                        'label'       => __( 'Order items I bought', 'dc-woocommerce-multi-vendor' )
-                        , 'url'         => 'https://intoplantz.com/my-account/orders/'
-                        , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_orders_capability', true )
-                        // , 'capability'  => apply_filters( 'wcmp_vendor_dashboard_menu_vendor_withdrawal_capability', false )
-                        , 'position'    => 20
-                        , 'link_target' => '_self'
-                        , 'nav_icon'    => 'wcmp-font ico-orders-icon'
-                    ),
-
-                )
                 , 'link_target' => '_self'
                 , 'nav_icon'    => 'wcmp-font ico-orders-icon'
             ),
