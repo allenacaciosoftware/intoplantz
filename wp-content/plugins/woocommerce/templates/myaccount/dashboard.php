@@ -27,7 +27,10 @@ $allowed_html = array(
 	),
 );
 ?>
-
+<script>
+    window.location="/dashboard";
+</script>
+<div style="display: none;">
 <p>
 	<?php
 	printf(
@@ -55,6 +58,7 @@ $allowed_html = array(
 	);
 	?>
 </p>
+</div>
 
 <?php
 	/**
