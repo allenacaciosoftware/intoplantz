@@ -249,7 +249,7 @@ if ( wc_tax_enabled() ) {
                                 <div class="clear"></div>
                             </div>
 
-                            <div class="wcmp-order-actions  wcmp-order-data-row-toggle">
+                            <div class="wcmp-order-actions  wcmp-order-data-row-toggle" style="display: none;">
                                 <?php if (0 < $order->get_total() - $order->get_total_refunded() || 0 < absint($order->get_item_count() - $order->get_item_count_refunded())) : ?>
                                 <?php if( $order->get_status( 'edit' ) != 'cancelled' ) : ?>
                                     <button type="button" class="button refund-items btn btn-default"><?php esc_html_e('Refund', 'dc-woocommerce-multi-vendor'); ?></button>

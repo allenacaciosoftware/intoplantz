@@ -76,7 +76,7 @@ $disallow_vendor_order_status = get_wcmp_vendor_settings('disallow_vendor_order_
             ?>
         </div>
         
-        <div class="col-md-8">
+        <div class="col-md-8" style="display: none;">
             <!-- Downloadable product permissions -->
             <?php
             $WCMp->template->get_template( 'vendor-dashboard/vendor-orders/views/html-order-downloadable-permissions.php', array( 'order' => $order, 'vendor_order' => $vendor_order, 'vendor' => $vendor ) );
@@ -88,8 +88,8 @@ $disallow_vendor_order_status = get_wcmp_vendor_settings('disallow_vendor_order_
             }
             ?>
         </div>
-        
-        <div class="col-md-4">
+
+        <div class="col-md-4" style="display: none;">
             <?php
             $WCMp->template->get_template( 'vendor-dashboard/vendor-orders/views/html-order-notes.php', array( 'order' => $order, 'vendor_order' => $vendor_order, 'vendor' => $vendor ) );
             ?>
