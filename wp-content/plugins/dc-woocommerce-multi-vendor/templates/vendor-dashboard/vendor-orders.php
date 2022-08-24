@@ -25,10 +25,11 @@ $orders_list_table_headers = apply_filters('wcmp_datatable_order_list_table_head
 
 $orders_list_table_headers2 = apply_filters('wcmp_datatable_order_list_table_headers', array(
     'order-number'      => array('label' => __( 'Order ID', 'dc-woocommerce-multi-vendor' )),
-    'sub_order_id'      => array('label' => __( 'Sub-Order ID', 'dc-woocommerce-multi-vendor' )),
+    'sub-order-id'      => array('label' => __( 'Sub-Order', 'dc-woocommerce-multi-vendor' )),
     'order-date'    => array('label' => __( 'Date', 'dc-woocommerce-multi-vendor' )),
     'order-status'  => array('label' => __( 'Status', 'dc-woocommerce-multi-vendor' )),
     'order-total'=> array('label' => __( 'Total', 'dc-woocommerce-multi-vendor' )),
+    'order-actions'=> array('label' => __( 'Action', 'dc-woocommerce-multi-vendor' )),
 ), get_current_user_id());
 
 $customer_orders = get_posts(
@@ -164,9 +165,23 @@ $customer_orders = get_posts(
                                         <?php do_action( 'woocommerce_my_account_my_orders_column_' . $column_id, $order ); ?>
 
                                     <?php elseif ( 'order-number' === $column_id ) : ?>
-                                        <a href="<?php echo esc_url( $order->get_view_order_url() ); ?>">
-                                            <?php echo _x( '#', 'hash before order number', 'woocommerce' ) . $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                                        </a>
+                                        <?php echo $order->get_order_number(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+
+                                    <?php elseif ( 'sub-order-id' === $column_id ) : ?>
+                                        <?php
+                                            $wcmp_suborders = get_wcmp_suborders($order->get_order_number());
+                                            if ($wcmp_suborders) {
+                                                foreach ($wcmp_suborders as $suborder) {
+                                                    $vendor = get_wcmp_vendor(get_post_field('post_author', $suborder->get_id()));
+                                                    $order_uri = esc_url( $suborder->get_view_order_url() );
+                                                    $suborder_number = $suborder->get_order_number();
+                                                    $vendor_name = $vendor->page_title;
+                                                    echo "<span><a href='" . $order_uri . "'>$suborder_number</a> for $vendor_name</span><br/>";
+                                                }
+                                            } else {
+                                                echo "";
+                                            }
+                                        ?>
 
                                     <?php elseif ( 'order-date' === $column_id ) : ?>
                                         <time datetime="<?php echo esc_attr( $order->get_date_created()->date( 'c' ) ); ?>"><?php echo esc_html( wc_format_datetime( $order->get_date_created() ) ); ?></time>
@@ -181,15 +196,10 @@ $customer_orders = get_posts(
                                         ?>
 
                                     <?php elseif ( 'order-actions' === $column_id ) : ?>
-                                        <?php
-                                        $actions = wc_get_account_orders_actions( $order );
+                                        <a href="<?php echo esc_url( $order->get_view_order_url() ); ?>" title="View order">
+                                            <i class="wcmp-font ico-eye-icon action-icon"></i>
+                                        </a>
 
-                                        if ( ! empty( $actions ) ) {
-                                            foreach ( $actions as $key => $action ) { // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-                                                echo '<a href="' . esc_url( $action['url'] ) . '" class="button ' . sanitize_html_class( $key ) . '">' . esc_html( $action['name'] ) . '</a>';
-                                            }
-                                        }
-                                        ?>
                                     <?php endif; ?>
                                 </td>
                             <?php endforeach; ?>
