@@ -108,7 +108,11 @@ if ( ! class_exists( 'Mega_Menu_Walker' ) ) :
 				$atts = array();
 
                 if (is_user_logged_in() && strcmp(strtolower($item->title), "login") == 0) {
-                    $item->title = "My Account";
+                    $atts['style']  = 'display: none';
+                }
+
+                if (!is_user_logged_in() && strcmp(strtolower($item->title), "my account") == 0) {
+                    $atts['style']  = 'display: none';
                 }
 
 				$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
